@@ -23,15 +23,15 @@ check_install_archive () {
     EXPECTED_SIZE=1409323648
     EXPECTED_MD5="a8bf2336a580527f0eb99f8b90009c33"
 
-    SIZE="$(stat -c%s $APP_ANSWER)"
-    MD5="$(md5sum $APP_ANSWER|cut -c1-32)"
+    SIZE="$(stat -c%s $ARCHIVE)"
+    MD5="$(md5sum $ARCHIVE|cut -c1-32)"
 
     POL_SetupWindow_detect_exit
 
-    if [ $SIZE != $EXPECTED_SIZE -o "$MD5" -ne "$EXPECTED_MD5" ]; then
-	POL_SetupWindow_message_image "$(printf $LNG_ARCHIVE_MISMATCH $SIZE $EXPECTED_SIZE $MD5 $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
-	POL_SetupWindow_question "Continue?" "$TITLE"
-	[ "$APP_ANSWER" -ne "TRUE" ] && abort
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_SetupWindow_message_image "$LNG_ARCHIVE_MISMATCH\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+        POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
 }
 
@@ -41,27 +41,29 @@ WORKING_WINE_VERSION="1.3.27-rawinput2"
 
 case "$POL_LANG" in
     fr)
-	TITLE="Outcast (version GoG)"
-	SHORTCUT_NAME="Outcast"
-	SHORTCUT_DOC="Manuel de l'utilisateur Outcast"
-	LNG_ABORTED="Une erreur est survenue, l'installation est interrompue."
-	LNG_CHECK_ARCHIVE="Test de l'archive d'installation..."
-	LNG_ARCHIVE_MISMATCH="L'archive ne correspond pas.\nOu bien elle est corrompue, ou ce n'est pas la version attendue.\nCe script ne peut pas garantir que l'installation se passera bien, pensez à communiquer le résultat de l'installation sur le forum de PlayOnLinux.\n\nTaille: %d (attendue %d)\nMD5: %s (attendu %s)"
-	LNG_ARCHIVE_LOCATION="Indiquez l'emplacement de l'archive d'installation"
-	LNG_SELECT_FILE="Sélectionnez le fichier"
-	LNG_INSTALLING="Installation de $SHORTCUT_NAME..."
-	;;
+        TITLE="Outcast (version GoG)"
+        SHORTCUT_NAME="Outcast"
+        SHORTCUT_DOC="Manuel de l'utilisateur Outcast"
+        LNG_ABORTED="Une erreur est survenue, l'installation est interrompue."
+        LNG_CHECK_ARCHIVE="Test de l'archive d'installation..."
+        LNG_ARCHIVE_MISMATCH="L'archive ne correspond pas.\nOu bien elle est corrompue, ou ce n'est pas la version attendue.\nCe script ne peut pas garantir que l'installation se passera bien, pensez à communiquer le résultat de l'installation sur le forum de PlayOnLinux."
+	LNG_CONTINUE="Continuer ?"
+        LNG_ARCHIVE_LOCATION="Indiquez l'emplacement de l'archive d'installation"
+        LNG_SELECT_FILE="Sélectionnez le fichier"
+        LNG_INSTALLING="Installation de $SHORTCUT_NAME..."
+        ;;
     *)
-	TITLE="Outcast (GoG release)"
-	SHORTCUT_NAME="Outcast"
-	SHORTCUT_DOC="Outcast user manual"
-	LNG_ABORTED="An error occurred, the installation is aborted."
-	LNG_CHECK_ARCHIVE="Checking install archive..."
-	LNG_ARCHIVE_MISMATCH="Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.\n\nSize: %d (expected %d)\nMD5: %s (expected %s)"
-	LNG_ARCHIVE_LOCATION="Please select the location of the install file"
-	LNG_SELECT_FILE="Select file"
-	LNG_INSTALLING="Installing $SHORTCUT_NAME..."
-	;;
+        TITLE="Outcast (GoG release)"
+        SHORTCUT_NAME="Outcast"
+        SHORTCUT_DOC="Outcast user manual"
+        LNG_ABORTED="An error occurred, the installation is aborted."
+        LNG_CHECK_ARCHIVE="Checking install archive..."
+        LNG_ARCHIVE_MISMATCH="Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums."
+        LNG_CONTINUE="Continue?"
+        LNG_ARCHIVE_LOCATION="Please select the location of the install file"
+        LNG_SELECT_FILE="Select file"
+        LNG_INSTALLING="Installing $SHORTCUT_NAME..."
+        ;;
 esac
 
 POL_SetupWindow_Init
@@ -74,9 +76,10 @@ POL_LoadVar_PROGRAMFILES
 
 cd $HOME
 POL_SetupWindow_browse "$LNG_ARCHIVE_LOCATION" "$LNG_SELECT_FILE"
+ARCHIVE="$APP_ANSWER"
 
 # Doesn't work?
-#check_install_archive
+check_install_archive
 
 POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
 export WINEVERSION="$WORKING_WINE_VERSION"
@@ -98,7 +101,7 @@ EOF
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
 
 
-POL_Wine "$APP_ANSWER" || abort
+POL_Wine "$ARCHIVE" || abort
 
 # GoG work!
 Set_OS winxp
@@ -145,6 +148,8 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="$REPERTOIRE/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
+POL_LoadVar_PROGRAMFILES
+
 case "\$POL_LANG" in
     fr)
         TITLE="Outcast (version Gog)"
@@ -156,7 +161,7 @@ case "\$POL_LANG" in
         ;;
 esac
 
-cd "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || exit 1
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || exit 1
 
 CURRENT_LANG=English
 [ -f pol_configuration ] && source pol_configuration
@@ -201,6 +206,13 @@ case "\$CURRENT_LANG" in
         ln -sf Data/Voices/German/VOICESGE.PAK voicesgen+.pak
         ;;
 esac
+
+# Allow for extensions
+shopt -s nullglob
+for conf in \$REPERTOIRE/configurations/configurators/Outcast.*; do
+    source "\$conf"
+done
+
 echo "CURRENT_LANG=\"\$CURRENT_LANG\"" > pol_configuration
 
 POL_SetupWindow_Close
