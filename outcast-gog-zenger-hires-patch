@@ -84,7 +84,6 @@ cd $HOME
 POL_SetupWindow_browse "$LNG_ARCHIVE_LOCATION" "$LNG_SELECT_FILE"
 ARCHIVE="$APP_ANSWER"
 
-# Doesn't work?
 check_install_archive
 
 POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
