@@ -1,0 +1,11 @@
+Outcast-gog:
+	Rewrite i18n with eval_gettext
+	Add INI tweaks? Need tool to manipulate INI files
+	Add $NAME/$EXPECTED_NAME to archive check
+
+Outcast-gog-zenger-hires-patch:
+	Rewrite i18n with eval_gettext
+	Check unzip is present
+	Add $NAME/$EXPECTED_NAME to archive check
+	Use registry instead of pol_settings file
+	
