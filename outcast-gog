@@ -153,10 +153,14 @@ case "\$POL_LANG" in
     fr)
         TITLE="Outcast (version Gog)"
         LNG_CHOOSE_LANGUAGE="Choisissez la langue"
+        LNG_VISUAL_QUALITY="Qualité graphique"
+        LNG_CHOOSE_KEYBOARD_LAYOUT="Dispositions de clavier standards"
         ;;
     *)
         TITLE="Outcast (GoG release)"
         LNG_CHOOSE_LANGUAGE="Choose language"
+        LNG_VISUAL_QUALITY="Visual quality"
+        LNG_CHOOSE_KEYBOARD_LAYOUT="Standard keyboard layouts"
         ;;
 esac
 
@@ -457,6 +461,354 @@ MAPEOF
 	;;
 esac
 
+POL_SetupWindow_menu "\$LNG_VISUAL_QUALITY" "\$TITLE" "Unchanged~Factory defaults~High quality (Entropy settings)" "~" "Unchanged"
+
+case "\$APP_ANSWER" in
+    Unchanged)
+        ;;
+    "Factory defaults")
+        cat <<'INIEOF' > antialiasing_high.ini 
+[Visual_Quality_Control]
+Global_Antialiasing= 1
+Combat_Antialiasing = 3
+Normal_Antialiasing = 3
+Dialog_Antialiasing = 3
+
+lnd_aa_level=2
+
+lnd_bilinear_range=4.0
+INIEOF
+        cat <<'INIEOF' > DOC_high.ini 
+[Visual_Quality_Control]
+lnd_base_layers=0
+
+[Render_Mesh]
+temples_world_view_angle=35.000000
+temples_world_view_dist=6000.000000
+temples_world_far_view_angle=38.000000
+temples_world_far_view_dist=9000
+
+marais_world_view_angle=35.000000
+marais_world_view_dist=5000.000000
+marais_world_far_view_angle=38.000000
+marais_world_far_view_dist=8000
+
+montagne_world_view_angle=35.000000
+montagne_world_view_dist=5500.000000
+montagne_world_far_view_angle=38.000000
+montagne_world_far_view_dist=8000
+
+ville_world_view_angle=35.000000
+ville_world_view_dist=5000.000000
+ville_world_far_view_angle=38.000000
+ville_world_far_view_dist=7000
+
+foret_world_view_angle=35.000000
+foret_world_view_dist=4500.000000
+foret_world_far_view_angle=38.000000
+foret_world_far_view_dist=9000
+
+neige_world_view_angle=35.000000
+neige_world_view_dist=5500.000000
+neige_world_far_view_angle=38.000000
+neige_world_far_view_dist=8500
+
+neige2_world_view_angle=35.000000
+neige2_world_view_dist=5500.000000
+neige2_world_far_view_angle=38.000000
+neige2_world_far_view_dist=8500
+
+
+[Render__mesh]
+temples__mesh_back_plane=5500
+marais__mesh_back_plane=4500
+montagne__mesh_back_plane=5000
+ville__mesh_back_plane=4500
+foret__mesh_back_plane=4000
+neige__mesh_back_plane=5000
+neige2__mesh_back_plane=5000
+
+[Render_big_mesh]
+temples_big_mesh_back_plane=8500
+marais_big_mesh_back_plane=7500
+montagne_big_mesh_back_plane=7500
+ville_big_mesh_back_plane=6000
+foret_big_mesh_back_plane=8000
+neige_big_mesh_back_plane=7500
+neige2_big_mesh_back_plane=7500
+
+[Fog]
+temples_fog_density=7
+temples_fog_sky_scale=1
+marches_fog_density=7
+marches_fog_sky_scale=2
+montagne_fog_density=6
+montagne_fog_sky_scale=2
+ville_fog_density=8
+ville_fog_sky_scale=2
+foret_fog_density=7
+foret_fog_sky_scale=2
+neige_fog_density=7
+neige_fog_sky_scale=3
+burned_fog_density=7
+burned_fog_sky_scale=3
+INIEOF
+        cat <<'INIEOF' > object_detail_high.ini 
+[Visual_Quality_Control]
+highobjectdetail=1
+global_particle_level=2
+
+[Leaves]
+MinimumLeaveSize=2
+MaximumLeaveSize=2.5
+NumberOfLeavesSmall=6
+NumberOfLeavesBig=9
+MipmapLevel2=1300.000000
+MipmapLevel1=2700.000000
+
+[Snow]
+Whirl_speed_ratio=200.000000
+Whirl_speed=20000.000000
+Transition_multiplier_snow_trigger=2.000000
+Transition_base_snow_trigger=-1.000000
+Side_move_effect=20.000000
+Radius_around_cutter=1500.000000
+Position_above_cutter=1000.000000
+Minimum_weight=5.000000
+Minimum_scale=10.000000
+Maximum_weight=10.000000
+Maximum_scale=12.000000
+Good_weather_in_frames=2000
+Fog_basic_altitude=1300.000000
+Flakes_number=1000
+Down_fog_speed=2.000000
+Down_fog_altitude=-600.000000
+Bad_weather_in_frames=4000
+
+
+INIEOF
+        cat <<'INIEOF' > 'Pentium III 550+ 64 Mb.ini'
+[performance]
+resolution=400x300
+cinemascope=false
+
+crowdlevel=true
+ambientsounds=true
+bumpmapping=true
+highanimationdetail=true
+
+antialiasing=high
+chardetail=high
+objectdetail=high
+prq=high
+dof=med
+
+doc=high
+INIEOF
+        cat <<'INIEOF' > character_detail_high.ini
+[Visual_Quality_Control]
+amh_shadow_limit_contraction_factor=1.5
+amh_bump_disable_distance=1800
+
+combat_stan_lod_near_limit=450.0
+combat_stan_lod_far_limit=800.0
+normal_stan_lod_near_limit=450.0
+normal_stan_lod_far_limit=800.0
+dialog_stan_lod_near_limit=450.0
+dialog_stan_lod_far_limit=800.0
+
+combat_animal_lod_near_limit=650.0
+combat_animal_lod_far_limit=1400.0
+normal_animal_lod_near_limit=650.0
+normal_animal_lod_far_limit=1400.0
+dialog_animal_lod_near_limit=650.0
+dialog_animal_lod_far_limit=1400.0
+
+combat_human_lod_near_limit=400.0
+combat_human_lod_far_limit=700.0
+normal_human_lod_near_limit=400.0
+normal_human_lod_far_limit=700.0
+dialog_human_lod_near_limit=400.0
+dialog_human_lod_far_limit=700.0
+
+dead_human_lod_near_limit=0.0
+dead_human_far_limit=400.0
+INIEOF
+        sed -i -e 's/^Water_opacity_shift=.*/Water_opacity_shift=6/' \
+               -e 's/^Water_opacity_pitch=.*/Water_opacity_pitch=20000.000000/' \
+               -e 's/^Water_opacity_offset=.*/Water_opacity_offset=25000/' OUTCAST.ini
+        ;;
+    "High quality (Entropy settings)")
+        cat <<'INIEOF' > antialiasing_high.ini 
+[Visual_Quality_Control]
+Global_Antialiasing= 3
+Combat_Antialiasing = 3
+Normal_Antialiasing = 3
+Dialog_Antialiasing = 3
+
+lnd_aa_level=2
+
+lnd_bilinear_range=16.0
+INIEOF
+        cat <<'INIEOF' > DOC_high.ini 
+[Visual_Quality_Control]
+lnd_base_layers=0
+
+[Render_Mesh]
+temples_world_view_angle=35.000000
+temples_world_view_dist=12000.000000
+temples_world_far_view_angle=38.000000
+temples_world_far_view_dist=9000
+
+marais_world_view_angle=35.000000
+marais_world_view_dist=10000.000000
+marais_world_far_view_angle=38.000000
+marais_world_far_view_dist=8000
+
+montagne_world_view_angle=35.000000
+montagne_world_view_dist=11000.000000
+montagne_world_far_view_angle=38.000000
+montagne_world_far_view_dist=8000
+
+ville_world_view_angle=35.000000
+ville_world_view_dist=10000.000000
+ville_world_far_view_angle=38.000000
+ville_world_far_view_dist=7000
+
+foret_world_view_angle=35.000000
+foret_world_view_dist=9000.000000
+foret_world_far_view_angle=38.000000
+foret_world_far_view_dist=9000
+
+neige_world_view_angle=35.000000
+neige_world_view_dist=11000.000000
+neige_world_far_view_angle=38.000000
+neige_world_far_view_dist=8500
+
+neige2_world_view_angle=35.000000
+neige2_world_view_dist=11000.000000
+neige2_world_far_view_angle=38.000000
+neige2_world_far_view_dist=8500
+
+
+[Render__mesh]
+temples__mesh_back_plane=11000
+marais__mesh_back_plane=9000
+montagne__mesh_back_plane=10000
+ville__mesh_back_plane=9000
+foret__mesh_back_plane=8000
+neige__mesh_back_plane=10000
+neige2__mesh_back_plane=10000
+
+[Render_big_mesh]
+temples_big_mesh_back_plane=15500
+marais_big_mesh_back_plane=14500
+montagne_big_mesh_back_plane=14500
+ville_big_mesh_back_plane=13000
+foret_big_mesh_back_plane=15000
+neige_big_mesh_back_plane=14500
+neige2_big_mesh_back_plane=14500
+
+[Fog]
+temples_fog_density=7
+temples_fog_sky_scale=1
+marches_fog_density=7
+marches_fog_sky_scale=2
+montagne_fog_density=6
+montagne_fog_sky_scale=2
+ville_fog_density=8
+ville_fog_sky_scale=2
+foret_fog_density=7
+foret_fog_sky_scale=2
+neige_fog_density=7
+neige_fog_sky_scale=3
+burned_fog_density=7
+burned_fog_sky_scale=3
+INIEOF
+        cat <<'INIEOF' > object_detail_high.ini 
+[Visual_Quality_Control]
+highobjectdetail=1
+global_particle_level=2
+
+[Leaves]
+MinimumLeaveSize=2
+MaximumLeaveSize=2.5
+NumberOfLeavesSmall=12
+NumberOfLeavesBig=18
+MipmapLevel2=1300.000000
+MipmapLevel1=2700.000000
+
+[Snow]
+Whirl_speed_ratio=200.000000
+Whirl_speed=20000.000000
+Transition_multiplier_snow_trigger=2.000000
+Transition_base_snow_trigger=-1.000000
+Side_move_effect=20.000000
+Radius_around_cutter=1500.000000
+Position_above_cutter=1000.000000
+Minimum_weight=5.000000
+Minimum_scale=10.000000
+Maximum_weight=10.000000
+Maximum_scale=12.000000
+Good_weather_in_frames=2000
+Fog_basic_altitude=1300.000000
+Flakes_number=2000
+Down_fog_speed=2.000000
+Down_fog_altitude=-600.000000
+Bad_weather_in_frames=4000
+INIEOF
+        cat <<'INIEOF' > 'Pentium III 550+ 64 Mb.ini'
+[performance]
+resolution=1280x800
+cinemascope=false
+
+crowdlevel=true
+ambientsounds=true
+bumpmapping=true
+highanimationdetail=true
+
+antialiasing=high
+chardetail=high
+objectdetail=high
+prq=high
+dof=high
+
+doc=high
+INIEOF
+        cat <<'INIEOF' > character_detail_high.ini
+[Visual_Quality_Control]
+amh_shadow_limit_contraction_factor=1.5
+amh_bump_disable_distance=2000
+
+combat_stan_lod_near_limit=1000.0
+combat_stan_lod_far_limit=2000.0
+normal_stan_lod_near_limit=2000.0
+normal_stan_lod_far_limit=2000.0
+dialog_stan_lod_near_limit=1000.0
+dialog_stan_lod_far_limit=2000.0
+
+combat_animal_lod_near_limit=1000.0
+combat_animal_lod_far_limit=2000.0
+normal_animal_lod_near_limit=1000.0
+normal_animal_lod_far_limit=2000.0
+dialog_animal_lod_near_limit=1000.0
+dialog_animal_lod_far_limit=2000.0
+
+combat_human_lod_near_limit=1000.0
+combat_human_lod_far_limit=2000.0
+normal_human_lod_near_limit=1000.0
+normal_human_lod_far_limit=2000.0
+dialog_human_lod_near_limit=1000.0
+dialog_human_lod_far_limit=1000.0
+
+dead_human_lod_near_limit=0.0
+dead_human_far_limit=400.0
+INIEOF
+        sed -i -e 's/^Water_opacity_shift=.*/Water_opacity_shift=6/' \
+               -e 's/^Water_opacity_pitch=.*/Water_opacity_pitch=2000.000000/' \
+               -e 's/^Water_opacity_offset=.*/Water_opacity_offset=5000/' OUTCAST.ini
+        ;;
+esac
 
 # Allow for extensions
 shopt -s nullglob
