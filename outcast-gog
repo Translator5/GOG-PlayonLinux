@@ -152,11 +152,11 @@ POL_LoadVar_PROGRAMFILES
 case "\$POL_LANG" in
     fr)
         TITLE="Outcast (version Gog)"
-        LNG_CHOOSE_LANGUAGE="Choisissez le langage des voix et des sous-titres"
+        LNG_CHOOSE_LANGUAGE="Choisissez la langue"
         ;;
     *)
         TITLE="Outcast (GoG release)"
-        LNG_CHOOSE_LANGUAGE="Choose language for voices and subtitles"
+        LNG_CHOOSE_LANGUAGE="Choose language"
         ;;
 esac
 
@@ -168,43 +168,295 @@ CURRENT_LANG=English
 POL_SetupWindow_Init
 
 # Other language directories are incomplete (?)
-POL_SetupWindow_menu_list "\$LNG_CHOOSE_LANGUAGE" "\$TITLE" "English~French~German" "~" "\$CURRENT_LANG"
-CURRENT_LANG="\$APP_ANSWER"
-case "\$CURRENT_LANG" in
-    English)
-        ln -sf Data/Voices/ENGLISH/FIX.PAK fix.pak
-        ln -sf Data/Voices/ENGLISH/TEXT.PAK text.pak
-        ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
-        ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
-        ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
-        ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
-        ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
-        ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
-        ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+POL_SetupWindow_menu_list "\$LNG_CHOOSE_LANGUAGE" "\$TITLE" "English~French~German~Brasilian (text only)~Dutch (text only)~Italian (text only)~Spanish (text only)" "~" "\$CURRENT_LANG"
+if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
+    CURRENT_LANG="\$APP_ANSWER"
+    case "\$CURRENT_LANG" in
+	English)
+	    ln -sf Data/Voices/ENGLISH/FIX.PAK fix.pak
+	    ln -sf Data/Voices/ENGLISH/TEXT.PAK text.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+	    ;;
+	French)
+	    ln -sf Data/Voices/French/FIX.PAK fix.pak
+	    ln -sf Data/Voices/French/TEXT.PAK text.pak
+	    ln -sf Data/Voices/French/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/French/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/French/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/French/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/French/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/French/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/French/VOICESGE.PAK voicesgen+.pak
+	    ;;
+	German)
+	    ln -sf Data/Voices/German/FIX.PAK fix.pak
+	    ln -sf Data/Voices/German/TEXT.PAK text.pak
+	    ln -sf Data/Voices/German/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/German/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/German/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/German/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/German/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/German/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/German/VOICESGE.PAK voicesgen+.pak
+	    ;;
+        "Brasilian (text only)")
+	    ln -sf Data/Voices/Brasilian/FIX.PAK fix.pak
+	    ln -sf Data/Voices/Brasilian/TEXT.PAK text.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+            ;;
+        "Dutch (text only)")
+	    ln -sf Data/Voices/Dutch/FIX.PAK fix.pak
+	    ln -sf Data/Voices/Dutch/TEXT.PAK text.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+            ;;
+        "Italian (text only)")
+	    ln -sf Data/Voices/Italian/FIX.PAK fix.pak
+	    ln -sf Data/Voices/Italian/TEXT.PAK text.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+            ;;
+        "Spanish (text only)")
+	    ln -sf Data/Voices/Spanish/FIX.PAK fix.pak
+	    ln -sf Data/Voices/Spanish/TEXT.PAK text.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES2.PAK voices2+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES3.PAK voices3+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES4.PAK voices4+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES5.PAK voices5+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
+	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
+            ;;
+    esac
+fi
+
+POL_SetupWindow_menu "\$LNG_CHOOSE_KEYBOARD_LAYOUT" "\$TITLE" "Unchanged~Arrow keys (default)~WASD (Qwerty)~ZQSD (Azerty)" "~" "Unchanged"
+case "\$APP_ANSWER" in
+    Unchanged)
         ;;
-    French)
-        ln -sf Data/Voices/French/FIX.PAK fix.pak
-        ln -sf Data/Voices/French/TEXT.PAK text.pak
-        ln -sf Data/Voices/French/VOICES1.PAK voices1+.pak
-        ln -sf Data/Voices/French/VOICES2.PAK voices2+.pak
-        ln -sf Data/Voices/French/VOICES3.PAK voices3+.pak
-        ln -sf Data/Voices/French/VOICES4.PAK voices4+.pak
-        ln -sf Data/Voices/French/VOICES5.PAK voices5+.pak
-        ln -sf Data/Voices/French/VOICES6.PAK voices6+.pak
-        ln -sf Data/Voices/French/VOICESGE.PAK voicesgen+.pak
-        ;;
-    German)
-        ln -sf Data/Voices/German/FIX.PAK fix.pak
-        ln -sf Data/Voices/German/TEXT.PAK text.pak
-        ln -sf Data/Voices/German/VOICES1.PAK voices1+.pak
-        ln -sf Data/Voices/German/VOICES2.PAK voices2+.pak
-        ln -sf Data/Voices/German/VOICES3.PAK voices3+.pak
-        ln -sf Data/Voices/German/VOICES4.PAK voices4+.pak
-        ln -sf Data/Voices/German/VOICES5.PAK voices5+.pak
-        ln -sf Data/Voices/German/VOICES6.PAK voices6+.pak
-        ln -sf Data/Voices/German/VOICESGE.PAK voicesgen+.pak
-        ;;
+    "Arrow keys (default)")
+        # LF -> CRLF mantra
+        cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
+[Trigger]
+Slow=KEY_RALT     
+Rudder_LeftRight=~MOUSE_AXIS_0 JOY_AXIS_3
+RudderRight=JOYBUT7
+RudderMotion=KEY_LALT     
+RudderLeft=JOYBUT6
+BackForward=JOY_AXIS_1
+LeftRight=JOY_AXIS_0
+CameraFar=||KEY_NUMPAD1 JOYBUT258 KEY_END
+CameraNear=||KEY_NUMPAD7 JOYBUT256 KEY_HOME
+Forward=|KEY_NUMPAD8 KEY_UP     
+Backward=|KEY_NUMPAD2 KEY_DOWN     
+Left=|KEY_NUMPAD4 KEY_LEFT     
+Right=|KEY_NUMPAD6 KEY_RIGHT     
+Fire=||MOUSE_BUTTON_0 JOYBUT0 KEY_LCONTROL
+Target=||MOUSE_BUTTON_1 JOYBUT1 KEY_LSHIFT
+MapZoomout=KEY_SUBTRACT     
+MapZoomin=KEY_ADD     
+MapToggleSize=KEY_MULTIPLY     
+Map=KEY_TAB     
+Inventory=|KEY_I JOYBUT6     
+WeaponPrevious=KEY_NUMPAD3     
+WeaponNext=KEY_NUMPAD9     
+Weapon6=KEY_6     
+Weapon5=KEY_5     
+Weapon4=KEY_4     
+Weapon3=KEY_3     
+Weapon2=KEY_2     
+Weapon1=KEY_1     
+XRay=KEY_X     
+PitchUp=|JOYBUT259 KEY_PAGEUP     
+PitchDown=|JOYBUT257 KEY_PAGEDOWN     
+Pitch=MOUSE_AXIS_1
+Notepad=KEY_N     
+BackPack=KEY_B     
+Lexicon=KEY_L     
+LockTarget=KEY_K     
+ClearHands=KEY_0     
+Abort=|KEY_ESCAPE JOYBUT1
+Escape=KEY_ESCAPE
+Crawl=|JOYBUT4 KEY_SPACE     
+Jump=JOYBUT5
+FirstPerson=|JOYBUT7 KEY_RCONTROL     
+PitchAbsolute=JOY_AXIS_2
+VolumeUp=KEY_R     
+VolumeDown=KEY_E     
+MouseUp=KEY_V     
+MouseDown=KEY_C     
+BalanceUp=KEY_F     
+BalanceDown=KEY_D     
+CameraRight=
+CameraLeft=
+disablejoystick=0
+
+[Sensitivity]
+MouseSensitivity=0.500000
+InvertedMouse=-1.000000
+swapmousebuttons=0
+
+[Sound_Quality_Control]
+3D_sound=1
+EAX_support=1
+MAPEOF
+	;;
+    "WASD (Qwerty)")
+        cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
+[Trigger]
+Slow=KEY_RALT
+Rudder_LeftRight=~MOUSE_AXIS_0 JOY_AXIS_3
+RudderRight=JOYBUT7
+RudderMotion=KEY_LALT
+RudderLeft=JOYBUT6
+BackForward=JOY_AXIS_1
+LeftRight=JOY_AXIS_0
+CameraFar=||KEY_NUMPAD1 JOYBUT258 KEY_END
+CameraNear=||KEY_NUMPAD7 JOYBUT256 KEY_HOME
+Forward=||KEY_W KEY_NUMPAD8 KEY_UP
+Backward=||KEY_S KEY_NUMPAD2 KEY_DOWN
+Left=||KEY_A KEY_NUMPAD4 KEY_LEFT
+Right=||KEY_D KEY_NUMPAD6 KEY_RIGHT
+Fire=|MOUSE_BUTTON_0 KEY_LCONTROL
+Target=||MOUSE_BUTTON_1 JOYBUT1 KEY_LSHIFT
+MapZoomout=KEY_SUBTRACT
+MapZoomin=KEY_ADD
+MapToggleSize=KEY_MULTIPLY
+Map=KEY_TAB
+Inventory=|KEY_R JOYBUT6
+WeaponPrevious=|KEY_NUMPAD3 KEY_Z
+WeaponNext=|KEY_NUMPAD9 KEY_Q
+Weapon6=KEY_6
+Weapon5=KEY_5
+Weapon4=KEY_4
+Weapon3=KEY_3
+Weapon2=KEY_2
+Weapon1=KEY_1
+XRay=KEY_X
+PitchUp=|JOYBUT259 KEY_PAGEUP
+PitchDown=|JOYBUT257 KEY_PAGEDOWN
+Pitch=MOUSE_AXIS_1
+Notepad=KEY_T
+BackPack=KEY_B
+Lexicon=KEY_L
+LockTarget=KEY_E
+ClearHands=|KEY_0 KEY_V
+Abort=|KEY_ESCAPE JOYBUT1
+Escape=KEY_ESCAPE
+Crawl=||JOYBUT4 KEY_C KEY_SPACE
+Jump=JOYBUT5
+FirstPerson=||JOYBUT7 KEY_RCONTROL KEY_F
+PitchAbsolute=JOY_AXIS_2
+VolumeUp=KEY_U
+VolumeDown=KEY_Y
+MouseUp=KEY_I
+MouseDown=KEY_K
+BalanceUp=KEY_J
+BalanceDown=KEY_H
+CameraRight=
+CameraLeft=
+disablejoystick=0
+
+[Sensitivity]
+MouseSensitivity=0.500000
+InvertedMouse=-1.000000
+swapmousebuttons=0
+
+[Sound_Quality_Control]
+3D_sound=1
+EAX_support=1
+MAPEOF
+	;;
+    "ZQSD (Azerty)")
+        cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
+[Trigger]
+Slow=KEY_RALT
+Rudder_LeftRight=~MOUSE_AXIS_0 JOY_AXIS_3
+RudderRight=JOYBUT7
+RudderMotion=KEY_LALT
+RudderLeft=JOYBUT6
+BackForward=JOY_AXIS_1
+LeftRight=JOY_AXIS_0
+CameraFar=||KEY_NUMPAD1 JOYBUT258 KEY_END
+CameraNear=||KEY_NUMPAD7 JOYBUT256 KEY_HOME
+Forward=||KEY_Z KEY_NUMPAD8 KEY_UP
+Backward=||KEY_S KEY_NUMPAD2 KEY_DOWN
+Left=||KEY_Q KEY_NUMPAD4 KEY_LEFT
+Right=||KEY_D KEY_NUMPAD6 KEY_RIGHT
+Fire=|MOUSE_BUTTON_0 KEY_LCONTROL
+Target=||MOUSE_BUTTON_1 JOYBUT1 KEY_LSHIFT
+MapZoomout=KEY_SUBTRACT
+MapZoomin=KEY_ADD
+MapToggleSize=KEY_MULTIPLY
+Map=KEY_TAB
+Inventory=|KEY_R JOYBUT6
+WeaponPrevious=|KEY_NUMPAD3 KEY_W
+WeaponNext=|KEY_NUMPAD9 KEY_A
+Weapon6=KEY_6
+Weapon5=KEY_5
+Weapon4=KEY_4
+Weapon3=KEY_3
+Weapon2=KEY_2
+Weapon1=KEY_1
+XRay=KEY_X
+PitchUp=|JOYBUT259 KEY_PAGEUP
+PitchDown=|JOYBUT257 KEY_PAGEDOWN
+Pitch=MOUSE_AXIS_1
+Notepad=KEY_T
+BackPack=KEY_B
+Lexicon=KEY_L
+LockTarget=KEY_E
+ClearHands=|KEY_0 KEY_V
+Abort=|KEY_ESCAPE JOYBUT1
+Escape=KEY_ESCAPE
+Crawl=||JOYBUT4 KEY_C KEY_SPACE
+Jump=JOYBUT5
+FirstPerson=||JOYBUT7 KEY_RCONTROL KEY_F
+PitchAbsolute=JOY_AXIS_2
+VolumeUp=KEY_U
+VolumeDown=KEY_Y
+MouseUp=KEY_I
+MouseDown=KEY_K
+BalanceUp=KEY_J
+BalanceDown=KEY_H
+CameraRight=
+CameraLeft=
+disablejoystick=0
+
+[Sensitivity]
+MouseSensitivity=0.500000
+InvertedMouse=-1.000000
+swapmousebuttons=0
+
+[Sound_Quality_Control]
+3D_sound=1
+EAX_support=1
+MAPEOF
+	;;
 esac
+
 
 # Allow for extensions
 shopt -s nullglob
