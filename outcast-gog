@@ -74,7 +74,6 @@ POL_SetupWindow_presentation "$TITLE" "Appeal S.A. / Atari" "http://www.gog.com/
  
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate
-POL_LoadVar_PROGRAMFILES
 
 cd $HOME
 POL_SetupWindow_browse "$LNG_ARCHIVE_LOCATION" "$LNG_SELECT_FILE"

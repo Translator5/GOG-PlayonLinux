@@ -1,11 +1,9 @@
 Outcast-gog:
 	Rewrite i18n with eval_gettext
-	Remove POL_LoadVar_PROGRAMFILES
 
 Outcast-gog-zenger-hires-patch:
 	Rewrite i18n with eval_gettext
 	Check unzip is present
 	Use registry instead of pol_settings file?
-	Remove POL_LoadVar_PROGRAMFILES
         Skip question if patch not present anymore (reinstall)
 
