@@ -3,7 +3,6 @@ Outcast-gog:
 
 Outcast-gog-zenger-hires-patch:
 	Rewrite i18n with eval_gettext
-	Check unzip is present
 	Use registry instead of pol_settings file?
         Skip question if patch not present anymore (reinstall)
 
