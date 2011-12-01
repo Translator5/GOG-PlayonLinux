@@ -118,12 +118,14 @@ case "\$POL_LANG" in
         ;;
 esac
 
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || return
+[ -e APPLYMEGAPATCH.exe ] || return
+
 POL_SetupWindow_question "\$LNG_CHANGE_RESOLUTION" "\$TITLE"
 if [ "\$APP_ANSWER" = "TRUE" ]; then
 
     POL_SetupWindow_wait_next_signal "\$LNG_HIRES_PATCH" "\$TITLE"
 
-    cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/"
     POL_Wine APPLYMEGAPATCH.exe
 
     POL_SetupWindow_detect_exit
@@ -136,5 +138,3 @@ if [ "\$APP_ANSWER" = "TRUE" ]; then
 
 fi
 EOF
-
-exit
