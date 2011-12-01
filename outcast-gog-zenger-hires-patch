@@ -20,16 +20,18 @@ abort () {
 check_install_archive () {
     POL_SetupWindow_wait_next_signal "$LNG_CHECK_ARCHIVE" "$TITLE"
 
+    EXPECTED_NAME='OUTCASTP_V3.zip'
     EXPECTED_SIZE=102462783
     EXPECTED_MD5="d1c6783339150684c659d5fb56f130dc"
 
+    NAME="$(basename $ARCHIVE)"
     SIZE="$(stat -c%s $ARCHIVE)"
     MD5="$(md5sum $ARCHIVE|cut -c1-32)"
 
     POL_SetupWindow_detect_exit
 
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message_image "$LNG_ARCHIVE_MISMATCH\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+        POL_SetupWindow_message_image "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
         POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
         [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
