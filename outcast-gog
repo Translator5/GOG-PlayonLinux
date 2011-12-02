@@ -45,7 +45,7 @@ case "$POL_LANG" in
     fr)
         TITLE="Outcast (version GoG)"
         SHORTCUT_NAME="Outcast"
-        SHORTCUT_DOC="Manuel de l'utilisateur Outcast"
+        SHORTCUT_DOC="Outcast - Manuel d'utilisation"
         LNG_ABORTED="Une erreur est survenue, l'installation est interrompue."
         LNG_CHECK_ARCHIVE="Test de l'archive d'installation..."
         LNG_ARCHIVE_MISMATCH="L'archive ne correspond pas.\nOu bien elle est corrompue, ou ce n'est pas la version attendue.\nCe script ne peut pas garantir que l'installation se passera bien, pensez à communiquer le résultat de l'installation sur le forum de PlayOnLinux."
@@ -57,7 +57,7 @@ case "$POL_LANG" in
     *)
         TITLE="Outcast (GoG release)"
         SHORTCUT_NAME="Outcast"
-        SHORTCUT_DOC="Outcast user manual"
+        SHORTCUT_DOC="Outcast - User manual"
         LNG_ABORTED="An error occurred, the installation is aborted."
         LNG_CHECK_ARCHIVE="Checking install archive..."
         LNG_ARCHIVE_MISMATCH="Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums."
