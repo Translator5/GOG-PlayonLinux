@@ -6,7 +6,7 @@
 # Author : Pierre Etchemaite <petchema@concept-micro.com>
 # Script licence : GPL v.2
 # Program licence : Retail
-# Depend : dosbox 
+# Depend : dosbox
 
 # prefer native dosbox version
 
@@ -65,6 +65,7 @@ case "$POL_LANG" in
 	LNG_CONTINUE="Continuer ?"
         LNG_ARCHIVE_LOCATION="Indiquez l'emplacement de l'archive d'installation"
         LNG_SELECT_FILE="Sélectionnez le fichier"
+	LNG_NATIVE_DOSBOX="Ce jeu utilise l'émulateur DOSBox, qui existe aussi sous Linux.\nUtiliser la version native si présente ? (Recommandé)"
         LNG_INSTALLING="Installation de $TITLE..."
         ;;
     *)
@@ -82,6 +83,7 @@ case "$POL_LANG" in
         LNG_CONTINUE="Continue?"
         LNG_ARCHIVE_LOCATION="Please select the location of the install file"
         LNG_SELECT_FILE="Select file"
+	LNG_NATIVE_DOSBOX="This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)"
         LNG_INSTALLING="Installing $TITLE..."
         ;;
 esac
@@ -89,9 +91,6 @@ esac
 POL_SetupWindow_Init
 POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/en/gamecard/starflight_1_2" "Pierre Etchemaite" "$PREFIX"
 
-check_one "dosbox" "dosbox"
-POL_SetupWindow_missing
- 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate
 
@@ -101,6 +100,10 @@ ARCHIVE="$APP_ANSWER"
 
 check_install_archive
 
+POL_SetupWindow_question "$LNG_NATIVE_DOSBOX" "$TITLE"
+NATIVEDOSBOX=''
+[ "$APP_ANSWER" = "TRUE" ] && NATIVEDOSBOX=1
+
 if [ -n "$WORKING_WINE_VERSION" ]; then
     POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
     export WINEVERSION="$WORKING_WINE_VERSION"
@@ -109,7 +112,7 @@ fi
 
 POL_SetupWindow_wait_next_signal "$LNG_INSTALLING" "$TITLE"
 
-# Associate .PDF with native app 
+# Associate .PDF with native app
 # http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
 # Do it before installing the game, so you have the possibility to open
 # PDFs with Win32 reader if you choose to install it
@@ -131,18 +134,20 @@ Set_OS winxp
 POL_SetupWindow_detect_exit
 
 # Doesn't hurt ;)
-POL_Wine_reboot 
+POL_Wine_reboot
 
 # Sadly, it seems GoG installer unpacks both games even if you only ask for 1
 # So test below is uneffective and all shortcuts are always created
 if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1" ]; then
     # Better default settings in my opinion
-    sed -i.orig -e 's/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
+    sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^cycles=.*/cycles=auto/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
 
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "-conf dosboxSF1.conf -noconsole" "$SHORTCUT1_NAME"
+    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "-conf dosboxSF1.conf -noconsole -c \"exit\""
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT1_NAME"
-    # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-    POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox -conf dosboxSF1.conf"
+    if [ -n "$NATIVEDOSBOX" ]; then
+        # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
+        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox -conf dosboxSF1.conf"
+    fi
     if [ -n "$WORKING_WINE_VERSION" ]; then
         Set_WineVersion_Assign "$WORKING_WINE_VERSION" "$SHORTCUT1_NAME"
     fi
@@ -156,12 +161,14 @@ fi
 
 if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2" ]; then
     # Better default settings in my opinion
-    sed -i.orig -e 's/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
+    sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
 
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "-conf dosboxSF2.conf -noconsole" "$SHORTCUT2_NAME"
+    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT2_NAME"
-    # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-    POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
+    if [ -n "$NATIVEDOSBOX" ]; then
+        # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
+        POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
+    fi
     if [ -n "$WORKING_WINE_VERSION" ]; then
         Set_WineVersion_Assign "$WORKING_WINE_VERSION" "$SHORTCUT2_NAME"
     fi
@@ -184,16 +191,18 @@ POL_LoadVar_PROGRAMFILES
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
 
-# Make sure that if user presses "start game", it will launch the right dosbox
-DOSBOX="`which dosbox`"
-if [ -n "\$DOSBOX" ]; then
-    cat <<-EOFINI > $REPERTOIRE/tmp/sf1nativedosbox.reg
+if [ -n "$NATIVEDOSBOX" ]; then
+    # Make sure that if user presses "start game", it will launch the right dosbox
+    DOSBOX="`which dosbox`"
+    if [ -n "\$DOSBOX" ]; then
+	cat <<-EOFINI > $REPERTOIRE/tmp/sf1nativedosbox.reg
 	REGEDIT4
 
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
 	EOFINI
-    POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
+	POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
+    fi
 fi
 
 POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT1"
@@ -210,16 +219,19 @@ export WINEDEBUG=""
 POL_LoadVar_PROGRAMFILES
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
-# Make sure that if user presses "start game", it will launch the right dosbox
-DOSBOX="`which dosbox`"
-if [ -n "\$DOSBOX" ]; then
-    cat <<-EOFINI > $REPERTOIRE/tmp/sf2nativedosbox.reg
+
+if [ -n "$NATIVEDOSBOX" ]; then
+    # Make sure that if user presses "start game", it will launch the right dosbox
+    DOSBOX="`which dosbox`"
+    if [ -n "\$DOSBOX" ]; then
+	cat <<-EOFINI > $REPERTOIRE/tmp/sf2nativedosbox.reg
 	REGEDIT4
 
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
 	EOFINI
-    POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
+	POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
+    fi
 fi
 
 POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT2"
