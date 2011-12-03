@@ -12,13 +12,13 @@
 source "$PLAYONLINUX/lib/sources"
 
 abort () {
-    POL_SetupWindow_message "$LNG_ABORTED" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.)" "$TITLE"
     POL_SetupWindow_Close
     exit 1
 }
 
 check_install_archive () {
-    POL_SetupWindow_wait "$LNG_CHECK_ARCHIVE" "$TITLE"
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
 
     EXPECTED_NAME='OUTCASTP_V3.zip'
     EXPECTED_SIZE=102462783
@@ -35,44 +35,19 @@ check_install_archive () {
     POL_SetupWindow_detect_exit
 
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE"
-        POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
+        POL_SetupWindow_message "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)" "$TITLE"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
         [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
 }
 
-# Must match outcast-gog $PREFIX
+# Must match outcast-gog script values
 PREFIX="Outcast_gog"
+SHORTCUT_NAME="Outcast"
 WORKING_WINE_VERSION="1.3.27-rawinput2"
 
-case "$POL_LANG" in
-    fr)
-        TITLE="Patch haute résolution v3 de Zenger pour Outcast"
-        SHORTCUT_NAME="Patch haute résolution v3 de Zenger"
-        LNG_ABORTED="Une erreur est survenue, l'installation est interrompue."
-        LNG_CHECK_ARCHIVE="Test de l'archive d'installation..."
-        LNG_ARCHIVE_MISMATCH="L'archive ne correspond pas.\nOu bien elle est corrompue, ou ce n'est pas la version attendue.\nCe script ne peut pas garantir que l'installation se passera bien,\npensez à communiquer le résultat de l'installation sur le forum de PlayOnLinux."
-        LNG_CONTINUE="Continuer ?"
-        LNG_ARCHIVE_LOCATION="Indiquez l'emplacement de l'archive d'installation\nVous pouvez la télécharger depuis:\nhttp://www.megaupload.com/?d=H6CIR27L"
-        LNG_SELECT_FILE="Sélectionnez le fichier"
-        LNG_NEED_OUTCAST="Oups, vous devez avoir Outcast (GoG release) déjà installé!"
-        LNG_INSTALLING="Installation de $SHORTCUT_NAME..."
-        LNG_SEE_CONFIGURATOR="Le patch peut maintenant être activé et configuré depuis\nl'assistant de configuration PlayOnLinux pour Outcast.\nN'oubliez pas de laisser un petit mot à Zenger sur le forum de GoG !"
-        ;;
-    *)
-        TITLE="Zenger's Outcast HI-RES patch v3"
-        SHORTCUT_NAME="Zenger Hi-Res patch v3"
-        LNG_ABORTED="An error occurred, the installation is aborted."
-        LNG_CHECK_ARCHIVE="Checking install archive..."
-        LNG_ARCHIVE_MISMATCH="Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly.\nPlease report success or failure to PlayOnLinux forums."
-        LNG_CONTINUE="Continue?"
-        LNG_ARCHIVE_LOCATION="Please select the location of the archive file\nYou can download it from:\nhttp://www.megaupload.com/?d=H6CIR27L"
-        LNG_SELECT_FILE="Select file"
-        LNG_NEED_OUTCAST="Oops, you must install Outcast (GoG release) first!"
-        LNG_INSTALLING="Installing $SHORTCUT_NAME..."
-        LNG_SEE_CONFIGURATOR="The patch can now be activated and configured from\nPlayOnLinux's setup wizard for Outcast.\nAnd don't forget to leave a message to Zenger on GoG forums!"
-        ;;
-esac
+TITLE="$(eval_gettext 'Zenger s Outcast HI-RES patch v3')"
+SHORTCUT_NAME="$(eval_gettext 'Zenger Hi-Res patch v3')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -83,15 +58,17 @@ check_one "unzip" "unzip"
 POL_SetupWindow_missing
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_SetupWindow_message "$LNG_NEED_OUTCAST" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'Oops, you must install Outcast (GoG release) first!')" "$TITLE"
     abort
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_LoadVar_PROGRAMFILES
 
+POL_SetupWindow_message "$(eval_gettext 'You can download the archive file from:')\nhttp://www.megaupload.com/?d=H6CIR27L" "$TITLE"
+
 cd $HOME
-POL_SetupWindow_browse "$LNG_ARCHIVE_LOCATION" "$LNG_SELECT_FILE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
 ARCHIVE="$APP_ANSWER"
 
 check_install_archive
@@ -99,35 +76,23 @@ check_install_archive
 POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
 export WINEVERSION="$WORKING_WINE_VERSION"
 
-POL_SetupWindow_wait "$LNG_INSTALLING" "$TITLE"
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 unzip -n "$ARCHIVE" -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || abort
 
-POL_SetupWindow_message "$LNG_SEE_CONFIGURATOR" "$TITLE"
+POL_SetupWindow_message "$(eval_gettext 'The patch can now be activated and configured from\nPlayOnLinux s setup wizard for Outcast.\nAnd dont forget to leave a message to Zenger on GoG forums!')" "$TITLE"
 
 POL_SetupWindow_Close
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/Outcast.zenger-hires
-case "\$POL_LANG" in
-    fr)
-        LNG_HIRES_PATCH="Patch haute résolution de Zenger"
-        LNG_CHANGE_RESOLUTION="Lancer le \$LNG_HIRES_PATCH ?"
-        LNG_LOADER_REMINDER="Vérifiez que la résolution a été changée dans le chargeur du jeu\n(éventuellement \"HI-RES\")."
-        ;;
-    *)
-        LNG_HIRES_PATCH="Zenger's Hi-Res patch"
-        LNG_CHANGE_RESOLUTION="Run \$LNG_HIRES_PATCH?"
-        LNG_LOADER_REMINDER="Check that the resolution has been changed\n(eventually set to \"HI-RES\") in the loader."
-        ;;
-esac
+cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME".zenger-hires
 
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || return
 [ -e APPLYMEGAPATCH.exe ] || return
 
-POL_SetupWindow_question "\$LNG_CHANGE_RESOLUTION" "\$TITLE"
+POL_SetupWindow_question "$(eval_gettext 'Run \$TITLE?')" "\$TITLE"
 if [ "\$APP_ANSWER" = "TRUE" ]; then
 
-    POL_SetupWindow_wait "\$LNG_HIRES_PATCH" "\$TITLE"
+    POL_SetupWindow_wait "\$TITLE" "\$TITLE"
 
     POL_Wine APPLYMEGAPATCH.exe
 
@@ -135,7 +100,7 @@ if [ "\$APP_ANSWER" = "TRUE" ]; then
     SCREEN_HEIGHT=\$(grep '^ScreenHeight=' OUTCAST.ini |cut -d= -f2)
     Set_Desktop "On" "\$SCREEN_WIDTH" "\$SCREEN_HEIGHT"
 
-    POL_SetupWindow_message "\$LNG_LOADER_REMINDER" "\$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'Check that the resolution has been changed\n(eventually set to \"HI-RES\") in the loader.')" "\$TITLE"
 
 fi
 EOF

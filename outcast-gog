@@ -12,13 +12,13 @@
 source "$PLAYONLINUX/lib/sources"
 
 abort () {
-    POL_SetupWindow_message_image "$LNG_ABORTED" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.)" "$TITLE"
     POL_SetupWindow_Close
     exit 1
 }
 
 check_install_archive () {
-    POL_SetupWindow_wait "$LNG_CHECK_ARCHIVE" "$TITLE"
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
 
     EXPECTED_NAME='setup_outcast.exe'
     EXPECTED_SIZE=1409323648
@@ -33,8 +33,8 @@ check_install_archive () {
     IFS="$OLDIFS"
 
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE"
-        POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
+        POL_SetupWindow_message "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)" "$TITLE"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
         [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
 }
@@ -43,32 +43,9 @@ check_install_archive () {
 PREFIX="Outcast_gog"
 WORKING_WINE_VERSION="1.3.27-rawinput2"
 
-case "$POL_LANG" in
-    fr)
-        TITLE="Outcast (version GoG)"
-        SHORTCUT_NAME="Outcast"
-        SHORTCUT_DOC="Outcast - Manuel d'utilisation"
-        LNG_ABORTED="Une erreur est survenue, l'installation est interrompue."
-        LNG_CHECK_ARCHIVE="Test de l'archive d'installation..."
-        LNG_ARCHIVE_MISMATCH="L'archive ne correspond pas.\nOu bien elle est corrompue, ou ce n'est pas la version attendue.\nCe script ne peut pas garantir que l'installation se passera bien, pensez à communiquer le résultat de l'installation sur le forum de PlayOnLinux."
-	LNG_CONTINUE="Continuer ?"
-        LNG_ARCHIVE_LOCATION="Indiquez l'emplacement de l'archive d'installation"
-        LNG_SELECT_FILE="Sélectionnez le fichier"
-        LNG_INSTALLING="Installation de $SHORTCUT_NAME..."
-        ;;
-    *)
-        TITLE="Outcast (GoG release)"
-        SHORTCUT_NAME="Outcast"
-        SHORTCUT_DOC="Outcast - User manual"
-        LNG_ABORTED="An error occurred, the installation is aborted."
-        LNG_CHECK_ARCHIVE="Checking install archive..."
-        LNG_ARCHIVE_MISMATCH="Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums."
-        LNG_CONTINUE="Continue?"
-        LNG_ARCHIVE_LOCATION="Please select the location of the install file"
-        LNG_SELECT_FILE="Select file"
-        LNG_INSTALLING="Installing $SHORTCUT_NAME..."
-        ;;
-esac
+TITLE="$(eval_gettext 'Outcast (GoG release)')"
+SHORTCUT_NAME="Outcast"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -79,7 +56,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate
 
 cd $HOME
-POL_SetupWindow_browse "$LNG_ARCHIVE_LOCATION" "$LNG_SELECT_FILE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
 ARCHIVE="$APP_ANSWER"
 
 check_install_archive
@@ -88,7 +65,7 @@ POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
 export WINEVERSION="$WORKING_WINE_VERSION"
 
 
-POL_SetupWindow_wait "$LNG_INSTALLING" "$TITLE"
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Associate .PDF with native app 
 # http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
@@ -144,7 +121,7 @@ POL_SetupWindow_make_shortcut "$PREFIX" "/windows/command" "start.exe" "" "$SHOR
 
 POL_SetupWindow_Close
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/Outcast
+cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
@@ -153,35 +130,21 @@ export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
 
-case "\$POL_LANG" in
-    fr)
-        TITLE="Outcast (version Gog)"
-        LNG_CHOOSE_LANGUAGE="Choisissez la langue"
-        LNG_VISUAL_QUALITY="Qualité graphique"
-        LNG_CHOOSE_KEYBOARD_LAYOUT="Dispositions de clavier standards"
-        ;;
-    *)
-        TITLE="Outcast (GoG release)"
-        LNG_CHOOSE_LANGUAGE="Choose language"
-        LNG_VISUAL_QUALITY="Visual quality"
-        LNG_CHOOSE_KEYBOARD_LAYOUT="Standard keyboard layouts"
-        ;;
-esac
+TITLE="$(eval_gettext 'Outcast (GoG release)')"
 
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || exit 1
 
-CURRENT_LANG=English
+CURRENT_LANG="$(eval_gettext 'English')"
 [ -f pol_configuration ] && source pol_configuration
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-# Other language directories are incomplete (?)
-POL_SetupWindow_menu_list "\$LNG_CHOOSE_LANGUAGE" "\$TITLE" "English~French~German~Brasilian (text only)~Dutch (text only)~Italian (text only)~Spanish (text only)" "~" "\$CURRENT_LANG"
+POL_SetupWindow_menu_list "$(eval_gettext 'Choose language')" "\$TITLE" "$(eval_gettext 'English')~$(eval_gettext 'French')~$(eval_gettext 'German')~$(eval_gettext 'Brasilian (text only)')~$(eval_gettext 'Dutch (text only)')~$(eval_gettext 'Italian (text only)')~$(eval_gettext 'Spanish (text only)')" "~" "\$CURRENT_LANG"
 if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
     CURRENT_LANG="\$APP_ANSWER"
     case "\$CURRENT_LANG" in
-	English)
+	"$(eval_gettext 'English')")
 	    ln -sf Data/Voices/ENGLISH/FIX.PAK fix.pak
 	    ln -sf Data/Voices/ENGLISH/TEXT.PAK text.pak
 	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
@@ -192,7 +155,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
 	    ;;
-	French)
+	"$(eval_gettext 'French')")
 	    ln -sf Data/Voices/French/FIX.PAK fix.pak
 	    ln -sf Data/Voices/French/TEXT.PAK text.pak
 	    ln -sf Data/Voices/French/VOICES1.PAK voices1+.pak
@@ -203,7 +166,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/French/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/French/VOICESGE.PAK voicesgen+.pak
 	    ;;
-	German)
+	"$(eval_gettext 'German')")
 	    ln -sf Data/Voices/German/FIX.PAK fix.pak
 	    ln -sf Data/Voices/German/TEXT.PAK text.pak
 	    ln -sf Data/Voices/German/VOICES1.PAK voices1+.pak
@@ -214,7 +177,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/German/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/German/VOICESGE.PAK voicesgen+.pak
 	    ;;
-        "Brasilian (text only)")
+        "$(eval_gettext 'Brasilian (text only)')")
 	    ln -sf Data/Voices/Brasilian/FIX.PAK fix.pak
 	    ln -sf Data/Voices/Brasilian/TEXT.PAK text.pak
 	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
@@ -225,7 +188,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
             ;;
-        "Dutch (text only)")
+        "$(eval_gettext 'Dutch (text only)')")
 	    ln -sf Data/Voices/Dutch/FIX.PAK fix.pak
 	    ln -sf Data/Voices/Dutch/TEXT.PAK text.pak
 	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
@@ -236,7 +199,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
             ;;
-        "Italian (text only)")
+        "$(eval_gettext 'Italian (text only)')")
 	    ln -sf Data/Voices/Italian/FIX.PAK fix.pak
 	    ln -sf Data/Voices/Italian/TEXT.PAK text.pak
 	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
@@ -247,7 +210,7 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
 	    ln -sf Data/Voices/ENGLISH/VOICES6.PAK voices6+.pak
 	    ln -sf Data/Voices/ENGLISH/VOICESGE.PAK voicesgen+.pak
             ;;
-        "Spanish (text only)")
+        "$(eval_gettext 'Spanish (text only)')")
 	    ln -sf Data/Voices/Spanish/FIX.PAK fix.pak
 	    ln -sf Data/Voices/Spanish/TEXT.PAK text.pak
 	    ln -sf Data/Voices/ENGLISH/VOICES1.PAK voices1+.pak
@@ -261,11 +224,11 @@ if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then
     esac
 fi
 
-POL_SetupWindow_menu "\$LNG_CHOOSE_KEYBOARD_LAYOUT" "\$TITLE" "Unchanged~Arrow keys (default)~WASD (Qwerty)~ZQSD (Azerty)" "~" "Unchanged"
+POL_SetupWindow_menu "$(eval_gettext 'Standard keyboard layouts')" "\$TITLE" "$(eval_gettext 'Unchanged')~$(eval_gettext 'Arrow keys (default)')~$(eval_gettext 'WASD (Qwerty)')~$(eval_gettext 'ZQSD (Azerty)')" "~" "$(eval_gettext 'Unchanged')"
 case "\$APP_ANSWER" in
-    Unchanged)
+    "$(eval_gettext 'Unchanged')")
         ;;
-    "Arrow keys (default)")
+    "$(eval_gettext 'Arrow keys (default)')")
         # LF -> CRLF mantra
         cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
 [Trigger]
@@ -332,7 +295,7 @@ swapmousebuttons=0
 EAX_support=1
 MAPEOF
 	;;
-    "WASD (Qwerty)")
+    "$(eval_gettext 'WASD (Qwerty)')")
         cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
 [Trigger]
 Slow=KEY_RALT
@@ -398,7 +361,7 @@ swapmousebuttons=0
 EAX_support=1
 MAPEOF
 	;;
-    "ZQSD (Azerty)")
+    "$(eval_gettext 'ZQSD (Azerty)')")
         cat <<'MAPEOF' | sed 's/$'"/`echo \\\r`/" > Control.ini
 [Trigger]
 Slow=KEY_RALT
@@ -466,12 +429,12 @@ MAPEOF
 	;;
 esac
 
-POL_SetupWindow_menu "\$LNG_VISUAL_QUALITY" "\$TITLE" "Unchanged~Factory defaults~High quality (Entropy settings)" "~" "Unchanged"
+POL_SetupWindow_menu "$(eval_gettext 'Visual quality')" "\$TITLE" "$(eval_gettext 'Unchanged')~$(eval_gettext 'Factory defaults')~$(eval_gettext 'High quality (Entropy settings)')" "~" "$(eval_gettext 'Unchanged')"
 
 case "\$APP_ANSWER" in
-    Unchanged)
+    "$(eval_gettext 'Unchanged'))
         ;;
-    "Factory defaults")
+    "$(eval_gettext 'Factory defaults')")
         cat <<'INIEOF' > antialiasing_high.ini 
 [Visual_Quality_Control]
 Global_Antialiasing= 1
@@ -643,7 +606,8 @@ INIEOF
                -e 's/^Water_opacity_pitch=.*/Water_opacity_pitch=20000.000000/' \
                -e 's/^Water_opacity_offset=.*/Water_opacity_offset=25000/' OUTCAST.ini
         ;;
-    "High quality (Entropy settings)")
+
+    "$(eval_gettext 'High quality (Entropy settings)')")
         cat <<'INIEOF' > antialiasing_high.ini 
 [Visual_Quality_Control]
 Global_Antialiasing= 3
@@ -817,7 +781,7 @@ esac
 
 # Allow for extensions
 shopt -s nullglob
-for conf in \$REPERTOIRE/configurations/configurators/Outcast.*; do
+for conf in \$REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME".*; do
     source "\$conf"
 done
 
