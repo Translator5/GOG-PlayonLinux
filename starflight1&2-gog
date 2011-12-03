@@ -26,9 +26,13 @@ check_install_archive () {
     EXPECTED_SIZE=44526203
     EXPECTED_MD5="4b3e884d1bbe066470338456991dc73e"
 
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
     NAME="$(basename $ARCHIVE)"
     SIZE="$(stat -c%s $ARCHIVE)"
     MD5="$(POL_MD5_file $ARCHIVE)"
+    IFS="$OLDIFS"
 
     POL_SetupWindow_detect_exit
 
