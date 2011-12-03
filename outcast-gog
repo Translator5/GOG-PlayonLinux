@@ -18,7 +18,7 @@ abort () {
 }
 
 check_install_archive () {
-    POL_SetupWindow_wait_next_signal "$LNG_CHECK_ARCHIVE" "$TITLE"
+    POL_SetupWindow_wait "$LNG_CHECK_ARCHIVE" "$TITLE"
 
     EXPECTED_NAME='setup_outcast.exe'
     EXPECTED_SIZE=1409323648
@@ -32,10 +32,8 @@ check_install_archive () {
     MD5="$(POL_MD5_file $ARCHIVE)"
     IFS="$OLDIFS"
 
-    POL_SetupWindow_detect_exit
-
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message_image "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+        POL_SetupWindow_message "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE"
         POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
         [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
@@ -89,7 +87,7 @@ POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
 export WINEVERSION="$WORKING_WINE_VERSION"
 
 
-POL_SetupWindow_wait_next_signal "$LNG_INSTALLING" "$TITLE"
+POL_SetupWindow_wait "$LNG_INSTALLING" "$TITLE"
 
 # Associate .PDF with native app 
 # http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
@@ -127,8 +125,6 @@ REGEDIT4
 "GrabFullscreen"="Y"
 EOF
 POL_Wine regedit $REPERTOIRE/tmp/grabfullscreen.reg
-
-POL_SetupWindow_detect_exit
 
 # Doesn't hurt ;)
 POL_Wine_reboot 

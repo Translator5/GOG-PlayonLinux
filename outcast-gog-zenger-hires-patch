@@ -12,13 +12,13 @@
 source "$PLAYONLINUX/lib/sources"
 
 abort () {
-    POL_SetupWindow_message_image "$LNG_ABORTED" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+    POL_SetupWindow_message "$LNG_ABORTED" "$TITLE"
     POL_SetupWindow_Close
     exit 1
 }
 
 check_install_archive () {
-    POL_SetupWindow_wait_next_signal "$LNG_CHECK_ARCHIVE" "$TITLE"
+    POL_SetupWindow_wait "$LNG_CHECK_ARCHIVE" "$TITLE"
 
     EXPECTED_NAME='OUTCASTP_V3.zip'
     EXPECTED_SIZE=102462783
@@ -35,7 +35,7 @@ check_install_archive () {
     POL_SetupWindow_detect_exit
 
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message_image "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+        POL_SetupWindow_message "$LNG_ARCHIVE_MISMATCH\nName: $NAME (expected $EXPECTED_NAME)\nSize: $SIZE (expected $EXPECTED_SIZE)\nMD5: $MD5\n     (expected $EXPECTED_MD5)" "$TITLE"
         POL_SetupWindow_question "$LNG_CONTINUE" "$TITLE"
         [ "$APP_ANSWER" != "TRUE" ] && abort
     fi
@@ -82,7 +82,7 @@ check_one "unzip" "unzip"
 POL_SetupWindow_missing
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_SetupWindow_message_image "$LNG_NEED_OUTCAST" "$TITLE" "$PLAYONLINUX/themes/tango/warning.png"
+    POL_SetupWindow_message "$LNG_NEED_OUTCAST" "$TITLE"
     abort
 fi
 
@@ -98,11 +98,9 @@ check_install_archive
 POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
 export WINEVERSION="$WORKING_WINE_VERSION"
 
-POL_SetupWindow_wait_next_signal "$LNG_INSTALLING" "$TITLE"
+POL_SetupWindow_wait "$LNG_INSTALLING" "$TITLE"
 
 unzip -n "$ARCHIVE" -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || abort
-
-POL_SetupWindow_detect_exit
 
 POL_SetupWindow_message "$LNG_SEE_CONFIGURATOR" "$TITLE"
 
@@ -128,11 +126,9 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || return
 POL_SetupWindow_question "\$LNG_CHANGE_RESOLUTION" "\$TITLE"
 if [ "\$APP_ANSWER" = "TRUE" ]; then
 
-    POL_SetupWindow_wait_next_signal "\$LNG_HIRES_PATCH" "\$TITLE"
+    POL_SetupWindow_wait "\$LNG_HIRES_PATCH" "\$TITLE"
 
     POL_Wine APPLYMEGAPATCH.exe
-
-    POL_SetupWindow_detect_exit
 
     SCREEN_WIDTH=\$(grep '^ScreenWidth=' OUTCAST.ini |cut -d= -f2)
     SCREEN_HEIGHT=\$(grep '^ScreenHeight=' OUTCAST.ini |cut -d= -f2)
