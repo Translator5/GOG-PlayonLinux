@@ -1,7 +1,13 @@
 Outcast-gog:
-	Rewrite i18n with eval_gettext
+	Improve icon setting
+	Replace abort by POL native abort (?)
+	Update Wine version management
 
 Outcast-gog-zenger-hires-patch:
-	Rewrite i18n with eval_gettext
-	Use registry instead of pol_settings file?
+	(Use registry instead of pol_settings file?)
+	Replace abort by POL native abort (?)
+	Update Wine version management
 
+Starflight:
+	Replace abort by POL native abort (?)
+	Update Wine version management
