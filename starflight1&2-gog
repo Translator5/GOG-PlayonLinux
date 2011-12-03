@@ -1,7 +1,7 @@
 #!/bin/bash
-# Date : (2011-12-01 22-38)
-# Last revision : (2011-12-01 22-38)
-# Wine version used : 
+# Date : (2012-12-02 01-16)
+# Last revision : (2011-12-03 16-00)
+# Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite <petchema@concept-micro.com>
 # Script licence : GPL v.2
@@ -47,6 +47,7 @@ check_install_archive () {
 PREFIX="Starflight_1_2_gog"
 WORKING_WINE_VERSION="1.3.23"
 # GoG tools (graphic mode setup, code wheel work _almost_ ok with 1.3.23
+# but are broken (controls don't react to clicks) with 1.3.33
 
 case "$POL_LANG" in
     fr)
