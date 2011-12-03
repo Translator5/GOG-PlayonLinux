@@ -26,7 +26,7 @@ check_install_archive () {
 
     NAME="$(basename $ARCHIVE)"
     SIZE="$(stat -c%s $ARCHIVE)"
-    MD5="$(md5sum $ARCHIVE|cut -c1-32)"
+    MD5="$(POL_MD5_file $ARCHIVE)"
 
     POL_SetupWindow_detect_exit
 
