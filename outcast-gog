@@ -71,6 +71,7 @@ case "$POL_LANG" in
 esac
 
 POL_SetupWindow_Init
+POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Appeal S.A. / Atari" "http://www.gog.com/en/gamecard/outcast" "Pierre Etchemaite" "$PREFIX"
  
  
@@ -173,6 +174,7 @@ CURRENT_LANG=English
 [ -f pol_configuration ] && source pol_configuration
 
 POL_SetupWindow_Init
+POL_Debug_Init
 
 # Other language directories are incomplete (?)
 POL_SetupWindow_menu_list "\$LNG_CHOOSE_LANGUAGE" "\$TITLE" "English~French~German~Brasilian (text only)~Dutch (text only)~Italian (text only)~Spanish (text only)" "~" "\$CURRENT_LANG"

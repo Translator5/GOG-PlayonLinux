@@ -89,6 +89,7 @@ case "$POL_LANG" in
 esac
 
 POL_SetupWindow_Init
+POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/en/gamecard/starflight_1_2" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"

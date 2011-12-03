@@ -75,6 +75,7 @@ case "$POL_LANG" in
 esac
 
 POL_SetupWindow_Init
+POL_Debug_Init
 # URL shortener? :p
 POL_SetupWindow_presentation "$TITLE" "Zenger" "http://www.gog.com/en/forum/outcast/...\nexperimental_outcast_hi_res_patch...\n_up_to_1280x768_cyana_lighthouse_problem_fixed/" "Pierre Etchemaite" "$PREFIX"
 
