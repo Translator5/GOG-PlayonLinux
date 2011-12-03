@@ -101,6 +101,7 @@ cat <<'EOF' > $REPERTOIRE/tmp/pdfnativereader.reg
 @="winebrowser \"%1\""
 EOF
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+rm $REPERTOIRE/tmp/pdfnativereader.reg
 
 
 POL_Wine start /unix "$ARCHIVE" || abort
@@ -125,6 +126,7 @@ REGEDIT4
 "GrabFullscreen"="Y"
 EOF
 POL_Wine regedit $REPERTOIRE/tmp/grabfullscreen.reg
+rm $REPERTOIRE/tmp/grabfullscreen.reg
 
 # Doesn't hurt ;)
 POL_Wine_reboot 

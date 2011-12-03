@@ -124,6 +124,7 @@ cat <<'EOF' > $REPERTOIRE/tmp/pdfnativereader.reg
 @="winebrowser \"%1\""
 EOF
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+rm $REPERTOIRE/tmp/pdfnativereader.reg
 
 POL_Wine start /unix "$ARCHIVE" || abort
 
@@ -202,6 +203,7 @@ if [ -n "$NATIVEDOSBOX" ]; then
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
 	EOFINI
 	POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
+        rm $REPERTOIRE/tmp/sf1nativedosbox.reg
     fi
 fi
 
@@ -231,6 +233,7 @@ if [ -n "$NATIVEDOSBOX" ]; then
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
 	EOFINI
 	POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
+        rm $REPERTOIRE/tmp/sf2nativedosbox.reg
     fi
 fi
 
