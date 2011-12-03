@@ -28,7 +28,7 @@ check_install_archive () {
 
     NAME="$(basename $ARCHIVE)"
     SIZE="$(stat -c%s $ARCHIVE)"
-    MD5="$(md5sum $ARCHIVE|cut -c1-32)"
+    MD5="$(POL_MD5_file $ARCHIVE)"
 
     POL_SetupWindow_detect_exit
 
@@ -131,6 +131,9 @@ POL_Wine_reboot
 # Sadly, it seems GoG installer unpacks both games even if you only ask for 1
 # So test below is uneffective and all shortcuts are always created
 if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1" ]; then
+    # Better default settings in my opinion
+    sed -i.orig -e 's/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
+
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "-conf dosboxSF1.conf -noconsole" "$SHORTCUT1_NAME"
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT1_NAME"
     # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
@@ -147,6 +150,9 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
 fi
 
 if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2" ]; then
+    # Better default settings in my opinion
+    sed -i.orig -e 's/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
+
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "-conf dosboxSF2.conf -noconsole" "$SHORTCUT2_NAME"
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT2_NAME"
     # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
@@ -176,12 +182,12 @@ cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
 # Make sure that if user presses "start game", it will launch the right dosbox
 DOSBOX="`which dosbox`"
 if [ -n "\$DOSBOX" ]; then
-   cat <<EOFINI > $REPERTOIRE/tmp/sf1nativedosbox.reg
-REGEDIT4
+    cat <<-EOFINI > $REPERTOIRE/tmp/sf1nativedosbox.reg
+	REGEDIT4
 
-[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
-"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
-EOFINI
+	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
+	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
+	EOFINI
     POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
 fi
 
@@ -202,12 +208,12 @@ cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
 # Make sure that if user presses "start game", it will launch the right dosbox
 DOSBOX="`which dosbox`"
 if [ -n "\$DOSBOX" ]; then
-   cat <<EOFINI > $REPERTOIRE/tmp/sf2nativedosbox.reg
-REGEDIT4
+    cat <<-EOFINI > $REPERTOIRE/tmp/sf2nativedosbox.reg
+	REGEDIT4
 
-[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
-"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
-EOFINI
+	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
+	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
+	EOFINI
     POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
 fi
 
