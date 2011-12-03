@@ -125,7 +125,7 @@ cat <<'EOF' > $REPERTOIRE/tmp/pdfnativereader.reg
 EOF
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
 
-POL_Wine "$ARCHIVE" || abort
+POL_Wine start /unix "$ARCHIVE" || abort
 
 # GoG work!
 Set_OS winxp
