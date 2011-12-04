@@ -1,0 +1,113 @@
+#!/bin/bash
+# Date : (2012-12-03 20-32)
+# Last revision : (2011-12-03 20-32)
+# Wine version used : 1.3.23
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite <petchema@concept-micro.com>
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+
+    EXPECTED_NAME='setup_ground_control_2.exe'
+    EXPECTED_SIZE=641603732
+    EXPECTED_MD5="dd1ae6e7ae1420bc52dc5327e974ea9e"
+
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $ARCHIVE)"
+    SIZE="$(stat -c%s $ARCHIVE)"
+    MD5="$(POL_MD5_file $ARCHIVE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_SetupWindow_message "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)" "$TITLE"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="GrndCtrl2_gog"
+WORKING_WINE_VERSION="1.3.23"
+# GoG tools (graphic mode setup, code wheel work _almost_ ok with 1.3.23
+# but are broken (controls don't react to clicks) with 1.3.33
+
+TITLE="$(eval_gettext 'Ground Control 2 (GoG release)')"
+SHORTCUT_NAME="Ground Control 2"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Massive Entertainment / Rebellion" "http://www.gog.com/en/gamecard/ground_control_2_operation_exodus" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+check_install_archive
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'EOF' > $REPERTOIRE/tmp/pdfnativereader.reg
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+EOF
+POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+
+POL_Wine_InstallFonts
+#POL_Call POL_Install_d3dx9 || POL_Debug_Fatal "$(eval_gettext 'Error while installing DirectX 9')"
+#winetricks dxdiagn 
+#POL_Call POL_Install_dxdiagn || POL_Debug_Fatal "$(eval_gettext 'Error while installing dxdiagn')"
+
+#POL_Call POL_Install_devenum
+#POL_Call POL_Install_quartz
+
+
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+#Set_Desktop On 1024 768
+
+#POL_Wine_X11Drv "DXGrab" "Y"
+
+POL_SetupWindow_VMS "32"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "gcii.exe" "$SHORTCUT_NAME"
+#POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Ground Control II/" "gcii.exe" "" "$SHORTCUT_NAME"
+
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Ground Control II/Manual.pdf'"
+
+POL_SetupWindow_Close
+exit
