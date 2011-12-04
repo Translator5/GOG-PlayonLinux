@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-03 20-32)
-# Last revision : (2011-12-03 20-32)
+# Last revision : (2011-12-04 18-17)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite <petchema@concept-micro.com>
@@ -74,13 +74,6 @@ EOF
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
 
 POL_Wine_InstallFonts
-#POL_Call POL_Install_d3dx9 || POL_Debug_Fatal "$(eval_gettext 'Error while installing DirectX 9')"
-#winetricks dxdiagn 
-#POL_Call POL_Install_dxdiagn || POL_Debug_Fatal "$(eval_gettext 'Error while installing dxdiagn')"
-
-#POL_Call POL_Install_devenum
-#POL_Call POL_Install_quartz
-
 
 POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -89,10 +82,6 @@ POL_Wine_WaitExit "$TITLE"
 
 # GoG work!
 Set_OS winxp
-
-#Set_Desktop On 1024 768
-
-#POL_Wine_X11Drv "DXGrab" "Y"
 
 POL_SetupWindow_VMS "32"
  
@@ -105,8 +94,6 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "gcii.exe" "$SHORTCUT_NAME"
-#POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Ground Control II/" "gcii.exe" "" "$SHORTCUT_NAME"
-
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Ground Control II/Manual.pdf'"
 
 POL_SetupWindow_Close
