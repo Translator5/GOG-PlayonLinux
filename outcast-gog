@@ -93,16 +93,7 @@ Set_Desktop "On" "640" "480"
 # release then click!), but the rest of the game is more enjoyable
 #Set_DXGrab "On"
 
-
-# Set_GrabFullScreen anyone?
-# cat <<'EOF' > $REPERTOIRE/tmp/grabfullscreen.reg
-# REGEDIT4
-# 
-# [HKEY_CURRENT_USER\Software\Wine\X11 Driver]
-# "GrabFullscreen"="Y"
-# EOF
-# POL_Wine regedit $REPERTOIRE/tmp/grabfullscreen.reg
-# rm $REPERTOIRE/tmp/grabfullscreen.reg
+POL_Wine_X11Drv "GrabFullScreen" "Y"
 
 # Doesn't hurt ;)
 POL_Wine_reboot 
@@ -111,9 +102,8 @@ POL_Wine_reboot
 # Warning, /windows/command/ also contains a start.exe, so
 # POL_SetupWindow_auto_shortcut or POL_Shortcut can fail
 POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Outcast/" "start.exe" "" "$SHORTCUT_NAME"
-cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/Outcast.ICO" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
 
-POL_Shortcut "start.exe "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Outcast/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Outcast/manual.pdf'"
 
 POL_SetupWindow_Close
 
