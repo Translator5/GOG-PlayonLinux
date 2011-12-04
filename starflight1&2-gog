@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 abort () {
-    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.)" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.')" "$TITLE"
     POL_SetupWindow_Close
     exit 1
 }
@@ -71,6 +71,9 @@ POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, th
 NATIVEDOSBOX=''
 [ "$APP_ANSWER" = "TRUE" ] && NATIVEDOSBOX=1
 
+# SF1 original interface for game backups involved DOS prompt, restoring this (almost: start in game however)
+SF1DROPINCONSOLE=1
+
 if [ -n "$WORKING_WINE_VERSION" ]; then
     POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
     export WINEVERSION="$WORKING_WINE_VERSION"
@@ -98,8 +101,7 @@ POL_Wine start /unix "$ARCHIVE" || abort
 # GoG work!
 Set_OS winxp
 
-
-POL_SetupWindow_detect_exit
+POL_Wine_WaitExit "$TITLE"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
@@ -110,11 +112,26 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     # Better default settings in my opinion
     sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^cycles=.*/cycles=auto/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
 
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "-conf dosboxSF1.conf -noconsole -c \"exit\""
+    # GoG default
+    DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole -c "exit"'
+
+    if [ -n "$SF1DROPINCONSOLE" ]; then
+	DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole'
+	cat <<-EOFINI > $REPERTOIRE/tmp/sf1dropinconsole.reg
+	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
+	"DOSBOXPARAM"="$DOSBOX_PARAMS"
+	"LAUNCHCOMMAND"="\"C:\\Program Files\\GOG.com\\Starflight 1 and 2\\DOSBOX\\dosbox.exe\" $DOSBOX_PARAMS"
+	EOFINI
+	POL_Wine regedit $REPERTOIRE/tmp/sf1dropinconsole.reg
+	rm $REPERTOIRE/tmp/sf1dropinconsole.reg
+	sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
+    fi
+
+    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT1_NAME"
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox -conf dosboxSF1.conf"
+        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
     fi
     if [ -n "$WORKING_WINE_VERSION" ]; then
         Set_WineVersion_Assign "$WORKING_WINE_VERSION" "$SHORTCUT1_NAME"
