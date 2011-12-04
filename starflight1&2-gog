@@ -93,10 +93,10 @@ rm $REPERTOIRE/tmp/pdfnativereader.reg
 
 POL_Wine start /unix "$ARCHIVE" || abort
 
+POL_Wine_WaitExit "$TITLE"
+
 # GoG work!
 Set_OS winxp
-
-POL_Wine_WaitExit "$TITLE"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
