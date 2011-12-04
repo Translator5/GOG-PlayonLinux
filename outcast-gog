@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 abort () {
-    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.)" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.')" "$TITLE"
     POL_SetupWindow_Close
     exit 1
 }
@@ -80,6 +80,8 @@ rm $REPERTOIRE/tmp/pdfnativereader.reg
 
 
 POL_Wine start /unix "$ARCHIVE" || abort
+
+POL_Wine_WaitExit "$TITLE"
 
 # GoG work!
 Set_OS winxp
@@ -428,7 +430,7 @@ esac
 POL_SetupWindow_menu "$(eval_gettext 'Visual quality')" "\$TITLE" "$(eval_gettext 'Unchanged')~$(eval_gettext 'Factory defaults')~$(eval_gettext 'High quality (Entropy settings)')" "~" "$(eval_gettext 'Unchanged')"
 
 case "\$APP_ANSWER" in
-    "$(eval_gettext 'Unchanged'))
+    "$(eval_gettext 'Unchanged')")
         ;;
     "$(eval_gettext 'Factory defaults')")
         cat <<'INIEOF' > antialiasing_high.ini 
