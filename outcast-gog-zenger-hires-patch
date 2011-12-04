@@ -11,12 +11,6 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-abort () {
-    POL_SetupWindow_message "$(eval_gettext 'An error occurred, the installation is aborted.')" "$TITLE"
-    POL_SetupWindow_Close
-    exit 1
-}
-
 check_install_archive () {
     POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
 
@@ -32,12 +26,10 @@ check_install_archive () {
     MD5="$(POL_MD5_file $ARCHIVE)"
     IFS="$OLDIFS"
 
-    POL_SetupWindow_detect_exit
-
     if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_SetupWindow_message "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)" "$TITLE"
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
         POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
-        [ "$APP_ANSWER" != "TRUE" ] && abort
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
     fi
 }
 
@@ -57,8 +49,7 @@ check_one "unzip" "unzip"
 POL_SetupWindow_missing
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_SetupWindow_message "$(eval_gettext 'Oops, you must install Outcast (GoG release) first!')" "$TITLE"
-    abort
+    POL_Debug_Fatal "$(eval_gettext 'Oops, you must install Outcast (GoG release) first!')"
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
@@ -74,7 +65,7 @@ check_install_archive
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
-unzip -n "$ARCHIVE" -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || abort
+unzip -n "$ARCHIVE" -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || POL_Debug_Fatal "$(eval_gettext 'Error why unzipping the archive')"
 
 POL_SetupWindow_message "$(eval_gettext 'The patch can now be activated and configured from\nPlayOnLinux s setup wizard for Outcast.\nAnd dont forget to leave a message to Zenger on GoG forums!')" "$TITLE"
 

@@ -7,4 +7,5 @@ Outcast-gog-zenger-hires-patch:
 	Replace abort by POL native abort (?)
 
 Starflight:
+	Improve icon setting
 	Replace abort by POL native abort (?)
