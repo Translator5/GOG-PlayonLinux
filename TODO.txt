@@ -1,13 +1,10 @@
 Outcast-gog:
 	Improve icon setting
 	Replace abort by POL native abort (?)
-	Update Wine version management
 
 Outcast-gog-zenger-hires-patch:
 	(Use registry instead of pol_settings file?)
 	Replace abort by POL native abort (?)
-	Update Wine version management
 
 Starflight:
 	Replace abort by POL native abort (?)
-	Update Wine version management
