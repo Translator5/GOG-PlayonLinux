@@ -59,7 +59,7 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/en/gamecard/starflight_1_2" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
 POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
@@ -73,11 +73,6 @@ NATIVEDOSBOX=''
 
 # SF1 original interface for game backups involved DOS prompt, restoring this (almost: start in game however)
 SF1DROPINCONSOLE=1
-
-if [ -n "$WORKING_WINE_VERSION" ]; then
-    POL_Wine_InstallVersion "$WORKING_WINE_VERSION"
-    export WINEVERSION="$WORKING_WINE_VERSION"
-fi
 
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
@@ -133,9 +128,6 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
         POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
     fi
-    if [ -n "$WORKING_WINE_VERSION" ]; then
-        Set_WineVersion_Assign "$WORKING_WINE_VERSION" "$SHORTCUT1_NAME"
-    fi
 
     POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL"
 
@@ -153,9 +145,6 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
         POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
-    fi
-    if [ -n "$WORKING_WINE_VERSION" ]; then
-        Set_WineVersion_Assign "$WORKING_WINE_VERSION" "$SHORTCUT2_NAME"
     fi
 
     POL_SetupWindow_make_shortcut "$PREFIX" "/windows/command" "start.exe" "" "$SHORTCUT2_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/manual.pdf'"
