@@ -109,17 +109,16 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
 
     # GoG default
     DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole -c "exit"'
-
     if [ -n "$SF1DROPINCONSOLE" ]; then
-	DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole'
-	cat <<-EOFINI > $REPERTOIRE/tmp/sf1dropinconsole.reg
+        DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole'
+        cat <<-EOFINI > $REPERTOIRE/tmp/sf1dropinconsole.reg
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
 	"DOSBOXPARAM"="$DOSBOX_PARAMS"
 	"LAUNCHCOMMAND"="\"C:\\Program Files\\GOG.com\\Starflight 1 and 2\\DOSBOX\\dosbox.exe\" $DOSBOX_PARAMS"
 	EOFINI
-	POL_Wine regedit $REPERTOIRE/tmp/sf1dropinconsole.reg
-	rm $REPERTOIRE/tmp/sf1dropinconsole.reg
-	sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
+        POL_Wine regedit $REPERTOIRE/tmp/sf1dropinconsole.reg
+        rm $REPERTOIRE/tmp/sf1dropinconsole.reg
+        sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
     fi
 
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
@@ -175,7 +174,7 @@ if [ -n "$NATIVEDOSBOX" ]; then
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
 	EOFINI
-	POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
+        POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
         rm $REPERTOIRE/tmp/sf1nativedosbox.reg
     fi
 fi
@@ -205,7 +204,7 @@ if [ -n "$NATIVEDOSBOX" ]; then
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
 	EOFINI
-	POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
+        POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
         rm $REPERTOIRE/tmp/sf2nativedosbox.reg
     fi
 fi
