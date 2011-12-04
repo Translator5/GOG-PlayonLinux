@@ -107,7 +107,7 @@ POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Outcast/m
 
 POL_SetupWindow_Close
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME"
+cat <<"EOF" > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"

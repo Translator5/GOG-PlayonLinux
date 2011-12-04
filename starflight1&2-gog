@@ -147,7 +147,7 @@ fi
 
 POL_SetupWindow_Close
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT1_NAME"
+cat <<"EOF" > $REPERTOIRE/configurations/configurators/"$SHORTCUT1_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
@@ -177,7 +177,7 @@ POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT1"
 exit
 EOF
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT2_NAME"
+cat <<"EOF" > $REPERTOIRE/configurations/configurators/"$SHORTCUT2_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"

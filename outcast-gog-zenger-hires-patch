@@ -71,7 +71,7 @@ POL_SetupWindow_message "$(eval_gettext 'The patch can now be activated and conf
 
 POL_SetupWindow_Close
 
-cat <<EOF > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME".zenger-hires
+cat <<"EOF" > $REPERTOIRE/configurations/configurators/"$SHORTCUT_NAME".zenger-hires
 
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || return
 [ -e APPLYMEGAPATCH.exe ] || return
