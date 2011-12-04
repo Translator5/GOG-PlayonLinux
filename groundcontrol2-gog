@@ -1,12 +1,18 @@
 #!/bin/bash
 # Date : (2012-12-03 20-32)
-# Last revision : (2011-12-04 18-17)
-# Wine version used : 1.3.23
+# Last revision : (2011-12-04 21-35)
+# Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite <petchema@concept-micro.com>
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
+
+# Supposed to be "Gold" on WineHQ with 1.3.23, but I crash it with middle-click + drag
+# Same for 1.3.27-rawinput2, 
+# very easily with 1.3.33
+# couldn't crash it with 1.3.34-rawinput2
+# 1.3.34 ok?
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -35,9 +41,7 @@ check_install_archive () {
 
 
 PREFIX="GrndCtrl2_gog"
-WORKING_WINE_VERSION="1.3.23"
-# GoG tools (graphic mode setup, code wheel work _almost_ ok with 1.3.23
-# but are broken (controls don't react to clicks) with 1.3.33
+WORKING_WINE_VERSION="1.3.34"
 
 TITLE="$(eval_gettext 'Ground Control 2 (GoG release)')"
 SHORTCUT_NAME="Ground Control 2"
