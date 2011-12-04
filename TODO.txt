@@ -1,11 +1,11 @@
 Outcast-gog:
 	Improve icon setting
-	Replace abort by POL native abort (?)
 
 Outcast-gog-zenger-hires-patch:
 	(Use registry instead of pol_settings file?)
-	Replace abort by POL native abort (?)
 
 Starflight:
 	Improve icon setting
-	Replace abort by POL native abort (?)
+
+Ground Control 2:
+        Improve game stability?
