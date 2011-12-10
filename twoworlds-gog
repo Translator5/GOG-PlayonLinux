@@ -79,23 +79,24 @@ POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing a
 POL_Wine_WaitExit "$TITLE"
 
 
-# GoG work!
-Set_OS winxp
-
-POL_Call POL_Install_d3dx9
-POL_Call POL_Install_wmp9
 #POL_Call POL_Install_dsound
+POL_Call POL_Install_devenum
 POL_Call POL_Install_quartz
 POL_Call POL_Install_xact
+POL_Call POL_Install_d3dx9
+POL_Call POL_Install_wmp10
 
 # WMV9AP VC-1 Codec
 cd "$REPERTOIRE/tmp/" || POL_Debug_Fatal "$(eval_gettext 'temp directory missing')"
 POL_Download 'http://www-pc.uni-regensburg.de/systemsw/WinMedia/wvc1dmo.exe' "cbbfea5937bebcc8ebf2ff6abfc050bd"
-POL_Wine wvc1dmo.exe /C /Q /T:C:\windows\temp
-cp "$WINEPREFIX/drive_c/windows/temp/wvcdmod.dll" "$WINEPREFIX/drive_c/windows/system32"
-POL_Wine regsvr32.exe wvc1dmod.dll
+POL_Wine wvc1dmo.exe /C /Q '/T:C:\windows\temp'
+cp "$WINEPREFIX/drive_c/windows/temp/wvc1dmod.dll" "$WINEPREFIX/drive_c/windows/system32"
+POL_Wine regsvr32 wvc1dmod.dll
 
-#POL_SetupWindow_VMS "32"
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
  
 ## PlayOnMac Section
 [ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
@@ -115,6 +116,57 @@ POL_Wine_reboot
 POL_Shortcut "TwoWorlds.exe" "$SHORTCUT_NAME"
 POL_Shortcut "TwoWorlds_RADEON.exe" "$SHORTCUT_NAME (Radeon)"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf'"
+
+POL_SetupWindow_question "$(eval_gettext 'Two Worlds Control Panel is a tool from InsideTwoWorlds community,\nthat allows you to tweak parameters and manage mods\nfor this game. See\nhttp://www.insidetwoworlds.com/local_links.php?linkid=21&catid=13 for details.\nInstall it?')" "$TITLE"
+if [ "$APP_ANSWER" = "TRUE" ]; then
+  cd "$REPERTOIRE/tmp/" 
+  POL_Download 'http://www.insidetwoworlds.com/local_links.php?s=d92f024673ebf64a34a7b47675963c70&action=jump&catid=13&id=21' "d41d8cd98f00b204e9800998ecf8427e"
+  mv local_links.php TwoWorldsCP107.zip
+  unzip TwoWorldsCP107.zip TwoWorldsCP.exe
+  #POL_Wine_InstallFonts
+  POL_Call POL_Install_dotnet20
+  POL_Wine TwoWorldsCP.exe
+  if [ $? -eq 0 ]; then
+    # CP needs that weird path ending to find TW correctly!
+    cat <<'_EOFINI_' > "$REPERTOIRE/tmp/fixtw1path.reg"
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\Software\Reality Pump\TwoWorlds\FileSystem]
+"DataPath"="C:\\Program Files\\GOG.com\\Two Worlds/>"
+"OutputDir"="C:\\Program Files\\GOG.com\\Two Worlds"
+_EOFINI_
+    POL_Wine regedit "$REPERTOIRE/tmp/fixtw1path.reg"
+    rm "$REPERTOIRE/tmp/fixtw1path.reg"
+
+    # On my computer, CP fonts look like crap @96dpi and fine @100dpi...
+    cat <<'_EOFINI_' > "$REPERTOIRE/tmp/100dpi.reg"
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Hardware Profiles\Current\Software\Fonts]
+"LogPixels"=dword:00000064
+_EOFINI_
+    POL_Wine regedit "$REPERTOIRE/tmp/100dpi.reg"
+    rm "$REPERTOIRE/tmp/100dpi.reg"
+
+    cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/Inside Operations/Two Worlds Control Panel" || exit
+
+POL_Wine TwoWorldsCP.exe
+exit
+_EOF_
+    # Same configurator for both shortcuts, so it stays available if the 
+    # user removes the one (s)he doesn't use
+    cp "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME" "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME (Radeon)"
+  fi
+fi
 
 POL_SetupWindow_Close
 exit
