@@ -79,7 +79,7 @@ POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
 
 POL_Wine_InstallFonts
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
