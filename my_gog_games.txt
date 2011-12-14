@@ -60,6 +60,13 @@
     - Technology Tree (addon) [ .../Empire Earth - The Art of Conquest/technology_tree_aoc.pdf ]
     Need Visual C++ 6.0 support
     then fail, will have to go read forums :p
+    Disable DirectMusic
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\SSSI\Empire Earth]
+"Music Enabled"=dword:00000000
+
+    Need to capture mouse
 
 * Enclave
 * Fallout
