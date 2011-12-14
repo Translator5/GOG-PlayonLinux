@@ -77,12 +77,12 @@ cat <<'_EOF_' > $REPERTOIRE/tmp/pdfnativereader.reg
 _EOF_
 POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
 
-POL_Wine_InstallFonts
-
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
+POL_Call POL_install_d3dx9
+POL_Call POL_install_directmusic
 POL_Call POL_install_vcrun6
 
 cat <<_EOFINI_ > "$REPERTOIRE/tmp/disable_directmusic.reg"
