@@ -93,4 +93,27 @@ POL_Shortcut "main.exe" "$SHORTCUT_NAME"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Game Install Directory/Manual.pdf'"
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Game Install Directory/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+# ...
+
+POL_SetupWindow_Close
+exit
+_EOF_
+
 exit
