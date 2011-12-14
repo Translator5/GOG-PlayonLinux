@@ -1,0 +1,116 @@
+* Advent Rising
+* Age of Wonders 3: Shadow Magic
+  * PlayOnLinux
+    Script exists for "Age of Wonders" (no specific version), but fails for GoG install
+    (shortcut to wrong directory)
+    Running AoWSM.exe: 
+      -> need virtual desktop (biscreen); Or "window" in setup, even better
+      -> sluggish responses
+      -> according to WineHQ: Cursor: color; Direct3D: no
+         improves cursor tramatically, game still lags
+      -> "Verrouillage du mode cible de rendu = readtex" helps somewhat
+
+  * Crossover Games 10
+    Installs ok, but shortcut created (with GoG tweaks) doesn't work; 
+    Also creates link to: Config (AoWSMSetup.exe), Editor (AoWSMEd.exe),
+      Quickplay Guide (QuickStart.pdf), Readme (Readme.html)
+    Running AoWSM.exe starts the ok (video), then lots of stability problems
+    -> Cursor: colors helps a lot
+
+  => renice wineserver!!
+
+* Alone in the Dark 1+2+3
+* Another World: 15th Anniversary Edition
+* Arcanum: Of Steamworks and Magick Obscura
+* Arx Fatalis
+* Baldur's Gate 2 Complete
+* Baldur's Gate: The Original Saga
+* Beneath a Steel Sky
+* Betrayal at Krondor Pack
+* Beyond Good and Evil™
+* Blood (One Unit Whole Blood)
+* BloodRayne
+* Broken Sword 2: Remastered + The Original Game
+* Broken Sword 3: The Sleeping Dragon
+* Broken Sword 4: The Angel of Death ( Secrets of the Ark )
+* Broken Sword: Director's Cut + The Original Game
+* Chessmaster® 9000
+* Creatures Exodus
+* Desperados: Wanted Dead or Alive
+* Divine Divinity
+* Dragonsphere
+* Dream Pinball 3D
+* Duke Nukem 3D: Atomic Edition
+* Duke Nukem: Manhattan Project
+* Dungeon Keeper™ 2
+* Dungeons & Dragons: Dragonshard
+* Earthworm Jim 1 + 2
+* Empire Earth: Gold Edition
+* Enclave
+* Fallout
+* Fallout 2
+* Far Cry®
+* FlatOut
+* Forgotten Realms: Demon Stone
+* Freespace 2
+* Gabriel Knight 2: The Beast Within
+* Gabriel Knight 3: Blood of the Sacred, Blood of the Damned
+* Gabriel Knight: Sins of the Fathers
+* Gobliiins pack
+* Gothic 2 Gold Edition
+* Ground Control 2: Operation Exodus SE
+* Icewind Dale 2 Complete
+* Icewind Dale Complete
+* Incoming + Incoming Forces
+* Incredible Machine Mega Pack, The
+* Iron Storm
+* Journeyman Project 2, The
+* Lands of Lore™ 1+2
+* Last Express, The
+* Little Big Adventure (Relentless: Twinsen's Adventure)
+* Little Big Adventure 2 (Twinsen's Odyssey)
+* Longest Journey, The
+* Lure of the Temptress
+* Master of Orion 1+2
+* Might and Magic® 6-pack: Limited Edition
+* Moto Racer
+* Neverwinter Nights: Diamond Edition
+* Nox™
+* Oddworld: Abe's Exoddus
+* Oddworld: Abe's Oddysee
+* Outcast
+* Painkiller Black Edition
+* Planescape: Torment
+* Prince of Persia®: The Sands of Time
+* Psychonauts
+* Realms of Arkania 3
+* Realms of the Haunting
+* Redneck Rampage Collection
+* Riven: The Sequel to Myst
+* Runaway: A Road Adventure
+* Sacred Gold
+* Sacrifice
+* Sanitarium
+* Septerra Core: Legacy of the Creator
+* Shadowgrounds
+* SimCity 2000™ Special Edition
+* Simon the Sorcerer
+* Simon the Sorcerer 2
+* Spellforce Platinum
+* Starflight™ 1+2
+* Still Life
+* Stonekeep
+* Syberia
+* Syberia 2
+* Teenagent
+* Temple of Elemental Evil, The
+* Tex Murphy: Under a Killing Moon
+* Tom Clancy's Ghost Recon®
+* Two Worlds
+* Tyrian 2000
+* UFO: Afterlight
+* UFO: Aftermath
+* Ultima™ 4: Quest of the Avatar
+* Unreal Gold
+* Uru: Complete Chronicles
+* Witcher: Enhanced Edition, The
