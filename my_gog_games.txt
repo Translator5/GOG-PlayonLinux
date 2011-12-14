@@ -46,6 +46,21 @@
 * Dungeons & Dragons: Dragonshard
 * Earthworm Jim 1 + 2
 * Empire Earth: Gold Edition
+  * PlayOnLinux
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts for
+    - Empire Earth           [ .../Empire Earth/Empire Earth.exe ]
+    - Empire Earth - The Art of Conquest [ .../Empire Earth - The Art of Conquest/EE-AOC.exe ]
+    - Manual                 [ .../Empire Earth/Manual.pdf ]
+    - Manual (addon)         [ .../Empire Earth - The Art of Conquest/manual_aoc.pdf ]
+    - Readme                 [ .../Empire Earth - The Art of Conquest/Readme.txt ]
+    - Scenario Editor Manual [ .../Empire Earth/scenario_editor_manual.pdf ]
+    - Technology Tree        [ .../Empire Earth/technology_tree.pdf ]
+    - Technology Tree (addon) [ .../Empire Earth - The Art of Conquest/technology_tree_aoc.pdf ]
+    Need Visual C++ 6.0 support
+    then fail, will have to go read forums :p
+
 * Enclave
 * Fallout
 * Fallout 2
