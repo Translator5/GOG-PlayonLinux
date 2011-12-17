@@ -28,6 +28,12 @@
 * Beneath a Steel Sky
 * Betrayal at Krondor Pack
 * Beyond Good and Evil™
+  No matter the Wine version I tried, without native DirectSound (dsound) I
+  get sounds looping forever, which gets on nerves quite efficiently.
+  According to Crossover (http://www.codeweavers.com/compatibility/browse/name/?app_id=3753;tips=1)
+  this can be fixed by selecting "Built-in Output" in SettingsApplication.exe
+  sound tab. Then you get desync/delayed/cropped sounds... Giving up for now
+
 * Blood (One Unit Whole Blood)
 * BloodRayne
 * Broken Sword 2: Remastered + The Original Game
