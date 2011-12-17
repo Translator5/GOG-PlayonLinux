@@ -1,0 +1,134 @@
+#!/bin/bash
+# Date : (2011-12-14 23-58)
+# Last revision : (2011-12-14 23-58)
+# Wine version used : 1.3.34
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="BeyondGaE_gog"
+WORKING_WINE_VERSION="1.3.34"
+
+TITLE="$(eval_gettext 'Beyond Good and Evil (GoG release)')"
+SHORTCUT_NAME="Beyond Good and Evil"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/en/gamecard/beyond_good_and_evil" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+check_install_archive "$ARCHIVE" setup_beyond_good_and_evil.exe 1544566386 "75ccff61fc37b3b04245f094850dce88"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > $REPERTOIRE/tmp/pdfnativereader.reg
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+POL_Call POL_install_dsound
+
+# Sound output: builtin (hopefully)
+# Should avoid looping, has proven to shorten some samples instead...
+cat <<_EOFINI_ > "$REPERTOIRE/tmp/dsoundbuiltinoutput.reg"
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Ubisoft\Beyond Good & Evil\SettingsApplication.INI\Sound]
+"Audio board GUID"=hex:00,18,ad,c2,43,b2,ce,11,a8,a4,00,aa,00,6c,45,00
+_EOFINI_
+POL_Wine regedit "$REPERTOIRE/tmp/dsoundbuiltinoutput.reg"
+rm "$REPERTOIRE/tmp/dsoundbuiltinoutput.reg"
+
+# GoG work!
+Set_OS winxp
+
+# Has problems when unconstrained
+Set_Desktop "On" "1024" "768"
+
+POL_SetupWindow_VMS "32"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "BGE.exe" "$SHORTCUT_NAME"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &\nBUSYLOOP_PID=$!\ntrap "kill $BUSYLOOP_PID" EXIT'
+
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt'"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Beyond Good and Evil/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Wine "SettingsApplication.exe"
+
+exit
+_EOF_
+
+exit
