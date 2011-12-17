@@ -104,6 +104,8 @@ REGEDIT4
 * Moto Racer
 * Neverwinter Nights: Diamond Edition
 * Nox™
+  No major problem, even worked (slowly) with 1.1.34
+
 * Oddworld: Abe's Exoddus
 * Oddworld: Abe's Oddysee
 * Outcast
