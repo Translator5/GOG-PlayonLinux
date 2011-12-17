@@ -1,0 +1,101 @@
+#!/bin/bash
+# Date : (2011-12-17 15-39)
+# Last revision : (2011-12-17 15-48)
+# Wine version used : 1.3.35
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Works with 1.1.34, but much slower!
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="Nox_gog"
+WORKING_WINE_VERSION=""
+
+TITLE="$(eval_gettext 'Nox (GoG release)')"
+SHORTCUT_NAME="Nox"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Westwood Studios / Electronic Arts" "http://www.gog.com/en/gamecard/nox" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+check_install_archive "$ARCHIVE" setup_nox.exe 483137692 "a8e4281c293d7b186b24fa9a09afca48"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > $REPERTOIRE/tmp/pdfnativereader.reg
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "4"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "NOX.EXE" "$SHORTCUT_NAME"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/NOX/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/NOX/Readme.txt'"
+
+POL_SetupWindow_Close
+
+exit
