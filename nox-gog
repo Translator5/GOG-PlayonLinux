@@ -65,14 +65,15 @@ POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" 
 # http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
 # Do it before installing the game, so you have the possibility to open
 # PDFs with Win32 reader if you choose to install it
-cat <<'_EOF_' > $REPERTOIRE/tmp/pdfnativereader.reg
+cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfnativereader.reg"
 [HKEY_CLASSES_ROOT\.pdf]
 @="PDFfile"
 "Content Type"="application/pdf"
 [HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
 @="winebrowser \"%1\""
 _EOF_
-POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
+POL_Wine regedit "$REPERTOIRE/tmp/pdfnativereader.reg"
+rm "$REPERTOIRE/tmp/pdfnativereader.reg"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
