@@ -79,6 +79,15 @@ REGEDIT4
 * Fallout 2
 * Far Cry®
 * FlatOut
+  Works out of the box
+  Defaults to triple-buffering not fully supported by Wine, but works
+  even like this
+  * Crossover Game:
+  Creates 3 shortcuts,
+  - Flatout (flatout.exe)
+  - Setup (flatout.exe -setup)
+  - Manual (manual.pdf)
+
 * Forgotten Realms: Demon Stone
 * Freespace 2
 * Gabriel Knight 2: The Beast Within
