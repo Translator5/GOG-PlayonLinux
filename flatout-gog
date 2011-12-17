@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-17 21-03)
-# Last revision : (2011-12-17 21-03)
+# Last revision : (2011-12-17 22-50)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -93,25 +93,11 @@ POL_Wine_reboot
 POL_Shortcut "flatout.exe" "$SHORTCUT_NAME"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/FlatOut/manual.pdf'"
 
+# I'd like to automate it (Savegames/device.cfg, byte #148 set to 0), but
+# config file is only created after the game is started once.
+POL_SetupWindow_message "$(eval_gettext 'Think about disabling triple-buffering in settings,\nas it is not fully supported by Wine yet.')" "$TITLE"
+
 POL_SetupWindow_Close
-
-# Wine only supports double buffering
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/FlatOut/" || POL_Debug_Fatal "Program directory not found"
-cat <<'_EOFPL_' > triplebuffering
-#!/usr/bin/env perl
-use strict;
-
-my $TB = int($ARGV[0]);
-
-my $filename='Savegame/device.cfg';
-open(FH, '+<', $filename) or die "Couldn't open $filename: $!";
-binmode(FH);
-sysseek(FH, 148, 0);
-syswrite(FH, chr($TB), 1);
-close(FH) or die "Couldn't close $filename: $!";
-_EOFPL_
-chmod a+x triplebuffering
-./triplebuffering 0
 
 cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
 #!/bin/bash
