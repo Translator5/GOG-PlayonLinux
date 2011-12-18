@@ -49,6 +49,16 @@
 * Duke Nukem 3D: Atomic Edition
 * Duke Nukem: Manhattan Project
 * Dungeon Keeper™ 2
+  * PlayOnLinux
+    Simply works with 1.3.35
+  * Crossover Games 10
+  - Creates 5 shortcuts:
+    - Dungeon Keeper 2 (DKII.EXE)
+    - Dungeon Keeper 2 [Safe Mode] (DKII_SOFT.EXE)
+    - Manual (manual.pdf)
+    - Readme (Readme.txt)
+    - Reference Card (reference_card.pdf)
+
 * Dungeons & Dragons: Dragonshard
 * Earthworm Jim 1 + 2
 * Empire Earth: Gold Edition
