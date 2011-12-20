@@ -1,0 +1,185 @@
+#!/bin/bash
+# Date : (2011-12-18 11-39)
+# Last revision : (2011-12-20 00-41)
+# Wine version used : 1.3.35
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="FarCry_gog"
+WORKING_WINE_VERSION="1.3.35"
+
+TITLE="$(eval_gettext 'Far Cry (GoG release)')"
+SHORTCUT_NAME="Far Cry"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'Manual')"
+SHORTCUT_DOC14="$SHORTCUT_NAME - $(eval_gettext 'Manual') 1.4"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'CryEngine Sandbox')"
+SHORTCUT_EDITOR_DOC="$SHORTCUT_NAME - $(eval_gettext 'Editor Manual')"
+
+SHORTCUT_DS_GUIDE="$SHORTCUT_NAME - $(eval_gettext 'Dedicated server guide')"
+SHORTCUT_DS_MAN="$SHORTCUT_NAME - $(eval_gettext 'Using the FarCry dedicated server')"
+SHORTCUT_DS_RC="$SHORTCUT_NAME - $(eval_gettext 'Server Command Table')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Crytek Studios / Ubisoft" "http://www.gog.com/en/gamecard/far_cry" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+# Hopefully checking first part is enough to identify uniquely the archive
+check_install_archive "$ARCHIVE" setup_far_cry.exe 2607407 "964f27d319571bd614db5d1df08e1912"
+#check_install_archive "${ARCHIVE%.exe}-1.bin" setup_far_cry-1.bin 2097392384 "77a792e45ba865d6bbd0ca4e5a39a2a7"
+#check_install_archive "${ARCHIVE%.exe}-2.bin" setup_far_cry-2.bin 437651497 "d6c8edb29a4a1cce4e9f46774bf47eb0"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF & .RTF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\.rtf]
+@="rtffile"
+"Content Type"="application/rtf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+[HKEY_CLASSES_ROOT\rtffile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+rm "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Far Cry/"
+if [ $? -eq 0 ]; then
+    # Disable new external configurator, as it generates setups that are
+    # not compatible with Wine...
+    mv "Bin32/FarCryConfigurator.exe" "Bin32/FarCryConfigurator.exe.disabled"
+else
+  POL_Debug_Error "$(eval_gettext 'Could not find program directory')"
+fi
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+LNG_DOC="$(eval_gettext 'Documentation about the game itself') (3)"
+LNG_EDITOR="$(eval_gettext 'The level editor and its documentation') (2)"
+LNG_DS="$(eval_gettext 'Documentation about dedicated server') (3)"
+POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_DOC}~${LNG_EDITOR}~${LNG_DS}" "~"
+SHORTCUTS="$APP_ANSWER"
+
+POL_Shortcut "FarCry.exe" "$SHORTCUT_NAME"
+if echo "$SHORTCUTS" | grep -q "$LNG_DOC"; then
+    POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Readme.txt'"
+    POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Manual.pdf'"
+    POL_Shortcut "start.exe" "$SHORTCUT_DOC14" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Manual_1_4.pdf'"
+fi
+
+if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
+    POL_Shortcut "Editor.exe" "$SHORTCUT_EDITOR"
+    # For some reason, association doesn't work with this space
+    mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Far Cry/Editor Manual.pdf" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Far Cry/Editor_Manual.pdf"
+    POL_Shortcut "start.exe" "$SHORTCUT_EDITOR_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Editor_Manual.pdf'"
+fi
+
+if echo "$SHORTCUTS" | grep -q "$LNG_DS"; then
+    POL_Shortcut "start.exe" "$SHORTCUT_DS_GUIDE" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Dedicated server guide.rtf'"
+    POL_Shortcut "start.exe" "$SHORTCUT_DS_MAN" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Using the FarCry dedicated server.rtf'"
+    POL_Shortcut "start.exe" "$SHORTCUT_DS_RC" "" "'C:/$PROGRAMFILES/GOG.com/Far Cry/Server_Command_Table.pdf'"
+fi
+
+POL_SetupWindow_message "$(eval_gettext 'Default video settings are a bit low for modern computers,\nremember to click on "Auto-detect" in advanced video settings;\nIf water looks weird, lower water effect quality.')" "$TITLE"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Far Cry/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+[ -f system.cfg ] || POL_Debug_Fatal "\$(eval_gettext 'Run the game once to create the configuration file!')"
+
+DRIVER="\$(sed -e 's/^r_Driver = \"\(.*\)\".*/\1/p; d' system.cfg)"
+VERBOSITY="\$(sed -e 's/^log_Verbosity = \"\(.*\)\".*/\1/p; d' system.cfg)"
+
+POL_SetupWindow_menu_list "\$(eval_gettext 'Pick video driver to use [experimental]:')" "\$TITLE" "Direct3D9~OpenGL" "~" "\$DRIVER"
+NEW_DRIVER="\$APP_ANSWER"
+
+POL_SetupWindow_menu_list "\$(eval_gettext 'Verbosity while loading maps:')" "\$TITLE" "0~1~2~3~4~5~6~7~8" "~" "\$VERBOSITY"
+NEW_VERBOSITY="\$APP_ANSWER"
+
+if [ "\$NEW_DRIVER" != "\$DRIVER" -o "\$NEW_VERBOSITY" != "\$VERBOSITY" ]; then
+    sed -i.bak -e 's/^r_Driver = ".*"/r_Driver = "'"\$NEW_DRIVER"'"/' \
+               -e 's/^log_Verbosity = ".*"/log_Verbosity = "'"\$NEW_VERBOSITY"'"/' \
+      system.cfg
+fi
+
+POL_SetupWindow_Close
+exit
+_EOF_
+
+exit

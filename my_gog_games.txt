@@ -88,6 +88,31 @@ REGEDIT4
 * Fallout
 * Fallout 2
 * Far Cry®
+  * PlayOnLinux
+  - Fine in Direct3D9, only problem is water looking bad
+  to try:
+   r_WaterRefractions: 1
+   r_WaterReflections: 1
+   r_WaterUpdateFactor: 0.001
+   r_Quality_Reflection: 0
+   e_beach: 1
+   e_use_global_fog_in_fog_volumes: 0
+
+  * Crossover Game 10
+    "For maximum install compatibility, Emulate a Virtual Desktop is enabled during installation @ 1024x768. If you wish to try running this title fullscreen, please disable 'Emulate a virtual desktop' in the Wine Configuration GUI.
+Les logiciels suivants seront également installés : Polices de base, Paquet redistribuable Microsoft Visual C++ 6.0, Paquet redistribuable Microsoft Visual C++ 2005"
+    Creates shortcuts:
+    - Far Cry                   [Bin32/FarCry.exe]
+    - Configure Far Cry         [Bin32/FarCryConfigurator.exe]
+    - CryEngine Sandbox		[Bin32/Editor.exe]
+    - Dedicated server guide	[Dedicated server guide.rtf]
+    - Editor Manual    		[Editor Manual.pdf]
+    - Manual 			[Manual.pdf]
+    - Manual 1.4		[Manual_1_4.pdf]
+    - Readme 			[Readme.txt]
+    - Server Command Table	[Server_Command_Table.pdf]
+    - Using the FarCry dedicated server [Using the FarCry dedicated server.rtf]
+
 * FlatOut
   Works out of the box
   Defaults to triple-buffering not fully supported by Wine, but works
