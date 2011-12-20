@@ -167,7 +167,7 @@ cat <<_EOF_ > "$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
