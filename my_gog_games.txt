@@ -22,9 +22,11 @@
 * Alone in the Dark 1+2+3
 * Another World: 15th Anniversary Edition
 * Arcanum: Of Steamworks and Magick Obscura
+* ArmA: Cold War Assault
 * Arx Fatalis
 * Baldur's Gate 2 Complete
 * Baldur's Gate: The Original Saga
+* Battle Isle Platinum
 * Beneath a Steel Sky
 * Betrayal at Krondor Pack
 * Beyond Good and Evil™
@@ -42,6 +44,7 @@
 * Broken Sword: Director's Cut + The Original Game
 * Chessmaster® 9000
 * Creatures Exodus
+* Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
 * Divine Divinity
 * Dragonsphere
@@ -113,6 +116,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
     - Server Command Table	[Server_Command_Table.pdf]
     - Using the FarCry dedicated server [Using the FarCry dedicated server.rtf]
 
+* Feeble Files, The 
 * FlatOut
   Works out of the box
   Defaults to triple-buffering not fully supported by Wine, but works
@@ -128,14 +132,17 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Gabriel Knight 2: The Beast Within
 * Gabriel Knight 3: Blood of the Sacred, Blood of the Damned
 * Gabriel Knight: Sins of the Fathers
+* Giants: Citizen Kabuto
 * Gobliiins pack
 * Gothic 2 Gold Edition
 * Ground Control 2: Operation Exodus SE
 * Icewind Dale 2 Complete
 * Icewind Dale Complete
+* In Cold Blood 
 * Incoming + Incoming Forces
 * Incredible Machine Mega Pack, The
 * Iron Storm
+* Jack Orlando: A Cinematic Adventure (DC)
 * Journeyman Project 2, The
 * Lands of Lore™ 1+2
 * Last Express, The
@@ -155,6 +162,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Outcast
 * Painkiller Black Edition
 * Planescape: Torment
+* Populous™ 2: Trials of the Olympian Gods
 * Prince of Persia®: The Sands of Time
 * Psychonauts
 * Realms of Arkania 3
@@ -167,9 +175,11 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Sanitarium
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
+* Sid Meier's Alpha Centauri™
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
 * Simon the Sorcerer 2
+* Space Quest 4+5+6 
 * Spellforce Platinum
 * Starflight™ 1+2
 * Still Life
@@ -188,3 +198,4 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Unreal Gold
 * Uru: Complete Chronicles
 * Witcher: Enhanced Edition, The
+* XIII
