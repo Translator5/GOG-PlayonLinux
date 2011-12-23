@@ -1,0 +1,119 @@
+#!/bin/bash
+# Date : (2011-12-23 23-13)
+# Last revision : (2011-12-23 23-31)
+# Wine version used : 1.3.35
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="DivineDivinity_gog"
+WORKING_WINE_VERSION="1.3.35"
+
+TITLE="$(eval_gettext 'Divine Divinity (GoG release)')"
+SHORTCUT_NAME="Divine Divinity"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/en/gamecard/divine_divinity" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+check_install_archive "$ARCHIVE" setup_divine_divinity.exe 1768859354 "560aff548d3df0d619958b443017b111"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfnativereader.reg"
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit "$REPERTOIRE/tmp/pdfnativereader.reg"
+rm "$REPERTOIRE/tmp/pdfnativereader.reg"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+# Default is Direct3D which creates display problems (trails)
+# Switch to DirectDraw
+perl -e 'print "\x02\x00\x00\x00"' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divine Divinity/slashed.cfg"
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "div.exe" "$SHORTCUT_NAME"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Divine Divinity/Manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Divine Divinity/ReadMe.txt'"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Divine Divinity/" || exit 1
+
+POL_Wine configtool.exe
+
+exit
+_EOF_
+
+exit
