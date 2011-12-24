@@ -79,7 +79,7 @@ POL_Wine_WaitExit "$TITLE"
 
 # Default is Direct3D which creates display problems (trails)
 # Switch to DirectDraw
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divine Divinity" || POL_Debug_Fatail "$(eval_gettext 'Could not find program directory!')"
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divine Divinity" || POL_Debug_Fatal "$(eval_gettext 'Could not find program directory!')"
 cp slashed.cfg slashed.cfg.orig
 perl -e 'print "\x02\x00\x00\x00"' > slashed.cfg
 
