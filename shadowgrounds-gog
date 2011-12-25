@@ -1,0 +1,119 @@
+#!/bin/bash
+# Date : (2011-12-25 01-41)
+# Last revision : (2011-12-25 02-13)
+# Wine version used : 1.3.32
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Lots of crashes with 1.3.35 - pattern in flashlight (intentionnal?),
+#   and flashlight goes thru obstacles (probably not intentional)
+# Crashes with 1.3.34-vertex-blending
+# Still some crashes with 1.3.34
+# Still some crashes with 1.3.33
+# Looks fine with 1.3.32 (as far as I could see)
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="ShadowGrounds_gog"
+WORKING_WINE_VERSION="1.3.32"
+
+TITLE="$(eval_gettext 'ShadowGrounds (GoG release)')"
+SHORTCUT_NAME="ShadowGrounds"
+SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_EDITOR_DOC="$SHORTCUT_NAME - $(eval_gettext 'Editor user manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+SHORTCUT_WEAPONS="$SHORTCUT_NAME - $(eval_gettext 'Weapon chart')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Frozenbyte / Meridian4" "http://www.gog.com/en/gamecard/shadowgrounds" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+check_install_archive "$ARCHIVE" setup_shadowgrounds.exe 832844096 "398af39f2b133fde083897c6c6a1c2f6"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF & .RTF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\.rtf]
+@="rtffile"
+"Content Type"="application/rtf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+[HKEY_CLASSES_ROOT\rtffile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+rm "$REPERTOIRE/tmp/pdfrtfnativereader.reg"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+POL_Call POL_Install_wmp10
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Shadowgrounds Launcher.exe" "$SHORTCUT_NAME"
+POL_Shortcut "Shadowgrounds Editor.exe" "$SHORTCUT_EDITOR"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Shadowgrounds/Manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_EDITOR_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Shadowgrounds/EditorManual.rtf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Shadowgrounds/Readme.txt'"
+POL_Shortcut "start.exe" "$SHORTCUT_WEAPONS" "" "'C:/$PROGRAMFILES/GOG.com/Shadowgrounds/weapon_chart.pdf'"
+
+POL_SetupWindow_Close
+
+exit

@@ -47,6 +47,18 @@
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
 * Divine Divinity
+  * PlayOnLinux
+  - installs Ok, display bug with Direct3D, should use DirectDraw instead
+    Problem, config tool provided by GOG only allows to switch resolution,
+    need to take config tool from demo version
+  * Crossover Games
+  - install Ok, creates
+    - Divine Divinity [div.exe]
+    - Configuration [configtool.exe]
+    - Manual [manual.pdf]
+    - Readme [ReadMe.txt]
+    display bug with Direct3D, should use DirectDraw instead, etc.
+
 * Dragonsphere
 * Dream Pinball 3D
 * Duke Nukem 3D: Atomic Edition
@@ -175,6 +187,28 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Sanitarium
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
+  * PlayOnLinux
+    Need to install WMP10
+    Lots of crashes with 1.3.35 - pattern in flashlight (intentionnal?),
+      and flashlight goes thru obstacles (probably not intentional)
+    Crashes with 1.3.34-vertex-blending
+    Still some crashes with 1.3.34
+    Still some crashes with 1.3.33
+    Looks fine with 1.3.32 (as far as I could see)
+    Editor and Editor Manual available from launcher (or so they say: launching
+    the editor seems to launch the game?)
+    Some doc in RTF format
+
+  * Crossover Games 10
+  - installs ok, creates shortcuts:
+    - Shadowgrounds [Shadowgrounds Launcher.exe]
+    - Shadowgrounds Editor [Shadowgrounds Editor.exe]
+    - Editor Manual [EditorManual.rtf]
+    - Manual [Manual.pdf]
+    - Readme [Readme.txt]
+    - Weapon Chart [weapon_chart.pdf]
+    Need to install WMP10
+
 * Sid Meier's Alpha Centauri™
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
