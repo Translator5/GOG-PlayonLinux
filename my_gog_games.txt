@@ -187,14 +187,23 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Sanitarium
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
+  Native demo http://demofiles.linuxgamepublishing.com/shadowgrounds/shadowgrounds-demo.run
+
   * PlayOnLinux
     Need to install WMP10
-    Lots of crashes with 1.3.35 - pattern in flashlight (intentionnal?),
+    Lots of crashes with 1.3.35 - pattern in flashlight (intentional?),
       and flashlight goes thru obstacles (probably not intentional)
     Crashes with 1.3.34-vertex-blending
     Still some crashes with 1.3.34
     Still some crashes with 1.3.33
-    Looks fine with 1.3.32 (as far as I could see)
+    Still some crashes with 1.3.32 (mods, special keys?)
+    Still some crashes with 1.3.31
+    Still some crashes with 1.3.30 (Tab key?)
+    Still some crashes with 1.3.29 (Tab key)
+    Still some crashes with 1.3.28 (and no sound)
+    Still some crashes with 1.3.27-rawinput2 (Tab key)
+    Still some crashes with 1.2.3 (Tab key)
+    Still some crashes with 0.9.54 (Tab key)
     Editor and Editor Manual available from launcher (or so they say: launching
     the editor seems to launch the game?)
     Some doc in RTF format
