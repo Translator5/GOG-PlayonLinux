@@ -185,6 +185,28 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Sacred Gold
 * Sacrifice
 * Sanitarium
+  * PlayOnLinux
+    Installs ok
+    Don't use Start.exe wrapper (doesn't work), call sntrm.exe directly
+    Force compatibility to win9x to avoid a warning
+    Lockup with 1.3.35 when reaching to top of the stairs
+    Same with 1.3.34
+    Same with 1.3.30
+    Crash with 1.3.29 when statue "lights up"
+    Heavy flickering with 1.3.27-rawinput2
+    Ok with 1.3.24?
+    Ok with 1.3.23?
+    Ok with 1.2.3?
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts
+    - Sanitarium [Start.exe]
+    - Manual [manual.pdf]
+    - Readme [readme.txt]
+    Don't use Start.exe wrapper (doesn't work), call sntrm.exe directly
+    Force compatibility to win9x to avoid a warning
+  Also read one could call sntrm.exe -w for windowed mode
+
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
   Native demo http://demofiles.linuxgamepublishing.com/shadowgrounds/shadowgrounds-demo.run
