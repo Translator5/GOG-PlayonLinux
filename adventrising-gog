@@ -1,0 +1,107 @@
+#!/bin/bash
+# Date : (2011-12-28 22-21)
+# Last revision : (2011-12-28 23-11)
+# Wine version used : 1.3.35
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+check_install_archive () {
+    FILE="$1"
+    EXPECTED_NAME="$2"
+    EXPECTED_SIZE="$3"
+    EXPECTED_MD5="$4"
+
+    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
+    # Temporarily prevent word splitting
+    OLDIFS="$IFS"
+    IFS=''
+    NAME="$(basename $FILE)"
+    SIZE="$(stat -c%s $FILE)"
+    MD5="$(POL_MD5_file $FILE)"
+    IFS="$OLDIFS"
+
+    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
+        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
+        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
+        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
+    fi
+}
+
+
+PREFIX="AdventRising_gog"
+WORKING_WINE_VERSION="1.3.35"
+
+TITLE="$(eval_gettext 'Advent Rising (GoG release)')"
+SHORTCUT_NAME="Advent Rising"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "GlyphX Games / Majesco" "http://www.gog.com/en/gamecard/advent_rising" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+ARCHIVE="$APP_ANSWER"
+
+# Hopefully checking first part is enough to identify uniquely the archive
+check_install_archive "$ARCHIVE" setup_advent_rising.exe 2343577 "28869aa14b25d9705f65ed916458a9aa"
+#check_install_archive "${ARCHIVE%.exe}-1.bin" setup_advent_rising-1.bin 2097656064 "16038e27a471a710b06bf8d737fc3679"
+#check_install_archive "${ARCHIVE%.exe}-2.bin" setup_advent_rising-2.bin 2100000000 "3f98999aa162600b4b8cb0fe036cbe21"
+#check_install_archive "${ARCHIVE%.exe}-3.bin" setup_advent_rising-3.bin 137857989 "e210f8aace0110d0ab20b46a1d10ee92"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Associate .PDF with native app
+# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
+# Do it before installing the game, so you have the possibility to open
+# PDFs with Win32 reader if you choose to install it
+cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfnativereader.reg"
+[HKEY_CLASSES_ROOT\.pdf]
+@="PDFfile"
+"Content Type"="application/pdf"
+[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
+@="winebrowser \"%1\""
+_EOF_
+POL_Wine regedit "$REPERTOIRE/tmp/pdfnativereader.reg"
+rm "$REPERTOIRE/tmp/pdfnativereader.reg"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+# Read on WineHQ AppDB test, not sure it's necessary
+POL_Wine_Direct3D "OffscreenRenderingMode" "backbuffer"
+
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+ 
+## PlayOnMac Section
+[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+[ -n "$PLAYONMAC" ] || Set_Managed "Off"
+## End Section
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
+POL_Shortcut "advent.exe" "$SHORTCUT_NAME"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/Help/ReadMe.int.txt'"
+
+POL_SetupWindow_Close
+
+exit
