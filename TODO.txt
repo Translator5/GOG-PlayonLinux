@@ -18,7 +18,6 @@ General:
     [ -n "$PLAYONMAC" ] || Set_Managed "Off"
     ## End Section
   unless it solves effectively a problem for the game
-    flatout
     ground control 2
     nox
     outcast
