@@ -8,4 +8,14 @@ Starflight:
 	Improve icon setting
 
 Ground Control 2:
-        Improve game stability?
+
+General:
+  Provide an implementation de POL_CheckFile to replace check_install_archive ()
+  Update all script to use that
+  Remove sections
+    ## PlayOnMac Section
+    [ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
+    [ -n "$PLAYONMAC" ] || Set_Managed "Off"
+    ## End Section
+  unless it solves effectively a problem for the game
+

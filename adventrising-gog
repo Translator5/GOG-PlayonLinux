@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 22-21)
-# Last revision : (2011-12-28 23-11)
+# Last revision : (2011-12-31 13-52)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -88,11 +88,6 @@ POL_Wine_Direct3D "OffscreenRenderingMode" "backbuffer"
 Set_OS winxp
 
 POL_SetupWindow_VMS "128"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 # Doesn't hurt ;)
 POL_Wine_reboot
