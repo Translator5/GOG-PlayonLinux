@@ -81,11 +81,6 @@ POL_Wine_WaitExit "$TITLE"
 Set_OS winxp
 
 POL_SetupWindow_VMS "32"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 # Doesn't hurt ;)
 POL_Wine_reboot
