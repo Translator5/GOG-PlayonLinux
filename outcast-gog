@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-11-27 19-47)
-# Last revision : (2011-12-04 10-56)
+# Last revision : (2011-12-31 22-59)
 # Wine version used : 1.3.27-rawinput2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -80,18 +80,8 @@ POL_Wine_WaitExit "$TITLE"
 # GoG work!
 Set_OS winxp
 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
-
 # Main game will crash if desktop size is not constrained
 Set_Desktop "On" "640" "480"
-
-# Only works perfectly with rawinput; Otherwise makes loader menu funky
-# (grab the menu around to put wanted entry at the center of screen,
-# release then click!), but the rest of the game is more enjoyable
-#Set_DXGrab "On"
 
 POL_Wine_X11Drv "GrabFullScreen" "Y"
 
@@ -101,6 +91,7 @@ POL_Wine_reboot
 
 # Warning, /windows/command/ also contains a start.exe, so
 # POL_SetupWindow_auto_shortcut or POL_Shortcut can fail
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
 POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Outcast/" "start.exe" "" "$SHORTCUT_NAME"
 
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Outcast/manual.pdf'"
