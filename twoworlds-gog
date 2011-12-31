@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2011-12-10 22-16)
-# Wine version used : 1.3.34
+# Last revision : (2011-12-31 11-49)
+# Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -35,7 +35,7 @@ check_install_archive () {
 
 
 PREFIX="2Worlds_gog"
-WORKING_WINE_VERSION="1.3.34"
+WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Two Worlds: Epic Edition (GoG release)')"
 SHORTCUT_NAME="Two worlds"
@@ -45,8 +45,6 @@ POL_SetupWindow_Init
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Reality Pump Studios / Topware Interactive" "http://www.gog.com/en/gamecard/two_worlds" "Pierre Etchemaite" "$PREFIX"
-
-POL_SetupWindow_message "$(eval_gettext 'Major caveat to date about running Two Wolds under Wine:\n\nEnabling introduction and (the few) interlude videos breaks the sound for\nthe rest of the game!\nThey will be enabled at first, since introduction video helps understanding\ngame background, but you will be able to disable or reenable videos\nfrom within the configurator at any time.\n\nAlso note that online gaming has not been tested.')" "$TITLE"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -108,7 +106,7 @@ POL_SetupWindow_VMS "128"
 [ -n "$PLAYONMAC" ] || Set_Managed "Off"
 ## End Section
 
-POL_Wine_X11Drv "DXGrab" "Y"
+#POL_Wine_X11Drv "DXGrab" "Y"
 POL_Wine_X11Drv "GrabFullScreen" "Y"
 
 POL_Wine_DirectSound "DefaultSampleRate" "48000"
@@ -159,57 +157,5 @@ _EOFINI_
 fi
 
 POL_SetupWindow_Close
-
-
-cd "$REPERTOIRE/configurations/configurators" || exit
-
-cat <<_EOF_ > "$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
-export WINEDEBUG=""
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Two Worlds/" || exit 1
-
-TITLE="$TITLE"
-
-POL_SetupWindow_Init
-POL_Debug_Init
-
-LNG_VIDEOS_ENABLED="\$(eval_gettext 'Enable videos, no in-game sound!')"
-LNG_VIDEOS_DISABLED="\$(eval_gettext 'Disable videos, in-game sound working')"
-
-if [ -d Video ]; then
-    DEFAULT="\$LNG_VIDEOS_ENABLED"
-elif [ -d Video.disabled ]; then
-    DEFAULT="\$LNG_VIDEOS_DISABLED"
-else
-    # Do'h!
-    exit
-fi
-
-POL_SetupWindow_menu_list "\$(eval_gettext 'Enable videos or in-game sound?')" "\$TITLE" "\$LNG_VIDEOS_ENABLED~\$LNG_VIDEOS_DISABLED" "~" "\$DEFAULT"
-
-if [ "\$APP_ANSWER" != "\$DEFAULT" ]; then
-    case "\$APP_ANSWER" in
-        "\$LNG_VIDEOS_ENABLED")
-            mv Video.disabled Video
-            ;;
-        "\$LNG_VIDEOS_DISABLED")
-            mv Video Video.disabled
-            ;;
-    esac
-fi
-
-POL_SetupWindow_Close
-exit
-_EOF_
-
-# Use the same configurator for both shortcuts, in case the user removes the
-# one (s)he doesn't use
-cp "$SHORTCUT_NAME" "$SHORTCUT_NAME (Radeon)"
 
 exit
