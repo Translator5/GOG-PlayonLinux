@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-17 15-39)
-# Last revision : (2011-12-17 15-48)
-# Wine version used : 1.3.35
+# Last revision : (2011-12-31 22-13)
+# Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -37,7 +37,7 @@ check_install_archive () {
 
 
 PREFIX="Nox_gog"
-WORKING_WINE_VERSION=""
+WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Nox (GoG release)')"
 SHORTCUT_NAME="Nox"
@@ -79,16 +79,10 @@ POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while 
 
 POL_Wine_WaitExit "$TITLE"
 
-
 # GoG work!
 Set_OS winxp
 
 POL_SetupWindow_VMS "4"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 # Doesn't hurt ;)
 POL_Wine_reboot
