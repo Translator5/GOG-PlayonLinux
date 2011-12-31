@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2011-12-28 18-50)
+# Last revision : (2011-12-31 23-46)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -90,11 +90,6 @@ POL_Wine_WaitExit "$TITLE"
 Set_OS win98
 
 POL_SetupWindow_VMS "32"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 # Doesn't hurt ;)
 POL_Wine_reboot
