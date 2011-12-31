@@ -9,6 +9,7 @@
 # Depend :
 
 # Tested up to 1.3.35 without native DirectSound, and still looping sounds
+# Same thing with 1.3.36
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
