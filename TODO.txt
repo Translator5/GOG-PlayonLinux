@@ -18,4 +18,18 @@ General:
     [ -n "$PLAYONMAC" ] || Set_Managed "Off"
     ## End Section
   unless it solves effectively a problem for the game
+    age of wonders 3
+    divine divinity
+    dungeon keeper 2
+    far cry
+    flatout
+    ground control 2
+    nox
+    outcast
+    sanitarium
+    starflight
+    two worlds
+    wip/beyond good and evil
+    wip/shadowgrounds
+    broken/empire earth
 
