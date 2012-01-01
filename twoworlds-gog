@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2011-12-31 11-49)
+# Last revision : (2012-01-01 00-05)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -100,11 +100,6 @@ POL_Wine regsvr32 wvc1dmod.dll
 Set_OS winxp
 
 POL_SetupWindow_VMS "128"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 #POL_Wine_X11Drv "DXGrab" "Y"
 POL_Wine_X11Drv "GrabFullScreen" "Y"
