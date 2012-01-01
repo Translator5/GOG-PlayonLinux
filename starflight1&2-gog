@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2011-12-03 17-30)
+# Last revision : (2012-01-01 01-50)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,31 +8,11 @@
 # Program licence : Retail
 # Depend : dosbox
 
+# Tested with install archive:
+# setup_starflight_1_2.exe 44526203 "4b3e884d1bbe066470338456991dc73e"
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
-
-check_install_archive () {
-    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
-
-    EXPECTED_NAME='setup_starflight_1_2.exe'
-    EXPECTED_SIZE=44526203
-    EXPECTED_MD5="4b3e884d1bbe066470338456991dc73e"
-
-    # Temporarily prevent word splitting
-    OLDIFS="$IFS"
-    IFS=''
-    NAME="$(basename $ARCHIVE)"
-    SIZE="$(stat -c%s $ARCHIVE)"
-    MD5="$(POL_MD5_file $ARCHIVE)"
-    IFS="$OLDIFS"
-
-    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
-        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
-        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
-    fi
-}
-
 
 PREFIX="Starflight_1_2_gog"
 WORKING_WINE_VERSION="1.3.23"
@@ -56,10 +36,8 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_starflight_1_2.exe"
 ARCHIVE="$APP_ANSWER"
-
-check_install_archive
 
 POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)')" "$TITLE"
 NATIVEDOSBOX=''

@@ -8,24 +8,3 @@ Starflight:
 	Improve icon setting
 
 Ground Control 2:
-
-General:
-  Provide an implementation de POL_CheckFile to replace check_install_archive ()
-  Update all script to use that
-  * Alternative: forget this idea, use 3rd parameter of POL_Browse to provide default filename, should
-    be sufficient to prevent the most stupid mistakes.
-	adventrising-gog
-	ageofwonders3-shadowmagic-gog
-	broken/empireearth-gog
-	divinedivinity-gog
-	dungeonkeeper2-gog
-	farcry-gog
-	flatout-gog
-	groundcontrol2-gog
-	nox-gog
-	outcast-gog
-	sanitarium-gog
-	starflight1&2-gog
-	twoworlds-gog
-	wip/beyond-good&evil-gog
-	wip/shadowgrounds-gog

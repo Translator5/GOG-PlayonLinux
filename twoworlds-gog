@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2012-01-01 00-05)
+# Last revision : (2012-01-01 01-52)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,31 +8,13 @@
 # Program licence : Retail
 # Depend :
 
+# Tested with install archives:
+# setup_two_worlds.exe 2314533 f59283baad1d482806a4302c6a105c66
+# setup_two_worlds-1.bin 2097685248 d0eab18be86037476a7cd4e47f1afc0a
+# setup_two_worlds-2.bin 1716047202 eb19df7336379a5b1355354ed69f124e
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
-
-check_install_archive () {
-    FILE="$1"
-    EXPECTED_NAME="$2"
-    EXPECTED_SIZE="$3"
-    EXPECTED_MD5="$4"
-
-    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
-    # Temporarily prevent word splitting
-    OLDIFS="$IFS"
-    IFS=''
-    NAME="$(basename $FILE)"
-    SIZE="$(stat -c%s $FILE)"
-    MD5="$(POL_MD5_file $FILE)"
-    IFS="$OLDIFS"
-
-    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
-        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
-        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
-    fi
-}
-
 
 PREFIX="2Worlds_gog"
 WORKING_WINE_VERSION="1.3.36"
@@ -50,14 +32,8 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_two_worlds.exe"
 ARCHIVE="$APP_ANSWER"
-
-# Hopefully checking first part is enough to identify uniquely the archive
-check_install_archive "$ARCHIVE" setup_two_worlds.exe 2314533 f59283baad1d482806a4302c6a105c66
-#check_install_archive "${ARCHIVE%.exe}-1.bin" setup_two_worlds-1.bin 2097685248 d0eab18be86037476a7cd4e47f1afc0a
-#check_install_archive "${ARCHIVE%.exe}-2.bin" setup_two_worlds-2.bin 1716047202 eb19df7336379a5b1355354ed69f124e
-
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

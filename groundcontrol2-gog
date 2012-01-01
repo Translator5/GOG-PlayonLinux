@@ -1,12 +1,15 @@
 #!/bin/bash
 # Date : (2011-12-03 20-32)
-# Last revision : (2011-12-31 22-11)
+# Last revision : (2012-01-01 01-44)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
+
+# Tested with install archive:
+# setup_ground_control_2.exe 641603732 "dd1ae6e7ae1420bc52dc5327e974ea9e"
 
 # Supposed to be "Gold" on WineHQ with 1.3.23, but I crash it with middle-click + drag
 # Same for 1.3.27-rawinput2,
@@ -16,29 +19,6 @@
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
-
-check_install_archive () {
-    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
-
-    EXPECTED_NAME='setup_ground_control_2.exe'
-    EXPECTED_SIZE=641603732
-    EXPECTED_MD5="dd1ae6e7ae1420bc52dc5327e974ea9e"
-
-    # Temporarily prevent word splitting
-    OLDIFS="$IFS"
-    IFS=''
-    NAME="$(basename $ARCHIVE)"
-    SIZE="$(stat -c%s $ARCHIVE)"
-    MD5="$(POL_MD5_file $ARCHIVE)"
-    IFS="$OLDIFS"
-
-    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
-        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
-        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
-    fi
-}
-
 
 PREFIX="GrndCtrl2_gog"
 WORKING_WINE_VERSION="1.3.36"
@@ -56,11 +36,8 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_ground_control_2.exe"
 ARCHIVE="$APP_ANSWER"
-
-check_install_archive
-
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

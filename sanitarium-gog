@@ -1,12 +1,15 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2011-12-31 23-46)
+# Last revision : (2012-01-01 01-48)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
+
+# Tested with install archive:
+# setup_sanitarium.exe 1235894636 "c60d04ddd0614988c7be7c86fa5fe7d8"
 
 #    Lockup with 1.3.36 when reaching to top of the stairs
 #    Same with 1.3.35
@@ -20,29 +23,6 @@
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
-
-check_install_archive () {
-    FILE="$1"
-    EXPECTED_NAME="$2"
-    EXPECTED_SIZE="$3"
-    EXPECTED_MD5="$4"
-
-    POL_SetupWindow_wait "$(eval_gettext 'Checking install archive...')" "$TITLE"
-    # Temporarily prevent word splitting
-    OLDIFS="$IFS"
-    IFS=''
-    NAME="$(basename $FILE)"
-    SIZE="$(stat -c%s $FILE)"
-    MD5="$(POL_MD5_file $FILE)"
-    IFS="$OLDIFS"
-
-    if [ $SIZE -ne $EXPECTED_SIZE -o "$MD5" != "$EXPECTED_MD5" ]; then
-        POL_Debug_Error "$(eval_gettext 'Install archive mismatch.\nEither your install archive is corrupted, or is not the expected version.\nThis script cannot guarantee that installation will work correctly. Please report success or failure to PlayOnLinux forums.')\n$(eval_gettext 'Name:') $NAME ($(eval_gettext 'expected') $EXPECTED_NAME)\n$(eval_gettext 'Size:') $SIZE ($(eval_gettext 'expected') $EXPECTED_SIZE)\n$(eval_gettext 'MD5:') $MD5\n     ($(eval_gettext 'expected') $EXPECTED_MD5)"
-        POL_SetupWindow_question "$(eval_gettext 'Continue?')" "$TITLE"
-        [ "$APP_ANSWER" != "TRUE" ] && POL_Debug_Fatal "$(eval_gettext 'Not the expected archive')"
-    fi
-}
-
 
 PREFIX="Sanitarium_gog"
 WORKING_WINE_VERSION="1.3.23"
@@ -61,11 +41,8 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_sanitarium.exe"
 ARCHIVE="$APP_ANSWER"
-
-check_install_archive "$ARCHIVE" setup_sanitarium.exe 1235894636 "c60d04ddd0614988c7be7c86fa5fe7d8"
-
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
