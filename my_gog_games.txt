@@ -157,6 +157,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Giants: Citizen Kabuto
 * Gobliiins pack
 * Gothic 2 Gold Edition
+* Gothic 3
 * Ground Control 2: Operation Exodus SE
 * Icewind Dale 2 Complete
 * Icewind Dale Complete
