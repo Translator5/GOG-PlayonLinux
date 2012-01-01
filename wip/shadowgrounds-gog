@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2011-12-27 02-10)
+# Last revision : (2012-01-01 01-03)
 # Wine version used : 1.3.30
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -108,11 +108,6 @@ POL_SetupWindow_VMS "128"
 
 POL_Call POL_Install_wmp10
 POL_Wine_X11Drv "GrabFullScreen" "Y"
- 
-## PlayOnMac Section
-[ -n "$PLAYONMAC" ] && Set_SoundDriver "alsa"
-[ -n "$PLAYONMAC" ] || Set_Managed "Off"
-## End Section
 
 # Doesn't hurt ;)
 POL_Wine_reboot
