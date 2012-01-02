@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2012-01-01 01-48)
+# Last revision : (2012-01-02 21-36)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -46,19 +46,8 @@ ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
-# Associate .PDF with native app
-# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
-# Do it before installing the game, so you have the possibility to open
-# PDFs with Win32 reader if you choose to install it
-cat <<'_EOF_' > "$REPERTOIRE/tmp/pdfnativereader.reg"
-[HKEY_CLASSES_ROOT\.pdf]
-@="PDFfile"
-"Content Type"="application/pdf"
-[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
-@="winebrowser \"%1\""
-_EOF_
-POL_Wine regedit "$REPERTOIRE/tmp/pdfnativereader.reg"
-rm "$REPERTOIRE/tmp/pdfnativereader.reg"
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 

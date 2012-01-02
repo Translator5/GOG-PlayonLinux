@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-01-01 01-50)
+# Last revision : (2012-01-02 21-36)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -49,19 +49,7 @@ SF1DROPINCONSOLE=1
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
-# Associate .PDF with native app
-# http://wiki.winehq.org/FAQ#head-91bf3f0a8ccbfab8dee96f82fae2f1a489e0d243
-# Do it before installing the game, so you have the possibility to open
-# PDFs with Win32 reader if you choose to install it
-cat <<'_EOF_' > $REPERTOIRE/tmp/pdfnativereader.reg
-[HKEY_CLASSES_ROOT\.pdf]
-@="PDFfile"
-"Content Type"="application/pdf"
-[HKEY_CLASSES_ROOT\PDFfile\Shell\Open\command]
-@="winebrowser \"%1\""
-_EOF_
-POL_Wine regedit $REPERTOIRE/tmp/pdfnativereader.reg
-rm $REPERTOIRE/tmp/pdfnativereader.reg
+POL_Call POL_Function_SetNativeExtension "pdf"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -93,8 +81,8 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
         sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
     fi
 
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT1_NAME"
+    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
         POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
@@ -111,8 +99,8 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     # Better default settings in my opinion
     sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
 
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
     cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT2_NAME"
+    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
         POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"

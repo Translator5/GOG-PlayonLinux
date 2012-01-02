@@ -6,5 +6,3 @@ Outcast-gog-zenger-hires-patch:
 
 Starflight:
 	Improve icon setting
-
-Ground Control 2:
