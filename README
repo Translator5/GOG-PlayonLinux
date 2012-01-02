@@ -1,0 +1,13 @@
+This is my repository of PlayOnLinux scripts for games available from
+Good Old Games (http://www.gog.com/): classical/retro gaming for a small
+price tag, and no DRM!
+
+
+"wip" subdirectory contains scripts that are not fully satisfying
+(some features that do not work, or even rare crashes). Gaming
+experience may still be fun, but with some reserves.
+
+"broken" subdirectory contains failed scripts attempts, or so poor
+results that the game cannot really be enjoyed. Only useful for
+further research, possibly with new releases of Wine.
+
