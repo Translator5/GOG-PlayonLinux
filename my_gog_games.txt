@@ -111,7 +111,27 @@ REGEDIT4
 
 * Enclave
 * Fallout
+  * PlayOnLinux
+    Installs of
+    Works perfect, but sometime exists with exitcode 1 (?)
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts for
+    - Fallout [falloutw.exe]
+    - Manual [Manual.pdf]
+    - Readme [Readme.txt]
+
 * Fallout 2
+  * PlayOnLinux
+    Installs of
+    Works perfect, but sometime exists with exitcode 1 (?)
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts for
+    - Fallout 2 [fallout2.exe]
+    - Manual [Manual.pdf]
+    - Readme [Readme.txt]
+
 * Far Cry®
   * PlayOnLinux
   - Fine in Direct3D9, only problem is water looking bad

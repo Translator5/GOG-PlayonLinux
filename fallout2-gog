@@ -1,27 +1,61 @@
 #!/bin/bash
-if [ "$PLAYONLINUX" = "" ]; then
-    exit 0
-fi
-source "$PLAYONLINUX/lib/sources"
- 
-POL_SetupWindow_Init
-POL_SetupWindow_presentation "Fallout 2" "Black Isle Studios" "http://fallout.bethsoft.com/" "Matt Caron" "Fallout 2"
- 
- 
-select_prefix "$REPERTOIRE/wineprefix/Fallout2/"
-POL_SetupWindow_prefixcreate
-cd $HOME
-POL_SetupWindow_browse "Plese select the location of the install file" "Select file"
+# Date : (2012-01-02 23-43)
+# Last revision : (2012-01-03 00-46)
+# Wine version used : 1.3.36
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
 
-POL_SetupWindow_wait_next_signal "Installing Fallout 2..." "Fallout 2"
-wine $APP_ANSWER
- 
-POL_SetupWindow_detect_exit
- 
-POL_SetupWindow_reboot
- 
- 
-POL_SetupWindow_make_shortcut "Fallout2" "Program Files/GOG.com/Fallout 2/" "fallout2.exe" "" "Fallout 2"
- 
+# Tested with install archives:
+# setup_fallout_2.exe 585188020 "0ec3537ca2af41ce11b478f11d4abd20"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="Fallout2_gog"
+WORKING_WINE_VERSION="1.3.36"
+
+TITLE="$(eval_gettext 'Fallout 2 (GoG release)')"
+SHORTCUT_NAME="Fallout 2"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Interplay" "http://www.gog.com/en/gamecard/fallout_2" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_fallout_2.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "2"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+# hackish, but sometimes exits with an exitcode of 1 for what it seems no good reason
+POL_Shortcut "fallout2.exe" "$SHORTCUT_NAME" "" "|| true"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Readme.txt'"
+
 POL_SetupWindow_Close
+
 exit
