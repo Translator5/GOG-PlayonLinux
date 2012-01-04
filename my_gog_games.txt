@@ -175,6 +175,16 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Gabriel Knight 3: Blood of the Sacred, Blood of the Damned
 * Gabriel Knight: Sins of the Fathers
 * Giants: Citizen Kabuto
+  * PlayOnLinux
+    Installs ok
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts:
+    - Giants - Citizen Kabuto [Giants.exe]
+    - Dedicated Server Editor [dedicated.exe]
+    - Manual [Manual.pdf]
+    - Readme [Readme.txt]
+    
 * Gobliiins pack
 * Gothic 2 Gold Edition
 * Gothic 3
