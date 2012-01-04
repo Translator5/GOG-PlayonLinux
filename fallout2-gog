@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-02 23-43)
-# Last revision : (2012-01-03 00-46)
+# Last revision : (2012-01-04 21-01)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -52,7 +52,9 @@ POL_SetupWindow_VMS "2"
 POL_Wine_reboot
 
 # hackish, but sometimes exits with an exitcode of 1 for what it seems no good reason
-POL_Shortcut "fallout2.exe" "$SHORTCUT_NAME" "" "|| true"
+POL_Shortcut "fallout2.exe" "$SHORTCUT_NAME"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "trap 'exit 0' EXIT"
+
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Manual.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Readme.txt'"
 
