@@ -159,6 +159,17 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
     - Using the FarCry dedicated server [Using the FarCry dedicated server.rtf]
 
 * Feeble Files, The 
+  * PlayOnLinux
+    Installs ok, but need some tweaking since manual install is not able to
+    create shortcuts with arguments.
+    ScummVM used; Switching to native version need changing all paths in .ini
+    file
+
+  * Crossover Games 10
+    Installs ok (ScummVM!), creates shortcuts for
+    - The Feeble Files [ScummVM\scummvm.exe -c "C:\...\feeble.ini"]
+    - Manual [Manual.pdf]
+
 * FlatOut
   Works out of the box
   Defaults to triple-buffering not fully supported by Wine, but works
@@ -199,6 +210,14 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Journeyman Project 2, The
 * Lands of Lore™ 1+2
 * Last Express, The
+  * Crossover Games 10
+  Installs ok, it's a DosBox game!
+  Creates shortcuts:
+  - The Last Express [dosbox.exe -conf dosboxTLE.conf -noconsole -c "exit"]
+  - Graphic Mode Setup ["Graphic mode setup.exe" GOGTHELASTEXPRESS]
+  - Manual [Manual.pdf]
+  - Readme [Readme.txt]
+
 * Little Big Adventure (Relentless: Twinsen's Adventure)
 * Little Big Adventure 2 (Twinsen's Odyssey)
 * Longest Journey, The
