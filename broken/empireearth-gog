@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 02-03)
-# Last revision : (2012-01-02 21-23)
+# Last revision : (2012-01-06 22-53)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -73,7 +73,10 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot
 
 POL_Shortcut "Empire Earth.exe" "$SHORTCUT_NAME1"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "POL_Wine_AutoSetVersionEnv\nwineserver -k\nnice -19 wineserver"
+#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "POL_Wine_AutoSetVersionEnv\nwineserver -k\nnice -19 wineserver"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "xset m 1 1"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "trap 'xset m default' EXIT"
+
 POL_Shortcut "start.exe" "$SHORTCUT_DOC1" "" "'C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/Manual.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC_TECHTREE1" "" "'C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/technology_tree.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC_EDITOR1" "" "'C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/scenario_editor_manual.pdf'"
