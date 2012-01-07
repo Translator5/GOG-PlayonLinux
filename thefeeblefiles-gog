@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-01-06 23-38)
+# Last revision : (2012-01-06 21-16)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -76,6 +76,7 @@ cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/game.ico" "$REPER
 if [ -n "$NATIVESCUMMVM" ]; then
     # All this because InsertBeforeWine does not like slashes, so I can't specify feeble-unix.ini path directly
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "cd .."
+    POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec scummvm -c 'feeble-unix.ini'"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "cd -"
 fi

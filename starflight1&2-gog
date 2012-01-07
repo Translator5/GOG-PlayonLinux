@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-01-02 21-36)
+# Last revision : (2012-01-06 21-17)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -85,6 +85,7 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
+        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "shopt -s execfail"
         POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
     fi
 
@@ -103,6 +104,7 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
+        POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "shopt -s execfail"
         POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
     fi
 
