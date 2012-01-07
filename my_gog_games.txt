@@ -204,6 +204,30 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Icewind Dale Complete
 * In Cold Blood 
 * Incoming + Incoming Forces
+  * PlayOnLinux
+    Install ok
+    Incoming GPF messagebox at start then runs ok when closed
+    Incoming runs in 640x480 only?
+    Incoming menus are very fast - game speed is ok
+    Incoming Forces: no mouse cursor with native dx3d9?
+    Incoming Forces show visual glitch (skies) with Wine > 1.3.21
+    Incoming show visual glitch (no textures) with Wine 1.3.21 (fix between 1.3.30 and 1.3.34)
+    Both exit with an exitcode != 0 or stay stuck on exit (Incoming at least)
+
+    Some slightly looping sounds, not fixed by native dsound
+
+  * Crossover Games 10
+    Installs ok, creates shortcuts for
+    - Incoming               [Incoming\Incoming.exe]
+    - Incoming Manual        [Incoming\Manual.pdf]
+    - Incoming Readme        [Incoming\readme.txt]
+    - Incoming Forces        [Incoming Forces\forces.exe]
+    - Incoming Forces Manual [Incoming Forces\Manual.pdf]
+    - Incoming Forces Readme [Incoming Forces\asc\language\manuals\English_readme.txt]
+    both games: Visual C++ crash? R6034
+
+  Move to _failure for the time being
+
 * Incredible Machine Mega Pack, The
 * Iron Storm
 * Jack Orlando: A Cinematic Adventure (DC)
