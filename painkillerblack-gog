@@ -1,0 +1,79 @@
+#!/bin/bash
+# Date : (2012-01-07 21-26)
+# Last revision : (2012-01-07 22-01)
+# Wine version used : 1.3.36
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_painkiller_black.exe 2353009 "04779d4d56e828daff8f82ba239d96a3"
+# setup_painkiller_black-1.bin 2097646848 "7db45f6fb84caa50f4b4679a63f30418"
+# setup_painkiller_black-2.bin 1710504737 "23f6f6b2078b5b909eaacff0a8238586"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="PainkillerBlack_gog"
+WORKING_WINE_VERSION="1.3.36"
+
+TITLE="$(eval_gettext 'Painkiller Black Edition (GoG release)')"
+SHORTCUT_NAME="Painkiller Black Edition"
+SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
+SHORTCUT_DS="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server')"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+SHORTCUT_ENGINE_DOC="$SHORTCUT_NAME - $(eval_gettext 'Pain Engine')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/en/gamecard/painkiller" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_painkiller_black.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+LNG_DOC="$(eval_gettext 'Documentation about the game itself') (2)"
+LNG_EXTRAS="$(eval_gettext 'Extras (editor, dedicated server, technical doc)') (3)"
+POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_DOC}~${LNG_EXTRAS}" "~"
+SHORTCUTS="$APP_ANSWER"
+
+POL_Shortcut "Painkiller.exe" "$SHORTCUT_NAME"
+
+if echo "$SHORTCUTS" | grep -q "$LNG_DOC"; then
+    POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Manual.pdf'"
+    POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/ReadMe.txt'"
+fi
+
+if echo "$SHORTCUTS" | grep -q "$LNG_EXTRAS"; then
+    POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR"
+    POL_Shortcut "Painkiller.exe" "$SHORTCUT_DS" "" "-dedicated"
+    POL_Shortcut "start.exe" "$SHORTCUT_ENGINE_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Pain Engine.pdf'"
+fi
+
+POL_SetupWindow_Close
+
+exit
