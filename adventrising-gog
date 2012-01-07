@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 22-21)
-# Last revision : (2012-01-02 21-13)
+# Last revision : (2012-01-06 10-49)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -61,6 +61,9 @@ cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/gfw_high.ico" "$R
 POL_Shortcut "advent.exe" "$SHORTCUT_NAME"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/manual.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/Help/ReadMe.int.txt'"
+
+# One last word about "Advent Revising"
+POL_SetupWindow_message "$(eval_gettext 'Think about installing one of the unofficial patches "Advent Revising"\nto fix lots of known issues:\nhttp://www.miketyndall.com/setz/Advent%20Revising/\n\nNo matter what version you choose, use a Windows archiver to\nuncompress the patch inside the your prefix case-insensitively.')" "$TITLE"
 
 POL_SetupWindow_Close
 
