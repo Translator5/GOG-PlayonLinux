@@ -1,3 +1,7 @@
+WON'T UPDATE THIS FILE ANYMORE
+Authoritative notes will be stored in Github Wiki,
+https://github.com/petchema/playonlinux/wiki/My-GoG-list
+
 * Advent Rising
   * PlayOnLinux
     Seems mostly ok with 1.3.35 (not played much)
@@ -112,7 +116,7 @@ REGEDIT4
 * Enclave
 * Fallout
   * PlayOnLinux
-    Installs of
+    Installs ok
     Works perfect, but sometime exists with exitcode 1 (?)
 
   * Crossover Games 10
@@ -123,7 +127,7 @@ REGEDIT4
 
 * Fallout 2
   * PlayOnLinux
-    Installs of
+    Installs ok
     Works perfect, but sometime exists with exitcode 1 (?)
 
   * Crossover Games 10
