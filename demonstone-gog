@@ -1,0 +1,61 @@
+#!/bin/bash
+# Date : (2012-01-08 10-18)
+# Last revision : (2012-01-08 10-24)
+# Wine version used : 1.3.36
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_demon_stone.exe 1760455392 "4a1dcb6e1466775dafaedd5a5d651fc8"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="DemonStone_gog"
+WORKING_WINE_VERSION="1.3.36"
+
+TITLE="$(eval_gettext 'Forgotten Realms: Demon Stone (GoG release)')"
+SHORTCUT_NAME="Demon Stone"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Stormfront Studios / Atari" "http://www.gog.com/en/gamecard/forgotten_realms_demon_stone" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_demon_stone.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "demonlaunch.exe" "$SHORTCUT_NAME"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Demon Stone/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Demon Stone/Readme.txt'"
+
+POL_SetupWindow_Close
+
+exit
