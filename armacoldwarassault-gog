@@ -1,0 +1,77 @@
+#!/bin/bash
+# Date : (2012-01-09 22-00)
+# Last revision : (2012-01-09 22-20)
+# Wine version used : 1.3.36
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_arma_cold_war_assault.exe 444364681 "299f5cb319d023b502937a10fc21fc83"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="ColdWarAssault_gog"
+WORKING_WINE_VERSION="1.3.36"
+
+TITLE="$(eval_gettext 'Arma: Cold War Assault (GoG release)')"
+SHORTCUT_NAME="Arma: Cold War Assault"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "http://www.gog.com/en/gamecard/arma_cold_war_assault" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_arma_cold_war_assault.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "ColdWarAssault.exe" "$SHORTCUT_NAME"
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Arma Cold War Assault/manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Arma Cold War Assault/readme.txt'"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arma Cold War Assault/" || exit 1
+
+POL_Wine ColdWarAssaultPreferences.exe
+
+exit
+_EOF_
+
+exit
