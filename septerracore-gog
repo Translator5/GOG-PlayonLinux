@@ -1,0 +1,64 @@
+#!/bin/bash
+# Date : (2012-01-15 00-06)
+# Last revision : (2012-01-15 00-30)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_septerra_core.exe 600263467 "22839e19bc5c8db1e557810e01be6e42"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="SepterraCore_gog"
+WORKING_WINE_VERSION="1.3.37"
+
+TITLE="$(eval_gettext 'Septerra Core: Legacy of the Creator (GoG release)')"
+SHORTCUT_NAME="Septerra Core"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "http://www.gog.com/en/gamecard/septerra_core_legacy_of_the_creator" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_septerra_core.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+# hackish, but sometimes exits with an exitcode of 1 for what it seems no good reason
+POL_Shortcut "septerra.exe" "$SHORTCUT_NAME"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "trap 'exit 0' EXIT"
+
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Septerra Core/Manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Septerra Core/README.TXT'"
+
+POL_SetupWindow_Close
+
+exit
