@@ -44,6 +44,7 @@ POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while 
 POL_Wine_WaitExit "$TITLE"
 
 
+# GoG work!
 Set_OS winxp
 
 POL_SetupWindow_VMS "16"
