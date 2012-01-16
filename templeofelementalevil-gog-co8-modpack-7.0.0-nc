@@ -1,0 +1,56 @@
+#!/bin/bash
+# Date : (2012-01-16 20-04)
+# Last revision : (2012-01-16 20-52)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe 295527044 "d8046e6174c4d6eb9a4c5e958b691963"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+# Must match templeofelementalevil-gog script values
+PREFIX="TempleElementalEvil_gog"
+WORKING_WINE_VERSION="1.3.37"
+
+TITLE="$(eval_gettext 'Circle of Eight Modpack 7.0.0 NC')"
+SHORTCUT_NAME="$(eval_gettext 'Circle of Eight Modpack')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Circle of Eight" "http://www.co8.org/" "Pierre Etchemaite" "$PREFIX"
+
+if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
+    POL_Debug_Fatal "$(eval_gettext 'You must install Temple of Elemental Evil (GoG release) first!')"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_LoadVar_PROGRAMFILES
+
+POL_SetupWindow_message "$(eval_gettext 'You can download the archive file from:')\nhttp://www.moddb.com/mods/circle-of-eight-modpack/news/circle-of-eight-modpacks-700-and-700-nc-released" "$TITLE"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Install_mono28
+POL_Call POL_Install_dotnet20
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+POL_Shortcut "TFE-X.exe" "$SHORTCUT_NAME"
+
+POL_SetupWindow_Close
+
+exit

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2012-01-15 23-59)
+# Last revision : (2012-01-16 20-20)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -60,6 +60,9 @@ cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/ToEE.i
 POL_Shortcut "ToEE.exe" "$SHORTCUT_NAME"
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Manual.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Readme.txt'"
+
+# Last words
+POL_SetupWindow_message "$(eval_gettext 'It is highly recommended to now install the Circle of Eight Modpack\nto fix many issues with this game, and optionally add new content\n(for "NC" modpacks).\nUse the dedicated PlayOnLinux script in patches section.')" "$TITLE"
 
 POL_SetupWindow_Close
 
