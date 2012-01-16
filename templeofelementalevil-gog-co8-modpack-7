@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2012-01-16 23-22)
+# Last revision : (2012-01-17 00-04)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -9,6 +9,8 @@
 # Depend :
 
 # Tested with install archives:
+# 2011_12_19_Circle_of_Eight_Modpack_7.0.0_Setup.exe 144230937 "f5794aaf9e6be982757f4e4f3ad66afe"
+# and
 # Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe 295527044 "d8046e6174c4d6eb9a4c5e958b691963"
 
 [ -z "$PLAYONLINUX" ] && exit 0
@@ -18,8 +20,10 @@ source "$PLAYONLINUX/lib/sources"
 PREFIX="TempleElementalEvil_gog"
 WORKING_WINE_VERSION="1.3.37"
 
+DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack/news/circle-of-eight-modpacks-700-and-700-nc-released"
+
 TITLE="$(eval_gettext 'Circle of Eight Modpack 7')"
-SHORTCUT_NAME="Temple of Elemental Evil - $(eval_gettext 'Circle of Eight Modpack')"
+SHORTCUT_NAME="Temple of Elemental Evil - $(eval_gettext 'Circle of Eight Modpack 7')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -34,7 +38,10 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_AutoSetVersionEnv
 POL_LoadVar_PROGRAMFILES
 
-POL_SetupWindow_message "$(eval_gettext 'You can download the archive file from:')\nhttp://www.moddb.com/mods/circle-of-eight-modpack/news/circle-of-eight-modpacks-700-and-700-nc-released" "$TITLE"
+POL_SetupWindow_question "$(eval_gettext 'You can download the archive file from:')\n$DOWNLOAD_URL\n$(eval_gettext 'Go there now?')" "$TITLE"
+if [ "$APP_ANSWER" = "TRUE" ]; then
+    POL_Browser "$DOWNLOAD_URL"
+fi
 
 cd $HOME
 POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe"
