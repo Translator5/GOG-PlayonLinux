@@ -339,6 +339,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Stonekeep
 * Syberia
 * Syberia 2
+* Syndicate™
 * Teenagent
 * Temple of Elemental Evil, The
 * Tex Murphy: Under a Killing Moon
