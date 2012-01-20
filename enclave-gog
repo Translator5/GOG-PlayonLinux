@@ -1,0 +1,98 @@
+#!/bin/bash
+# Date : (2012-01-20 23-25)
+# Last revision : (2012-01-20 23-41)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_enclave.exe 1296344974 "0fd0daa0f8b8e8a642e05a0cdc4f15ad"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="Enclave_gog"
+WORKING_WINE_VERSION="1.3.37"
+
+TITLE="$(eval_gettext 'Enclave (GoG release)')"
+SHORTCUT_NAME="Enclave"
+SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
+SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Starbreeze Studios / TopWare Interactive" "http://www.gog.com/en/gamecard/enclave" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_enclave.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_Function_SetNativeExtension "txt"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME"
+# Fixes a problem with CPU management on modern computers (specially laptops):
+# Enclave doesn't handle variable frequency, so make sure they stay at top frequency
+# with a background busy loop (other means are less portable and/or require root privileges)
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
+
+POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Enclave/Manual.pdf'"
+POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Enclave/readme.txt'"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Enclave/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+DRIVER="\$(sed -e 's/^VID_RENDER=\([A-Za-z0-9]*\).*/\1/p; d' environment.cfg
+
+POL_SetupWindow_menu_list "\$(eval_gettext 'Pick video renderer to use:')" "\$TITLE" "Direct3D8~OpenGL" "\$DRIVER"
+NEW_DRIVER="\$APP_ANSWER"
+
+if [ "\$NEW_DRIVER" != "\$DRIVER" ]; then
+    sed -i.bak -e 's/^VID_RENDER=[A-Za-z0-9]*/VID_RENDER=\$NEW_DRIVER/' environment.cfg
+fi
+
+POL_SetupWindow_Close
+exit
+_EOF_
+
+exit
