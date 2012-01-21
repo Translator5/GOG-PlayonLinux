@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-20 23-25)
-# Last revision : (2012-01-21 01-11)
+# Last revision : (2012-01-21 18-33)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -56,15 +56,11 @@ POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME"
 # Fixes a problem with CPU management on modern computers (specially laptops):
 # Enclave doesn't handle variable frequency, so make sure they stay at top frequency
 # with a background busy loop (other means are less portable and/or require root privileges)
-#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
-#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
-#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
-#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
-
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 \$\$'
+# POL 4.0.15 needed
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=\$\!'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill \$BUSYLOOP_PID" EXIT'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
 
 POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Enclave/Manual.pdf'"
 POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Enclave/readme.txt'"
