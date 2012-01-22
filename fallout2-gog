@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-02 23-43)
-# Last revision : (2012-01-04 21-01)
+# Last revision : (2012-01-22 00-12)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -19,8 +19,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Fallout 2 (GoG release)')"
 SHORTCUT_NAME="Fallout 2"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -54,9 +52,8 @@ POL_Wine_reboot
 # hackish, but sometimes exits with an exitcode of 1 for what it seems no good reason
 POL_Shortcut "fallout2.exe" "$SHORTCUT_NAME"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "trap 'exit 0' EXIT"
-
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Fallout 2/Readme.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Fallout 2/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Fallout 2/Readme.txt
 
 POL_SetupWindow_Close
 

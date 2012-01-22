@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-08 20-49)
-# Last revision : (2012-01-08 21-00)
+# Last revision : (2012-01-21 23-58)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,8 +20,6 @@ WORKING_WINE_VERSION="1.3.36"
 TITLE="$(eval_gettext 'Iron Storm (GoG release)')"
 SHORTCUT_NAME="Iron Storm"
 SHORTCUT_DS="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server')"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -38,7 +36,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -54,8 +51,8 @@ POL_Wine_reboot
 
 POL_Shortcut "IronStorm.exe" "$SHORTCUT_NAME"
 POL_Shortcut "IronStorm_DS.exe" "$SHORTCUT_DS"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Iron Storm/Manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Iron Storm/readme.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Iron Storm/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Iron Storm/readme.txt
 
 POL_SetupWindow_Close
 

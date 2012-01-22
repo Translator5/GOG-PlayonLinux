@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-01-07 21-17)
+# Last revision : (2012-01-21 23-36)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -19,8 +19,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'The Last Express (GoG release)')"
 SHORTCUT_NAME="The Last Express"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -41,7 +39,6 @@ NATIVEDOSBOX=''
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -66,8 +63,8 @@ if [ -n "$NATIVEDOSBOX" ]; then
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec dosbox -conf dosboxTLE.conf"
 fi
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/The Last Express/Manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/The Last Express/Readme.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/The Last Express/Readme.txt
 
 POL_SetupWindow_Close
 

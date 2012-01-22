@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-17 21-03)
-# Last revision : (2012-01-02 21-32)
+# Last revision : (2012-01-22 00-03)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -19,7 +19,6 @@ WORKING_WINE_VERSION="1.3.35"
 
 TITLE="$(eval_gettext 'Flatout (GoG release)')"
 SHORTCUT_NAME="Flatout"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -51,7 +50,7 @@ POL_SetupWindow_VMS "128"
 POL_Wine_reboot
 
 POL_Shortcut "flatout.exe" "$SHORTCUT_NAME"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/FlatOut/manual.pdf'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/FlatOut/manual.pdf"
 
 # I'd like to automate it (Savegames/device.cfg, byte #148 set to 0), but
 # config file is only created after the game is started once.

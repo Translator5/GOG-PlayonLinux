@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 21-13)
-# Last revision : (2012-01-04 22-13)
+# Last revision : (2012-01-22 00-01)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,9 +20,6 @@ WORKING_WINE_VERSION="1.3.36"
 TITLE="$(eval_gettext 'Giants: Citizen Kabuto (GoG release)')"
 SHORTCUT_NAME="Giants: Citizen Kabuto"
 SHORTCUT_SERVER="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server Editor')"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
-SHORTCUT_DS_DOC="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server user manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -39,7 +36,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -54,20 +50,17 @@ POL_SetupWindow_VMS "8"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-LNG_DOC="$(eval_gettext 'Documentation about the game itself') (2)"
-LNG_DS="$(eval_gettext 'The dedicated server and its documentation (2)')"
-POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_DOC}~${LNG_DS}" "~"
+LNG_DS="$(eval_gettext 'The dedicated server')"
+POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_DS}" "~"
 SHORTCUTS="$APP_ANSWER"
 
 POL_Shortcut "Giants.exe" "$SHORTCUT_NAME"
-if echo "$SHORTCUTS" | grep -q "$LNG_DOC"; then
-    POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/Manual.pdf'"
-    POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/readme.TXT'"
-fi
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/readme.TXT
 
 if echo "$SHORTCUTS" | grep -q "$LNG_DS"; then
     POL_Shortcut "dedicated.exe" "$SHORTCUT_SERVER"
-    POL_Shortcut "start.exe" "$SHORTCUT_DS_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/readme_dedicated.txt'"
+    POL_Shortcut_Document "$SHORTCUT_SERVER" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Giants - Citizen Kabuto/readme_dedicated.txt"
 fi
 
 POL_SetupWindow_Close

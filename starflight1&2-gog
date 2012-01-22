@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-01-07 21-17)
+# Last revision : (2012-01-21 23-44)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -22,10 +22,8 @@ WORKING_WINE_VERSION="1.3.23"
 TITLE="$(eval_gettext 'Starflight 1 and 2 (GoG release)')"
 SHORTCUT1_NAME="Starflight 1"
 SHORTCUT1_CODEWHEEL="$SHORTCUT1_NAME - $(eval_gettext 'Code wheel')"
-SHORTCUT1_DOC="$SHORTCUT1_NAME - $(eval_gettext 'User manual')"
 SHORTCUT1_MAP="$SHORTCUT1_NAME - $(eval_gettext 'Stellar map')"
 SHORTCUT2_NAME="Starflight 2"
-SHORTCUT2_DOC="$SHORTCUT2_NAME - $(eval_gettext 'User manual')"
 SHORTCUT2_MAP="$SHORTCUT2_NAME - $(eval_gettext 'Stellar map')"
 
 POL_SetupWindow_Init
@@ -88,10 +86,9 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
         POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "shopt -s execfail"
         POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
     fi
+    POL_Shortcut_Document "$SHORTCUT1_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/manual.pdf"
 
     POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL"
-
-    POL_Shortcut "start.exe" "$SHORTCUT1_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/manual.pdf'"
 
     POL_Shortcut "start.exe" "$SHORTCUT1_MAP" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/map.pdf'"
 fi
@@ -107,8 +104,7 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
         POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "shopt -s execfail"
         POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
     fi
-
-    POL_Shortcut "start.exe" "$SHORTCUT2_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/manual.pdf'"
+    POL_Shortcut_Document "$SHORTCUT2_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/manual.pdf"
 
     POL_Shortcut "start.exe" "$SHORTCUT2_MAP" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/map.pdf'"
 fi

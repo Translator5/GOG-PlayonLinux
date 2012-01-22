@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2012-01-02 21-36)
+# Last revision : (2012-01-21 23-49)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -29,8 +29,6 @@ WORKING_WINE_VERSION="1.3.23"
 
 TITLE="$(eval_gettext 'Sanitarium (GoG release)')"
 SHORTCUT_NAME="Sanitarium"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -47,7 +45,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -61,10 +58,11 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
+SHORTCUT_WINDOW="$SHORTCUT_NAME $(eval_gettext '(windowed)')"
 POL_Shortcut "sntrm.exe" "$SHORTCUT_NAME"
-POL_Shortcut "sntrm.exe" "$SHORTCUT_NAME $(eval_gettext '(windowed)')" "" "-w"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Sanitarium/manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Sanitarium/readme.txt'"
+POL_Shortcut "sntrm.exe" "$SHORTCUT_WINDOW" "" "-w"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Sanitarium/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_WINDOW" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Sanitarium/manual.pdf"
 
 POL_SetupWindow_Close
 

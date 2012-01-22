@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-01-07 21-16)
+# Last revision : (2012-01-21 23-37)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -21,7 +21,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'The Feeble Files (GoG release)')"
 SHORTCUT_NAME="The Feeble Files"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -80,7 +79,7 @@ if [ -n "$NATIVESCUMMVM" ]; then
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec scummvm -c 'feeble-unix.ini'"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "cd -"
 fi
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/The Feeble Files/manual.pdf'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/manual.pdf"
 
 POL_SetupWindow_Close
 

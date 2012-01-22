@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 22-21)
-# Last revision : (2012-01-06 10-49)
+# Last revision : (2012-01-22 00-49)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -22,8 +22,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Advent Rising (GoG release)')"
 SHORTCUT_NAME="Advent Rising"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -40,7 +38,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -59,8 +56,8 @@ POL_Wine_reboot
 
 cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
 POL_Shortcut "advent.exe" "$SHORTCUT_NAME"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Advent Rising/Help/ReadMe.int.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Advent Rising/Help/ReadMe.int.txt
 
 # One last word about "Advent Revising"
 POL_SetupWindow_message "$(eval_gettext 'Think about installing one of the unofficial patches "Advent Revising"\nto fix lots of known issues:\nhttp://www.miketyndall.com/setz/Advent%20Revising/\n\nNo matter what version you choose, use a Windows archiver to\nuncompress the patch inside the your prefix case-insensitively.')" "$TITLE"

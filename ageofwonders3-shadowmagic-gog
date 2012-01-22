@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-01-02 21-14)
+# Last revision : (2012-01-22 00-48)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,8 +20,6 @@ WORKING_WINE_VERSION="1.3.34"
 TITLE="$(eval_gettext 'Age of Wonders III: Shadow Magic (GoG release)')"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'Quickplay Guide')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -72,9 +70,10 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "POL_Wine_AutoSetVersionEnv"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "wineserver -k"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "nice -19 wineserver"
 
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/QuickStart.pdf"
+# C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/Readme.html
+
 POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/QuickStart.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/Readme.html'"
 
 POL_SetupWindow_Close
 

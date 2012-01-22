@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2012-01-07 22-01)
+# Last revision : (2012-01-21 23-54)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,9 +23,6 @@ TITLE="$(eval_gettext 'Painkiller Black Edition (GoG release)')"
 SHORTCUT_NAME="Painkiller Black Edition"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
 SHORTCUT_DS="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server')"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
-SHORTCUT_ENGINE_DOC="$SHORTCUT_NAME - $(eval_gettext 'Pain Engine')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -42,7 +39,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -56,22 +52,22 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-LNG_DOC="$(eval_gettext 'Documentation about the game itself') (2)"
-LNG_EXTRAS="$(eval_gettext 'Extras (editor, dedicated server, technical doc)') (3)"
-POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_DOC}~${LNG_EXTRAS}" "~"
+LNG_EDITOR="$(eval_gettext 'Editor')"
+LNG_DS="$(eval_gettext 'Dedicated server')"
+POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_EDITOR}~${LNG_DS}" "~"
 SHORTCUTS="$APP_ANSWER"
 
 POL_Shortcut "Painkiller.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/ReadMe.txt
 
-if echo "$SHORTCUTS" | grep -q "$LNG_DOC"; then
-    POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Manual.pdf'"
-    POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/ReadMe.txt'"
+if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
+    POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR"
+    POL_Shortcut_Document "$SHORTCUT_EDITOR" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Pain Engine.pdf"
 fi
 
-if echo "$SHORTCUTS" | grep -q "$LNG_EXTRAS"; then
-    POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR"
+if echo "$SHORTCUTS" | grep -q "$LNG_DS"; then
     POL_Shortcut "Painkiller.exe" "$SHORTCUT_DS" "" "-dedicated"
-    POL_Shortcut "start.exe" "$SHORTCUT_ENGINE_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Pain Engine.pdf'"
 fi
 
 POL_SetupWindow_Close

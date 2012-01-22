@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2012-01-02 21-38)
+# Last revision : (2012-01-21 23-34)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -21,7 +21,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Two Worlds: Epic Edition (GoG release)')"
 SHORTCUT_NAME="Two worlds"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -76,7 +75,8 @@ POL_Wine_reboot
 
 POL_Shortcut "TwoWorlds.exe" "$SHORTCUT_NAME"
 POL_Shortcut "TwoWorlds_RADEON.exe" "$SHORTCUT_NAME (Radeon)"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME (Radeon)" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
 
 POL_SetupWindow_question "$(eval_gettext 'Two Worlds Control Panel is a tool from InsideTwoWorlds community,\nthat allows you to tweak parameters and manage mods\nfor this game. See\nhttp://www.insidetwoworlds.com/local_links.php?linkid=21&catid=13 for details.\nInstall it?')" "$TITLE"
 if [ "$APP_ANSWER" = "TRUE" ]; then

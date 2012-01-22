@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 01-01)
-# Last revision : (2012-01-02 21-27)
+# Last revision : (2012-01-22 00-36)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,9 +20,6 @@ WORKING_WINE_VERSION="1.3.35"
 TITLE="$(eval_gettext 'Dungeon Keeper II (GoG release)')"
 SHORTCUT_NAME="Dungeon Keeper II"
 SHORTCUT_SAFE="$SHORTCUT_NAME - $(eval_gettext 'Safe mode')"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_REFCARD="$SHORTCUT_NAME - $(eval_gettext 'Reference Card')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -39,7 +36,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -56,9 +52,9 @@ POL_Wine_reboot
 
 POL_Shortcut "DKII.EXE" "$SHORTCUT_NAME"
 POL_Shortcut "DKII_SOFT.EXE" "$SHORTCUT_SAFE"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_REFCARD" "" "'C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/reference_card.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/ReadMe.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/manual.pdf"
+# C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/reference_card.pdf
+# C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/ReadMe.txt
 
 POL_SetupWindow_Close
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2012-01-17 22-19)
+# Last revision : (2012-01-21 23-39)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -11,7 +11,7 @@
 # Tested with install archives:
 # setup_temple_of_elemental_evil.exe 1223704982 "a2f9ee737fd040028585bc24c270e86a"
 
-# Got a crash with 1.3.37, backoff to 1.3.36
+# Got a crash with 1.3.37, backoff to 1.3.36; But could be random crashes
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -21,8 +21,6 @@ WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'The Temple of Elemental Evil (GoG release)')"
 SHORTCUT_NAME="Temple of Elemental Evil"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -39,7 +37,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -60,8 +57,8 @@ POL_Wine_reboot
 
 cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/ToEE.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
 POL_Shortcut "ToEE.exe" "$SHORTCUT_NAME"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Readme.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Readme.txt
 
 # Last words
 POL_SetupWindow_message "$(eval_gettext 'It is highly recommended to now install the Circle of Eight Modpack\nto fix many issues with this game, and optionally add new content\n(for "NC" modpacks).\nUse the dedicated PlayOnLinux script in patches section.')" "$TITLE"
