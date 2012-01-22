@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-XX-XX XX-XX)
 # Last revision : (2012-XX-XX XX-XX)
-# Wine version used : 1.3.36
+# Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -15,11 +15,10 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="GameName_gog"
-WORKING_WINE_VERSION="1.3.36"
+WORKING_WINE_VERSION="1.3.37"
 
 TITLE="$(eval_gettext 'Full Game Name (GoG release)')"
 SHORTCUT_NAME="Shortcut Game Name"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -51,7 +50,7 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "main.exe" "$SHORTCUT_NAME"
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Game Install Directory/Manual.pdf'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Game Install Directory/Manual.pdf"
 
 POL_SetupWindow_Close
 
