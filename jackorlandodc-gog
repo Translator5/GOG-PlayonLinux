@@ -1,0 +1,60 @@
+#!/bin/bash
+# Date : (2012-01-23 01-07)
+# Last revision : (2012-01-23 01-35)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_jack_orlando_dc.exe 454501766 "ea8815ca57005b75368163897b51e1f2"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="JackOrlandoDC_gog"
+WORKING_WINE_VERSION="1.3.37"
+
+TITLE="$(eval_gettext 'Jack Orlando: A Cinematic Adventure (DC) (GoG release)')"
+SHORTCUT_NAME="Jack Orlando DC"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Toontraxx / Topware Interactive" "http://www.gog.com/en/gamecard/jack_orlando_a_cinematic_adventure_dc" "Pierre Etchemaite" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_jack_orlando_dc.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+# hackish, but sometimes exits with an exitcode != 0 for what it seems no good reason
+POL_Shortcut "JackOrlando.exe" "$SHORTCUT_NAME"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "trap 'exit 0' EXIT"
+
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Jack Orlando Director's Cut/Manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
