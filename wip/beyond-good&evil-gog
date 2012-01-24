@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-01-02 21-40)
+# Last revision : (2012-01-24 20-22)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -22,8 +22,6 @@ WORKING_WINE_VERSION="1.3.23"
 
 TITLE="$(eval_gettext 'Beyond Good and Evil (GoG release)')"
 SHORTCUT_NAME="Beyond Good and Evil"
-SHORTCUT_DOC="$SHORTCUT_NAME - $(eval_gettext 'User manual')"
-SHORTCUT_README="$SHORTCUT_NAME - $(eval_gettext 'Readme')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -40,7 +38,6 @@ ARCHIVE="$APP_ANSWER"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 POL_Call POL_Function_SetNativeExtension "pdf"
-POL_Call POL_Function_SetNativeExtension "txt"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
@@ -71,8 +68,8 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
 
-POL_Shortcut "start.exe" "$SHORTCUT_DOC" "" "'C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf'"
-POL_Shortcut "start.exe" "$SHORTCUT_README" "" "'C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt'"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt
 
 POL_SetupWindow_Close
 
