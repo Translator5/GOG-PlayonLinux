@@ -1,0 +1,61 @@
+#!/bin/bash
+# Date : (2012-01-29 17-31)
+# Last revision : (2012-01-29 17-38)
+# Wine version used : 1.4-rc1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_broken_sword_directors_cut.exe 1217398155 "27b2f01bfd65ea1a20054c73aee8d4db"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="BrokenSword1DC_gog"
+WORKING_WINE_VERSION="1.4-rc1"
+
+TITLE="$(eval_gettext 'Broken Sword: Shadow of the Templars (DC) (GoG release)')"
+URL="http://www.gog.com/en/gamecard/broken_sword_directors_cut"
+SHORTCUT_NAME="Broken Sword 1: Shadow of the Templars"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Revolution Software" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_broken_sword_directors_cut.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "bs1dc.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword - Director's Cut/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
