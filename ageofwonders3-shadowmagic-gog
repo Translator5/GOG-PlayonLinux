@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-01-29 01-07)
+# Last revision : (2012-01-29 17-25)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,13 +18,17 @@ PREFIX="AgeOfWonders3_gog"
 WORKING_WINE_VERSION="1.3.34"
 
 TITLE="$(eval_gettext 'Age of Wonders III: Shadow Magic (GoG release)')"
+URL="http://www.gog.com/en/gamecard/age_of_wonders_shadow_magic"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Triumph Studios" "http://www.gog.com/en/gamecard/age_of_wonders_shadow_magic" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Triumph Studios" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

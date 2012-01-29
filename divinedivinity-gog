@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2012-01-29 01-07)
+# Last revision : (2012-01-29 17-09)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,12 +18,16 @@ PREFIX="DivineDivinity_gog"
 WORKING_WINE_VERSION="1.3.35"
 
 TITLE="$(eval_gettext 'Divine Divinity (GoG release)')"
+URL="http://www.gog.com/en/gamecard/divine_divinity"
 SHORTCUT_NAME="Divine Divinity"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/en/gamecard/divine_divinity" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Larian Studios" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-09 22-00)
-# Last revision : (2012-01-29 01-07)
+# Last revision : (2012-01-29 17-24)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,12 +18,16 @@ PREFIX="ColdWarAssault_gog"
 WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Arma: Cold War Assault (GoG release)')"
+URL="http://www.gog.com/en/gamecard/arma_cold_war_assault"
 SHORTCUT_NAME="Arma: Cold War Assault"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "http://www.gog.com/en/gamecard/arma_cold_war_assault" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

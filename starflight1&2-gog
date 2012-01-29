@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-01-29 01-08)
+# Last revision : (2012-01-29 17-21)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,6 +20,7 @@ WORKING_WINE_VERSION="1.3.23"
 # but are broken (controls don't react to clicks) with 1.3.33
 
 TITLE="$(eval_gettext 'Starflight 1 and 2 (GoG release)')"
+URL="http://www.gog.com/en/gamecard/starflight_1_2"
 SHORTCUT1_NAME="Starflight 1"
 SHORTCUT1_CODEWHEEL="$SHORTCUT1_NAME - $(eval_gettext 'Code wheel')"
 SHORTCUT1_MAP="$SHORTCUT1_NAME - $(eval_gettext 'Stellar map')"
@@ -28,7 +29,10 @@ SHORTCUT2_MAP="$SHORTCUT2_NAME - $(eval_gettext 'Stellar map')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
-POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/en/gamecard/starflight_1_2" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-23 01-07)
-# Last revision : (2012-01-29 01-06)
+# Last revision : (2012-01-29 17-17)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,12 +18,16 @@ PREFIX="JackOrlandoDC_gog"
 WORKING_WINE_VERSION="1.3.37"
 
 TITLE="$(eval_gettext 'Jack Orlando: A Cinematic Adventure (DC) (GoG release)')"
+URL="http://www.gog.com/en/gamecard/jack_orlando_a_cinematic_adventure_dc"
 SHORTCUT_NAME="Jack Orlando DC"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Toontraxx / Topware Interactive" "http://www.gog.com/en/gamecard/jack_orlando_a_cinematic_adventure_dc" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Toontraxx / Topware Interactive" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

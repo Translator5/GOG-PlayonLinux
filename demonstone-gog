@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-08 10-18)
-# Last revision : (2012-01-22 00-38)
+# Last revision : (2012-01-29 17-08)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,12 +18,16 @@ PREFIX="DemonStone_gog"
 WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Forgotten Realms: Demon Stone (GoG release)')"
+URL="http://www.gog.com/en/gamecard/forgotten_realms_demon_stone"
 SHORTCUT_NAME="Demon Stone"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Stormfront Studios / Atari" "http://www.gog.com/en/gamecard/forgotten_realms_demon_stone" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Stormfront Studios / Atari" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

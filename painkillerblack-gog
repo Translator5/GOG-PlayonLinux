@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2012-01-21 23-54)
+# Last revision : (2012-01-29 17-19)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,6 +20,7 @@ PREFIX="PainkillerBlack_gog"
 WORKING_WINE_VERSION="1.3.36"
 
 TITLE="$(eval_gettext 'Painkiller Black Edition (GoG release)')"
+URL="http://www.gog.com/en/gamecard/painkiller"
 SHORTCUT_NAME="Painkiller Black Edition"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
 SHORTCUT_DS="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server')"
@@ -27,7 +28,10 @@ SHORTCUT_DS="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server')"
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/en/gamecard/painkiller" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
