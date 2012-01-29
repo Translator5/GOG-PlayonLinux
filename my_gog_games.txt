@@ -235,6 +235,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Incredible Machine Mega Pack, The
 * Iron Storm
 * Jack Orlando: A Cinematic Adventure (DC)
+* Jagged Alliance 2
 * Journeyman Project 2, The
 * Lands of Lore™ 1+2
 * Last Express, The
