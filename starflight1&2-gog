@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-01-21 23-44)
+# Last revision : (2012-01-29 01-08)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -69,17 +69,17 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole -c "exit"'
     if [ -n "$SF1DROPINCONSOLE" ]; then
         DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole'
-        cat <<- _EOFINI_ > $REPERTOIRE/tmp/sf1dropinconsole.reg
+        cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf1dropinconsole.reg
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
 	"DOSBOXPARAM"="$DOSBOX_PARAMS"
 	"LAUNCHCOMMAND"="\"C:\\Program Files\\GOG.com\\Starflight 1 and 2\\DOSBOX\\dosbox.exe\" $DOSBOX_PARAMS"
 	_EOFINI_
-        POL_Wine regedit $REPERTOIRE/tmp/sf1dropinconsole.reg
-        rm $REPERTOIRE/tmp/sf1dropinconsole.reg
+        POL_Wine regedit $POL_USER_ROOT/tmp/sf1dropinconsole.reg
+        rm $POL_USER_ROOT/tmp/sf1dropinconsole.reg
         sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
     fi
 
-    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT1_NAME"
+    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT1_NAME"
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
@@ -97,7 +97,7 @@ if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight
     # Better default settings in my opinion
     sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
 
-    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT2_NAME"
+    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT2_NAME"
     POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
     if [ -n "$NATIVEDOSBOX" ]; then
         # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
@@ -111,11 +111,11 @@ fi
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > $REPERTOIRE/configurations/configurators/"$SHORTCUT1_NAME"
+cat <<_EOF_ > $POL_USER_ROOT/configurations/configurators/"$SHORTCUT1_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
@@ -126,14 +126,14 @@ if [ -n "$NATIVEDOSBOX" ]; then
     # Make sure that if user presses "start game", it will launch the right dosbox
     DOSBOX="`which dosbox`"
     if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $REPERTOIRE/tmp/sf1nativedosbox.reg
+	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf1nativedosbox.reg
 	REGEDIT4
 
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
 	_EOFINI_
-        POL_Wine regedit $REPERTOIRE/tmp/sf1nativedosbox.reg
-        rm $REPERTOIRE/tmp/sf1nativedosbox.reg
+        POL_Wine regedit $POL_USER_ROOT/tmp/sf1nativedosbox.reg
+        rm $POL_USER_ROOT/tmp/sf1nativedosbox.reg
     fi
 fi
 
@@ -141,11 +141,11 @@ POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT1"
 exit
 _EOF_
 
-cat <<_EOF_ > $REPERTOIRE/configurations/configurators/"$SHORTCUT2_NAME"
+cat <<_EOF_ > $POL_USER_ROOT/configurations/configurators/"$SHORTCUT2_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
@@ -156,14 +156,14 @@ if [ -n "$NATIVEDOSBOX" ]; then
     # Make sure that if user presses "start game", it will launch the right dosbox
     DOSBOX="`which dosbox`"
     if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $REPERTOIRE/tmp/sf2nativedosbox.reg
+	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf2nativedosbox.reg
 	REGEDIT4
 
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
 	_EOFINI_
-        POL_Wine regedit $REPERTOIRE/tmp/sf2nativedosbox.reg
-        rm $REPERTOIRE/tmp/sf2nativedosbox.reg
+        POL_Wine regedit $POL_USER_ROOT/tmp/sf2nativedosbox.reg
+        rm $POL_USER_ROOT/tmp/sf2nativedosbox.reg
     fi
 fi
 

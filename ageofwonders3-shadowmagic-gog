@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-01-22 00-48)
+# Last revision : (2012-01-29 01-07)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -50,15 +50,15 @@ Set_OS winxp
 POL_SetupWindow_VMS "16"
 
 # Direct3D: off; Cursor: colors
-cat <<_EOFINI_ > "$REPERTOIRE/tmp/aow3_video.reg"
+cat <<_EOFINI_ > "$POL_USER_ROOT/tmp/aow3_video.reg"
 REGEDIT4
 
 [HKEY_CURRENT_USER\Software\Triumph Studios\Age of Wonders Shadow Magic\Video]
 "Cursor Mode"=dword:00000002
 "Use Direct3D"=dword:00000000
 _EOFINI_
-POL_Wine regedit "$REPERTOIRE/tmp/aow3_video.reg"
-rm "$REPERTOIRE/tmp/aow3_video.reg"
+POL_Wine regedit "$POL_USER_ROOT/tmp/aow3_video.reg"
+rm "$POL_USER_ROOT/tmp/aow3_video.reg"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
@@ -77,11 +77,11 @@ POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR"
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES

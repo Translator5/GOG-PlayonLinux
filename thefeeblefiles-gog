@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-01-21 23-37)
+# Last revision : (2012-01-29 01-08)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -71,7 +71,7 @@ POL_SetupWindow_VMS "2"
 POL_Wine_reboot
 
 POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "" "-c 'C:/$PROGRAMFILES/GOG.com/The Feeble Files/feeble.ini'"
-cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/game.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
+cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/game.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
 if [ -n "$NATIVESCUMMVM" ]; then
     # All this because InsertBeforeWine does not like slashes, so I can't specify feeble-unix.ini path directly
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "cd .."

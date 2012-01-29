@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2012-01-22 00-37)
+# Last revision : (2012-01-29 01-07)
 # Wine version used : 1.3.35
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -60,11 +60,11 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES

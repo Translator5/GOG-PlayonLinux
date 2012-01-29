@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 22-21)
-# Last revision : (2012-01-22 00-49)
+# Last revision : (2012-01-29 01-06)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -54,7 +54,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
 POL_Shortcut "advent.exe" "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising/manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Advent Rising/Help/ReadMe.int.txt

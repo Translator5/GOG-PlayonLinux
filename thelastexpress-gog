@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-01-21 23-36)
+# Last revision : (2012-01-29 01-09)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -56,7 +56,7 @@ POL_Wine_reboot
 # Native DosBox incompatible statement...
 sed -i.orig 's/^mount D "\.\\data"/mount D "data"/i' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/dosboxTLE.conf"
 
-cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/gfw_high.ico" "$REPERTOIRE/icones/32/$SHORTCUT_NAME"
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
 POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/The Last Express/" "C:/$PROGRAMFILES/GOG.com/The Last Express/DOSBOX/DOSBox.exe" "" "$SHORTCUT_NAME" "" '-conf dosboxTLE.conf -noconsole -c "exit"'
 if [ -n "$NATIVEDOSBOX" ]; then
     # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
@@ -68,11 +68,11 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > "$REPERTOIRE/configurations/configurators/$SHORTCUT_NAME"
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$REPERTOIRE/wineprefix/$PREFIX"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
@@ -83,14 +83,14 @@ if [ -n "$NATIVEDOSBOX" ]; then
     # Make sure that if user presses "start game", it will launch the right dosbox
     DOSBOX="`which dosbox`"
     if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $REPERTOIRE/tmp/tlenativedosbox.reg
+	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/tlenativedosbox.reg
 	REGEDIT4
 
 	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGTHELASTEXPRESS]
 	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxTLE.conf"
 	_EOFINI_
-        POL_Wine regedit $REPERTOIRE/tmp/tlenativedosbox.reg
-        rm $REPERTOIRE/tmp/tlenativedosbox.reg
+        POL_Wine regedit $POL_USER_ROOT/tmp/tlenativedosbox.reg
+        rm $POL_USER_ROOT/tmp/tlenativedosbox.reg
     fi
 fi
 
