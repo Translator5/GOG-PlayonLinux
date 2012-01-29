@@ -1,0 +1,62 @@
+#!/bin/bash
+# Date : (2012-01-29 18-29)
+# Last revision : (2012-01-29 18-40)
+# Wine version used : 1.4-rc1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_broken_sword_2_dc.exe 1296672811 "4cfe3858334e36c85cb6954362afc4a5"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="BrokenSword2DC_gog"
+WORKING_WINE_VERSION="1.4-rc1"
+
+TITLE="$(eval_gettext 'Broken Sword II: The Smoking Mirror (DC) (GoG release)')"
+URL="http://www.gog.com/en/gamecard/broken_sword_2__the_smoking_mirror"
+SHORTCUT_NAME="Broken Sword 2: The Smoking Mirror"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Revolution Software" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_broken_sword_2_dc.exe"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "BrokenSword2.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword II - The Smoking Mirror Directors Cut/manual.pdf"
+# C:\Program Files\GOG.com\Broken Sword II - The Smoking Mirror Directors Cut\Readme.txt
+
+POL_SetupWindow_Close
+
+exit
