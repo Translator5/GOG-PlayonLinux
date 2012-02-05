@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 21-27)
-# Last revision : (2012-02-03 21-41)
+# Last revision : (2012-02-03 23-36)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -49,6 +49,16 @@ POL_Wine_WaitExit "$TITLE"
 Set_OS winxp
 
 POL_SetupWindow_VMS "64"
+
+# http://www.gog.com/en/forum/broken_sword_the_smoking_mirror/broken_sword_the_sleeping_dragon_freezes_on_startup
+#cat <<'_EOFINI_' > "$POL_USER_ROOT/tmp/refresh60hz.reg"
+#REGEDIT4
+#
+#[HKEY_LOCAL_MACHINE\Software\Microsoft\DirectDraw]
+#"ForceRefreshRate"=dword:0000003c
+#_EOFINI_
+#POL_Wine regedit "$POL_USER_ROOT/tmp/refresh60hz.reg"
+#rm "$POL_USER_ROOT/tmp/refresh60hz.reg"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
