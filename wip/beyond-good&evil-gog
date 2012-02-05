@@ -42,6 +42,7 @@ ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
