@@ -16,6 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 PREFIX="BrokenSword2DC_gog"
 WORKING_WINE_VERSION="1.4-rc2"
+INSTALLBIN="setup_broken_sword_2_dc.exe"
 
 TITLE="$(eval_gettext 'Broken Sword II: The Smoking Mirror (DC) (GoG release)')"
 URL="http://www.gog.com/en/gamecard/broken_sword_2__the_smoking_mirror"
@@ -33,7 +34,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_broken_sword_2_dc.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"

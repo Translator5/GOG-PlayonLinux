@@ -16,6 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 PREFIX="Flatout_gog"
 WORKING_WINE_VERSION="1.3.35"
+INSTALLBIN="setup_flatout.exe"
 
 TITLE="$(eval_gettext 'Flatout (GoG release)')"
 URL="http://www.gog.com/en/gamecard/flatout"
@@ -33,7 +34,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_flatout.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"

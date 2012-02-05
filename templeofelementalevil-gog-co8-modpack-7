@@ -21,6 +21,7 @@ source "$PLAYONLINUX/lib/sources"
 # Must match templeofelementalevil-gog script values
 PREFIX="TempleElementalEvil_gog"
 WORKING_WINE_VERSION="1.3.36"
+INSTALLBIN="Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe"
 
 DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack/news/circle-of-eight-modpacks-700-and-700-nc-released"
 
@@ -46,7 +47,7 @@ if [ "$APP_ANSWER" = "TRUE" ]; then
 fi
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_Call POL_Install_mono28

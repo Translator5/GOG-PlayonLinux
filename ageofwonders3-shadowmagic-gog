@@ -16,6 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 PREFIX="AgeOfWonders3_gog"
 WORKING_WINE_VERSION="1.3.34"
+INSTALLBIN="setup_age_of_wonders_shadow_magic.exe"
 
 TITLE="$(eval_gettext 'Age of Wonders III: Shadow Magic (GoG release)')"
 URL="http://www.gog.com/en/gamecard/age_of_wonders_shadow_magic"
@@ -34,7 +35,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_age_of_wonders_shadow_magic.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"

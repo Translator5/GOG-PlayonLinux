@@ -16,6 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 PREFIX="LastExpress_gog"
 WORKING_WINE_VERSION="1.3.36"
+INSTALLBIN="setup_the_last_express.exe"
 
 TITLE="$(eval_gettext 'The Last Express (GoG release)')"
 URL="http://www.gog.com/en/gamecard/last_express_the"
@@ -33,7 +34,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_the_last_express.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)')" "$TITLE"

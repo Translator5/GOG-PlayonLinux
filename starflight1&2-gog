@@ -16,6 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 PREFIX="Starflight_1_2_gog"
 WORKING_WINE_VERSION="1.3.23"
+INSTALLBIN="setup_starflight_1_2.exe"
 # GoG tools (graphic mode setup, code wheel work _almost_ ok with 1.3.23
 # but are broken (controls don't react to clicks) with 1.3.33
 
@@ -38,7 +39,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "setup_starflight_1_2.exe"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)')" "$TITLE"

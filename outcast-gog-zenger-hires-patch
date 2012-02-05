@@ -18,6 +18,7 @@ source "$PLAYONLINUX/lib/sources"
 PREFIX="Outcast_gog"
 SHORTCUT_NAME="Outcast"
 
+INSTALLBIN="OUTCASTP_V3.zip"
 TITLE="$(eval_gettext 'Zenger s Outcast HI-RES patch v3')"
 SHORTCUT_NAME="$(eval_gettext 'Zenger Hi-Res patch v3')"
 
@@ -39,7 +40,7 @@ POL_LoadVar_PROGRAMFILES
 POL_SetupWindow_message "$(eval_gettext 'You can download the archive file from:')\nhttp://www.megaupload.com/?d=H6CIR27L" "$TITLE"
 
 cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "OUTCASTP_V3.zip"
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
