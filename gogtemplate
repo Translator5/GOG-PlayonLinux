@@ -14,12 +14,12 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-PREFIX="GameName"
+PREFIX="GameName_gog"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN="setup_game_name.exe"
 
-TITLE="$(eval_gettext 'Full Game Name')"
-URL="http://"
+TITLE="$(eval_gettext 'Full Game Name (GoG release)')"
+URL="http://www.gog.com/en/gamecard/game_url"
 SHORTCUT_NAME="Shortcut Game Name"
 
 POL_SetupWindow_Init
@@ -27,10 +27,8 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Studio / Publisher" "$URL" "Pierre Etchemaite" "$PREFIX"
 
-if [ -n "$URL" ]; then
-  POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE?')" "$TITLE"
-  [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -41,11 +39,15 @@ ARCHIVE="$APP_ANSWER"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
 POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
 
+# GoG work!
 Set_OS winxp
 
 POL_SetupWindow_VMS "32"
@@ -54,7 +56,7 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "main.exe" "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/Game Install Directory/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Game Install Directory/Manual.pdf"
 
 POL_SetupWindow_Close
 
@@ -67,7 +69,7 @@ export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/Game Install Directory/" || exit 1
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Game Install Directory/" || exit 1
 
 TITLE="$TITLE"
 
