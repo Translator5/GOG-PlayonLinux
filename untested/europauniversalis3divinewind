@@ -1,0 +1,67 @@
+#!/bin/bash
+# Date : (2012-02-12 15-29)
+# Last revision : (2012-02-12 15-55)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="EuropaUniversalis3_DivineWind"
+WORKING_WINE_VERSION="1.3.37"
+INSTALLBIN=""
+
+TITLE="$(eval_gettext 'Europa Universalis 3: Divine Wind')"
+URL="http://www.europauniversalis3.com/"
+SHORTCUT_NAME="Europa Universalis 3: Divine Wind"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Paradox Interactive" "$URL" "Fredrik Vollan (Pierre Etchemaite)" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+POL_Call POL_Install_d3dx9
+POL_Call POL_Install_vcrun2005
+POL_Call POL_Install_quartz # needed for music to play correctly
+POL_Call POL_Install_ffdshow # contains codec needed to play music
+POL_Call POL_Install_wininet # fix problem related to Achievements and Paradox Connect
+POL_Call POL_Install_devenum # needed for music and sound to play
+POL_Call POL_Install_msasn1 # not sure what it does, but it removes an error message from terminal
+POL_Call POL_Install_dsound # didn't try the built in one
+
+POL_Wine_Direct3D "DirectDrawRenderer" "opengl"
+POL_Wine_Direct3D "OffscreenRenderingMode" "fbo"
+POL_Wine_Direct3D "PixelShaderMode" "enabled"
+POL_Wine_DirectSound "MaxShadowSize" "0"
+POL_Wine_X11Drv "DXGrab" "Y"
+Set_Managed "Off"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "eu3.exe" "$SHORTCUT_NAME"
+
+POL_SetupWindow_Close
+
+exit
