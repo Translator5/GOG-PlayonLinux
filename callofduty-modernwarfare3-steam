@@ -96,10 +96,6 @@ if [ "$INSTALL_METHOD" == "DVD" ]; then
 	POL_Wine_WaitExit "$TITLE"
 else
 	cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
-
-        # FIXME avoid redownloading 14.3GB during tests
-        tar xzvf /media/onetbtoo/Perso/SteamApps_COD:MW3.tgz
-        # /FIXME
         POL_SetupWindow_message "$(eval_gettext 'You will have to close the Steam interface when the download is completed,\nso that the installation script can continue.')" "$TITLE"
 	POL_Wine "steam.exe" steam://install/$VID
 	POL_Wine_WaitExit "$TITLE"
