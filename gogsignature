@@ -1,0 +1,5 @@
+#!/bin/zsh
+X="$1"
+for i in "$X" "${X%.exe}"-*.bin(N); do
+  echo "# $(basename $i) $(/usr/bin/stat -c '%s' $i) \"$(md5sum $i|cut -c1-32)\""
+done
