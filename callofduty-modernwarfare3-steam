@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-18 14:54)
+# Last revision : (2012-02-18 16:43)
 # Wine version used : 1.2.3, 1.3.28
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
@@ -65,7 +65,7 @@ fi
 POL_Call POL_Install_steam_flags "$VID"
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
-POL_SetupWindow_message "$(eval_gettext 'You will have to close the Steam interface when the download is completed,\nso that the installation script can continue.')" "$TITLE"
+POL_SetupWindow_message "$(eval_gettext 'When $TITLE download by Steam is finished,\nDo NOT click on Play.\n\nClose COMPLETELY the Steam interface, \nso that the installation script can continue.')" "$TITLE"
 POL_Wine "steam.exe" steam://install/$VID
 POL_Wine_WaitExit "$TITLE"
 
@@ -87,8 +87,11 @@ if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
 	rm -rf "$POL_USER_ROOT/tmp/*"
 fi
 
+REALBIN="`find $WINEPREFIX -iname iw5mp.exe`"
 # Making shortcut
-POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID"
+POL_ExtractIcon "$REALBIN" "$POL_USER_ROOT/icones/32/$TITLE"
+POL_ExtractBiggestIcon "$REALBIN" "$POL_USER_ROOT/icones/full_size/$TITLE"
+POL_Shortcut "Steam.exe" "$TITLE" "" "steam://rungameid/$VID"
 
 POL_SetupWindow_Close
 exit 0
