@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-18 19:02)
+# Last revision : (2012-02-18 19:18)
 # Wine version used : 1.4-rc4
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
@@ -78,10 +78,6 @@ POL_Call POL_Install_steam_flags "$VID"
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
 POL_SetupWindow_message "$(eval_gettext 'When $TITLE download by Steam is finished,\nDo NOT click on Play.\n\nClose COMPLETELY the Steam interface, \nso that the installation script can continue.')" "$TITLE"
-
-# FIXME avoid redownloading 14.3GB during tests
-tar xzvf /media/onetbtoo/Perso/SteamApps_COD:MW3.tgz
-# /FIXME
 POL_Wine "steam.exe" steam://install/$VID
 POL_Wine_WaitExit "$TITLE"
 
