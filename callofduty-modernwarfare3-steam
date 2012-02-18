@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-18 14:50)
+# Last revision : (2012-02-18 14:54)
 # Wine version used : 1.2.3, 1.3.28
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
@@ -15,25 +15,6 @@ PREFIX="CallOfDutyMW3"
 WORKING_WINE_VERSION="1.2.3"
 GAME_VMS="256"
 VID="42690"
-
-# Only supoport french VID for now
-# if [ "$POL_LANG" == "fr" ]; then
-# VID="243"
-# elif [ "$POL_LANG" == "it" ]; then
-# VID="244"
-# elif [ "$POL_LANG" == "de" ]; then
-# VID="245"
-# elif [ "$POL_LANG" == "es" ]; then
-# VID="246"
-# elif [ "$POL_LANG" == "ko" ]; then
-# VID="249"
-# elif [ "$POL_LANG" == "ja" ]; then
-# VID="251"
-# elif [ "$POL_LANG" == "ru" ]; then
-# VID="252"
-# elif [ "$POL_LANG" == "th" ]; then
-# VID="253"
-# fi
 
 # Starting the script
 rm "$POL_USER_ROOT/tmp/*.jpg"
@@ -75,10 +56,6 @@ if [ "$STEAM_USE" == "0" ]; then
 	POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 fi
 
-# Choose between Steam and Digital Download version
-# POL_SetupWindow_InstallMethod "DVD,STEAM"
-INSTALL_METHOD=STEAM
-
 # Installing mandatory dependencies
 if [ "$STEAM_USE" == "0" ]; then
 	POL_Call POL_Install_steam
@@ -87,19 +64,10 @@ fi
 # Mandatory pre-install fix for steam
 POL_Call POL_Install_steam_flags "$VID"
 
-if [ "$INSTALL_METHOD" == "DVD" ]; then
-	# Asking for CDROM and checking if it's correct one
-	POL_SetupWindow_message "$(eval_gettext 'Please insert game media into your disk drive\nif not already done.')"
-	POL_SetupWindow_cdrom
-	POL_SetupWindow_check_cdrom "Setup.exe"
-	POL_Wine start /unix "$CDROM/Setup.exe"
-	POL_Wine_WaitExit "$TITLE"
-else
-	cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
-        POL_SetupWindow_message "$(eval_gettext 'You will have to close the Steam interface when the download is completed,\nso that the installation script can continue.')" "$TITLE"
-	POL_Wine "steam.exe" steam://install/$VID
-	POL_Wine_WaitExit "$TITLE"
-fi
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
+POL_SetupWindow_message "$(eval_gettext 'You will have to close the Steam interface when the download is completed,\nso that the installation script can continue.')" "$TITLE"
+POL_Wine "steam.exe" steam://install/$VID
+POL_Wine_WaitExit "$TITLE"
 
 # Asking about memory size of graphic card
 POL_SetupWindow_VMS $GAME_VMS
