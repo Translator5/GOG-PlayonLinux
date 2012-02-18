@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-18 12:57)
-# Wine version used : 1.3.28
+# Last revision : (2012-02-18 14:50)
+# Wine version used : 1.2.3, 1.3.28
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
 #    based on script by GNU_Raziel
@@ -12,10 +12,11 @@ source "$PLAYONLINUX/lib/sources"
 
 TITLE="Call of Duty: Modern Warfare 3"
 PREFIX="CallOfDutyMW3"
-WORKING_WINE_VERSION="1.3.28"
+WORKING_WINE_VERSION="1.2.3"
 GAME_VMS="256"
 VID="42690"
 
+# Only supoport french VID for now
 # if [ "$POL_LANG" == "fr" ]; then
 # VID="243"
 # elif [ "$POL_LANG" == "it" ]; then
@@ -42,10 +43,10 @@ POL_SetupWindow_Init
 # Starting debugging API
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Activision" "http://www.callofduty.com/mw3" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Infinity Ward / Sledgehammer Games" "http://www.callofduty.com/mw3" "Pierre Etchemaite" "$PREFIX"
 
 POL_SetupWindow_checkexist()
-{	
+{
 	if [ -e "$POL_USER_ROOT/wineprefix/$1" ]; then
 		STEAM=`find $WINEPREFIX -name "Steam.exe"`
 		if [ "$STEAM" != "" ]; then
@@ -96,10 +97,10 @@ if [ "$INSTALL_METHOD" == "DVD" ]; then
 else
 	cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
 
-        # FIXME avoid redownloads during tests
-        tar xzvf ~/dvdrip-data/SteamApps_COD:MW3.tgz
+        # FIXME avoid redownloading 14.3GB during tests
+        tar xzvf /media/onetbtoo/Perso/SteamApps_COD:MW3.tgz
         # /FIXME
-        POL_SetupWindow_message "$(eval gettext 'You will have to close the Steam interface when the download is completed, so that the installation script can continue.')" "$TITLE"
+        POL_SetupWindow_message "$(eval_gettext 'You will have to close the Steam interface when the download is completed,\nso that the installation script can continue.')" "$TITLE"
 	POL_Wine "steam.exe" steam://install/$VID
 	POL_Wine_WaitExit "$TITLE"
 fi
@@ -113,6 +114,8 @@ POL_SetupWindow_VMS $GAME_VMS
 [ "$POL_OS" = "Linux" ] && Set_SoundEmulDriver "Y"
 ## End Fix
 
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+
 # Cleaning temp
 if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
 	rm -rf "$WINEPREFIX/drive_c/windows/temp/*"
@@ -125,10 +128,3 @@ POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID"
 
 POL_SetupWindow_Close
 exit 0
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAk5eZO0ACgkQ5TH6yaoTykfi+QCghxrd5ttqx2sBJFU7/QWvvHoD
-sZAAnR1YycNl+9HmqUfy8El4i0z00MbE
-=dj8G
------END PGP SIGNATURE-----
