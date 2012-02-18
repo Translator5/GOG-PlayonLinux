@@ -1,18 +1,30 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-18 16:43)
-# Wine version used : 1.2.3, 1.3.28
+# Last revision : (2012-02-18 17:42)
+# Wine version used : 1.4-rc4
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
 #    based on script by GNU_Raziel
 # Licence : Retail
+
+# Playing windowed with forced mouse capture
+# 
+# 1.4-rc4: "flashes" in smoke/dirt textures
+# 1.3.37: idem
+# 1.3.36: crash at start
+# 1.3.35: crash at start
+# 1.3.34: flashes in smoke/dirt
+# 1.3.30: idem
+# 1.3.28: idem
+# 1.3.23: idem
+# Flashes fixed with StrictDrawOrdering = enabled
 
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 TITLE="Call of Duty: Modern Warfare 3"
 PREFIX="CallOfDutyMW3"
-WORKING_WINE_VERSION="1.2.3"
+WORKING_WINE_VERSION="1.4-rc4"
 GAME_VMS="256"
 VID="42690"
 
@@ -79,6 +91,9 @@ POL_SetupWindow_VMS $GAME_VMS
 ## End Fix
 
 POL_Wine_X11Drv "GrabFullScreen" "Y"
+
+# Fix moire flashes in smoke and dirt
+POL_Wine_Direct3D "StrictDrawOrdering" "enabled"
 
 # Cleaning temp
 if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
