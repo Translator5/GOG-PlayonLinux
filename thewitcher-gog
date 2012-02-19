@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2012-02-19 00-44)
+# Last revision : (2012-02-19 01-00)
 # Wine version used : 1.4-rc4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -60,11 +60,11 @@ POL_Call POL_install_d3dx9
 
 POL_SetupWindow_VMS "128"
 
-POL_Wine_Direct3D "DirectDrawRenderer" "opengl" # default?
-POL_Wine_Direct3D "OffscreenRenderingMode" "fbo" # default?
-POL_Wine_Direct3D "PixelShaderMode" "enabled" # default?
-POL_Wine_Direct3D "RenderTargetLockMode" "textex"
-POL_Wine_Direct3D "UseGLSL" "enabled" # default?
+# POL_Wine_Direct3D "DirectDrawRenderer" "opengl" # default
+# POL_Wine_Direct3D "OffscreenRenderingMode" "fbo" # default
+# POL_Wine_Direct3D "PixelShaderMode" "enabled" # default
+# POL_Wine_Direct3D "RenderTargetLockMode" "textex" # synonym of readtex which is default
+# POL_Wine_Direct3D "UseGLSL" "enabled" # default
 
 # Doesn't hurt ;)
 POL_Wine_reboot
