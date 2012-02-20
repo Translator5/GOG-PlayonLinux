@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-12 15-29)
-# Last revision : (2012-02-12 15-55)
+# Last revision : (2012-02-20 22-39)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -15,7 +15,7 @@ PREFIX="EuropaUniversalis3_DivineWind"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN=""
 
-TITLE="$(eval_gettext 'Europa Universalis 3: Divine Wind')"
+TITLE="Europa Universalis 3: Divine Wind"
 URL="http://www.europauniversalis3.com/"
 SHORTCUT_NAME="Europa Universalis 3: Divine Wind"
 

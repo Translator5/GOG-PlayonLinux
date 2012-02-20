@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 22-01)
-# Last revision : (2012-02-03 22-49)
+# Last revision : (2012-02-20 22-23)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -20,7 +20,7 @@ PREFIX="BrokenSword4_gog"
 WORKING_WINE_VERSION="1.4-rc2"
 INSTALLBIN="setup_broken_sword_4.exe"
 
-TITLE="$(eval_gettext 'Broken Sword IV: The Angel of Death (GoG release)')"
+TITLE="Broken Sword IV: The Angel of Death (GoG release)"
 URL="http://www.gog.com/en/gamecard/broken_sword_4"
 SHORTCUT_NAME="Broken Sword 4: The Angel of Death (Secrets of the Ark)"
 

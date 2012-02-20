@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2012-01-29 17-19)
+# Last revision : (2012-02-20 22-33)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -28,7 +28,7 @@ PREFIX="Sanitarium_gog"
 WORKING_WINE_VERSION="1.3.23"
 INSTALLBIN="setup_sanitarium.exe"
 
-TITLE="$(eval_gettext 'Sanitarium (GoG release)')"
+TITLE="Sanitarium (GoG release)"
 URL="http://www.gog.com/en/gamecard/sanitarium"
 SHORTCUT_NAME="Sanitarium"
 

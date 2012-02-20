@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-23 01-07)
-# Last revision : (2012-01-29 17-17)
+# Last revision : (2012-02-20 22-32)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ PREFIX="JackOrlandoDC_gog"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN="setup_jack_orlando_dc.exe"
 
-TITLE="$(eval_gettext 'Jack Orlando: A Cinematic Adventure (DC) (GoG release)')"
+TITLE="Jack Orlando: A Cinematic Adventure (DC) (GoG release)"
 URL="http://www.gog.com/en/gamecard/jack_orlando_a_cinematic_adventure_dc"
 SHORTCUT_NAME="Jack Orlando DC"
 

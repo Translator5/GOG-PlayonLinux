@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 00-06)
-# Last revision : (2012-01-29 17-20)
+# Last revision : (2012-02-20 22-34)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ PREFIX="SepterraCore_gog"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN="setup_septerra_core.exe"
 
-TITLE="$(eval_gettext 'Septerra Core: Legacy of the Creator (GoG release)')"
+TITLE="Septerra Core: Legacy of the Creator (GoG release)"
 URL="http://www.gog.com/en/gamecard/septerra_core_legacy_of_the_creator"
 SHORTCUT_NAME="Septerra Core"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-29 18-29)
-# Last revision : (2012-02-02 23-35)
+# Last revision : (2012-02-20 22-24)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ PREFIX="BrokenSword2DC_gog"
 WORKING_WINE_VERSION="1.4-rc2"
 INSTALLBIN="setup_broken_sword_2_dc.exe"
 
-TITLE="$(eval_gettext 'Broken Sword II: The Smoking Mirror (DC) (GoG release)')"
+TITLE="Broken Sword II: The Smoking Mirror (DC) (GoG release)"
 URL="http://www.gog.com/en/gamecard/broken_sword_2__the_smoking_mirror"
 SHORTCUT_NAME="Broken Sword 2: The Smoking Mirror"
 

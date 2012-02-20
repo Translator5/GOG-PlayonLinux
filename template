@@ -18,7 +18,7 @@ PREFIX="GameName"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN="setup_game_name.exe"
 
-TITLE="$(eval_gettext 'Full Game Name')"
+TITLE="Full Game Name"
 URL="http://"
 SHORTCUT_NAME="Shortcut Game Name"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 11-39)
-# Last revision : (2012-01-29 17-14)
+# Last revision : (2012-02-20 22-30)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,7 +23,7 @@ PREFIX="FarCry_gog"
 WORKING_WINE_VERSION="1.3.36"
 INSTALLBIN="setup_far_cry.exe"
 
-TITLE="$(eval_gettext 'Far Cry (GoG release)')"
+TITLE="Far Cry (GoG release)"
 URL="http://www.gog.com/en/gamecard/far_cry"
 SHORTCUT_NAME="Far Cry"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'CryEngine Sandbox')"

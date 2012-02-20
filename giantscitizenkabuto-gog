@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 21-13)
-# Last revision : (2012-01-29 17-15)
+# Last revision : (2012-02-20 22-31)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ PREFIX="CitizenKabuto_gog"
 WORKING_WINE_VERSION="1.3.36"
 INSTALLBIN="setup_giants.exe"
 
-TITLE="$(eval_gettext 'Giants: Citizen Kabuto (GoG release)')"
+TITLE="Giants: Citizen Kabuto (GoG release)"
 URL="http://www.gog.com/en/gamecard/giants_citizen_kabuto"
 SHORTCUT_NAME="Giants: Citizen Kabuto"
 SHORTCUT_SERVER="$SHORTCUT_NAME - $(eval_gettext 'Dedicated Server Editor')"

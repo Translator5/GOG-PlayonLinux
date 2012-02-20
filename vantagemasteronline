@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-11 08-38)
-# Last revision : (2012-02-11 09-37)
+# Last revision : (2012-02-20 22-21)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ source "$PLAYONLINUX/lib/sources"
 PREFIX="VMOv2"
 WORKING_WINE_VERSION="1.4-rc2"
 
-TITLE="$(eval_gettext 'Vantage Master Online')"
+TITLE="Vantage Master Online"
 URL="http://www.falcom.co.jp/vantage/"
 SHORTCUT_NAME="Vantage Master Online"
 

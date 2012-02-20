@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2012-02-19 01-00)
+# Last revision : (2012-02-20 22-35)
 # Wine version used : 1.4-rc4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,7 +23,7 @@ PREFIX="TheWitcher_gog"
 WORKING_WINE_VERSION="1.4-rc4"
 INSTALLBIN="setup_the_witcher_enhanced_edition.exe"
 
-TITLE="$(eval_gettext 'The Witcher Enhanced Edition Directors Cut (GoG release)')"
+TITLE="The Witcher Enhanced Edition Directors Cut (GoG release)"
 URL="http://www.gog.com/en/gamecard/the_witcher"
 SHORTCUT_NAME="The Witcher Enhanced Edition DC"
 

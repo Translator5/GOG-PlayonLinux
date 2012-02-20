@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-12 16-11)
-# Last revision : (2012-02-12 16-39)
+# Last revision : (2012-02-20 22-39)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -15,7 +15,7 @@ PREFIX="WarInThePacific_AdmiralsEdition"
 WORKING_WINE_VERSION="1.3.37"
 INSTALLBIN=""
 
-TITLE="$(eval_gettext 'War In The Pacific: Admiral's Edition')"
+TITLE="War In The Pacific: Admiral's Edition"
 URL="http://www.matrixgames.com/products/351/details/War.in.the.Pacific.-.Admiral%27s.Edition"
 SHORTCUT_NAME="War In The Pacific: Admiral's Edition"
 

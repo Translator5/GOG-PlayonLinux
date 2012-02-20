@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-01-29 17-25)
+# Last revision : (2012-02-20 22-22)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,7 +18,7 @@ PREFIX="AgeOfWonders3_gog"
 WORKING_WINE_VERSION="1.3.34"
 INSTALLBIN="setup_age_of_wonders_shadow_magic.exe"
 
-TITLE="$(eval_gettext 'Age of Wonders III: Shadow Magic (GoG release)')"
+TITLE="Age of Wonders III: Shadow Magic (GoG release)"
 URL="http://www.gog.com/en/gamecard/age_of_wonders_shadow_magic"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
