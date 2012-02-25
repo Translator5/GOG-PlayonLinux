@@ -1,0 +1,63 @@
+#!/bin/bash
+# Date : (2012-02-25 23-27)
+# Last revision : (2012-02-25 23-42)
+# Wine version used : 1.4-rc5
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_riven.exe 1775313275 "e261a0e2ffceddc04ff6917c94a64e57"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="Riven_gog"
+WORKING_WINE_VERSION="1.4-rc5"
+INSTALLBIN="setup_riven.exe"
+
+TITLE="Riven: The sequel to Myst (GoG release)"
+URL="http://www.gog.com/en/gamecard/riven_the_sequel_to_myst"
+SHORTCUT_NAME="Riven: The sequel to Myst"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Cyan Worlds / Cyan Inc" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "2" # "640x480 16bit"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Riven.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Riven/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
