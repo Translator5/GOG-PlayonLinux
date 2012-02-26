@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-20 23-25)
-# Last revision : (2012-02-20 22-29)
+# Last revision : (2012-02-26 23-38)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -13,6 +13,9 @@
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
+
+# 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
+POL_RequiredVersion "4.0.15"
 
 PREFIX="Enclave_gog"
 WORKING_WINE_VERSION="1.3.37"
@@ -59,7 +62,6 @@ POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME"
 # Fixes a problem with CPU management on modern computers (specially laptops):
 # Enclave doesn't handle variable frequency, so make sure they stay at top frequency
 # with a background busy loop (other means are less portable and/or require root privileges)
-# POL 4.0.15 needed
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
