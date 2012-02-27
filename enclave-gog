@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-20 23-25)
-# Last revision : (2012-02-26 23-38)
+# Last revision : (2012-02-27 00-27)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -32,6 +32,8 @@ POL_SetupWindow_presentation "$TITLE" "Starbreeze Studios / TopWare Interactive"
 
 POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
 [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_System_SetArch "auto"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
