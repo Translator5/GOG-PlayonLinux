@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-28 21-20)
-# Last revision : (2012-02-28 21-29)
+# Last revision : (2012-02-28 22-16)
 # Wine version used : 1.4-rc5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,9 +18,10 @@ PREFIX="IncomingForces_gog"
 WORKING_WINE_VERSION="1.4-rc5"
 INSTALLBIN="setup_incoming_and_incoming_forces.exe"
 
-TITLE="Incoming Forces (GoG release)"
+TITLE="Incoming & Incoming Forces (GoG release)"
 URL="http://www.gog.com/en/gamecard/incoming_incoming_forces"
-SHORTCUT_NAME="Incoming Forces"
+SHORTCUT_NAME1="Incoming"
+SHORTCUT_NAME2="Incoming Forces"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -37,8 +38,6 @@ cd $HOME
 POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
 ARCHIVE="$APP_ANSWER"
 
-POL_SetupWindow_message "$(eval_gettext 'Note: I did not manage to get Incoming to work correctly, this installer\nwill just take care of Incoming Forces. You can deselect Incoming\nfrom GOG installer to save some disk space.')" "$TITLE"
-
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
@@ -54,11 +53,18 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "4"
 
+# Needed for Incoming only
+POL_Call POL_Install_vcrun2008
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "forces.exe" "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming Forces/Manual.pdf"
+POL_Shortcut "incoming.exe" "$SHORTCUT_NAME1"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming/Manual.pdf"
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "trap 'exit 0' EXIT"
+
+POL_Shortcut "forces.exe" "$SHORTCUT_NAME2"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming Forces/Manual.pdf"
 
 POL_SetupWindow_Close
 
