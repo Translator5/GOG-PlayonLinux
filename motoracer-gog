@@ -1,0 +1,112 @@
+#!/bin/bash
+# Date : (2012-03-01 20-38)
+# Last revision : (2012-03-11 18-15)
+# Wine version used : 1.3.23
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_moto_racer.exe 343243943 "39ffda45ac7504064cb9bd8ca193861e"
+
+# 1.2.3 => game crash
+# 1.4 => look for OpenGL even if -NoD3D is specified
+#        that's a problem when using Xephyr
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="MotoRacer_gog"
+WORKING_WINE_VERSION="1.3.23"
+INSTALLBIN="setup_moto_racer.exe"
+
+TITLE="Moto Racer (GoG release)"
+URL="http://www.gog.com/en/gamecard/moto_racer"
+SHORTCUT_NAME="Moto Racer"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Delphine Software / Anuman Interactive" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "2" # 640 x 480 x 16
+
+# So that it doesn't ask for an audio CD
+ln -sf / "$WINEPREFIX/dosdevices/d:"
+cat <<_EOFINI_ > "$POL_USER_ROOT/tmp/cdrom.reg"
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\Software\Wine\Drives]
+"D:"="cdrom"
+_EOFINI_
+POL_Wine regedit.exe "$POL_USER_ROOT/tmp/cdrom.reg"
+rm "$POL_USER_ROOT/tmp/cdrom.reg"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "MotoRacer.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Moto Racer/faq_uk.txt"
+# Use Xephyr to emulate 16bpp display
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'TITLE="'"$TITLE"'"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'POL_Debug_Init'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'OK=0'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BPP="$(xdpyinfo|sed '"'"'s/^ *depth of root window: *\([0-9]\+\).*$/\1/p; d'"'"')"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'if [ $BPP = 16 ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  OK=1'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'else'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  if [ -z "$PLAYONMAC" ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '    XEPHYR="$(command -v Xephyr)"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '    if [ -n "$XEPHYR" ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '      POL_Debug_Message "Using Xephyr to emulate 16bit display"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '      OK=1'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '    fi'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  fi'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'fi'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'if [ $OK = 0 ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  MSG="$(eval_gettext '"'"'This game requires a 16bit display (65536 colors)'"'"')"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  if [ -z "$PLAYONMAC" ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '    MSG="${MSG}\n$(eval_gettext '"'"'If you dont want to change your display setup each time, you can install Xephyr to emulate a 16 bit X server.'"'"')"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  fi'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  POL_Debug_Fatal "$MSG"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'fi'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'if [ -n "$XEPHYR" ]; then'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  "$XEPHYR" :1 -screen 640x480x16 &'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  XEPHYR_PID=$!'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  sleep 1'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  DISPLAY=:1'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  trap '"'"'kill $XEPHYR_PID'"'"' EXIT'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  cp motoracer.ini motoracer.bak'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  sed "s/^D3D=true/D3D=false/" motoracer.bak > motoracer.ini'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'fi'
+
+POL_SetupWindow_message "$(eval_gettext 'MotoRacer needs a 16bpp (65536 colors) display to run.\nUnder Linux, this script can make use of Xephyr\nto make it run without modifying your screen configuration.\n\nOn first run, if you experience no sound in game go to\nthe Options menu and increase volume.')" "$TITLE"
+
+POL_SetupWindow_Close
+
+exit
