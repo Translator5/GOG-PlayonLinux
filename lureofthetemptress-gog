@@ -1,0 +1,91 @@
+#!/bin/bash
+# Date : (2012-03-11 19-24)
+# Last revision : (2012-03-11 20-58)
+# Wine version used : 1.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_lure_of_the_temptress.exe 12584641 "dcc8c74c53670f308a37dbead4181965"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="LureOfTheTemptress_gog"
+WORKING_WINE_VERSION="1.4"
+INSTALLBIN="setup_lure_of_the_temptress.exe"
+
+TITLE="Lure of the Temptress (GoG release)"
+URL="http://www.gog.com/en/gamecard/lure_of_the_temptress"
+SHORTCUT_NAME="Lure of the Temptress"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+# 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
+POL_RequiredVersion "4.0.15"
+
+POL_SetupWindow_presentation "$TITLE" "Revolution Software" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_question "$(eval_gettext 'This game uses the ScummVM emulator, that also exists natively for Linux.\nUse native version when present?')" "$TITLE"
+NATIVESCUMMVM=''
+[ "$APP_ANSWER" = "TRUE" ] && NATIVESCUMMVM=1
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+if cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/"; then
+    # Create setup file for native ScummVM (translating paths)
+    perl -ne 'chomp; 
+	      if(/^(.*path)=(.*)/) { 
+		my($setting, $path)=($1, $2); 
+		my $unix_path=`winepath -u '"'"'$path'"'"'`; 
+		chomp $unix_path; 
+		print "$setting=$unix_path\n"; 
+	      } 
+	      else { 
+		print "$_\n"; 
+	      }' < lure.ini > lure-unix.ini
+fi
+
+# GoG work!
+Set_OS winxp
+
+# "SVGA videocard" (?)
+POL_SetupWindow_VMS "2"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "" '-c "C:\'"$PROGRAMFILES"'\GOG.com\Lure of the Temptress\lure.ini" lure'
+cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/game.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
+if [ -n "$NATIVESCUMMVM" ]; then
+    POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
+    POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec scummvm -c '../lure-unix.ini'"
+fi
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/Manual.pdf"
+# C:\Program Files\GOG.com\Lure of the Temptress\solution.txt
+
+POL_SetupWindow_Close
+
+exit
