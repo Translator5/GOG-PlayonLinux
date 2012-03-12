@@ -1,0 +1,69 @@
+#!/bin/bash
+# Date : (2012-03-12 23-44)
+# Last revision : (2012-03-12 23-58)
+# Wine version used : 1.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_bloodrayne_1.exe 858704866 "b9925ca60f016cf67cdfafceeb5623e7"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="BloodRayne1_gog"
+WORKING_WINE_VERSION="1.4"
+INSTALLBIN="setup_bloodrayne_1.exe"
+
+TITLE="BloodRayne (GoG release)"
+URL="http://www.gog.com/en/gamecard/bloodrayne"
+SHORTCUT_NAME="BloodRayne"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+
+# Some issues playing this
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/BloodRayne 1/video/Cutscene.exe" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/BloodRayne 1/video/Cutscene.exe.disabled"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "rayne.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/BloodRayne 1/manual.pdf"
+# C:\Program Files\GOG.com\BloodRayne 1\readme.txt
+
+POL_SetupWindow_Close
+
+exit
