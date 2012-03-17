@@ -1,0 +1,74 @@
+#!/bin/bash
+# Date : (2012-03-17 10-47)
+# Last revision : (2012-03-17 10-53)
+# Wine version used : 1.3.27
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_nwn_diamond.exe 2310698 "5e07fe97815bf329eacd1f0a474128cc"
+# setup_nwn_diamond-1.bin 2097689344 "9e5aec8eb2a8bea2626a51d36e72d12e"
+# setup_nwn_diamond-2.bin 267609647 "ba9ed46b94eb84870e9e41eeab653859"
+
+# Logo screen does not show up starting from Wine 1.3.28:
+# http://bugs.winehq.org/show_bug.cgi?id=28869
+# Tested up to Wine 1.5.0
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="NeverwinterNights_gog"
+WORKING_WINE_VERSION="1.3.27"
+INSTALLBIN="setup_nwn_diamond.exe"
+
+TITLE="Neverwinter Nights Diamond Edition (GoG release)"
+URL="http://www.gog.com/en/gamecard/neverwinter_nights_diamond_edition"
+SHORTCUT_NAME="Neverwinter Nights Diamond Edition"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Bioware / Atari" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd $HOME
+POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+ARCHIVE="$APP_ANSWER"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "nwn.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Neverwinter Nights Diamond Edition/NWN_OnlineManual.pdf"
+# C:\Program Files\GOG.com\Neverwinter Nights Diamond Edition\NWNHordes_Manual.pdf
+# C:\Program Files\GOG.com\Neverwinter Nights Diamond Edition\NWN_SoU_OnlineManual.pdf
+# C:\Program Files\GOG.com\Neverwinter Nights Diamond Edition\readme.txt
+# C:\Program Files\GOG.com\Neverwinter Nights Diamond Edition\HotUreadme.txt
+# C:\Program Files\GOG.com\Neverwinter Nights Diamond Edition\SoUreadme.txt
+
+POL_SetupWindow_Close
+
+exit
