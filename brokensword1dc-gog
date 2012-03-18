@@ -1,9 +1,10 @@
 #!/bin/bash
 # Date : (2012-01-29 17-31)
-# Last revision : (2012-02-20 22-24)
+# Last revision : (2012-03-18 17-26)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
+#    author of original script Ulukyn
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
@@ -21,6 +22,8 @@ INSTALLBIN="setup_broken_sword_directors_cut.exe"
 TITLE="Broken Sword: Shadow of the Templars (DC) (GoG release)"
 URL="http://www.gog.com/en/gamecard/broken_sword_directors_cut"
 SHORTCUT_NAME="Broken Sword 1: Shadow of the Templars"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/min.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
