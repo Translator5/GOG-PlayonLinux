@@ -1,0 +1,24 @@
+/files/resources/
+  icones/
+    <scriptname>.png
+      PNG 48 x 48, 128 x 128, 256 x 256
+
+  icones_install/
+    <scriptname>
+      PNG 24 x 24 (also seen 22 x 22, 32 x 32,...?)
+
+  miniatures/
+    <scriptname>
+    PNG or JPEG 200 x 150
+
+  screenshots/
+    <prefixname?>-##.jpg
+    JPEG 800 x 600
+
+  setups/
+    <prefixname>/
+      top.jpg
+        JPEG 64 x 64
+
+      left.jpg
+        JPEG 150 x 356
