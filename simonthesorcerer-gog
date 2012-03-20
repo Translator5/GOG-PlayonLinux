@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-03-20 21-04)
+# Last revision : (2012-03-20 21-56)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -21,6 +21,8 @@ INSTALLBIN="setup_simon_the_sorcerer.exe"
 TITLE="Simon the Sorcerer (GoG release)"
 URL="http://www.gog.com/en/gamecard/simon_the_sorcerer"
 SHORTCUT_NAME="Simon the Sorcerer"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg"
 
 POL_SetupWindow_Init
 POL_Debug_Init
