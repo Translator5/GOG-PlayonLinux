@@ -330,6 +330,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
     - Weapon Chart [weapon_chart.pdf]
     Need to install WMP10
 
+* Sherlock Holmes: Secret of the Silver Earring
 * Sid Meier's Alpha Centauri™
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
