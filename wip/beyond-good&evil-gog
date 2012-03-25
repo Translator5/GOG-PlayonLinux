@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-02-20 22-36)
-# Wine version used : 1.3.23
+# Last revision : (2012-03-25 13-22)
+# Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -13,12 +13,13 @@
 
 # Tested up to 1.3.35 without native DirectSound, and still looping sounds
 # Same thing with 1.3.36
+# Same thing with 1.5.0 (less often I feel)
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="BeyondGaE_gog"
-WORKING_WINE_VERSION="1.3.23"
+WORKING_WINE_VERSION="1.5.0"
 INSTALLBIN="setup_beyond_good_and_evil.exe"
 
 TITLE="Beyond Good and Evil (GoG release)"
@@ -51,7 +52,8 @@ POL_Wine_WaitExit "$TITLE"
 
 # Can only get lots of looping sounds (2s loops) without native DirectSound
 # (and emulated sound outputs?)
-POL_Call POL_install_dsound
+# Not so bad as it used to in 1.5.0?
+# POL_Call POL_install_dsound
 
 # GoG work!
 Set_OS winxp
@@ -76,6 +78,8 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
 
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt
+
+POL_SetupWindow_message "$(eval_gettext 'Remember to run the configurator once before playing.')" "$TITLE"
 
 POL_SetupWindow_Close
 
