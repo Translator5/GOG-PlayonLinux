@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-11 08-38)
-# Last revision : (2012-02-20 22-21)
+# Last revision : (2012-03-25 17-09)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -30,8 +30,13 @@ POL_SetupWindow_presentation "$TITLE" "Falcom" "$URL" "Pierre Etchemaite" "$PREF
 POL_SetupWindow_question "$(eval_gettext 'Do you want to browse $TITLE website?')" "$TITLE"
 [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
-cd "$POL_USER_ROOT/tmp"
-POL_Download "http://file.4gamer.net/old2/demo2/VMOnline.zip" "133067458043d0bca7e988d74dba52af"
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd "$POL_USER_ROOT/tmp"
+    POL_Download "http://file.4gamer.net/old2/demo2/VMOnline.zip" "133067458043d0bca7e988d74dba52af"
+    ARCHIVE="$POL_USER_ROOT/tmp/VMOnline.zip"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -39,7 +44,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 cd "$WINEPREFIX/drive_c"
-unzip "$POL_USER_ROOT/tmp/VMOnline.zip"
+unzip "$ARCHIVE"
 
 POL_Wine_WaitExit "$TITLE"
 

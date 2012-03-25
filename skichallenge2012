@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-05 18-36)
-# Last revision : (2012-02-20 22-22)
+# Last revision : (2012-03-25 17-27)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -26,15 +26,20 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Greentube" "$URL" "Pierre Etchemaite" "$PREFIX"
 
-cd $POL_USER_ROOT/tmp
-POL_Download "http://download.skichallenge.ch/SC12/installer/TSR-SkiChallenge12.exe" "ca54f9f503159f933ac97ba123647cfb"
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd "$POL_USER_ROOT/tmp"
+    POL_Download "http://download.skichallenge.ch/SC12/installer/TSR-SkiChallenge12.exe" "ca54f9f503159f933ac97ba123647cfb"
+    ARCHIVE="$POL_USER_ROOT/tmp/TSR-SkiChallenge12.exe"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
-POL_Wine start /unix "$POL_USER_ROOT/tmp/TSR-SkiChallenge12.exe" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

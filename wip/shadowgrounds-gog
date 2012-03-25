@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-03-25 15-13)
+# Last revision : (2012-03-25 17-29)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -47,17 +47,23 @@ POL_RequiredVersion "4.0.15"
 
 POL_SetupWindow_presentation "$TITLE" "Frozenbyte / Meridian4" "$URL" "Pierre Etchemaite" "$PREFIX"
 
-POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+if [ -z "$POL_SELECTED_FILE" ]; then
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+fi
 
 POL_SetupWindow_message "$(eval_gettext 'Now, the bad news. No matter what version of Wine I tried, the game\nshowed some probability of crashing when displaying\nthe map/objectives 2D panel. Only use it when necessary and\nyou should be able to complete the game.\n(If that really bothers you, the Linux version of ShadowGrounds does\nnot have this problem).')" "$TITLE"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
-ARCHIVE="$APP_ANSWER"
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    ARCHIVE="$APP_ANSWER"
+fi
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

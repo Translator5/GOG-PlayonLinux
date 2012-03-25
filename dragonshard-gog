@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-18 22-56)
-# Last revision : (2012-03-18 22-59)
+# Last revision : (2012-03-25 18-46)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -27,15 +27,21 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Liquid Entertainment / Atari" "$URL" "Pierre Etchemaite" "$PREFIX"
 
-POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+if [ -z "$POL_SELECTED_FILE" ]; then
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
-ARCHIVE="$APP_ANSWER"
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    ARCHIVE="$APP_ANSWER"
+fi
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

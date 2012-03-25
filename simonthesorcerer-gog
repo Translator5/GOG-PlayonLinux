@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-03-20 21-56)
+# Last revision : (2012-03-25 17-28)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -29,15 +29,21 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "$URL" "Pierre Etchemaite" "$PREFIX"
 
-POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+if [ -z "$POL_SELECTED_FILE" ]; then
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
-ARCHIVE="$APP_ANSWER"
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    ARCHIVE="$APP_ANSWER"
+fi
 
 POL_SetupWindow_question "$(eval_gettext 'This game uses the ScummVM emulator, that also exists natively for Linux.\nUse native version when present?')" "$TITLE"
 NATIVESCUMMVM=''

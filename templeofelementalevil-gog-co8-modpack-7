@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2012-02-20 22-39)
+# Last revision : (2012-03-25 17-24)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -41,14 +41,16 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_AutoSetVersionEnv
 POL_LoadVar_PROGRAMFILES
 
-POL_SetupWindow_question "$(eval_gettext 'You can download the archive file from:')\n$DOWNLOAD_URL\n$(eval_gettext 'Go there now?')" "$TITLE"
-if [ "$APP_ANSWER" = "TRUE" ]; then
-    POL_Browser "$DOWNLOAD_URL"
-fi
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    POL_SetupWindow_question "$(eval_gettext 'You can download the archive file from:')\n$DOWNLOAD_URL\n$(eval_gettext 'Go there now?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$DOWNLOAD_URL"
 
-cd $HOME
-POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
-ARCHIVE="$APP_ANSWER"
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    ARCHIVE="$APP_ANSWER"
+fi
 
 POL_Call POL_Install_mono28
 
