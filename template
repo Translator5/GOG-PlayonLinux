@@ -28,8 +28,8 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Studio / Publisher" "$URL" "Pierre Etchemaite" "$PREFIX"
 
 if [ -z "$POL_SELECTED_FILE" -a -n "$URL" ]; then
-  POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE?')" "$TITLE"
-  [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
