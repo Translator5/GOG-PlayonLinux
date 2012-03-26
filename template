@@ -22,10 +22,10 @@ TITLE="Full Game Name"
 URL="http://"
 SHORTCUT_NAME="Shortcut Game Name"
 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg"
+
 POL_SetupWindow_Init
 POL_Debug_Init
-
-POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg"
 
 POL_SetupWindow_presentation "$TITLE" "Studio / Publisher" "$URL" "Pierre Etchemaite" "$PREFIX"
 
