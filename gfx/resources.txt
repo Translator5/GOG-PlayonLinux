@@ -5,7 +5,7 @@
 
   icones_install/
     <scriptname>
-      PNG 24 x 24 (also seen 22 x 22, 32 x 32,...?)
+      PNG 22 x 22 - convertion of game's icon
 
   miniatures/
     <scriptname>
