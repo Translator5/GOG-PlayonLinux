@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 01-01)
-# Last revision : (2012-04-01 12-40)
+# Last revision : (2012-04-02 17-34)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -22,6 +22,8 @@ TITLE="Dungeon Keeper II (GoG release)"
 URL="http://www.gog.com/en/gamecard/dungeon_keeper_2"
 SHORTCUT_NAME="Dungeon Keeper II"
 SHORTCUT_SAFE="$SHORTCUT_NAME - $(eval_gettext 'Safe mode')"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
