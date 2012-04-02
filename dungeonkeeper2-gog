@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-18 01-01)
-# Last revision : (2012-03-25 18-45)
-# Wine version used : 1.3.35
+# Last revision : (2012-04-01 12-40)
+# Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -15,7 +15,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="DungeonKeeper2_gog"
-WORKING_WINE_VERSION="1.3.35"
+WORKING_WINE_VERSION="1.5.1"
 INSTALLBIN="setup_dungeon_keeper_2.exe"
 
 TITLE="Dungeon Keeper II (GoG release)"
@@ -68,6 +68,78 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom
 # C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/reference_card.pdf
 # C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/ReadMe.txt
 
+POL_SetupWindow_message "$(eval_gettext 'GOG release defaults to 800x600 software rendering to work around\nstability issues, specially under Windows XP/Seven.\nYou can re-enable hardware acceleration in the configurator.')" "$TITLE"
+
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$POL_USER_ROOT/tmp/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+# Based on http://www.pcgamingbuzz.com/2011/how-to-fix-dungeon-keeper-2-from-gog/
+
+POL_SetupWindow_menu "$(eval_gettext 'Rendering')" "\$TITLE" "$(eval_gettext 'Unchanged'
+)~$(eval_gettext '800x600 software rendering (GOG defaults)')~$(eval_gettext 'Hardware 3D')" "~" "
+$(eval_gettext 'Unchanged')"
+
+case "\$APP_ANSWER" in
+    "$(eval_gettext 'Unchanged')")
+        ;;
+
+    "$(eval_gettext '800x600 software rendering (GOG defaults)')")
+        cat <<-'_INIEOF_' > "\$POL_USER_ROOT/tmp/software3d.reg"
+	REGEDIT4
+	
+	[HKEY_CURRENT_USER\Software\Bullfrog Productions Ltd\Dungeon Keeper II\Configuration\Video]
+	"Engine Id"=dword:00000004
+	"EnvironmentMapping"=dword:00000000
+	"Res 1024*768 Enabled"=dword:00000000
+	"Res 1280*1024 Enable"=dword:00000000
+	"Res 1600*1200 Enable"=dword:00000000
+	"Screen Hardware3D"=dword:00000000
+	"Screen Height"=dword:00000258
+	"Screen Width"=dword:00000320
+	"Translucent Water"=dword:00000000
+	_INIEOF_
+        POL_Wine regedit "\$POL_USER_ROOT/tmp/software3d.reg"
+        rm "\$POL_USER_ROOT/tmp/software3d.reg"
+        ;;
+
+    "$(eval_gettext 'Hardware 3D')")
+        cat <<-'_INIEOF_' > "\$POL_USER_ROOT/tmp/hardware3d.reg"
+	REGEDIT4
+	
+	[HKEY_CURRENT_USER\Software\Bullfrog Productions Ltd\Dungeon Keeper II\Configuration\Video]
+	"Engine Id"=dword:00000002
+	"EnvironmentMapping"=dword:00000001
+	"Res 1024*768 Enabled"=dword:00000001
+	"Res 1280*1024 Enable"=dword:00000001
+	"Res 1600*1200 Enable"=dword:00000001
+	"Screen Hardware3D"=dword:00000001
+	"Screen Height"=dword:00000500
+	"Screen Width"=dword:00000400
+	"Translucent Water"=dword:00000001
+	_INIEOF_
+        POL_Wine regedit "\$POL_USER_ROOT/tmp/hardware3d.reg"
+        rm "\$POL_USER_ROOT/tmp/hardware3d.reg"
+        POL_SetupWindow_message "$(eval_gettext 'You can now change the resolution inside game options.\nThe game can become unstable at high resolutions, so you may have\nto experiment a bit.')" "$TITLE"
+        ;;
+esac
+
+POL_SetupWindow_Close
+exit
+_EOF_
 
 exit
