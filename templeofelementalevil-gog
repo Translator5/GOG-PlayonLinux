@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2012-03-25 17-24)
+# Last revision : (2012-04-04 23-25)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,6 +23,8 @@ INSTALLBIN="setup_temple_of_elemental_evil.exe"
 TITLE="The Temple of Elemental Evil (GoG release)"
 URL="http://www.gog.com/en/gamecard/the_temple_of_elemental_evil"
 SHORTCUT_NAME="Temple of Elemental Evil"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
