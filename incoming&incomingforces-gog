@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-28 21-20)
-# Last revision : (2012-03-25 18-37)
+# Last revision : (2012-04-04 11-45)
 # Wine version used : 1.4-rc5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -68,9 +68,11 @@ POL_Wine_reboot
 POL_Shortcut "incoming.exe" "$SHORTCUT_NAME1"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming/Manual.pdf"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "trap 'exit 0' EXIT"
+convert "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming/game.ico" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME1"
 
 POL_Shortcut "forces.exe" "$SHORTCUT_NAME2"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming Forces/Manual.pdf"
+convert "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Incoming and Incoming Forces/Incoming Forces/game.ico" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME2"
 
 POL_SetupWindow_Close
 
