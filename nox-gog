@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-17 15-39)
-# Last revision : (2012-03-25 18-31)
+# Last revision : (2012-04-04 18-12)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,6 +23,8 @@ INSTALLBIN="setup_nox.exe"
 TITLE="Nox (GoG release)"
 URL="http://www.gog.com/en/gamecard/nox"
 SHORTCUT_NAME="Nox"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top2.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left2.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init

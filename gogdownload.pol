@@ -1,0 +1,23 @@
+#!/bin/bash
+source "$PLAYONLINUX/lib/sources"
+[ "$PLAYONLINUX" = "" ] && exit
+
+POL_SetupWindow_Init
+POL_SetupWindow_login
+
+export 
+
+POL_SetupWindow_wait "Je me connecte ..." "Plop"
+
+wget https://www.gog.com/en/login --save-cookies=/tmp/cookies --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
+
+POL_SetupWindow_textbox "Nom du programme a télécharger ? (Exemple : teenagent)" "Plop"
+
+programme="$APP_ANSWER"
+
+POL_SetupWindow_wait "Je suis en train de télécharger ça sur ton bureau" "Plop"
+
+cd "$HOME/Desktop"
+wget --load-cookies=/tmp/cookies "http://www.gog.com/en/download/game/$programme/0" -O setup.exe
+
+POL_SetupWindow_Close
