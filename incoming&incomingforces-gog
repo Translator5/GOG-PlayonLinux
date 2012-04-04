@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-28 21-20)
-# Last revision : (2012-04-04 11-57)
+# Last revision : (2012-04-04 15-27)
 # Wine version used : 1.4-rc5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -22,6 +22,8 @@ TITLE="Incoming & Incoming Forces (GoG release)"
 URL="http://www.gog.com/en/gamecard/incoming_incoming_forces"
 SHORTCUT_NAME1="Incoming"
 SHORTCUT_NAME2="Incoming Forces"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
