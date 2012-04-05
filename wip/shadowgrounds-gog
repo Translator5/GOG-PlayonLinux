@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-03-25 17-29)
+# Last revision : (2012-04-05 23-37)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -93,7 +93,7 @@ POL_Shortcut "Shadowgrounds Launcher.exe" "$SHORTCUT_NAME"
 # Restore resolution after game leaves fullscreen
 # Any drawbacks?
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'RESOLUTION=`xrandr --current|sed -e "s/^.*current \([0-9]\+\) x \([0-9]\+\).*$/\1x\2/p; d"`'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "xrandr -s $RESOLUTION" EXIT'
+echo 'xrandr -s $RESOLUTION' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Shadowgrounds/Manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Shadowgrounds/Readme.txt

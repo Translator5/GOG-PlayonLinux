@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-20 23-25)
-# Last revision : (2012-03-25 18-43)
+# Last revision : (2012-04-05 23-38)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -73,7 +73,7 @@ POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
+echo 'kill $BUSYLOOP_PID' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Enclave/Manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Enclave/readme.txt

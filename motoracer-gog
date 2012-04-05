@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-01 20-38)
-# Last revision : (2012-03-25 18-33)
+# Last revision : (2012-04-05 23-40)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -92,10 +92,10 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  Xephyr :1 -screen 640x480x16 &
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  XEPHYR_PID=$!'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  sleep 1'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  DISPLAY=:1'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  trap '"'"'kill $XEPHYR_PID'"'"' EXIT'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  cp motoracer.ini motoracer.bak'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  sed "s/^D3D=true/D3D=false/" motoracer.bak > motoracer.ini'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'fi'
+echo '[ -n "$XEPHYR_PID" ] && kill $XEPHYR_PID' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 
 POL_SetupWindow_message "$(eval_gettext 'MotoRacer needs a 16bpp (65536 colors) display to run.\nUnder Linux, this script can make use of Xephyr\nto make it run without modifying your screen configuration.\n\nOn first run, if you experience no sound in game go to\nthe Options menu and increase volume.')" "$TITLE"
 

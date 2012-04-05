@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-03-25 18-53)
+# Last revision : (2012-04-05 23-35)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -80,7 +80,7 @@ POL_Shortcut "BGE.exe" "$SHORTCUT_NAME"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'schedtool -a 0x1 $$'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'trap "kill $BUSYLOOP_PID" EXIT'
+echo 'kill $BUSYLOOP_PID' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt
