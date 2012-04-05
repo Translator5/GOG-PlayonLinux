@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-26 20-43)
-# Last revision : (2012-03-26 21-57)
+# Last revision : (2012-04-05 22-46)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -64,7 +64,7 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "FS2.exe" "$SHORTCUT_NAME"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "trap 'exit 0' EXIT"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Freespace 2/MANUAL.PDF"
 # C:\Program Files\GOG.com\Freespace 2\readme.txt
 # C:\Program Files\GOG.com\Freespace 2\refcard.pdf
