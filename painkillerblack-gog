@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2012-04-05 17-20)
-# Wine version used : 1.5.1
+# Last revision : (2012-03-25 17-33)
+# Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -17,7 +17,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="PainkillerBlack_gog"
-WORKING_WINE_VERSION="1.5.1"
+WORKING_WINE_VERSION="1.3.36"
 INSTALLBIN="setup_painkiller_black.exe"
 
 TITLE="Painkiller Black Edition (GoG release)"
@@ -35,8 +35,6 @@ if [ -z "$POL_SELECTED_FILE" ]; then
     POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
     [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 fi
-
-POL_System_SetArch "auto"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
