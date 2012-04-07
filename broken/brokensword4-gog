@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 22-01)
-# Last revision : (2012-03-25 18-49)
+# Last revision : (2012-04-07 20-46)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -41,7 +41,7 @@ if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
 else
     cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
     ARCHIVE="$APP_ANSWER"
 fi
 

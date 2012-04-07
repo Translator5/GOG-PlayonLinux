@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2012-03-25 17-24)
+# Last revision : (2012-04-07 20-53)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -48,7 +48,7 @@ else
     [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$DOWNLOAD_URL"
 
     cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
     ARCHIVE="$APP_ANSWER"
 fi
 

@@ -41,7 +41,7 @@ if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
 else
     cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "$INSTALLBIN"
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
     ARCHIVE="$APP_ANSWER"
 fi
 
