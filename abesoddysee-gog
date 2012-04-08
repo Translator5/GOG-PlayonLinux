@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-08 14-46)
-# Last revision : (2012-04-08 14-53)
+# Last revision : (2012-04-08 16-05)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -58,8 +58,6 @@ POL_Wine_WaitExit "$TITLE"
 # GoG work!
 Set_OS winxp
 
-# Until d3dx9 is fixed
-POL_Call POL_Install_dxfullsetup
 POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
 
 # "16-bit SVGA"
