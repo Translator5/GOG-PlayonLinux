@@ -1,0 +1,73 @@
+#!/bin/bash
+# Date : (2012-04-08 16-43)
+# Last revision : (2012-04-08 16-47)
+# Wine version used : 1.5.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_abes_exoddus.exe 625840158 "fc8a002ebf8b0adaa6ad7efa01c33ca5"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="AbesExoddus_gog"
+WORKING_WINE_VERSION="1.5.1"
+INSTALLBIN="setup_abes_exoddus.exe"
+
+TITLE="Oddworld: Abe's Exoddus (GoG release)"
+URL="http://www.gog.com/en/gamecard/oddworld_abes_exoddus/"
+SHORTCUT_NAME="Oddworld: Abe's Exoddus"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Oddworld Inhabitants" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+if [ -z "$POL_SELECTED_FILE" ]; then
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
+    ARCHIVE="$APP_ANSWER"
+fi
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+# "16-bit SVGA"
+POL_SetupWindow_VMS "2"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Exoddus.exe" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Abe's Exoddus/manual.pdf"
+# C:\Program Files\GOG.com\Abe's Exoddus\README.TXT
+
+POL_SetupWindow_Close
+
+exit
