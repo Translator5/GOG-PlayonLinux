@@ -14,25 +14,28 @@ POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
 $POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
 
-if [ ! -e "setup_$GAME.exe" -o -n "$1" -a "$(POL_MD5_file 'setup_$GAME.exe')" != "$1" ]; then
-	POL_System_wget "http://www.gog.com/en/download/game/$GAME/0" "$GAME (1/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME.exe"
+download_piece ()
+{
+	# 1: URL
+	# 2: filename
+	# 3: MD5 hash
+	# 4: Title
 
-	if [ ! -e "setup_$GAME.exe" -o -n "$1" -a "$(POL_MD5_file 'setup_$GAME.exe')" != "$1" ]; then
-		POL_Debug_Error "Download seems to have failed"
+	if [ ! -e "$2" -o -n "$3" -a "$(POL_MD5_file $2)" != "$3" ]; then
+		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$2"
+
+		if [ ! -e "$2" -o -n "$3" -a "$(POL_MD5_file $2)" != "$3" ]; then
+			POL_Debug_Error "Download seems to have failed"
+		fi
 	fi
-fi
+}
+
+download_piece "http://www.gog.com/en/download/game/$GAME/0" "setup_$GAME.exe" "$1" "$GAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
 	local n
 	for n in `seq 2 $PIECES`; do
-		local PIECENAME="setup_$GAME-$((n-1)).bin"
-		if [ ! -e "$PIECENAME" -o -n "$$n" -a "$(POL_MD5_file $PIECENAME)" != "$$n" ]; then
-			POL_System_wget "http://www.gog.com/en/download/game/$GAME/$((n-1))" "$GAME ($n/$PIECES)" --load-cookies="$COOKIES" -O "$PIECENAME"
-
-			if [ ! -e "$PIECENAME" -o -n "$$n" -a "$(POL_MD5_file $PIECENAME)" != "$$n" ]; then
-				POL_Debug_Error "Download seems to have failed"
-			fi
-		fi
+		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${$n}" "$GAME ($n/$PIECES)"
 	done
 fi
 
