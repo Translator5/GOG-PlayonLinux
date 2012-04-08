@@ -22,7 +22,7 @@ else
 
 	if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
 		cd "$POL_USER_ROOT/tmp/"
-		@ POL_GoG_download "$@"
+		POL_Call POL_GoG_download "$@"
 		POL_GoG_location="$POL_USER_ROOT/tmp/setup_$1.exe"
 	fi
 
