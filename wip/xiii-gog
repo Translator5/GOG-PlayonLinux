@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 23-07)
-# Last revision : (2012-04-08 23-23)
+# Last revision : (2012-04-09 01-47)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -45,7 +45,7 @@ Set_OS winxp
 POL_SetupWindow_VMS "32"
 
 POL_Wine_X11Drv "GrabFullScreen" "Y"
-[ "$POL_OS" = "Mac" ] && POL_Wine_DirectInput "MouseWarpOverride" "force"
+POL_Wine_DirectInput "MouseWarpOverride" "force"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
