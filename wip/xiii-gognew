@@ -8,9 +8,6 @@
 # Program licence : Retail
 # Depend :
 
-# Tested with install archives:
-# setup_xiii.exe 1941055024 "6933e1a9f8e17c0a8b816e47f39bded5"
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
