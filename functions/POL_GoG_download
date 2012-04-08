@@ -1,0 +1,36 @@
+#!/bin/bash
+
+GAME="$1"
+PIECES="${2:-1}"
+
+COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
+POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
+
+$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate;
+
+POL_System_wget "http://www.gog.com/en/download/game/$GAME/0" "$GAME (1/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME.exe"
+
+if [ ! -e "setup_$GAME.exe" ]; then
+	POL_Debug_Error "Download seems to have failed"
+fi
+
+if [ $PIECES -gt 1 ]; then
+	for n in `seq 1 $((PIECES-1))`; do
+		POL_System_wget "http://www.gog.com/en/download/game/$GAME/$n" "$GAME ($((n+1))/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME-$n.bin"
+
+		if [ ! -e "setup_$GAME-$n.bin" ]; then
+			POL_Debug_Error "Download seems to have failed"
+		fi
+	done
+fi
+
+cat << "-----END PGP SIGNATURE-----" > /dev/null
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk+B62kACgkQ5TH6yaoTyke7iQCgmRub/mlSwMaUMlfysWA02Czi
+luQAn0lzNQnqV6SmsakZL5EnoLATZlfu
+=b512
+-----END PGP SIGNATURE-----
