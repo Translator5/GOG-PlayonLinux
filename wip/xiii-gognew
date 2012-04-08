@@ -11,29 +11,23 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGAME="xiii"
 PREFIX="XIII_gog"
 WORKING_WINE_VERSION="1.5.0"
 [ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.2.3"
-INSTALLBIN="setup_xiii.exe"
 
 TITLE="XIII (GoG release)"
-URL="http://www.gog.com/en/gamecard/xiii"
 SHORTCUT_NAME="XIII"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Ubisoft Paris Studios / Ubisoft" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "Ubisoft Paris Studios / Ubisoft" "http://www.gog.com/en/gamecard/$GOGAME" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_setup "xiii" "6933e1a9f8e17c0a8b816e47f39bded5"
+POL_Call POL_GoG_setup "$GOGAME" "6933e1a9f8e17c0a8b816e47f39bded5"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
