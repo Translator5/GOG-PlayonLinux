@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-08 14-46)
-# Last revision : (2012-04-08 16-05)
+# Last revision : (2012-04-08 16-42)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -68,6 +68,7 @@ POL_Wine_reboot
 
 POL_Shortcut "AbeWin.exe" "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Abe's Oddysee/manual.pdf"
+# C:\Program Files\GOG.com\Abe's Oddysee\README.TXT
 
 POL_SetupWindow_Close
 
