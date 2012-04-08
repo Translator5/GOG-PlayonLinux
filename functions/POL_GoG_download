@@ -35,7 +35,7 @@ download_piece "http://www.gog.com/en/download/game/$GAME/0" "setup_$GAME.exe" "
 if [ $PIECES -gt 1 ]; then
 	local n
 	for n in `seq 2 $PIECES`; do
-		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${$n}" "$GAME ($n/$PIECES)"
+		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
 	done
 fi
 
