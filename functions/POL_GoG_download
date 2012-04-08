@@ -38,12 +38,3 @@ if [ $PIECES -gt 1 ]; then
 		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
 	done
 fi
-
-cat << "-----END PGP SIGNATURE-----" > /dev/null
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk+B62kACgkQ5TH6yaoTyke7iQCgmRub/mlSwMaUMlfysWA02Czi
-luQAn0lzNQnqV6SmsakZL5EnoLATZlfu
-=b512
------END PGP SIGNATURE-----

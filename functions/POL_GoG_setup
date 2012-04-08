@@ -28,11 +28,3 @@ else
 	INSTALL_METHOD="$INSTALL_METHOD_BACK"
 	cd "$DIRNAME_BACK"
 fi
-cat << "-----END PGP SIGNATURE-----" > /dev/null
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk+B7HoACgkQ5TH6yaoTykeWqACfbzCy+7gK3B5w3ysV62fIH9Nw
-Xc8AoJK6OvbA/NkBtF2tVzoA8uMA7p5j
-=rYD3
------END PGP SIGNATURE-----
