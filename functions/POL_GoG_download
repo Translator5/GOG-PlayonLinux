@@ -1,27 +1,37 @@
 #!/bin/bash
 
-GAME="$1"
-PIECES="${2:-1}"
+local GAME="$1"
+# 2.. MD5 hash of the pieces
+# Will download as many pieces as extra parameters
+# Hashes are recommended for large downloads anyway
+shift
+local PIECES="$#"
 
-COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
+local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
 POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
-$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate;
+$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
 
-POL_System_wget "http://www.gog.com/en/download/game/$GAME/0" "$GAME (1/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME.exe"
+if [ ! -e "setup_$GAME.exe" -o -n "$1" -a "$(POL_MD5_file 'setup_$GAME.exe')" != "$1" ]; then
+	POL_System_wget "http://www.gog.com/en/download/game/$GAME/0" "$GAME (1/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME.exe"
 
-if [ ! -e "setup_$GAME.exe" ]; then
-	POL_Debug_Error "Download seems to have failed"
+	if [ ! -e "setup_$GAME.exe" -o -n "$1" -a "$(POL_MD5_file 'setup_$GAME.exe')" != "$1" ]; then
+		POL_Debug_Error "Download seems to have failed"
+	fi
 fi
 
 if [ $PIECES -gt 1 ]; then
-	for n in `seq 1 $((PIECES-1))`; do
-		POL_System_wget "http://www.gog.com/en/download/game/$GAME/$n" "$GAME ($((n+1))/$PIECES)" --load-cookies="$COOKIES" -O "setup_$GAME-$n.bin"
+	local n
+	for n in `seq 2 $PIECES`; do
+		local PIECENAME="setup_$GAME-$((n-1)).bin"
+		if [ ! -e "$PIECENAME" -o -n "$$n" -a "$(POL_MD5_file $PIECENAME)" != "$$n" ]; then
+			POL_System_wget "http://www.gog.com/en/download/game/$GAME/$((n-1))" "$GAME ($n/$PIECES)" --load-cookies="$COOKIES" -O "$PIECENAME"
 
-		if [ ! -e "setup_$GAME-$n.bin" ]; then
-			POL_Debug_Error "Download seems to have failed"
+			if [ ! -e "$PIECENAME" -o -n "$$n" -a "$(POL_MD5_file $PIECENAME)" != "$$n" ]; then
+				POL_Debug_Error "Download seems to have failed"
+			fi
 		fi
 	done
 fi
