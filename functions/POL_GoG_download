@@ -36,16 +36,27 @@ download_piece ()
 	# 3: MD5 hash
 	# 4: Title
 
+	# Failed piece from previous download, maybe reference MD5 was corrected?
+	local FAILEDPIECE="$2.failed"
+	if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
+		if [ "$(POL_MD5_file $FAILEDPIECE)" = "$3" ]; then
+			mv "$FAILEDPIECE" "$2"
+		fi
+	fi
+
 	if [ ! -e "$2" ]; then
 		local TMPPIECE="$2.part"
 		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$TMPPIECE"
 
 		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ ! -e "$TMPPIECE" -o -n "$3" -a "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
-			rm -f "$TMPPIECE"
+		if [ ! -e "$TMPPIECE" ]; then
 			POL_Debug_Error "Download seems to have failed"
+		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
+			POL_Debug_Error "Download seems to be corrupted"
+			mv "$TMPPIECE" "$FAILEDPIECE"
 		else
 			mv "$TMPPIECE" "$2"
+			[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
 		fi
 	fi
 }
