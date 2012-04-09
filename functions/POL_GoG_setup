@@ -30,6 +30,7 @@ else
 
 		[ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
 		cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
+		POL_Debug_Message "Will download into $PWD"
 		POL_Call POL_GoG_download "$@"
 		POL_GoG_location="$PWD/setup_$1.exe"
 	fi
