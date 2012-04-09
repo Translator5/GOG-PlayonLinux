@@ -13,6 +13,7 @@ POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to downlo
 POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
 $POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
+unset POL_LOGIN POL_PASSWORD
 
 download_piece ()
 {
@@ -42,3 +43,5 @@ if [ $PIECES -gt 1 ]; then
 		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
 	done
 fi
+
+rm -f "$COOKIES"
