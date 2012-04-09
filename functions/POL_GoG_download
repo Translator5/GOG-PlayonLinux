@@ -15,9 +15,6 @@ if [ -z "$GOG_REPO" ]; then
 	POL_Config_Write GOG_REPO "$GOG_REPO"
 fi
 
-[ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
-cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
-POL_Debug_Message "Will download into $PWD"
 
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
 POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE" "http://www.gog.com/"
@@ -26,6 +23,11 @@ POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
 $POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
 unset POL_LOGIN POL_PASSWORD
+
+
+[ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
+cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
+POL_Debug_Message "Will download into $PWD"
 
 download_piece ()
 {
