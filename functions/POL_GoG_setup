@@ -20,7 +20,7 @@ else
 	POL_Debug_Message "Install method $INSTALL_METHOD"
 
 	if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
-		POL_GoG_location="$(POL_Call POL_GoG_download $@)"
+		POL_Call POL_GoG_download "$@"
 	fi
 
 	if [ "$INSTALL_METHOD" = "LOCAL" ]; then

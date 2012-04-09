@@ -37,14 +37,15 @@ download_piece ()
 	# 4: Title
 
 	if [ ! -e "$2" ]; then
-		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$2.part"
+		local TMPPIECE="$2.part"
+		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$TMPPIECE"
 
 		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ ! -e "$2.part" -o -n "$3" -a "$(POL_MD5_file '$2.part')" != "$3" ]; then
-			rm -f "$2.part"
+		if [ ! -e "$TMPPIECE" -o -n "$3" -a "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
+			rm -f "$TMPPIECE"
 			POL_Debug_Error "Download seems to have failed"
 		else
-			mv "$2.part" "$2"
+			mv "$TMPPIECE" "$2"
 		fi
 	fi
 }
@@ -60,4 +61,4 @@ fi
 
 rm -f "$COOKIES"
 
-echo "$PWD/setup_$GAME.exe"
+POL_GoG_location="$PWD/setup_$GAME.exe"
