@@ -1,0 +1,83 @@
+#!/bin/bash
+# Date : (2012-04-09 13-47)
+# Last revision : (2012-04-09 16-06)
+# Wine version used : 1.5.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Tested with install archives:
+# setup_pop_sands.exe 1035767269 "f0a210a07427c92b938ae532073a1664"
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="SandsOfTime_gog"
+WORKING_WINE_VERSION="1.5.1"
+INSTALLBIN="setup_pop_sands.exe"
+
+TITLE="Prince of Persia: The Sands of Time (GoG release)"
+URL="http://www.gog.com/en/gamecard/prince_of_persia_the_sands_of_time"
+SHORTCUT_NAME="Prince of Persia: The Sands of Time"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Ubisoft" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+if [ -z "$POL_SELECTED_FILE" ]; then
+    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
+    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd $HOME
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
+    ARCHIVE="$APP_ANSWER"
+fi
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "PrinceOfPersia.EXE" "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Prince of Persia The Sands of Time/manual.pdf"
+# C:\Program Files\GOG.com\Prince of Persia The Sands of Time\readme.txt
+
+# Disable fog option by default
+if type -t POL_unbase64 > /dev/null; then
+	POL_unbase64 <<-_EOF_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Prince of Persia The Sands of Time/Profiles/DefaultProfile.DAT"
+	UE9QNEQAZQBmAGEAdQBsAHQAAAAhOFn3sPoCAAAAUgAAAFSwDt0AASADAABYAgAAIAAAAAEAAAAA
+	AAAAAgAAAAIAAAACAAAAAgAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAA
+	AAABAAAABAAAABoAAABSzYhDAAEAAIA/AACAPwAAgD8BAAAAAAAAAAAAAAA=
+	_EOF_
+else
+	POL_SetupWindow_message "$(eval_gettext 'If you can barely distinguish a landscape behind main menu,\ndisable FOG in graphic options.')" "$TITLE"
+fi
+
+POL_SetupWindow_Close
+
+exit
