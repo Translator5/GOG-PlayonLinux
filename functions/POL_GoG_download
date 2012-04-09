@@ -8,6 +8,13 @@ shift
 local PIECES="$#"
 
 local GOG_REPO="$(POL_Config_Read GOG_REPO)"
+
+if [ -z "$GOG_REPO" ]; then
+	POL_SetupWindow_textbox "$(eval_gettext 'In what directory do you want to download GOG files?')" "$TITLE" "$POL_USER_ROOT/tmp/"
+	GOG_REPO="$APP_ANSWER"
+	POL_Config_Write GOG_REPO "$GOG_REPO"
+fi
+
 [ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
 cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
 POL_Debug_Message "Will download into $PWD"

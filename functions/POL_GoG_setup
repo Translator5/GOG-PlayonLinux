@@ -20,11 +20,6 @@ else
 	POL_Debug_Message "Install method $INSTALL_METHOD"
 
 	if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
-		if [ -z "$(POL_Config_Read GOG_REPO)" ]; then
-			POL_SetupWindow_textbox "$(eval_gettext 'In what directory do you want to download GOG files?')" "$TITLE" "$POL_USER_ROOT/tmp/"
-			POL_Config_Write GOG_REPO "$APP_ANSWER"
-		fi
-
 		POL_GoG_location="$(POL_Call POL_GoG_download $@)"
 	fi
 
