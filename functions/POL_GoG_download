@@ -39,6 +39,7 @@ download_piece ()
 	# Failed piece from previous download, maybe reference MD5 was corrected?
 	local FAILEDPIECE="$2.failed"
 	if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
+		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
 		if [ "$(POL_MD5_file $FAILEDPIECE)" = "$3" ]; then
 			mv "$FAILEDPIECE" "$2"
 		fi
