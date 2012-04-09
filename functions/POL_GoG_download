@@ -21,13 +21,15 @@ download_piece ()
 	# 3: MD5 hash
 	# 4: Title
 
-	POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-	if [ ! -e "$2" -o -n "$3" -a "$(POL_MD5_file $2)" != "$3" ]; then
-		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$2"
+	if [ ! -e "$2" ]; then
+		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$2.part"
 
 		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ ! -e "$2" -o -n "$3" -a "$(POL_MD5_file $2)" != "$3" ]; then
+		if [ ! -e "$2.part" -o -n "$3" -a "$(POL_MD5_file '$2.part')" != "$3" ]; then
+			rm -f "$2.part"
 			POL_Debug_Error "Download seems to have failed"
+		else
+			mv "$2.part" "$2"
 		fi
 	fi
 }
