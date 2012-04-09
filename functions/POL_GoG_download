@@ -8,7 +8,7 @@ shift
 local PIECES="$#"
 
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
-POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE"
+POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE" "http://www.gog.com/"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
