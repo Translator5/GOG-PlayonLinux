@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-03 20-32)
-# Last revision : (2012-04-07 20-55)
+# Last revision : (2012-04-10 23-03)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -56,7 +56,7 @@ POL_Call POL_Function_SetNativeExtension "pdf"
 
 POL_Wine_InstallFonts
 
-POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

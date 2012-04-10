@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 10-47)
-# Last revision : (2012-04-07 20-55)
+# Last revision : (2012-04-10 23-03)
 # Wine version used : 1.3.27
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -56,7 +56,7 @@ POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine start /unix "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
