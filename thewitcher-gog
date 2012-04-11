@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-11 21-51)
 # Wine version used : 1.4-rc4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,52 +8,32 @@
 # Program licence : Retail
 # Depend :
 
-# Tested with install archives:
-# setup_the_witcher_enhanced_edition.exe 2539517 "3acbfee8327e023bdc83efa92917279e"
-# setup_the_witcher_enhanced_edition-1.bin 2097460480 "f992a98576b3d561c8070a38c214ea91"
-# setup_the_witcher_enhanced_edition-2.bin 2100000000 "b0f2ad8ea420bfad9a4719e599f4f0bb"
-# setup_the_witcher_enhanced_edition-3.bin 2100000000 "f62a19ed67c59286c4d3c96995676d13"
-# setup_the_witcher_enhanced_edition-4.bin 2100000000 "e8d48571b065f9e798cff1aef56d3ae6"
-# setup_the_witcher_enhanced_edition-5.bin 614978058 "9daaa7b2eac44bf19111fbb0670cd6db"
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="the_witcher"
 PREFIX="TheWitcher_gog"
 WORKING_WINE_VERSION="1.4-rc4"
-INSTALLBIN="setup_the_witcher_enhanced_edition.exe"
 
 TITLE="The Witcher Enhanced Edition Directors Cut (GoG release)"
-URL="http://www.gog.com/en/gamecard/the_witcher"
 SHORTCUT_NAME="The Witcher Enhanced Edition DC"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-if [ -n "$POL_SELECTED_FILE" ]; then
-    ARCHIVE="$POL_SELECTED_FILE"
-else
-    cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-    ARCHIVE="$APP_ANSWER"
-fi
+POL_Call POL_GoG_setup "$GOGID" "3acbfee8327e023bdc83efa92917279e" "f992a98576b3d561c8070a38c214ea91" "b0f2ad8ea420bfad9a4719e599f4f0bb" "f62a19ed67c59286c4d3c96995676d13" "e8d48571b065f9e798cff1aef56d3ae6" "9daaa7b2eac44bf19111fbb0670cd6db"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

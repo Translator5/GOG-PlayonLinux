@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-10 23-38)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,20 +8,14 @@
 # Program licence : Retail
 # Depend :
 
-# Tested with install archives:
-# setup_the_feeble_files.exe 2476028 "16f0ec3760c68d646abc6671f657361a"
-# setup_the_feeble_files-1.bin 2097523968 "df8a0031ac21f2efe93da1440d0fb024"
-# setup_the_feeble_files-2.bin 289111409 "27197e9622d4ee349a8f4766f949426b"
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="the_feeble_files"
 PREFIX="FeebleFiles_gog"
 WORKING_WINE_VERSION="1.3.36"
-INSTALLBIN="setup_the_feeble_files.exe"
 
 TITLE="The Feeble Files (GoG release)"
-URL="http://www.gog.com/en/gamecard/the_feeble_files"
 SHORTCUT_NAME="The Feeble Files"
 
 POL_SetupWindow_Init
@@ -30,35 +24,23 @@ POL_Debug_Init
 # 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
 POL_RequiredVersion "4.0.15"
 
-POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-if [ -n "$POL_SELECTED_FILE" ]; then
-    ARCHIVE="$POL_SELECTED_FILE"
-else
-    cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-    ARCHIVE="$APP_ANSWER"
-fi
 
 POL_SetupWindow_question "$(eval_gettext 'This game uses the ScummVM emulator, that also exists natively for Linux.\nUse native version when present?')" "$TITLE"
 NATIVESCUMMVM=''
 [ "$APP_ANSWER" = "TRUE" ] && NATIVESCUMMVM=1
 
+POL_Call POL_GoG_setup "$GOGID" "16f0ec3760c68d646abc6671f657361a" "df8a0031ac21f2efe93da1440d0fb024" "27197e9622d4ee349a8f4766f949426b"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

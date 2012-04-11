@@ -1,15 +1,12 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-11 22-15)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
-
-# Tested with install archive:
-# setup_sanitarium.exe 1235894636 "c60d04ddd0614988c7be7c86fa5fe7d8"
 
 #    Lockup with 1.3.36 when reaching to top of the stairs
 #    Same with 1.3.35
@@ -24,12 +21,11 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="sanitarium"
 PREFIX="Sanitarium_gog"
 WORKING_WINE_VERSION="1.3.23"
-INSTALLBIN="setup_sanitarium.exe"
 
 TITLE="Sanitarium (GoG release)"
-URL="http://www.gog.com/en/gamecard/sanitarium"
 SHORTCUT_NAME="Sanitarium"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
@@ -37,30 +33,19 @@ POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jp
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "DreamForge Intertainment / XS Games" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "DreamForge Intertainment / XS Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-if [ -n "$POL_SELECTED_FILE" ]; then
-    ARCHIVE="$POL_SELECTED_FILE"
-else
-    cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-    ARCHIVE="$APP_ANSWER"
-fi
+POL_Call POL_GoG_setup "$GOGID" "c60d04ddd0614988c7be7c86fa5fe7d8"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

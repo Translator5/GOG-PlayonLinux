@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-11 21-45)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,47 +8,32 @@
 # Program licence : Retail
 # Depend :
 
-# Tested with install archives:
-# setup_bloodrayne_1.exe 858704866 "b9925ca60f016cf67cdfafceeb5623e7"
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="bloodrayne"
 PREFIX="BloodRayne1_gog"
 WORKING_WINE_VERSION="1.4"
-INSTALLBIN="setup_bloodrayne_1.exe"
 
 TITLE="BloodRayne (GoG release)"
-URL="http://www.gog.com/en/gamecard/bloodrayne"
 SHORTCUT_NAME="BloodRayne"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-if [ -n "$POL_SELECTED_FILE" ]; then
-    ARCHIVE="$POL_SELECTED_FILE"
-else
-    cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-    ARCHIVE="$APP_ANSWER"
-fi
+POL_Call POL_GoG_setup "$GOGID" "b9925ca60f016cf67cdfafceeb5623e7"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 

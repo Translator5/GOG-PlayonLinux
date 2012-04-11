@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 00-06)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-11 22-13)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -8,47 +8,32 @@
 # Program licence : Retail
 # Depend :
 
-# Tested with install archives:
-# setup_septerra_core.exe 600263467 "22839e19bc5c8db1e557810e01be6e42"
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="septerra_core_legacy_of_the_creator"
 PREFIX="SepterraCore_gog"
 WORKING_WINE_VERSION="1.3.37"
-INSTALLBIN="setup_septerra_core.exe"
 
 TITLE="Septerra Core: Legacy of the Creator (GoG release)"
-URL="http://www.gog.com/en/gamecard/septerra_core_legacy_of_the_creator"
 SHORTCUT_NAME="Septerra Core"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "$URL" "Pierre Etchemaite" "$PREFIX"
-
-if [ -z "$POL_SELECTED_FILE" ]; then
-    POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-    [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
-fi
+POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-if [ -n "$POL_SELECTED_FILE" ]; then
-    ARCHIVE="$POL_SELECTED_FILE"
-else
-    cd $HOME
-    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-    ARCHIVE="$APP_ANSWER"
-fi
+POL_Call POL_GoG_setup "$GOGID" "22839e19bc5c8db1e557810e01be6e42"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
-POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
