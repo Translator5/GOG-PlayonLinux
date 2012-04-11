@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-02 22-13)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-12 00-50)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -14,6 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 GOGID="fallout"
 PREFIX="Fallout_gog"
 WORKING_WINE_VERSION="1.3.36"
+[ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.3.7"
 
 TITLE="Fallout (GoG release)"
 SHORTCUT_NAME="Fallout"
