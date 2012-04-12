@@ -34,6 +34,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
   => renice wineserver!!
 
 * Alone in the Dark 1+2+3
+* Anachronox
 * Another World: 15th Anniversary Edition
 * Arcanum: Of Steamworks and Magick Obscura
 * ArmA: Cold War Assault
@@ -60,6 +61,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Creatures Exodus
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
+* Deus Ex™ GOTY Edition
 * Divine Divinity
   * PlayOnLinux
   - installs Ok, display bug with Direct3D, should use DirectDraw instead
@@ -346,6 +348,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Teenagent
 * Temple of Elemental Evil, The
 * Tex Murphy: Under a Killing Moon
+* Theme Hospital
 * Tom Clancy's Ghost Recon®
 * Two Worlds
 * Tyrian 2000
