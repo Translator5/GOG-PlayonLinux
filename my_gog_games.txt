@@ -138,6 +138,7 @@ REGEDIT4
     - Manual [Manual.pdf]
     - Readme [Readme.txt]
 
+* Fallout Tactics
 * Far Cry®
   * PlayOnLinux
   - Fine in Direct3D9, only problem is water looking bad
@@ -240,6 +241,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
 * Jack Orlando: A Cinematic Adventure (DC)
 * Jagged Alliance 2
 * Journeyman Project 2, The
+* Kingpin: Life of Crime
 * Lands of Lore™ 1+2
 * Last Express, The
   * Crossover Games 10
@@ -250,12 +252,14 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
   - Manual [Manual.pdf]
   - Readme [Readme.txt]
 
+* Lionheart: Legacy of the Crusader
 * Little Big Adventure (Relentless: Twinsen's Adventure)
 * Little Big Adventure 2 (Twinsen's Odyssey)
 * Longest Journey, The
 * Lure of the Temptress
 * Master of Orion 1+2
 * Might and Magic® 6-pack: Limited Edition
+* MDK 2
 * Moto Racer
 * Neverwinter Nights: Diamond Edition
 * Nox™
@@ -299,6 +303,7 @@ Les logiciels suivants seront également installés : Polices de base, Paquet r
     Force compatibility to win9x to avoid a warning
   Also read one could call sntrm.exe -w for windowed mode
 
+* Screamer
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
   Native demo http://demofiles.linuxgamepublishing.com/shadowgrounds/shadowgrounds-demo.run
