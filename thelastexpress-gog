@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-04-11 22-02)
-# Wine version used : 1.3.36
+# Last revision : (2012-04-14 17-17)
+# Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="last_express_the"
 PREFIX="LastExpress_gog"
-WORKING_WINE_VERSION="1.3.36"
+WORKING_WINE_VERSION="1.4-dos_support"
 
 TITLE="The Last Express (GoG release)"
 SHORTCUT_NAME="The Last Express"
@@ -25,10 +25,6 @@ POL_SetupWindow_presentation "$TITLE" "Smoking Car Productions / Phoenix Licensi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)')" "$TITLE"
-NATIVEDOSBOX=''
-[ "$APP_ANSWER" = "TRUE" ] && NATIVEDOSBOX=1
 
 POL_Call POL_GoG_setup "$GOGID" "fa23dcee7dc701d8d33f12d3037433e8"
 
@@ -47,52 +43,18 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "2"
 
+cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
+mount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/data" -t cdrom
+_EOFAE_
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-# Native DosBox incompatible statement...
-sed -i.orig 's/^mount D "\.\\data"/mount D "data"/i' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/dosboxTLE.conf"
-
 cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/The Last Express/" "C:/$PROGRAMFILES/GOG.com/The Last Express/DOSBOX/DOSBox.exe" "" "$SHORTCUT_NAME" "" '-conf dosboxTLE.conf -noconsole -c "exit"'
-if [ -n "$NATIVEDOSBOX" ]; then
-    # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-    POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
-    POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec dosbox -conf dosboxTLE.conf"
-fi
+POL_Shortcut "EXPRESS.EXE" "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/Manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/The Last Express/Readme.txt
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/The Last Express/" || exit 1
-
-if [ -n "$NATIVEDOSBOX" ]; then
-    # Make sure that if user presses "start game", it will launch the right dosbox
-    DOSBOX="`which dosbox`"
-    if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/tlenativedosbox.reg
-	REGEDIT4
-
-	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGTHELASTEXPRESS]
-	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxTLE.conf"
-	_EOFINI_
-        POL_Wine regedit $POL_USER_ROOT/tmp/tlenativedosbox.reg
-        rm $POL_USER_ROOT/tmp/tlenativedosbox.reg
-    fi
-fi
-
-POL_Wine "Graphic Mode Setup.exe" GOGTHELASTEXPRESS
-
-_EOF_
 
 exit
