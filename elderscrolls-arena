@@ -1,12 +1,12 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-15 17-36)
+# Last revision : (2012-04-15 17-43)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
-# Depend : unrar-free
+# Depend :
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -85,13 +85,8 @@ _EOFBAT_
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-cd "$POL_USER_ROOT/tmp"
-POL_Download "http://www.deviantart.com/download/161685128/The_Elders_Scroll_series_icons_by_KingReverant.rar" "bb48661c9ced4db38947d50e07cbb062"
-unrar The_Elders_Scroll_series_icons_by_KingReverant.rar
-
-convert 'TES 1 Arena.png' -resize 32x32 "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-cp 'TES 1 Arena.png' "$POL_USER_ROOT/icones/full_size/$SHORTCUT_NAME"
-POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME"
+# Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
+POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
 
 POL_SetupWindow_Close
