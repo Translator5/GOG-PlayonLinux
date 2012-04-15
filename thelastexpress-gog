@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-04-14 17-17)
+# Last revision : (2012-04-15 14-02)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -43,8 +43,9 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "2"
 
+# Use drives from W downward
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-mount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/data" -t cdrom
+mount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/data" -t cdrom
 _EOFAE_
 
 # Doesn't hurt ;)
