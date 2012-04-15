@@ -38,9 +38,6 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 
 POL_Wine_WaitExit "$TITLE"
 
-# GoG work!
-Set_OS winxp
-
 # Doesn't hurt ;)
 POL_Wine_reboot
 
