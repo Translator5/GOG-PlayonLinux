@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-04-15 14-02)
+# Last revision : (2012-04-15 22-29)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -38,18 +38,10 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 POL_Wine_WaitExit "$TITLE"
 
 
-# GoG work!
-Set_OS winxp
-
-POL_SetupWindow_VMS "2"
-
 # Use drives from W downward
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 mount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/data" -t cdrom
 _EOFAE_
-
-# Doesn't hurt ;)
-POL_Wine_reboot
 
 cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Last Express/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
 POL_Shortcut "EXPRESS.EXE" "$SHORTCUT_NAME"
