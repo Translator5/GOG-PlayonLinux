@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-04-15 15-01)
+# Last revision : (2012-04-15 15-02)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -18,9 +18,7 @@ WORKING_WINE_VERSION="1.4-dos_support"
 TITLE="Starflight 1 and 2 (GoG release)"
 SHORTCUT1_NAME="Starflight 1"
 SHORTCUT1_CODEWHEEL="$SHORTCUT1_NAME - $(eval_gettext 'Code wheel')"
-SHORTCUT1_MAP="$SHORTCUT1_NAME - $(eval_gettext 'Stellar map')"
 SHORTCUT2_NAME="Starflight 2"
-SHORTCUT2_MAP="$SHORTCUT2_NAME - $(eval_gettext 'Stellar map')"
 
 POL_SetupWindow_Init
 POL_Debug_Init
