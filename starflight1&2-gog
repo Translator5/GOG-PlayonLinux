@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-04-15 14-55)
+# Last revision : (2012-04-15 15-01)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -64,7 +64,7 @@ cp "$STARFLT2/SF2.BAT" "$STARFLT2/SF2.BAK"
 # Create for Starflight 1 what has been done for Starflight 2: batch file to save/restore games
 cp "$STARFLT2/MMAIN.EXE" "$STARFLT1/STARFLT/PLAY/"
 cp "$STARFLT2/DPUT.EXE" "$STARFLT1/STARFLT/PLAY/"
-# graphic mode code (*.MOD files) could also be removed as it does nothing, not done for simplicity
+# graphic mode code (*.MOD files shuffling) could also be removed as it does nothing, not done for simplicity
 sed 's/STAR2A\.COM/STARA.COM/g' $STARFLT2/SF2.BAT | \
 sed 's/STAR2B\.COM/STARB.COM/g' | \
 sed 's/^STARFLT2/STARFLT\r\nREM IF SF1CHECK...\r\nCOPY STARA.COM LASTSAVE.SVA\r\nCOPY STARB.COM LASTSAVE.SVB/g' | \
