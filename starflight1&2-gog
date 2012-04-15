@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-04-15 15-02)
+# Last revision : (2012-04-15 15-21)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -38,6 +38,10 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 
 POL_Wine_WaitExit "$TITLE"
 
+cd "$POL_USER_ROOT/tmp"
+POL_Download "http://files.playonlinux.com/starflight_batches.tgz" "2ad24333904d2e875736ec3995f0e3aa"
+tar xzvf starflight_batches.tgz
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
@@ -49,22 +53,14 @@ STARFLT2="STARFLT2"
 mv "Starflight 1" "$STARFLT1"
 mv "Starflight 2" "$STARFLT2"
 
-
-# "file" doesn't recognize MSDOS batch files as such if they don't start with @ECHO OFF or end with ^Z
-# + fix typo in original (GAMEB8 instead of GAME.B8 in one place)
-cp "$STARFLT2/SF2.BAT" "$STARFLT2/SF2.BAK"
-(echo "@ECHO OFF"; sed 's/GAMEB8/GAME.B8/' < "$STARFLT2/SF2.BAK"; echo "EXIT") | tr -d '\32' > "$STARFLT2/SF2.BAT"
-
-
 # Create for Starflight 1 what has been done for Starflight 2: batch file to save/restore games
 cp "$STARFLT2/MMAIN.EXE" "$STARFLT1/STARFLT/PLAY/"
 cp "$STARFLT2/DPUT.EXE" "$STARFLT1/STARFLT/PLAY/"
-# graphic mode code (*.MOD files shuffling) could also be removed as it does nothing, not done for simplicity
-sed 's/STAR2A\.COM/STARA.COM/g' $STARFLT2/SF2.BAT | \
-sed 's/STAR2B\.COM/STARB.COM/g' | \
-sed 's/^STARFLT2/STARFLT\r\nREM IF SF1CHECK...\r\nCOPY STARA.COM LASTSAVE.SVA\r\nCOPY STARB.COM LASTSAVE.SVB/g' | \
-sed 's/ORIGINAL\.A/..\\START\\STARA.COM/g' | \
-sed 's/ORIGINAL\.B/..\\START\\STARB.COM/g' > $STARFLT1/STARFLT/PLAY/SF1.BAT
+cp "$POL_USER_ROOT/tmp/SF1.BAT" "$STARFLT1/STARFLT/PLAY/SF1.BAT"
+
+# "file" doesn't recognize MSDOS batch files as such if they don't start with @ECHO OFF or end with ^Z
+# + fix typo in original (GAMEB8 instead of GAME.B8 in one place)
+cp "$POL_USER_ROOT/tmp/SF2.BAT" "$STARFLT2/SF2.BAT"
 
 cp -n "$STARFLT1/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT1_NAME"
 POL_Shortcut "SF1.BAT" "$SHORTCUT1_NAME"
