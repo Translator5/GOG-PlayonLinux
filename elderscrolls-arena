@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-15 16-59)
+# Last revision : (2012-04-15 17-25)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -30,11 +30,8 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
 else
-    POL_SetupWindow_InstallMethod "DOWNLOAD,LOCAL"
-
-    if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
-        cd "$POL_USER_ROOT/tmp"
-        cat <<_EOFTOU_ > arena_tou.txt
+    cd "$POL_USER_ROOT/tmp"
+    cat <<_EOFTOU_ > arena_tou.txt
 THE ELDER SCROLLS: ARENA
 For Win2k/WinXP
 
@@ -54,19 +51,12 @@ IF YOU DO NOT AGREE, DO NOT INSTALL.
 
 5. You acknowledge that Bethesda Softworks owns any and all trademark, copyright and other proprietary rights to this Product.
 _EOFTOU_
-        POL_SetupWindow_license "Terms of Use For Arena" "$TITLE" "arena_tou.txt"
+    POL_SetupWindow_licence "Terms of Use For Arena" "$TITLE" "$POL_USER_ROOT/tmp/arena_tou.txt"
 
 
-        POL_Download "http://cms.elderscrolls.com/sites/default/files/tes/extras/Arena106Setup.zip" "b55b3ddcce98c1905a723781dbe1df7c"
-        unzip "Arena106Setup.zip"
-        ARCHIVE="$POL_USER_ROOT/tmp/Arena106.exe"
-    fi
-
-    if [ "$INSTALL_METHOD" = "LOCAL" ]; then
-        cd $HOME
-        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
-        ARCHIVE="$APP_ANSWER"
-    fi
+    POL_Download "http://cms.elderscrolls.com/sites/default/files/tes/extras/Arena106Setup.zip" "b55b3ddcce98c1905a723781dbe1df7c"
+    unzip "Arena106Setup.zip"
+    ARCHIVE="$POL_USER_ROOT/tmp/Arena106.exe"
 fi
 
 DOCUMENT="$(dirname $ARCHIVE)/Arena106 Setup.pdf"
@@ -83,6 +73,15 @@ Set_OS winxp
 # 640x480x256
 POL_SetupWindow_VMS "1"
 
+cp "$POL_USER_ROOT/tmp/Arena106 Setup.pdf" "$WINEPREFIX/drive_c/ARENA/Docs/"
+
+# file doesn't recognize MSDOS batch files without @ECHO OFF
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/ARENA/ARENA.BAT"
+@ECHO OFF
+A -sa:220 -si:7 -sd:1 -ma:220 -mq:7 -md:1 -ssbdig.adv -msbfm.adv
+EXIT
+_EOFBAT_
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
@@ -93,12 +92,7 @@ unrar The_Elders_Scroll_series_icons_by_KingReverant.rar
 convert 'TES 1 Arena.png' -resize 32x32 "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
 cp 'TES 1 Arena.png' "$POL_USER_ROOT/icones/full_size/$SHORTCUT_NAME"
 POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME"
-if [ -e "$DOCUMENT" ]; then
-    cp "$DOCUMENT" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
-    POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
-else
-    POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Passwords.txt"
-fi
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
 
 POL_SetupWindow_Close
 
