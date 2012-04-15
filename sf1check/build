@@ -1,0 +1,2 @@
+#!/bin/sh
+bcc -ansi -Md -o sf1check.com sf1check.c

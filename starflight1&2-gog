@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-04-11 22-08)
-# Wine version used : 1.3.23
+# Last revision : (2012-04-15 12-29)
+# Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -13,9 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="starflight_1_2"
 PREFIX="Starflight_1_2_gog"
-WORKING_WINE_VERSION="1.3.23"
-# GoG tools (graphic mode setup, code wheel work _almost_ ok with 1.3.23
-# but are broken (controls don't react to clicks) with 1.3.33
+WORKING_WINE_VERSION="1.4-dos_support"
 
 TITLE="Starflight 1 and 2 (GoG release)"
 SHORTCUT1_NAME="Starflight 1"
@@ -30,13 +28,6 @@ POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http:/
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_SetupWindow_question "$(eval_gettext 'This game uses the DOSBox emulator, that also exists natively for Linux.\nUse native version when present? (Recommended)')" "$TITLE"
-NATIVEDOSBOX=''
-[ "$APP_ANSWER" = "TRUE" ] && NATIVEDOSBOX=1
-
-# SF1 original interface for game backups involved DOS prompt, restoring this (almost: start in game however)
-SF1DROPINCONSOLE=1
 
 POL_Call POL_GoG_setup "$GOGID" "4b3e884d1bbe066470338456991dc73e"
 
@@ -55,116 +46,321 @@ Set_OS winxp
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-# Sadly, it seems GoG installer unpacks both games even if you only ask for 1
-# So test below is uneffective and all shortcuts are always created
-if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1" ]; then
-    # Better default settings in my opinion
-    sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^cycles=.*/cycles=auto/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
+# Create for Starflight 1 what has been done for Starflight 2: batch file to save/restore games
+cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/MMAIN.EXE" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/STARFLT/PLAY/"
+cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/DPUT.EXE" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/STARFLT/PLAY/"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/STARFLT/PLAY/sf1.bat"
+@ECHO OFF
 
-    # GoG default
-    DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole -c "exit"'
-    if [ -n "$SF1DROPINCONSOLE" ]; then
-        DOSBOX_PARAMS='-conf dosboxSF1.conf -noconsole'
-        cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf1dropinconsole.reg
-	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
-	"DOSBOXPARAM"="$DOSBOX_PARAMS"
-	"LAUNCHCOMMAND"="\"C:\\Program Files\\GOG.com\\Starflight 1 and 2\\DOSBOX\\dosbox.exe\" $DOSBOX_PARAMS"
-	_EOFINI_
-        POL_Wine regedit $POL_USER_ROOT/tmp/sf1dropinconsole.reg
-        rm $POL_USER_ROOT/tmp/sf1dropinconsole.reg
-        sed -i -e 's/^exit.*/type HDNOTESA.TXT/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/dosboxSF1.conf"
-    fi
+:MAIN
+PAUSE
+CLS
+MMAIN.EXE
+CLS
+IF ERRORLEVEL 5 GOTO QUIT
+IF ERRORLEVEL 4 GOTO DLETE
+IF ERRORLEVEL 3 GOTO SAVE
+IF ERRORLEVEL 2 GOTO PLAY
+IF ERRORLEVEL 1 GOTO RSUME
+IF ERRORLEVEL 0 GOTO PNEW
 
-    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT1_NAME"
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT1_NAME" "" "$DOSBOX_PARAMS"
-    if [ -n "$NATIVEDOSBOX" ]; then
-        # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "shopt -s execfail"
-        POL_Shortcut_InsertBeforeWine "$SHORTCUT1_NAME" "exec dosbox $DOSBOX_PARAMS"
-    fi
-    POL_Shortcut_Document "$SHORTCUT1_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/manual.pdf"
 
-    POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL"
 
-    POL_Shortcut "start.exe" "$SHORTCUT1_MAP" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/map.pdf'"
-fi
 
-if [ -d "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2" ]; then
-    # Better default settings in my opinion
-    sed -i.orig -e 's/^output=.*/output=OpenGL/; s/^fullscreen=.*/fullscreen=false/; s/^scaler=.*/scaler=hq2x/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/dosboxSF2.conf"
+:DLETE
+IF NOT EXISTS GAME.B* GOTO NOTEXIS
+DIR GAME.B*
+ECHO  Delete which saved game? (1-9)
+ECHO  Press space the Enter to cancel
 
-    cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT2_NAME"
-    POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/" "C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/DOSBOX/DOSBox.exe" "" "$SHORTCUT2_NAME" "" "-conf dosboxSF2.conf -noconsole -c \"exit\""
-    if [ -n "$NATIVEDOSBOX" ]; then
-        # Thanks to exec, will only start W32 dosbox if native dosbox fails to start
-        POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "shopt -s execfail"
-        POL_Shortcut_InsertBeforeWine "$SHORTCUT2_NAME" "exec dosbox -conf dosboxSF2.conf"
-    fi
-    POL_Shortcut_Document "$SHORTCUT2_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/manual.pdf"
+DPUT.EXE
 
-    POL_Shortcut "start.exe" "$SHORTCUT2_MAP" "" "'C:/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/map.pdf'"
-fi
+IF ERRORLEVEL 9 GOTO CANCEL
+
+IF NOT ERRORLEVEL 8 GOTO DEIGHT
+IF EXISTS GAME.9SV DEL GAME.9SV
+IF EXISTS GAME.B9 DEL GAME.B9
+ECHO Game number 9 no longer exists...
+GOTO MAIN
+
+:DEIGHT
+IF NOT ERRORLEVEL 7 GOTO DSEVEN
+IF EXISTS GAME.8SV DEL GAME.8SV
+IF EXISTS GAME.B8 DEL GAME.B8
+ECHO Game number 8 no longer exists...
+GOTO MAIN
+
+:DSEVEN
+IF NOT ERRORLEVEL 6 GOTO DSIX
+IF EXISTS GAME.7SV DEL GAME.7SV
+IF EXISTS GAME.B7 DEL GAME.B7
+ECHO Game number 7 no longer exists...
+GOTO MAIN
+
+:DSIX
+IF NOT ERRORLEVEL 5 GOTO DFIVE
+IF EXISTS GAME.6SV DEL GAME.6SV
+IF EXISTS GAME.B6 DEL GAME.B6
+ECHO Game number 6 no longer exists...
+GOTO MAIN
+
+:DFIVE
+IF NOT ERRORLEVEL 4 GOTO DFOUR
+IF EXISTS GAME.5SV DEL GAME.5SV
+IF EXISTS GAME.B5 DEL GAME.B5
+ECHO Game number 5 no longer exists...
+GOTO MAIN
+
+:DFOUR
+IF NOT ERRORLEVEL 3 GOTO DTHREE
+IF EXISTS GAME.4SV DEL GAME.4SV
+IF EXISTS GAME.B4 DEL GAME.B4
+ECHO Game number 4 no longer exists...
+GOTO MAIN
+
+:DTHREE
+IF NOT ERRORLEVEL 2 GOTO DTWO
+IF EXISTS GAME.3SV DEL GAME.3SV
+IF EXISTS GAME.B3 DEL GAME.B3
+ECHO Game number 3 no longer exists...
+GOTO MAIN
+
+:DTWO
+IF NOT ERRORLEVEL 1 GOTO DONE
+IF EXISTS GAME.2SV DEL GAME.2SV
+IF EXISTS GAME.B2 DEL GAME.B2
+ECHO Game number 2 no longer exists...
+GOTO MAIN
+
+:DONE
+IF EXISTS GAME.1SV DEL GAME.1SV
+IF EXISTS GAME.B1 DEL GAME.B1
+ECHO Game number 1 no longer exists...
+GOTO MAIN
+
+
+
+
+:RSUME
+IF NOT EXIST LASTSAVE.SVA GOTO NOTEXIS
+ECHO Copying LASTSAVE to current game
+COPY LASTSAVE.SVA STARA.COM
+COPY LASTSAVE.SVB STARB.COM
+GOTO START
+
+
+
+
+:PLAY
+IF NOT EXISTS GAME.B* GOTO NOTEXIS
+DIR GAME.B*
+ECHO  Play which saved game? (1-9)
+ECHO  Press space then Enter to cancel
+
+DPUT.EXE
+
+IF ERRORLEVEL 9 GOTO CANCEL
+
+IF NOT ERRORLEVEL 8 GOTO EEIGHT
+IF NOT EXISTS GAME.9SV GOTO NOTEXIS
+COPY GAME.9SV STARA.COM
+COPY GAME.B9 STARB.COM
+ECHO Game 9 is now ready to be played
+GOTO START
+
+:EEIGHT
+IF NOT ERRORLEVEL 7 GOTO ESEVEN
+IF NOT EXISTS GAME.8SV GOTO NOTEXIS
+COPY GAME.8SV STARA.COM
+COPY GAME.B8 STARB.COM
+ECHO Game 8 is now ready to be played
+GOTO START
+
+:ESEVEN
+IF NOT ERRORLEVEL 6 GOTO ESIX
+IF NOT EXISTS GAME.7SV GOTO NOTEXIS
+COPY GAME.7SV STARA.COM
+COPY GAME.B7 STARB.COM
+ECHO Game 7 is now ready to be played
+GOTO START
+
+:ESIX
+IF NOT ERRORLEVEL 5 GOTO EFIVE
+IF NOT EXISTS GAME.6SV GOTO NOTEXIS
+COPY GAME.6SV STARA.COM
+COPY GAME.B6 STARB.COM
+ECHO Game 6 is now ready to be played
+GOTO START
+
+:EFIVE
+IF NOT ERRORLEVEL 4 GOTO EFOUR
+IF NOT EXISTS GAME.5SV GOTO NOTEXIS
+COPY GAME.5SV STARA.COM
+COPY GAME.B5 STARB.COM
+ECHO Game 5 is now ready to be played
+GOTO START
+
+:EFOUR
+IF NOT ERRORLEVEL 3 GOTO ETHREE
+IF NOT EXISTS GAME.4SV GOTO NOTEXIS
+COPY GAME.4SV STARA.COM
+COPY GAME.B4 STARB.COM
+ECHO Game 4 is now ready to be played
+GOTO START
+
+:ETHREE
+IF NOT ERRORLEVEL 2 GOTO ETWO
+IF NOT EXISTS GAME.3SV GOTO NOTEXIS
+COPY GAME.3SV STARA.COM
+COPY GAME.B3 STARB.COM
+ECHO Game 3 is now ready to be played
+GOTO START
+
+:ETWO
+IF NOT ERRORLEVEL 1 GOTO EONE
+IF NOT EXISTS GAME.2SV GOTO NOTEXIS
+COPY GAME.2SV STARA.COM
+COPY GAME.B2 STARB.COM
+ECHO Game 2 is now ready to be played
+GOTO START
+
+:EONE
+IF NOT EXISTS GAME.1SV GOTO NOTEXIS
+COPY GAME.1SV STARA.COM
+COPY GAME.B1 STARB.COM
+ECHO Game 1 is now ready to be played
+GOTO START
+
+
+
+
+:START
+ECHO Good luck!
+CLS
+STARFLT
+REM IF SF1CHECK...
+COPY STARA.COM LASTSAVE.SVA
+COPY STARB.COM LASTSAVE.SVB
+GOTO MAIN
+
+
+
+:NOTEXIS
+ECHO Either there are no saved games to delete/play
+ECHO or you have chosen one that does not exist.
+ECHO Please try another option.
+GOTO MAIN
+
+
+
+
+:SAVE
+IF NOT EXIST LASTSAVE.SVA GOTO NOTEXIS
+
+
+IF EXIST GAME.1* GOTO STWO
+COPY LASTSAVE.SVA GAME.1SV
+COPY LASTSAVE.SVN GAME.B1
+ECHO Game saved as GAME.1SV
+GOTO MAIN
+
+:STWO
+IF EXISTS GAME.2* GOTO STHREE
+COPY LASTSAVE.SVA GAME.2SV
+COPY LASTSAVE.SVN GAME.B2
+ECHO Game saved as GAME.2SV
+GOTO MAIN
+
+:STHREE
+IF EXISTS GAME.3* GOTO SFOUR
+COPY LASTSAVE.SVA GAME.3SV
+COPY LASTSAVE.SVN GAME.B3
+ECHO Game saved as GAME.3SV
+GOTO MAIN
+
+:SFOUR
+IF EXISTS GAME.4* GOTO SFIVE
+COPY LASTSAVE.SVA GAME.4SV
+COPY LASTSAVE.SVN GAME.B4
+ECHO Game saved as GAME.4SV
+GOTO MAIN
+
+:SFIVE
+IF EXISTS GAME.5* GOTO SSIX
+COPY LASTSAVE.SVA GAME.5SV
+COPY LASTSAVE.SVN GAME.B5
+ECHO Game saved as GAME.5SV
+GOTO MAIN
+
+:SSIX
+IF EXISTS GAME.6* GOTO SSEVEN
+COPY LASTSAVE.SVA GAME.6SV
+COPY LASTSAVE.SVN GAME.B6
+ECHO Game saved as GAME.6SV
+GOTO MAIN
+
+:SSEVEN
+IF EXISTS GAME.7* GOTO SEIGHT
+COPY LASTSAVE.SVA GAME.7SV
+COPY LASTSAVE.SVN GAME.B7
+ECHO Game saved as GAME.7SV
+GOTO MAIN
+
+:SEIGHT
+IF EXISTS GAME.8* GOTO SNINE
+COPY LASTSAVE.SVA GAME.8SV
+COPY LASTSAVE.SVN GAME.B8
+ECHO Game saved as GAME.8SV
+GOTO MAIN
+
+:SNINE
+IF EXISTS GAME.9* GOTO ALLFULL
+COPY LASTSAVE.SVA GAME.9SV
+COPY LASTSAVE.SVN GAME.B9
+ECHO Game saved as GAME.9SV
+GOTO MAIN
+
+
+
+:ALLFULL
+ECHO You have nine saved games.
+ECHO You will have to delete a
+ECHO game before you can save.
+GOTO MAIN
+
+
+
+
+:PNEW
+ECHO Copying original files...
+COPY ..\START\STARA.COM STARA.COM
+COPY ..\START\STARB.COM STARB.COM
+GOTO START
+
+
+
+
+:CANCEL
+ECHO Your request has been canceled
+GOTO MAIN
+
+
+:QUIT
+ECHO See you again soon!
+_EOFBAT_
+
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT1_NAME"
+POL_Shortcut "sf1.bat" "$SHORTCUT1_NAME"
+POL_Shortcut_Document "$SHORTCUT1_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 1/manual.pdf"
+# C:\Program Files\GOG.com\Starflight 1 and 2/Starflight 1/map.pdf
+
+POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL"
+
+cp -n "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT2_NAME"
+POL_Shortcut "sf2.bat" "$SHORTCUT2_NAME"
+POL_Shortcut_Document "$SHORTCUT2_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/Starflight 2/manual.pdf"
+# C:\Program Files\GOG.com\Starflight 1 and 2\Starflight 2\map.pdf
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > $POL_USER_ROOT/configurations/configurators/"$SHORTCUT1_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
-
-POL_LoadVar_PROGRAMFILES
-
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
-
-if [ -n "$NATIVEDOSBOX" ]; then
-    # Make sure that if user presses "start game", it will launch the right dosbox
-    DOSBOX="`which dosbox`"
-    if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf1nativedosbox.reg
-	REGEDIT4
-
-	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT1]
-	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF1.conf"
-	_EOFINI_
-        POL_Wine regedit $POL_USER_ROOT/tmp/sf1nativedosbox.reg
-        rm $POL_USER_ROOT/tmp/sf1nativedosbox.reg
-    fi
-fi
-
-POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT1"
-exit
-_EOF_
-
-cat <<_EOF_ > $POL_USER_ROOT/configurations/configurators/"$SHORTCUT2_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
-
-POL_LoadVar_PROGRAMFILES
-
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Starflight 1 and 2/" || exit
-
-if [ -n "$NATIVEDOSBOX" ]; then
-    # Make sure that if user presses "start game", it will launch the right dosbox
-    DOSBOX="`which dosbox`"
-    if [ -n "\$DOSBOX" ]; then
-	cat <<- _EOFINI_ > $POL_USER_ROOT/tmp/sf2nativedosbox.reg
-	REGEDIT4
-
-	[HKEY_LOCAL_MACHINE\Software\GOG.com\GOGSTARFLIGHT2]
-	"LAUNCHCOMMAND"="\$DOSBOX -conf dosboxSF2.conf"
-	_EOFINI_
-        POL_Wine regedit $POL_USER_ROOT/tmp/sf2nativedosbox.reg
-        rm $POL_USER_ROOT/tmp/sf2nativedosbox.reg
-    fi
-fi
-
-POL_Wine "Graphic mode setup.exe" "GOGSTARFLIGHT2"
-exit
-_EOF_
 
 exit
