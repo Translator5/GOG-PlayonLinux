@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-15 17-43)
+# Last revision : (2012-04-15 18-15)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -15,14 +15,14 @@ PREFIX="ElderScrolls_Arena"
 WORKING_WINE_VERSION="1.4-dos_support"
 
 TITLE="The Elder Scrolls - Arena"
-SHORTCUT_NAME="The Elder Scrolls - Arena"
+SHORTCUT_NAME="The Elder Scrolls: Arena"
 
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Bethesda Softworks" "http://www.elderscrolls.com/arena" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Bethesda Softworks" "http://www.elderscrolls.com/arena/" "Pierre Etchemaite" "$PREFIX"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -51,7 +51,7 @@ IF YOU DO NOT AGREE, DO NOT INSTALL.
 
 5. You acknowledge that Bethesda Softworks owns any and all trademark, copyright and other proprietary rights to this Product.
 _EOFTOU_
-    POL_SetupWindow_licence "Terms of Use For Arena" "$TITLE" "$POL_USER_ROOT/tmp/arena_tou.txt"
+    POL_SetupWindow_licence "Terms of Use of Arena" "$TITLE" "$POL_USER_ROOT/tmp/arena_tou.txt"
 
 
     POL_Download "http://cms.elderscrolls.com/sites/default/files/tes/extras/Arena106Setup.zip" "b55b3ddcce98c1905a723781dbe1df7c"
@@ -88,6 +88,8 @@ POL_Wine_reboot
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
 POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
+
+POL_SetupWindow_message "$(eval_gettext 'The codes needed to exit the first dungeon can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual" then check pp 3-4.')" "$TITLE"
 
 POL_SetupWindow_Close
 
