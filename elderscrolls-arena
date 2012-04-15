@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-15 18-15)
+# Last revision : (2012-04-15 18-23)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -89,7 +89,7 @@ POL_Wine_reboot
 POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
 
-POL_SetupWindow_message "$(eval_gettext 'The codes needed to exit the first dungeon can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual" then check pp 3-4.')" "$TITLE"
+POL_SetupWindow_message "$(eval_gettext 'The codes needed to exit the first dungeon can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual" then check pp 4-5.')" "$TITLE"
 
 POL_SetupWindow_Close
 
