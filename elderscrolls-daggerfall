@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-15 21-20)
+# Last revision : (2012-04-15 21-59)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -55,7 +55,7 @@ _EOFTOU_
 
     POL_Download "http://cms.elderscrolls.com/sites/default/files/tes/extras/DFInstall.zip" "3cdd09a5696c2b94c58b85488be7cba2"
 
-    POL_Download "http://files.playonlinux.com/unpk.py" "b86293a3a1bd2a9bd1762988cc87af6e"
+    POL_Download "http://files.playonlinux.com/unpk.py" "0e358342663c933eb7e49bb11d0ab1f2"
 fi
 
 POL_SetupWindow_wait "$(eval_gettext 'Decompressing archive...')" "$TITLE"
@@ -78,9 +78,7 @@ mkdir DAGGER/ARENA2/MAPS
 cp DFCD/DAGGER/ARENA2/MAPS/MAPSAVE.SAV DAGGER/ARENA2/MAPS/
 
 POL_SetupWindow_pulsebar "$(eval_gettext 'Decompressing archive...')" "$TITLE"
-# For some reason unpk.py output is CRLF delimited (?)
 python "$POL_USER_ROOT/tmp/unpk.py" DFCD/DAGGER/ARENA2/PACKED.DAT DAGGER/ | \
-tr -d '\15' | \
 while read line; do
   case "$line" in
       "Extracting file "*)
