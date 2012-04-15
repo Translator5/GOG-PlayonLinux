@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-15 21-59)
+# Last revision : (2012-04-15 22-08)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -126,22 +126,13 @@ cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
 mount W "$WINEPREFIX/drive_c/DFCD" -t cdrom -label Daggerfall
 _EOFBAT_
 
-POL_SetupWindow_pulsebar "$(eval_gettext 'Patching $TITLE...')" "$TITLE"
+POL_SetupWindow_wait "$(eval_gettext 'Patching $TITLE...')" "$TITLE"
 
 cd DAGGER
 WINEDEBUG="-all" POL_Wine "DAG213.EXE"
 
 POL_Wine_WaitExit "$TITLE"
 
-
-Set_OS winxp
-
-# ?x256
-POL_SetupWindow_VMS "1"
-
-
-# Doesn't hurt ;)
-POL_Wine_reboot
 
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
 POL_Shortcut "DAGGER/DAGGER.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
