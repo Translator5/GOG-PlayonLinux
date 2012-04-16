@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-15 22-09)
+# Last revision : (2012-04-16 20-39)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -15,7 +15,7 @@ PREFIX="ElderScrolls_Arena"
 WORKING_WINE_VERSION="1.4-dos_support"
 
 TITLE="The Elder Scrolls - Arena"
-SHORTCUT_NAME="The Elder Scrolls: Arena"
+SHORTCUT_NAME="The Elder Scrolls I: Arena"
 
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -71,7 +71,7 @@ POL_Wine_WaitExit "$TITLE"
 cp "$POL_USER_ROOT/tmp/Arena106 Setup.pdf" "$WINEPREFIX/drive_c/ARENA/Docs/"
 
 # file doesn't recognize MSDOS batch files without @ECHO OFF
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/ARENA/ARENA.BAT"
+cat <<'_EOFBAT_' |perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/ARENA/ARENA.BAT"
 @ECHO OFF
 A -sa:220 -si:7 -sd:1 -ma:220 -mq:7 -md:1 -ssbdig.adv -msbfm.adv
 EXIT
