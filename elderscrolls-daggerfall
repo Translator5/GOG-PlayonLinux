@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-16 20-38)
+# Last revision : (2012-04-16 20-51)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -79,7 +79,7 @@ mkdir DAGGER/ARENA2/MAPS
 cp DFCD/DAGGER/ARENA2/MAPS/MAPSAVE.SAV DAGGER/ARENA2/MAPS/
 
 POL_SetupWindow_pulsebar "$(eval_gettext 'Decompressing archive...')" "$TITLE"
-python "$POL_USER_ROOT/tmp/unpk.py" DFCD/DAGGER/ARENA2/PACKED.DAT DAGGER/ | \
+python -u "$POL_USER_ROOT/tmp/unpk.py" DFCD/DAGGER/ARENA2/PACKED.DAT DAGGER/ | \
 while read line; do
   case "$line" in
       "Extracting file "*)
