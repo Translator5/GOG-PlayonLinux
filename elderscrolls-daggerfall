@@ -111,6 +111,7 @@ cpatch() {
 cpatch "Hal's Tavern" 1047962 1483930 3822533 5168320 11861871 12007237 18182800 18226618 19076460 19558619 19694830 20135365
 cpatch "Chris's Inn" 1184610 1487514
 cpatch " Heights" 6286605 7318532
+# Expected MD5 hash 7121927d200ea03e5d833ae188a13cfa
 
 cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > DAGGER/Z.CFG
 type dfall_minimum
