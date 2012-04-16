@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-16 23-09)
+# Last revision : (2012-04-16 23-24)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -128,7 +128,7 @@ controls betaplyr.dat
 maps mapsave.sav
 _EOFCFG_
 
-cat <<'_EOFSND_' | perl -pe 's/\n/\r\n' > DAGGER/HMISET.CFG
+cat <<'_EOFSND_' | perl -pe 's/\n/\r\n/' > DAGGER/HMISET.CFG
 
 [DIGITAL]
 DeviceName  = Sound Blaster 16/AWE32    
