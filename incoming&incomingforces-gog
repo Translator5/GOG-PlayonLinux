@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-28 21-20)
-# Last revision : (2012-04-11 22-00)
+# Last revision : (2012-04-19 00-42)
 # Wine version used : 1.4-rc5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -26,10 +26,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Rage Software / Kalypso Media Digital" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "6bdfc2bc17028db1789d04333f329818"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "6bdfc2bc17028db1789d04333f329818"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

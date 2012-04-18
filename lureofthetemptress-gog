@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-11 19-24)
-# Last revision : (2012-04-11 21-44)
+# Last revision : (2012-04-19 00-39)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -26,14 +26,14 @@ POL_RequiredVersion "4.0.15"
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
 POL_SetupWindow_question "$(eval_gettext 'This game uses the ScummVM emulator, that also exists natively for Linux.\nUse native version when present?')" "$TITLE"
 NATIVESCUMMVM=''
 [ "$APP_ANSWER" = "TRUE" ] && NATIVESCUMMVM=1
 
 POL_Call POL_GoG_setup "$GOGID" "dcc8c74c53670f308a37dbead4181965"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

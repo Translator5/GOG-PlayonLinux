@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-04-11 21-46)
+# Last revision : (2012-04-19 00-40)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -27,10 +27,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "75ccff61fc37b3b04245f094850dce88"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "75ccff61fc37b3b04245f094850dce88"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

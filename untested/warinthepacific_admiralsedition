@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-12 16-11)
-# Last revision : (2012-04-07 20-54)
+# Last revision : (2012-04-19 00-49)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -24,12 +24,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Henderson Field Designs / Matrix Games" "$URL" "Fredrik Vollan (Pierre Etchemaite)" "$PREFIX"
 
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
 cd $HOME
 POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
 ARCHIVE="$APP_ANSWER"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

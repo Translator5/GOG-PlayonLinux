@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 10-47)
-# Last revision : (2012-04-11 23-53)
+# Last revision : (2012-04-19 00-50)
 # Wine version used : 1.3.27
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -29,10 +29,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "5e07fe97815bf329eacd1f0a474128cc" "9e5aec8eb2a8bea2626a51d36e72d12e" "ba9ed46b94eb84870e9e41eeab653859"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "5e07fe97815bf329eacd1f0a474128cc" "9e5aec8eb2a8bea2626a51d36e72d12e" "ba9ed46b94eb84870e9e41eeab653859"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

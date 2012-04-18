@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-26 20-43)
-# Last revision : (2012-04-12 00-20)
+# Last revision : (2012-04-19 00-35)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -25,10 +25,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Volition / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "06341f1ccd8f70a1e02cc236712e7726"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "06341f1ccd8f70a1e02cc236712e7726"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

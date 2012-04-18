@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-04-10 23-40)
+# Last revision : (2012-04-19 00-34)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -25,14 +25,14 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
 POL_SetupWindow_question "$(eval_gettext 'This game uses the ScummVM emulator, that also exists natively for Linux.\nUse native version when present?')" "$TITLE"
 NATIVESCUMMVM=''
 [ "$APP_ANSWER" = "TRUE" ] && NATIVESCUMMVM=1
 
 POL_Call POL_GoG_setup "$GOGID" "298f453852f4b057e80e255ad713d32e"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

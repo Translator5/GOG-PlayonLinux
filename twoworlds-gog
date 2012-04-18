@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2012-04-10 23-03)
+# Last revision : (2012-04-19 00-41)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,10 +23,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Reality Pump Studios / Topware Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "f59283baad1d482806a4302c6a105c66" "d0eab18be86037476a7cd4e47f1afc0a" "eb19df7336379a5b1355354ed69f124e"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "f59283baad1d482806a4302c6a105c66" "d0eab18be86037476a7cd4e47f1afc0a" "eb19df7336379a5b1355354ed69f124e"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

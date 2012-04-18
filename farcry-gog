@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 11-39)
-# Last revision : (2012-04-11 19-59)
+# Last revision : (2012-04-19 00-38)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -29,10 +29,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Crytek Studios / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "964f27d319571bd614db5d1df08e1912" "77a792e45ba865d6bbd0ca4e5a39a2a7" "d6c8edb29a4a1cce4e9f46774bf47eb0"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "964f27d319571bd614db5d1df08e1912" "77a792e45ba865d6bbd0ca4e5a39a2a7" "d6c8edb29a4a1cce4e9f46774bf47eb0"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

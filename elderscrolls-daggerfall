@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-16 23-24)
+# Last revision : (2012-04-19 00-49)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -26,9 +26,6 @@ POL_SetupWindow_Init
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bethesda Softworks" "http://www.elderscrolls.com/daggerfall/" "Pierre Etchemaite" "$PREFIX"
-
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 if [ -n "$POL_SELECTED_FILE" ]; then
 	ARCHIVE="$POL_SELECTED_FILE"
@@ -58,6 +55,9 @@ fi
 
 cd "$POL_USER_ROOT/tmp"
 POL_Download "http://files.playonlinux.com/unpk.py" "0e358342663c933eb7e49bb11d0ab1f2"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Decompressing archive...')" "$TITLE"
 

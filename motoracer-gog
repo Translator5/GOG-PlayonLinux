@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-01 20-38)
-# Last revision : (2012-04-12 00-02)
+# Last revision : (2012-04-19 00-51)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -30,10 +30,10 @@ POL_RequiredVersion "4.0.15"
 
 POL_SetupWindow_presentation "$TITLE" "Delphine Software / Anuman Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "39ffda45ac7504064cb9bd8ca193861e"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "39ffda45ac7504064cb9bd8ca193861e"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

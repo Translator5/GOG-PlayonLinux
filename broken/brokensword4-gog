@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 22-01)
-# Last revision : (2012-04-11 20-03)
+# Last revision : (2012-04-19 00-38)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,10 +23,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "04286672cfe5a99ec65e04d35d9e0b8c" "54f55cedc88e3ca94f81b99c102f6cf6" "259e76b3604e0ef871647093f8a0fb64"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "04286672cfe5a99ec65e04d35d9e0b8c" "54f55cedc88e3ca94f81b99c102f6cf6" "259e76b3604e0ef871647093f8a0fb64"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

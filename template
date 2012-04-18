@@ -34,9 +34,6 @@ if [ -z "$POL_SELECTED_FILE" -a -n "$URL" ]; then
     [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 fi
 
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
 if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
 else
@@ -44,6 +41,9 @@ else
     POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
     ARCHIVE="$APP_ANSWER"
 fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

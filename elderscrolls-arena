@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-16 20-39)
+# Last revision : (2012-04-19 00-52)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,9 +23,6 @@ POL_SetupWindow_Init
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bethesda Softworks" "http://www.elderscrolls.com/arena/" "Pierre Etchemaite" "$PREFIX"
-
-POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
@@ -60,6 +57,9 @@ _EOFTOU_
 fi
 
 DOCUMENT="$(dirname $ARCHIVE)/Arena106 Setup.pdf"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

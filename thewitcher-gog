@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2012-04-11 21-51)
+# Last revision : (2012-04-19 00-41)
 # Wine version used : 1.4-rc4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -23,10 +23,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "3acbfee8327e023bdc83efa92917279e" "f992a98576b3d561c8070a38c214ea91" "b0f2ad8ea420bfad9a4719e599f4f0bb" "f62a19ed67c59286c4d3c96995676d13" "e8d48571b065f9e798cff1aef56d3ae6" "9daaa7b2eac44bf19111fbb0670cd6db"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "3acbfee8327e023bdc83efa92917279e" "f992a98576b3d561c8070a38c214ea91" "b0f2ad8ea420bfad9a4719e599f4f0bb" "f62a19ed67c59286c4d3c96995676d13" "e8d48571b065f9e798cff1aef56d3ae6" "9daaa7b2eac44bf19111fbb0670cd6db"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 

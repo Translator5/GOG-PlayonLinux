@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2012-04-11 23-54)
+# Last revision : (2012-04-19 00-50)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -27,10 +27,10 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
+POL_Call POL_GoG_setup "$GOGID" "04779d4d56e828daff8f82ba239d96a3" "7db45f6fb84caa50f4b4679a63f30418" "23f6f6b2078b5b909eaacff0a8238586"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_GoG_setup "$GOGID" "04779d4d56e828daff8f82ba239d96a3" "7db45f6fb84caa50f4b4679a63f30418" "23f6f6b2078b5b909eaacff0a8238586"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
