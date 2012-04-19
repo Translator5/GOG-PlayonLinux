@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-19 21-51)
+# Last revision : (2012-04-19 22-39)
 # Wine version used : 1.4-dos_support_0.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -79,9 +79,10 @@ _EOFBAT_
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 render_frameskip=1
-render_scaler=hq2x
 cpu_cycles='max 95% limit 33000'
 _EOFCFG_
+# Doesn't work on OSX
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
 POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-delay:9 -exit"
