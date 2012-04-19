@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-19 00-52)
+# Last revision : (2012-04-19 21-23)
 # Wine version used : 1.4-dos_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="ElderScrolls_Arena"
-WORKING_WINE_VERSION="1.4-dos_support"
+WORKING_WINE_VERSION="1.4-dos_support_0.2"
 
 TITLE="The Elder Scrolls - Arena"
 SHORTCUT_NAME="The Elder Scrolls I: Arena"
