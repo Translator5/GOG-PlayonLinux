@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-19 21-23)
-# Wine version used : 1.4-dos_support
+# Last revision : (2012-04-19 21-51)
+# Wine version used : 1.4-dos_support_0.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
@@ -77,8 +77,14 @@ A -sa:220 -si:7 -sd:1 -ma:220 -mq:7 -md:1 -ssbdig.adv -msbfm.adv
 EXIT
 _EOFBAT_
 
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+render_frameskip=1
+render_scaler=hq2x
+cpu_cycles='max 95% limit 33000'
+_EOFCFG_
+
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
-POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
+POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-delay:9 -exit"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
 
 POL_SetupWindow_message "$(eval_gettext 'The codes needed to exit the first dungeon can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual" then check pp 4-5.')" "$TITLE"
