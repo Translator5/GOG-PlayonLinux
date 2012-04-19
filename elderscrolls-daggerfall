@@ -1,21 +1,18 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-19 00-49)
-# Wine version used : 1.4-dos_support
+# Last revision : (2012-04-19 21-56)
+# Wine version used : 1.4-dos_support_0.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
-# Comment: documentation recommends memsize=32 in dosbox conf
-# also, it says the installer must *not* be run fullscreen
-
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="ElderScrolls_Daggerfall"
-WORKING_WINE_VERSION="1.4-dos_support"
+WORKING_WINE_VERSION="1.4-dos_support_0.2"
 
 TITLE="The Elder Scrolls II - Daggerfall"
 SHORTCUT_NAME="The Elder Scrolls II: Daggerfall"
@@ -144,6 +141,13 @@ DevicePort  = 0x388
 DeviceID    = 0xa009
 
 _EOFSND_
+
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+dosbox_memsize=32
+render_scaler=hq2x
+cpu_cycles='max 95% limit 33000'
+auto_mount=false
+_EOFCFG_
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
 mount W "$WINEPREFIX/drive_c/DFCD" -t cdrom -label Daggerfall
