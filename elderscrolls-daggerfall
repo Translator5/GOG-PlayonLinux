@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-19 21-56)
+# Last revision : (2012-04-19 22-52)
 # Wine version used : 1.4-dos_support_0.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -144,10 +144,10 @@ _EOFSND_
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=32
-render_scaler=hq2x
 cpu_cycles='max 95% limit 33000'
 auto_mount=false
 _EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
 mount W "$WINEPREFIX/drive_c/DFCD" -t cdrom -label Daggerfall
