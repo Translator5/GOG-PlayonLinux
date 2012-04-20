@@ -1,0 +1,156 @@
+#!/bin/bash
+# Date : (2012-04-20 21-33)
+# Last revision : (2012-04-21 00-27)
+# Wine version used : 1.4-dos_support_0.2
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite petchema@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="redneck_rampage_collection"
+PREFIX="RedneckRampage_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.2"
+
+TITLE="Redneck Rampage collection (GoG release)"
+SHORTCUT_NAME1="Redneck Rampage"
+SHORTCUT_NAME2="Suckin' Grits on Route 66"
+SHORTCUT_NAME3="Redneck Rampage Rides Again"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Xatrix Entertainment / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "ba42e0818496ff76a3f3a23a243bf354"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection" || POL_Debug_Fatal "Game not installed in standard path?"
+
+# Problem with shortizing "Redneck Rampage" and "Redneck Rides Again" subdirectories side-by-side :(
+REDNECK3="REDNECK3"
+mv "Redneck Rides Again" "$REDNECK3"
+
+
+POL_SetupWindow_VMS "2"
+
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+auto_mount=false
+_EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
+imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/REDNECK.inst" -t iso -fs iso
+imgmount V "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/$REDNECK3/RRRAGAIN.inst" -t iso -fs iso
+_EOFAE_
+
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/RR.BAT"
+@ECHO OFF
+fix.exe
+rr.exe
+EXIT
+_EOFBAT_
+
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/RRSETUP.BAT"
+@ECHO OFF
+fix.exe
+setup.exe
+EXIT
+_EOFBAT_
+
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/66.BAT"
+@ECHO OFF
+fix.exe
+ROUTE66.EXE
+EXIT
+_EOFBAT_
+
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/66SETUP.BAT"
+@ECHO OFF
+fix.exe
+ROUTE66M.EXE
+EXIT
+_EOFBAT_
+
+POL_Shortcut "RR.BAT" "$SHORTCUT_NAME1"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/manual.pdf"
+
+POL_Shortcut "66.BAT" "$SHORTCUT_NAME2"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/ROUTE66.TXT"
+
+POL_Shortcut "RA.EXE" "$SHORTCUT_NAME3"
+POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/$REDNECK3/readme.TXT"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine RRSETUP.BAT
+
+_EOF_
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine 66SETUP.BAT
+
+_EOF_
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME3"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG=""
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Redneck Rampage Collection/$REDNECK3/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine SETUP.EXE
+
+_EOF_
+
+exit
