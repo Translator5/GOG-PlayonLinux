@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-20 21-33)
-# Last revision : (2012-04-21 00-27)
+# Last revision : (2012-04-21 00-56)
 # Wine version used : 1.4-dos_support_0.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite petchema@concept-micro.com
@@ -55,13 +55,9 @@ auto_mount=false
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/REDNECK.inst" -t iso -fs iso
-imgmount V "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/$REDNECK3/RRRAGAIN.inst" -t iso -fs iso
-_EOFAE_
-
-cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/RR.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/RR.BAT"
 @ECHO OFF
+imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/REDNECK.inst" -t iso -fs iso
 fix.exe
 rr.exe
 EXIT
@@ -74,8 +70,9 @@ setup.exe
 EXIT
 _EOFBAT_
 
-cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/66.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/66.BAT"
 @ECHO OFF
+imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/REDNECK.inst" -t iso -fs iso
 fix.exe
 ROUTE66.EXE
 EXIT
@@ -88,13 +85,20 @@ ROUTE66M.EXE
 EXIT
 _EOFBAT_
 
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/$REDNECK3/RA.BAT"
+@ECHO OFF
+imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/$REDNECK3/RRRAGAIN.inst" -t iso -fs iso
+RA.EXE
+EXIT
+_EOFBAT_
+
 POL_Shortcut "RR.BAT" "$SHORTCUT_NAME1"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/manual.pdf"
 
 POL_Shortcut "66.BAT" "$SHORTCUT_NAME2"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/ROUTE66.TXT"
 
-POL_Shortcut "RA.EXE" "$SHORTCUT_NAME3"
+POL_Shortcut "RA.BAT" "$SHORTCUT_NAME3"
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/$REDNECK3/readme.TXT"
 
 POL_SetupWindow_Close
@@ -104,7 +108,7 @@ cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
+export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
@@ -122,7 +126,7 @@ cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
+export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
@@ -140,7 +144,7 @@ cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME3"
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
+export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
