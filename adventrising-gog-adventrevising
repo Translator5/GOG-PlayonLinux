@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-21 16-25)
-# Last revision : (2012-04-21 19-13)
+# Last revision : (2012-04-21 19-41)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -40,7 +40,9 @@ else
         cd "$HOME"
         POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
         ARCHIVE="$APP_ANSWER"
-    else
+    fi
+
+    if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
         cd "$POL_USER_ROOT/tmp"
         LITE_DESC="$(eval_gettext 'Lite (702MB), fix major issues (18 cutscenes)')"
         FULL_DESC="$(eval_gettext 'Full (1.5GB), fix even minor issues (49 cutscenes)')"
@@ -52,8 +54,9 @@ else
             POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part3.rar" "702a02f9503515134281bb85816fed09"
             POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part4.rar" "f53b9e6ba241c20191a4b5f231e4172f"
             ARCHIVE="$POL_USER_ROOT/tmp/AdventRevising lite(segmented).part1.rar"
+        fi
 
-        else
+        if [ "$APP_ANSWER" = "$FULL_DESC" ]; then
             POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part1.rar" "6922d7d0bcfb1db9f048c45a80a5ba7e"
             POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part2.rar" "498686c63cbe1774ac86ac95e0570003"
             POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part3.rar" "905da750ea5c9d2163cccf6adfe42c3f"
