@@ -1,0 +1,93 @@
+#!/bin/bash
+# Date : (2012-04-21 16-25)
+# Last revision : (2012-04-21 17-57)
+# Wine version used : 1.3.36
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Freeware
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+# Must match adventrising-gog script values
+PREFIX="AdventRising_gog"
+WORKING_WINE_VERSION="1.3.36"
+
+TITLE="Advent Rising: Advent Revising v1.0 patches"
+DOWNLOAD_URL="http://www.miketyndall.com/setz/Advent%20Revising/"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Setz" "$DOWNLOAD_URL" "Pierre Etchemaite" "$PREFIX"
+
+if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
+    POL_Debug_Fatal "$(eval_gettext 'You must install Advent Rising (GoG release) first!')"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_AutoSetVersionEnv
+POL_LoadVar_PROGRAMFILES
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    POL_SetupWindow_InstallMethod "LOCAL,DOWNLOAD"
+    case "$INSTALL_METHOD" in
+        LOCAL)
+            cd "$HOME"
+            POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+            ARCHIVE="$APP_ANSWER"
+            ;;
+
+        DOWNLOAD)
+            cd "$POL_USER_ROOT/tmp"
+            LITE_DESC="$(eval_gettext 'Lite (702MB), fix major issues (18 cutscenes)')"
+            FULL_DESC="$(eval_gettext 'Full (1.5GB), fix even minor issues (49 cutscenes)')"
+            POL_SetupWindow_menu "$(eval_gettext 'Which version do you want to install?')" "$TITLE" "${LITE_DESC}~${FULL_DESC}" "~"
+
+            case "$APP_ANSWER" in
+                "$LITE_DESC")
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part1.rar" "3aec0105b9d8513a7c7ccc6b97c264f7"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part2.rar" "c6b9c5a08633ba7720a73c52bdc4f320"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part3.rar" "702a02f9503515134281bb85816fed09"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20lite(segmented).part4.rar" "f53b9e6ba241c20191a4b5f231e4172f"
+                    ARCHIVE="$POL_USER_ROOT/tmp/AdventRevising lite(segmented).part1.rar"
+                    ;;
+
+                "$FULL_DESC")
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part1.rar" "6922d7d0bcfb1db9f048c45a80a5ba7e"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part2.rar" "498686c63cbe1774ac86ac95e0570003"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part3.rar" "905da750ea5c9d2163cccf6adfe42c3f"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part4.rar" "676869792b8fc19527f3edb3d8ba0aca"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part5.rar" "33e641a140b7278e0345ae058926abac"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part6.rar" "642fa8eb3e0d6402453b7035660ade96"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part7.rar" "6c8fd48fc00f8d432b520aa10ea71b13"
+                    POL_Download "${DOWNLOAD_URL}AdventRevising%20full(segmented).part8.rar" "bd3fe73f259e021eadb606c6d964ad51"
+                    ARCHIVE="$POL_USER_ROOT/tmp/AdventRevising full(segmented).part1.rar"
+                    ;;
+            esac
+            ;;
+    esac
+fi
+
+cd "$POL_USER_ROOT/tmp"
+POL_Download "http://files.playonlinux.com/UnxUtils.zip" "59567db7fc650e1e778f91702ed109c6"
+POL_System_ExtractSingleFile "UnxUtils.zip" "usr/local/wbin/unrar.exe" "$POL_USER_ROOT/tmp/unrar.exe"
+
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising" || POL_Debug_Fatal "Could not find game directory"
+
+POL_Wine "$POL_USER_ROOT/tmp/unrar.exe" x -v -o+ "$(winepath -w "$ARCHIVE")" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+POL_SetupWindow_message "$(eval_gettext 'Advent Revising patch has been installed;\nDont forget to leave some email to Setz for his work.')" "$TITLE"
+
+POL_SetupWindow_Close
+
+exit
