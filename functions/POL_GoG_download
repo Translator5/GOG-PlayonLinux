@@ -17,12 +17,22 @@ fi
 
 
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
-POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE" "http://www.gog.com/"
+while true; do
+	POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE" "http://www.gog.com/"
 
-POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
+	POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
-$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
-unset POL_LOGIN POL_PASSWORD
+	$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
+	unset POL_LOGIN POL_PASSWORD
+	local AUTH_SESSION="$(awk '$6 == \"guc_al\" { print $7 }' $COOKIES)"
+	[ "$AUTH_SESSION" != "0" ] && break
+
+	POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, retry?')" "$TITLE"
+	if [ "$APP_ANSWER" = "FALSE" ]; then
+		POL_SetupWindow_Close
+		exit
+	fi
+done
 
 
 [ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
