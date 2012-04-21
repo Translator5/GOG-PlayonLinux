@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-21 16-25)
-# Last revision : (2012-04-21 17-57)
+# Last revision : (2012-04-21 18-38)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -73,16 +73,31 @@ else
     esac
 fi
 
-cd "$POL_USER_ROOT/tmp"
-POL_Download "http://files.playonlinux.com/UnxUtils.zip" "59567db7fc650e1e778f91702ed109c6"
-POL_System_ExtractSingleFile "UnxUtils.zip" "usr/local/wbin/unrar.exe" "$POL_USER_ROOT/tmp/unrar.exe"
+POL_Download_Resource "http://files.playonlinux.com/unrar.exe" "eb6033179b6c6427f5f61e4fb3915ff4"
 
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Advent Rising" || POL_Debug_Fatal "Could not find game directory"
 
-POL_Wine "$POL_USER_ROOT/tmp/unrar.exe" x -v -o+ "$(winepath -w "$ARCHIVE")" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+TOTAL=$(POL_Wine "$POL_USER_ROOT/ressources/unrar.exe" l -v "$(winepath -w "$ARCHIVE")"|tail -n 2|head -n 1|awk '{ print $1 }')
+FILES=0
+
+POL_SetupWindow_pulsebar "$(eval_gettext 'Decompressing archive...')" "$TITLE"
+
+POL_Wine "$POL_USER_ROOT/ressources/unrar.exe" x -v -o+ "$(winepath -w "$ARCHIVE")" | \
+while read line; do
+  case "$line" in
+      "Extracting  "*)
+          let FILES++
+          line="${line%%   *}"
+          POL_SetupWindow_set_text "${line//\\//}"
+          POL_SetupWindow_pulse $((100 * FILES / TOTAL))
+          ;;
+  esac
+done
+
+[ $? = 0 ] || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
 
