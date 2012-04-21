@@ -29,7 +29,7 @@ while true; do
 	[ "$AUTH_SESSION" != "0" ] && break
 	unset AUTH_SESSION
 
-	POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, retry?')" "$TITLE"
+	POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, try again?')" "$TITLE"
 	if [ "$APP_ANSWER" = "FALSE" ]; then
 		POL_SetupWindow_Close
 		exit
