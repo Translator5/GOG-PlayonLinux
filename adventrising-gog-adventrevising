@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-21 16-25)
-# Last revision : (2012-04-21 18-59)
+# Last revision : (2012-04-21 19-13)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -12,6 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 # Must match adventrising-gog script values
+TITLE_REQUIRED="Advent Rising (GoG release)"
 PREFIX="AdventRising_gog"
 WORKING_WINE_VERSION="1.3.36"
 
@@ -24,7 +25,7 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Setz" "$DOWNLOAD_URL" "Pierre Etchemaite" "$PREFIX"
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_Debug_Fatal "$(eval_gettext 'You must install Advent Rising (GoG release) first!')"
+    POL_Debug_Fatal "$(eval_gettext 'Please install $TITLE_REQUIRED first')"
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
