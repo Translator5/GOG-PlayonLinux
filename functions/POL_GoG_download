@@ -24,8 +24,10 @@ while true; do
 
 	$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
 	unset POL_LOGIN POL_PASSWORD
-	local AUTH_SESSION="$(awk '$6 == \"guc_al\" { print $7 }' $COOKIES)"
+
+	local AUTH_SESSION="$(awk '\$6 == \"guc_al\" { print \$7 }' $COOKIES)"
 	[ "$AUTH_SESSION" != "0" ] && break
+	unset AUTH_SESSION
 
 	POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, retry?')" "$TITLE"
 	if [ "$APP_ANSWER" = "FALSE" ]; then
