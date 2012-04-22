@@ -48,7 +48,7 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "main.exe" "$SHORTCUT_NAME"
+POL_Shortcut "main.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Game Install Directory/Manual.pdf"
 
 POL_SetupWindow_Close
