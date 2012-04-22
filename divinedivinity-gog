@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2012-04-19 00-46)
-# Wine version used : 1.3.35
+# Last revision : (2012-04-22 09-20)
+# Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="divine_divinity"
 PREFIX="DivineDivinity_gog"
-WORKING_WINE_VERSION="1.3.35"
+WORKING_WINE_VERSION="1.4"
 
 TITLE="Divine Divinity (GoG release)"
 SHORTCUT_NAME="Divine Divinity"
@@ -36,12 +36,6 @@ POL_Call POL_Function_SetNativeExtension "pdf"
 POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
-
-# Default is Direct3D which creates display problems (trails)
-# Switch to DirectDraw
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divine Divinity" || POL_Debug_Fatal "$(eval_gettext 'Could not find program directory!')"
-cp slashed.cfg slashed.cfg.orig
-perl -e 'print "\x02\x00\x00\x00"' > slashed.cfg
 
 # GoG work!
 Set_OS winxp
