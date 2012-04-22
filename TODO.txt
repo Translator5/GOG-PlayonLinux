@@ -6,3 +6,5 @@ Outcast-gog-zenger-hires-patch:
 
 Starflight:
 	Improve icon setting
+
+Remove icon extraction tricks and put right icons on server in /files/resources/icones/
