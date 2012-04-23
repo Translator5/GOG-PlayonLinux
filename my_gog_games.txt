@@ -23,6 +23,8 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Broken Sword: Director's Cut + The Original Game
 * Chessmaster® 9000
 * Creatures Exodus
+* Dark Fall: The Journal
+* Dark Fall 2: Lights Out
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
 * Deus Ex™ GOTY Edition
@@ -74,6 +76,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Might and Magic® 6-pack: Limited Edition
 * MDK 2
 * Moto Racer
+* Nations Gold Edition, The 
 * Neverwinter Nights: Diamond Edition
 * Nox™
 * Oddworld: Abe's Exoddus
@@ -100,6 +103,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
 * Simon the Sorcerer 2
+* Soulbringer
 * Space Quest 4+5+6 
 * Spellforce Platinum
 * Starflight™ 1+2
