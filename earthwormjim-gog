@@ -1,0 +1,82 @@
+#!/bin/bash
+# Date : (2012-04-25 19-32)
+# Last revision : (2012-04-25 22-06)
+# Wine version used : 1.4-dos_support_0.3
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="earthworm_jim_1_2"
+PREFIX="EarthwormJim_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.3"
+
+TITLE="Earthworm Jim 1+2 (GoG release)"
+SHORTCUT_NAME1="Earthworm Jim"
+SHORTCUT_NAME2="Earthworm Jim 2"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Shiny Entertainment / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "c48f2fa00a7af4b713c113fdf3fca6c9"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+auto_mount=false
+dosbox_memsize=32
+dosbox_captures=CAPTURES
+render_frameskip=1
+_EOFCFG_
+
+# Both games expect themselves at the root of the current drive
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/"{EWJ1.DAT,EWJ1.EXE,EWJ1.ID,EWJ.CFG,SOUND.CFG,MOVIE.EXE,TOYSHOW.EXE} "$WINEPREFIX/drive_c"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/"{EWJ2.DAT,EWJ2.EXE,EWJ2.ID} "$WINEPREFIX/drive_c"
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/EWJ1.BAT"
+@ECHO OFF
+imgmount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.inst" -t iso -fs fat
+EWJ1.EXE 320x224
+exit
+_EOFBAT_
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/EWJ2.BAT"
+@ECHO OFF
+imgmount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.inst" -t iso -fs fat
+EWJ2.EXE
+exit
+_EOFBAT_
+
+# "256 colors SVGA"
+POL_SetupWindow_VMS "2"
+
+convert ico:"$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.ICO" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME1"
+POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/readme.txt"
+# C:\Program Files\GOG.com\Earthworm Jim 1 and 2\Earthworm Jim\WORM0.HLP
+
+convert ico:"$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.ICO" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME2"
+POL_Shortcut "EWJ2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/readme.txt"
+
+POL_SetupWindow_Close
+
+exit
