@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-04-25 22-06)
+# Last revision : (2012-04-25 22-37)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,20 +47,20 @@ dosbox_captures=CAPTURES
 render_frameskip=1
 _EOFCFG_
 
-# Both games expect themselves at the root of the current drive
-mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/"{EWJ1.DAT,EWJ1.EXE,EWJ1.ID,EWJ.CFG,SOUND.CFG,MOVIE.EXE,TOYSHOW.EXE} "$WINEPREFIX/drive_c"
-mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/"{EWJ2.DAT,EWJ2.EXE,EWJ2.ID} "$WINEPREFIX/drive_c"
-
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/EWJ1.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/EWJ1.BAT"
 @ECHO OFF
-imgmount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.inst" -t iso -fs fat
+mount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/"
+imgmount B "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.inst" -t iso -fs fat
+A:
 EWJ1.EXE 320x224
 exit
 _EOFBAT_
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/EWJ2.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/EWJ2.BAT"
 @ECHO OFF
-imgmount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.inst" -t iso -fs fat
+mount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/"
+imgmount B "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.inst" -t iso -fs fat
+A:
 EWJ2.EXE
 exit
 _EOFBAT_
