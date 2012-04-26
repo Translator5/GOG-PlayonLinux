@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-26 23-18)
-# Last revision : (2012-04-26 23-44)
+# Last revision : (2012-04-27 00-42)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -43,8 +43,22 @@ cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 auto_mount=false
 dosbox_memsize=8
 cpu_cycles=max
+mixer_prebuffer=20
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+if [ "$POL_OS" = "Linux" ]; then
+	# use pmidi -l or aconnect -o list to check your (emulated) midi device
+	# 128:0 is just default software emulation port (usually Timidity)
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	render_scaler=hq2x
+	midi_mididevice=alsa
+	midi_midiconfig=128:0
+	_EOFCFG_
+fi
+if [ "$POL_OS" = "Mac"; then
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	midi_mididevice=coreaudio
+	_EOFCFG_
+fi
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight/GK1.gog" -t iso
