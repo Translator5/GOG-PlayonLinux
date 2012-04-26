@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-04-26 20-22)
+# Last revision : (2012-04-26 23-27)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -64,9 +64,6 @@ A:
 EWJ2.EXE
 exit
 _EOFBAT_
-
-# "256 colors SVGA"
-POL_SetupWindow_VMS "2"
 
 convert ico:"$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.ICO" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME1"
 POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
