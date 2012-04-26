@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-04-25 22-37)
+# Last revision : (2012-04-26 20-22)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,10 +42,10 @@ POL_Wine_WaitExit "$TITLE"
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 auto_mount=false
-dosbox_memsize=32
-dosbox_captures=CAPTURES
+dosbox_memsize=16
 render_frameskip=1
 _EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/EWJ1.BAT"
 @ECHO OFF

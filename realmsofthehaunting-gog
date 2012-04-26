@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-22 21-59)
-# Last revision : (2012-04-25 19-33)
+# Last revision : (2012-04-26 20-13)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -43,6 +43,7 @@ cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 auto_mount=false
 dosbox_memsize=16
 _EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # The game expects itself in C:\ROTH and CDROM in C:\DATA
 mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/"{ROTH,DATA,mapper.txt} "$WINEPREFIX/drive_c/"
