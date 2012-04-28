@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-26 23-18)
-# Last revision : (2012-04-28 09-23)
+# Last revision : (2012-04-28 09-55)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -64,8 +64,6 @@ cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight/GK1.gog" -t iso
 _EOFAE_
 
-POL_ExtractIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight/gfw_high.ico" "$POL_USER_ROOT/icones/full_size/$SHORTCUT_NAME"
 POL_Shortcut "SIERRA.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight/Manual.pdf"
 # C:\Program Files\GOG.com\Gabriel Knight\README.txt
