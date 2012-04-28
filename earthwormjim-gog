@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
 # Last revision : (2012-04-28 23-37)
-# Wine version used : 1.4-dos_support_0.3
+# Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="earthworm_jim_1_2"
 PREFIX="EarthwormJim_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.3"
+WORKING_WINE_VERSION="1.4-dos_support_0.4"
 
 TITLE="Earthworm Jim 1+2 (GoG release)"
 SHORTCUT_NAME1="Earthworm Jim"
