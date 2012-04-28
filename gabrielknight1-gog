@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-26 23-18)
-# Last revision : (2012-04-28 09-55)
+# Last revision : (2012-04-28 10-17)
 # Wine version used : 1.4-dos_support_0.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.4-dos_support_0.3"
 TITLE="Gabriel Knight - Sins of the Fathers (GoG release)"
 SHORTCUT_NAME="Gabriel Knight 1: Sins of the Fathers"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
