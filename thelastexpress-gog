@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2012-04-28 23-36)
-# Wine version used : 1.4-dos_support_0.2
+# Last revision : (2012-04-29 01-24)
+# Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="last_express_the"
 PREFIX="LastExpress_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.2"
+WORKING_WINE_VERSION="1.4-dos_support_0.4"
 
 TITLE="The Last Express (GoG release)"
 SHORTCUT_NAME="The Last Express"
