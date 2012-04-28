@@ -1,6 +1,6 @@
 /files/resources/
   icones/
-    <scriptname>.png
+    <shortcutname>.png
       PNG 48 x 48, 128 x 128, 256 x 256
 
   icones_install/
