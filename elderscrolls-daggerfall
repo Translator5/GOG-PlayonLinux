@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-28 23-36)
-# Wine version used : 1.4-dos_support_0.2
+# Last revision : (2012-04-29 13-00)
+# Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -12,12 +12,12 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="ElderScrolls_Daggerfall"
-WORKING_WINE_VERSION="1.4-dos_support_0.2"
+WORKING_WINE_VERSION="1.4-dos_support_0.4"
 
 TITLE="The Elder Scrolls II - Daggerfall"
 SHORTCUT_NAME="The Elder Scrolls II: Daggerfall"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -51,6 +51,9 @@ _EOFTOU_
 fi
 
 cd "$POL_USER_ROOT/tmp"
+
+POL_Download "http://theelderscrolls.wiwiland.net/Fichiers/DaggerfallManuel.pdf" "423efeebc9adfbddf5b8bd7e566d1eac"
+
 POL_Download "http://files.playonlinux.com/unpk.py" "0e358342663c933eb7e49bb11d0ab1f2"
 
 POL_Wine_SelectPrefix "$PREFIX"
@@ -153,11 +156,14 @@ cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
 mount W "$WINEPREFIX/drive_c/DFCD" -t cdrom -label Daggerfall
 _EOFBAT_
 
+cp "$POL_USER_ROOT/tmp/DaggerfallManuel.pdf" "$WINEPREFIX/drive_c/DAGGER/"
+
 POL_Wine_WaitExit "$TITLE"
 
 
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
 POL_Shortcut "DAGGER/DAGGER.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/DAGGER/DaggerfallManuel.pdf"
 
 POL_SetupWindow_Close
 
