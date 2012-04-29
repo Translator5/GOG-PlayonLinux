@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2012-04-29 18-39)
+# Last revision : (2012-04-29 20-10)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -45,6 +45,7 @@ POL_SetupWindow_VMS "2"
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
+sdl_autolock=false
 cpu_core=dynamic
 cpu_cycles=20000
 mixer_prebuffer=240
@@ -54,19 +55,46 @@ if [ "$POL_OS" = "Linux" ]; then
 	# 128:0 is just default software emulation port (usually Timidity)
 	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 	render_scaler=hq2x
-	midi_mididevice=alsa
-	midi_midiconfig=128:0
-	_EOFCFG_
-fi
-if [ "$POL_OS" = "Mac" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	midi_mididevice=coreaudio
 	_EOFCFG_
 fi
 
+# Internal SB16 sounds better than external MIDI... And that's one less dependency
+cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000.CFG"
+[SimCity 2000 Configuration File]
+
+[Video]
+VIDEONAME=VESA Super VGA
+VIDEOCARD=ve:31
+
+[Music]
+MUSICNAME=Sound Blaster 16
+MUSICDRIVER=A32SP2FM.DLL
+MUSICADDRESS=220
+MUSICIRQ=7
+MUSICDMA=1
+MUSICDRQ=*
+
+[Sound Effects]
+SFXNAME=Sound Blaster 16
+SFXDRIVER=A32SBPDG.DLL
+SFXADDRESS=220
+SFXIRQ=5
+SFXDMA=1
+SFXDRQ=*
+
+[MIDI Bank]
+MUSICFILES=SB
+
+[WillTV Path]
+WILLTV=D:\DOS
+_EOFCFG_
+
+# Game looks for its CDROM in D:
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount W "$WINEPREFIX/drive_c/$PROGRAMFILES/SimCity 2000 Special Edition/SC2000SE.DAT" -t iso -fs iso
+imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000SE.DAT" -t iso -fs iso
 _EOFAE_
+
+echo "EXIT" >> "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000.BAT"
 
 cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SCURK.BAT"
 @ECHO OFF
@@ -74,7 +102,7 @@ SCURK.COM
 exit
 _EOFBAT_
 
-POL_Shortcut "loader.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "SC2000.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/manual.pdf"
 
 POL_Shortcut "SCURK.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
