@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2012-04-29 20-10)
+# Last revision : (2012-04-29 20-21)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -51,8 +51,6 @@ cpu_cycles=20000
 mixer_prebuffer=240
 _EOFCFG_
 if [ "$POL_OS" = "Linux" ]; then
-	# use pmidi -l or aconnect -o list to check your (emulated) midi device
-	# 128:0 is just default software emulation port (usually Timidity)
 	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 	render_scaler=hq2x
 	_EOFCFG_
