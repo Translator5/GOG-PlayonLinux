@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2012-04-29 20-21)
+# Last revision : (2012-04-29 20-35)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -19,7 +19,7 @@ TITLE="Simcity 2000 Special Edition (GoG release)"
 SHORTCUT_NAME1="Simcity 2000 SE"
 SHORTCUT_NAME2="Simcity 2000 SE: Urban Renewal Kit"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
