@@ -1,0 +1,83 @@
+#!/bin/bash
+# Date : (2012-04-30 12-44)
+# Last revision : (2012-04-30 13-37)
+# Wine version used : 1.4-dos_support_0.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="little_big_adventure"
+PREFIX="LittleBigAdventure_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.4"
+
+TITLE="Little Big Adventure: Twinsen's Adventure (GoG release)"
+SHORTCUT_NAME="Little Big Adventure: Twinsen's Adventure"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Adeline Software International / Didier Chanfray SARL" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "8ec70c0d61802e04dab4406962a4f7e3"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+dosbox_memsize=30
+cpu_core=auto
+cpu_cputype=486_slow
+cpu_cycles='max 95% limit 20000'
+mixer_perbuffer=240
+_EOFCFG_
+
+cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
+imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure/LBA.DAT" -t iso
+mixer cdaudio 50:50
+_EOFAE_
+
+POL_Shortcut "RELENT.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_ExtractIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
+POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure/gfw_high.ico" "$POL_USER_ROOT/icones/full_size/$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure/manual.pdf"
+# C:\Program Files\GOG.com\Little Big Adventure/README.TXT
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Little Big Adventure/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+
+POL_Wine Language.exe
+
+exit
+_EOF_
+
+exit
