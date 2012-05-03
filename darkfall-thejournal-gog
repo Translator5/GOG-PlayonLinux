@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-30 09-59)
-# Last revision : (2012-04-30 10-47)
+# Last revision : (2012-05-03 18-26)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -23,7 +23,7 @@ POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jp
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Studio / Publisher" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "XXv Productions / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "4589541fcfa043a6b87d20bf855af648"
 
