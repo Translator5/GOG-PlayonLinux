@@ -77,9 +77,10 @@ download_piece ()
 download_piece "http://www.gog.com/en/download/game/$GAME/0" "setup_$GAME.exe" "$1" "$GAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
-	local n
-	for n in `seq 2 $PIECES`; do
+	local n=2
+	while [ $n -le $PIECES ]; do
 		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
+		let n=$((n+1))
 	done
 fi
 
