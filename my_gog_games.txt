@@ -38,6 +38,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Earthworm Jim 1 + 2
 * Empire Earth: Gold Edition
 * Enclave
+* Evil Genius
 * Fallout
 * Fallout 2
 * Fallout Tactics
@@ -116,6 +117,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Temple of Elemental Evil, The
 * Tex Murphy: Under a Killing Moon
 * Theme Hospital
+* Thief™ 2: The Metal Age
 * Tom Clancy's Ghost Recon®
 * Two Worlds
 * Tyrian 2000
