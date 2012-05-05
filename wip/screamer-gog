@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-04 23-09)
-# Last revision : (2012-05-05 00-22)
+# Last revision : (2012-05-05 11-36)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,11 +42,14 @@ POL_Wine_WaitExit "$TITLE"
 # Game expects itself at the root of C:
 mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Screamer/"* "$WINEPREFIX/drive_c/"
 
-# Game is a bit crash-prone http://www.dosbox.com/comp_list.php?showID=723
+# Screamer is a bit crash-prone http://www.dosbox.com/comp_list.php?showID=723
+mv "$WINEPREFIX/drive_c/GFX/MAP5H.DAT" "$WINEPREFIX/drive_c/GFX/real.MAP5H.DAT"
+cp "$WINEPREFIX/drive_c/GFX/MAP5L.DAT" "$WINEPREFIX/drive_c/GFX/MAP5H.DAT"
+
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 cpu_core=dynamic
-cpu_cycles=150000
+cpu_cycles='max 95% limit 120000'
 mixer_prebuffer=10
 ipx_enable=1
 ipx_connection=1
