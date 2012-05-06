@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-05-06 10-22)
+# Last revision : (2012-05-06 16-23)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -69,8 +69,7 @@ Set_Desktop "On" 640 480
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "" '-c "C:\'"$PROGRAMFILES"'\GOG.com\Simon the Sorcerer\simon1.ini" simon1'
-cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Simon the Sorcerer/game.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
+POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" '-c "C:\'"$PROGRAMFILES"'\GOG.com\Simon the Sorcerer\simon1.ini" simon1'
 if [ -n "$NATIVESCUMMVM" ]; then
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec scummvm -c '../simon1-unix.ini'"
