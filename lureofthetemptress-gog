@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-11 19-24)
-# Last revision : (2012-05-06 10-21)
+# Last revision : (2012-05-06 16-45)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -69,8 +69,7 @@ POL_SetupWindow_VMS "2"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "" '-c "C:\'"$PROGRAMFILES"'\GOG.com\Lure of the Temptress\lure.ini" lure'
-cp "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/game.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
+POL_Shortcut "scummvm.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" '-c "C:\'"$PROGRAMFILES"'\GOG.com\Lure of the Temptress\lure.ini" lure'
 if [ -n "$NATIVESCUMMVM" ]; then
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "shopt -s execfail"
     POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "exec scummvm -c '../lure-unix.ini'"
