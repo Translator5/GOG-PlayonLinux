@@ -1,0 +1,78 @@
+#!/bin/bash
+# Date : (2012-05-05 21-11)
+# Last revision : (2012-05-07 18-25)
+# Wine version used : 1.4-dos_support_0.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="betrayal_at_krondor"
+PREFIX="BetrayalAtKrondor_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.4"
+
+TITLE="Betrayal at Krondor Pack (GoG release)"
+SHORTCUT_NAME1="Betrayal at Krondor"
+SHORTCUT_NAME2="Betrayal in Antara"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Dynamix / Activision" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "348c6dbe598f15bfb08f1318fcce03d7"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+# "640x480 256 colors"
+POL_SetupWindow_VMS "2"
+
+# Problem with shortizing "Betrayal at Krondor" and "Betrayal in Antara" subdirectories side-by-side :(
+# *and* game expects itself in C:\
+KRONDOR="Krondor"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Betrayal Pack/Betrayal at Krondor"/* "$WINEPREFIX/drive_c/"
+
+cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+manual_mount=true
+dosbox_memsize=8
+cpu_core=auto
+cpu_cycles=max
+_EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+# Didn't want to mount "$WINEPREFIX/drive_c/bak.inst" (?)
+cat <<_EOFAE_  >"$WINEPREFIX/drive_c/autoexec.bat"
+c:
+imgmount d "bak~1.ins" -t iso -fs iso
+_EOFAE_
+
+# Betrayal at Krondor's icon comes from BaK desktop theme, could not find any other
+# http://www.sierrahelp.com/Games/KrondorSeries/BaKHelp.html
+
+POL_Shortcut "KRONDOR.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/Manual.pdf"
+# C:\Program Files\GOG.com\Betrayal Pack\Betrayal at Krondor\README.txt
+
+POL_Shortcut "ANTARAR.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Betrayal Pack/Betrayal in Antara/Manual.pdf"
+# C:\Program Files\GOG.com\Betrayal Pack\Betrayal in Antara\README.TXT
+
+POL_SetupWindow_Close
+
+exit
