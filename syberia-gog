@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2012-05-07 24-35)
+# Last revision : (2012-05-08 21-40)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,17 +47,17 @@ POL_SetupWindow_VMS "16"
 
 POL_Call POL_Install_vcrun6
 
-# GOG.com is supposed to be DRM-free?
 cd "$POL_USER_ROOT/tmp"
-POL_Download "http://designa-z.net/upload/Syberia_Collectors_Edition_Crack-MVFS.zip" "32807a3c7cddef1b913ac02e89f7ed7f"
-unzip -o "Syberia_Collectors_Edition_Crack-MVFS.zip"
-cd 'SYBERIA_COLLECTORS_EDITION_CRACK [-=MVFS!=-]/Syberia' || POL_Debug_Fatal "Could not apply patch!"
-cp -a * "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Syberia/"
+POL_Download "http://www.nirsoft.net/utils/nircmd.zip" "3d6d3f094633c5c97f8b15f8fe1023bf"
+POL_System_ExtractSingleFile "nircmd.zip" "nircmd.exe" "$WINEPREFIX/drive_c/windows/nircmd.exe"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "Syberia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+# double quotes around "P"OL_Wine prevent args detection to pickup this line, sorry for the hack
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '(sleep 10; "P"OL_Wine nircmd.exe win hide title Syberia; "P"OL_Wine nircmd.exe win hideshow title Syberia)&'
+echo "wait" >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Syberia/Manual.pdf"
 # C:\Program Files\GOG.com\Syberia\ReadMe.txt
 
