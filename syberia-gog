@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2012-05-08 21-40)
+# Last revision : (2012-05-08 23-26)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.5.3"
 TITLE="Syberia (GoG release)"
 SHORTCUT_NAME="Syberia"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -55,9 +55,12 @@ POL_System_ExtractSingleFile "nircmd.zip" "nircmd.exe" "$WINEPREFIX/drive_c/wind
 POL_Wine_reboot
 
 POL_Shortcut "Syberia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-# double quotes around "P"OL_Wine prevent args detection to pickup this line, sorry for the hack
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '(sleep 10; "P"OL_Wine nircmd.exe win hide title Syberia; "P"OL_Wine nircmd.exe win hideshow title Syberia)&'
+
+# Work around "black screen" bug http://bugs.winehq.org/show_bug.cgi?id=21796
+# double quotes around "P"OL_Wine prevent POL getArgs to pickup this line, sorry for the hack
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '(sleep 10; "P"OL_Wine nircmd.exe win hide title Syberia; sleep 0.1; "P"OL_Wine nircmd.exe win hideshow title Syberia)&'
 echo "wait" >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
+
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Syberia/Manual.pdf"
 # C:\Program Files\GOG.com\Syberia\ReadMe.txt
 
