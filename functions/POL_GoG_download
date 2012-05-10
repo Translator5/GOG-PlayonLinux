@@ -22,7 +22,7 @@ while true; do
 
 	POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
-	$POL_WGET https://www.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
+	$POL_WGET https://secure.gog.com/en/login --save-cookies="$COOKIES" --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/" --no-check-certificate
 	unset POL_LOGIN POL_PASSWORD
 
 	local AUTH_SESSION="$(awk '$6 == "guc_al" { print $7 }' $COOKIES)"
