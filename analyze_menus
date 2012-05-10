@@ -1,0 +1,38 @@
+#!/bin/bash
+# Required: lp64
+
+PREFIX="$1"
+if [ -z "$PREFIX" ]; then
+    echo "Usage: $0 <prefixname>"
+    exit 1
+fi
+
+WINEPREFIX="$HOME/.PlayOnLinux/wineprefix/$PREFIX"
+if [ ! -d "$WINEPREFIX" ]; then
+    echo "Prefix \`$PREFIX' does not exist."
+    exit 1
+fi
+
+if [ ! -d "$WINEPREFIX/drive_c/users/Public/Start Menu" ]; then
+    echo "Could not find global menu data"
+    exit 1
+fi
+
+cd "$WINEPREFIX/drive_c/users/Public/Start Menu" 
+find . -type f -a -name '*.lnk' -print| \
+while read lnkname; do
+#    echo "----------"
+#    echo "$lnkname"
+    LABEL="${lnkname##*/}"
+    LABEL="${LABEL%.lnk}"
+    IFS='' LP_OUT="$(lp64 $lnkname)"
+    BIN="$(echo $LP_OUT|perl -ne 'chomp; if(/^ID List:\s*(.*)/) { print $1 }')"
+#    echo "raw bin: $BIN"
+    BIN="${BIN//\\//}"
+#    echo "forward slashes bin: $BIN"
+    BIN="${BIN#*drive_c/}"
+#    echo "relative bin: $BIN"
+    ARGS="$(echo $LP_OUT|perl -ne 'chomp; if(/^cmdline args:\s*(.*)/) { print $1 }')"
+    echo -e "        * $LABEL\t[\"$BIN\" $ARGS]"
+done
+
