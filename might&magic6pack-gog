@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-05-10 01-40)
+# Last revision : (2012-05-10 05-17)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -22,11 +22,15 @@ SHORTCUT_NAME3="Might and Magic 3 - Isles of Terra"
 SHORTCUT_NAME45="Might and Magic 4-5 - World of Xeen"
 SHORTCUT_NAME5A="Might and Magic 5a - Swords of Xeen"
 SHORTCUT_NAME6="Might and Magic 6 - The Mandate to Heaven"
+SHORTCUT_NAME345PW="Might and Magic Password reference card 3-4-5"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
+
+# For POL_unbase64
+POL_RequiredVersion "4.0.17"
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
@@ -75,6 +79,17 @@ ipx_ipx=true
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
+# Using SBPro 0x220 7 1 fixes lockups in WoX and SoX
+# http://www.gog.com/en/forum/might_and_magic_series/world_of_xeen_crashes_when_i_sign_in_in_a_tavern
+cd "$POL_USER_ROOT/tmp"
+POL_unbase64 <<_EOFCFG_ > "XEEN.CFG"
+BwAgAgMAIAIHAAAAAAAAAAAAAQABAAAAAQAAAA==
+_EOFCFG_
+if [ -s "XEEN.CFG" ]; then
+	cp "XEEN.CFG" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45/XEEN.CFG"
+	cp "XEEN.CFG" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC5A/XEEN.CFG"
+fi
+
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC1/MM1.BAT"
 @ECHO OFF
 CONFIG -set "cpu cycles=2000"
@@ -105,13 +120,9 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.c
 
 POL_Shortcut "MM3.BAT" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/Manual.pdf"
-# FIXME
-POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME3 - Password reference card" "$SHORTCUT_NAME3.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/keys_3_5.pdf'"
 
 POL_Shortcut "XEEN.EXE" "$SHORTCUT_NAME45" "$SHORTCUT_NAME45.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME45" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45/Manual_world_of_xeen.pdf"
-# FIXME
-POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME45 - Password reference card" "$SHORTCUT_NAME45.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45/keys_3_5.pdf'"
 
 POL_Shortcut "SWORDS.EXE" "$SHORTCUT_NAME5A" "$SHORTCUT_NAME5A.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME5A" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC5A/Manual_Swords_of_Xeen.PDF"
@@ -119,6 +130,9 @@ POL_Shortcut_Document "$SHORTCUT_NAME5A" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.
 POL_Shortcut "MM6.exe" "$SHORTCUT_NAME6" "$SHORTCUT_NAME6.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME6" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 6 - The Mandate of Heaven/Manual.pdf"
 # C:\Program Files\GOG.com\Might & Magic VI Limited Edition\Might and Magic 6 - The Mandate of Heaven\Readme.txt
+
+# FIXME
+POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME345PW" "" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/keys_3_5.pdf'"
 
 POL_SetupWindow_Close
 
