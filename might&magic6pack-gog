@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-05-10 00-58)
+# Last revision : (2012-05-10 01-40)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,6 +53,18 @@ POL_SetupWindow_VMS "1"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
+# Problem with shortizing subdirectories side-by-side :(
+MIGHTANDMAGIC1="MM1"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 1 - Book I" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC1"
+MIGHTANDMAGIC2="MM2"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 2 - Gates to Another World" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC2"
+MIGHTANDMAGIC3="MM3"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 3 - Isles of Terra" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3"
+MIGHTANDMAGIC45="MM4-5"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 4-5 -  World of Xeen" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45"
+MIGHTANDMAGIC5A="MM5A"
+mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic - Swords of Xeen" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC5A"
+
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
 cpu_core=auto
@@ -63,21 +75,21 @@ ipx_ipx=true
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 1 - Book I/MM1.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC1/MM1.BAT"
 @ECHO OFF
 CONFIG -set "cpu cycles=2000"
 MM.EXE
 EXIT
 _EOFBAT_
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 2 - Gates to Another World/MM2.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC2/MM2.BAT"
 @ECHO OFF
 CONFIG -set "cpu cycles=8000"
 loadfix -4 MM2.EXE
 EXIT
 _EOFBAT_
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 3 - Isles of Terra/MM3.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/MM3.BAT"
 @ECHO OFF
 CONFIG -set "cpu cycles=8000"
 Mm3.com
@@ -85,24 +97,24 @@ EXIT
 _EOFBAT_
 
 POL_Shortcut "MM1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 1 - Book I/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC1/Manual.pdf"
 # C:\Program Files\GOG.com\Might & Magic VI Limited Edition/Might and Magic 1 - Book I\Readme.txt
 
 POL_Shortcut "MM2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 2 - Gates to Another World/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC2/Manual.pdf"
 
 POL_Shortcut "MM3.BAT" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 3 - Isles of Terra/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/Manual.pdf"
 # FIXME
-POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME3 - Password reference card" "$SHORTCUT_NAME3.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 3 - Isles of Terra/keys_3_5.pdf'"
+POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME3 - Password reference card" "$SHORTCUT_NAME3.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC3/keys_3_5.pdf'"
 
 POL_Shortcut "XEEN.EXE" "$SHORTCUT_NAME45" "$SHORTCUT_NAME45.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME45" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 4-5 -  World of Xeen/Manual_world_of_xeen.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME45" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45/Manual_world_of_xeen.pdf"
 # FIXME
-POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME45 - Password reference card" "$SHORTCUT_NAME45.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 4-5 -  World of Xeen/keys_3_5.pdf'"
+POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME45 - Password reference card" "$SHORTCUT_NAME45.png" "'$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC45/keys_3_5.pdf'"
 
 POL_Shortcut "SWORDS.EXE" "$SHORTCUT_NAME5A" "$SHORTCUT_NAME5A.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME5A" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic - Swords of Xeen/Manual_Swords_of_Xeen.PDF"
+POL_Shortcut_Document "$SHORTCUT_NAME5A" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/$MIGHTANDMAGIC5A/Manual_Swords_of_Xeen.PDF"
 
 POL_Shortcut "MM6.exe" "$SHORTCUT_NAME6" "$SHORTCUT_NAME6.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME6" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might & Magic VI Limited Edition/Might and Magic 6 - The Mandate of Heaven/Manual.pdf"
