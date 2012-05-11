@@ -1,0 +1,122 @@
+#!/bin/bash
+# Date : (2012-05-11 13-22)
+# Last revision : (2012-05-11 15-01)
+# Wine version used : N/A
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend : rar
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+INSTALLBIN="widescreen-v3.05.exe"
+
+TITLE="Infinity Engine: Widescreen mod"
+URL="http://www.gibberlings3.net/widescreen/"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+# For POL_System_wget; for some reason POL_Download gets stuck
+POL_RequiredVersion "4.0.17"
+
+check_one "rar" "rar"
+POL_SetupWindow_missing
+
+POL_SetupWindow_presentation "$TITLE" "The Gibberlings" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+PREFIXFOUND=''
+UNPATCHEDFOUND=''
+DOWNLOADED=''
+
+download_mod () {
+    if [ -z "$DOWNLOADED" ]; then
+        cd "$POL_USER_ROOT/tmp"
+        POL_System_wget 'http://forums.gibberlings3.net/index.php?app=downloads&module=display&section=download&do=confirm_download&id=896' "Infinity Engine widescreen mod" -O "$INSTALLBIN"
+        if [ "$(POL_MD5_file $INSTALLBIN)" != "788019400933f33babacf88f8c53da12" ]; then
+            POL_Debug_Fatal "Download seems to have failed"
+        fi
+        DOWNLOADED=1
+    fi
+}
+
+
+check_install () {
+    local PREFIX="$1"
+    local EXE="$2"
+    local SHORTCUT_NAME="$3"
+    local TITLE="Widescreen mod: $SHORTCUT_NAME"
+
+    if [ "$(POL_Wine_PrefixExists $PREFIX)" = "True" ]; then
+        WINEPREFIX="$POL_USER_ROOT/wineprefix/$PREFIX"
+        DIR="$(find $WINEPREFIX -iname $EXE -printf '%h'|head -n 1)"
+        if [ -n "$DIR" -a -d "$DIR" ]; then
+            PREFIXFOUND=1
+            if [ ! -d "$DIR/widescreen" ]; then
+                UNPATCHEDFOUND=1
+                POL_SetupWindow_question "Patch $SHORTCUT_NAME?" "$TITLE"
+                if [ "$APP_ANSWER" = "TRUE" ]; then
+                    download_mod
+                    rar x "$POL_USER_ROOT/tmp/$INSTALLBIN" "$DIR/" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+                    CONFIGURATOR_EXTENSION="$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME.widescreen"
+                    cat <<-_EOF_ > "$CONFIGURATOR_EXTENSION"
+			#!/bin/bash
+			cd "$DIR" || exit 1
+
+			if [ -e setup-widescreen.exe ]; then
+			    POL_SetupWindow_question "\$(eval_gettext 'Run widescreen setup?')" "\$TITLE"
+			    if [ "$APP_ANSWER" = "TRUE" ]; then
+
+			        POL_SetupWindow_wait "\$TITLE" "\$TITLE"
+
+			        wineconsole setup-widescreen.exe
+
+			        POL_Wine_WaitExit "\$TITLE"
+			    fi
+			fi
+			_EOF_
+
+                        source "$CONFIGURATOR_EXTENSION"
+                fi
+            fi
+        else
+            POL_Debug_Error "$(eval_gettext 'Could not find executable $EXE in virtual disk $PREFIX')"
+        fi
+    fi
+}
+
+# check_install PREFIX EXE SHORTCUT_NAME
+check_install "BaldursGate1_gog" "Baldur.exe" "Baldur's Gate"
+
+# FIXME add more Infinity Engine games here
+# Potentially supported:
+# * Baldur's Gate with the Tales of the Sword Coast expansion pack,
+# * Baldur's Gate II: Shadows of Amn with or without the Throne of Bhaal expansion pack,
+# * Icewind Dale with the Heart of Winter & Trials of the Loremaster expansion pack,
+# * Icewind Dale II
+# * Planescape: Torment
+
+# In return, their configurators should contain code:
+# ----------------
+# # Allow for extensions
+# shopt -s nullglob
+# for conf in \$POL_USER_ROOT/configurations/configurators/"$SHORTCUT_NAME".*; do
+#     source "\$conf"
+# done
+# ----------------
+# where SetupWindow and Debug are already initialized
+
+if [ -z "$PREFIXFOUND" ]; then
+    POL_SetupWindow_message "$(eval_gettext 'No supported Infinity Engine game found.')" "$TITLE"
+elif [ -z "$UNPATCHEDFOUND" ]; then
+    POL_SetupWindow_message "$(eval_gettext 'All supported Infinity Engine games already patched.\nTo modify resolution use shortcuts configurator.')" "$TITLE"
+fi
+
+POL_SetupWindow_Close
+
+exit
