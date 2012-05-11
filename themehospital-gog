@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-03 22-02)
-# Last revision : (2012-05-04 02-26)
+# Last revision : (2012-05-11 10-09)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,16 +46,21 @@ cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 cpu_core=auto
 cpu_cputype=auto
 cpu_cycles=auto
-#mixer_rate=44100
-mixer_prebuffer=20
+mixer_rate=44100
+mixer_prebuffer=50
 sblaster_oplmode=auto
 sblaster_oplemu=default
 #sblaster_oplrate=44100
-#speaker_pcrate=44100
-#speaker_tandyrate=44100
 ipx_enable=1
 ipx_connection=1
 ipx_ipx=true
+
+speaker_pcspeaker=false
+speaker_tandy=off
+speaker_disney=false
+joystick_joysticktype=none
+midi_mpu401=none
+gus_gus=false
 _EOFCFG_
 
 # Set real install path
