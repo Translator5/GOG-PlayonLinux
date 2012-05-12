@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-12 10-21)
+# Last revision : (2012-05-12 12-45)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,8 +53,9 @@ check_install () {
 
     [ "$(POL_Wine_PrefixExists $PREFIX)" = "True" ] || return
 
-    WINEPREFIX="$POL_USER_ROOT/wineprefix/$PREFIX"
-    DIR="$(find $WINEPREFIX -iname $EXE -printf '%h'|head -n 1)"
+    POL_Wine_SelectPrefix "$PREFIX"
+    local DRIVEC="$WINEPREFIX/drive_c"
+    DIR="$(find $DRIVEC -iname $EXE -printf '%h'|head -n 1)"
     if [ -z "$DIR" -o ! -d "$DIR" ]; then
         POL_Debug_Error "$(eval_gettext 'Could not find executable $EXE in virtual disk $PREFIX')"
         return
@@ -115,7 +116,7 @@ check_install "BaldursGate1_gog" "Baldur.exe" "Baldur's Gate"
 if [ -z "$PREFIXFOUND" ]; then
     POL_SetupWindow_message "$(eval_gettext 'No supported Infinity Engine game found.')" "$TITLE"
 elif [ -z "$UNPATCHEDFOUND" ]; then
-    POL_SetupWindow_message "$(eval_gettext 'All supported Infinity Engine games already patched.\nTo modify resolution use shortcuts configurator.')" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'All supported Infinity Engine games already patched.\nTo modify the screen resolution of a shortcut, use its configurator.')" "$TITLE"
 fi
 
 POL_SetupWindow_Close
