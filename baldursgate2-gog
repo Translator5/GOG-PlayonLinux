@@ -1,0 +1,84 @@
+#!/bin/bash
+# Date : (2012-05-12 14-11)
+# Last revision : (2012-05-12 15-40)
+# Wine version used : 1.5.3
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="baldurs_gate_2_complete"
+PREFIX="BaldursGate2_gog"
+WORKING_WINE_VERSION="1.5.3"
+
+TITLE="Baldur's Gate II Complete (GoG release)"
+SHORTCUT_NAME="Baldur's Gate II"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/BG2/top.jpg" "http://files.playonlinux.com/resources/setups/BG2/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Bioware / Hasbro Inc." "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "334d116cb431eb9cd5e18e06f99d13dd" "f6866e2d77e2e0fcd5f72456f513f5dc" "9a3bbfc56216ed73cac9e9f1638cc5bb"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "4"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "BGMain.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Baldurs Gate II/manual.pdf"
+# C:\Program Files\GOG.com\Baldurs Gate II\Readme.txt
+# C:\Program Files\GOG.com\Baldurs Gate II\Readme_totsc.txt
+
+#POL_Shortcut "CharView.exe" "$SHORTCUT_NAME - Character Viewer" "$SHORTCUT_NAME.png" ""
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Baldurs Gate II/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_Wine BGConfig.exe
+
+POL_Call POL_Configurator_runparts
+
+POL_SetupWindow_Close
+exit
+_EOF_
+
+exit
