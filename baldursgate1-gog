@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 17-58)
-# Last revision : (2012-05-11 12-50)
+# Last revision : (2012-05-12 11-11)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -75,11 +75,7 @@ POL_Debug_Init
 
 POL_Wine Config.exe
 
-# Allow for extensions
-shopt -s nullglob
-for conf in \$POL_USER_ROOT/configurations/configurators/"$SHORTCUT_NAME".*; do
-    source "\$conf"
-done
+POL_Call POL_Configurator_runparts
 
 POL_SetupWindow_Close
 exit
