@@ -68,6 +68,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Kingpin: Life of Crime
 * Lands of Lore™ 1+2
 * Last Express, The
+* Legend of Grimrock
 * Lionheart: Legacy of the Crusader
 * Little Big Adventure (Relentless: Twinsen's Adventure)
 * Little Big Adventure 2 (Twinsen's Odyssey)
@@ -105,9 +106,10 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Simon the Sorcerer
 * Simon the Sorcerer 2
 * Soulbringer
-* Space Quest 4+5+6 
+* Space Quest 4+5+6
 * Spellforce Platinum
 * Starflight™ 1+2
+* Star Wolves
 * Still Life
 * Stonekeep
 * Syberia
