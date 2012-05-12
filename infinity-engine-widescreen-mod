@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-12 12-47)
+# Last revision : (2012-05-12 13-08)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -104,13 +104,9 @@ check_install "BaldursGate1_gog" "Baldur.exe" "Baldur's Gate"
 
 # In return, their configurators should contain code:
 # ----------------
-# # Allow for extensions
-# shopt -s nullglob
-# for conf in \$POL_USER_ROOT/configurations/configurators/"$SHORTCUT_NAME".*; do
-#     source "\$conf"
-# done
+# POL_Call POL_Configurator_runparts
 # ----------------
-# where SetupWindow and Debug are already initialized
+# in a place where SetupWindow and Debug are already initialized
 
 if [ -z "$PREFIXFOUND" ]; then
     POL_SetupWindow_message "$(eval_gettext 'No supported Infinity Engine game found.')" "$TITLE"
