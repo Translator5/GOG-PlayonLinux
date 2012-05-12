@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-12 23-07)
+# Last revision : (2012-05-12 23-43)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,7 +36,7 @@ DOWNLOADED=''
 download_mod () {
     [ -n "$DOWNLOADED" ] && return
     cd "$POL_USER_ROOT/tmp"
-    POL_System_wget 'http://forums.gibberlings3.net/index.php?app=downloads&module=display&section=download&do=confirm_download&id=896' "Infinity Engine widescreen mod" -O "$INSTALLBIN"
+    POL_System_wget 'http://files.playonlinux.com/widescreen-v3.05.exe' "Infinity Engine widescreen mod" -O "$INSTALLBIN"
     if [ "$(POL_MD5_file $INSTALLBIN)" != "788019400933f33babacf88f8c53da12" ]; then
         POL_Debug_Fatal "Download seems to have failed"
     fi
