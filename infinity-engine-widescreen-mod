@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-13 09-37)
+# Last revision : (2012-05-13 20-55)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -85,6 +85,7 @@ check_install () {
 # check_install PREFIX EXE SHORTCUT_NAME
 check_install "BaldursGate1_gog" "Baldur.exe" "Baldur's Gate"
 check_install "BaldursGate2_gog" "BGMain.exe" "Baldur's Gate II"
+check_install "IcewindDale_gog" "IDMain.exe" "Icewind Dale"
 
 # FIXME add more Infinity Engine games here
 # Potentially supported:
