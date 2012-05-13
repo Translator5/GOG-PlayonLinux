@@ -1,29 +1,23 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-12 23-43)
+# Last revision : (2012-05-13 09-37)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
-# Depend : rar
+# Depend :
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-INSTALLBIN="widescreen-v3.05.exe"
+INSTALLBIN="widescreen-v3.05.zip"
 
 TITLE="Infinity Engine: Widescreen mod"
 URL="http://www.gibberlings3.net/widescreen/"
 
 POL_SetupWindow_Init
 POL_Debug_Init
-
-# For POL_System_wget; for some reason POL_Download gets stuck
-POL_RequiredVersion "4.0.17"
-
-check_one "rar" "rar"
-POL_SetupWindow_missing
 
 POL_SetupWindow_presentation "$TITLE" "The Gibberlings" "$URL" "Pierre Etchemaite" "$PREFIX"
 
@@ -36,10 +30,7 @@ DOWNLOADED=''
 download_mod () {
     [ -n "$DOWNLOADED" ] && return
     cd "$POL_USER_ROOT/tmp"
-    POL_System_wget 'http://files.playonlinux.com/widescreen-v3.05.exe' "Infinity Engine widescreen mod" -O "$INSTALLBIN"
-    if [ "$(POL_MD5_file $INSTALLBIN)" != "788019400933f33babacf88f8c53da12" ]; then
-        POL_Debug_Fatal "Download seems to have failed"
-    fi
+    POL_Download 'http://files.playonlinux.com/widescreen-v3.05.zip' "99cee5d4a56d8b470e725aa231f35716"
     DOWNLOADED=1
 }
 
@@ -68,7 +59,7 @@ check_install () {
     [ "$APP_ANSWER" = "TRUE" ] || return
 
     download_mod
-    rar x "$POL_USER_ROOT/tmp/$INSTALLBIN" "$DIR/" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+    unzip "$POL_USER_ROOT/tmp/$INSTALLBIN" -d "$DIR/" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
     CONFIGURATOR_EXTENSION="$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME.widescreen"
     cat <<-_EOF_ > "$CONFIGURATOR_EXTENSION"
