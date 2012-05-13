@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-13 10-53)
-# Last revision : (2012-05-13 13-54)
+# Last revision : (2012-05-13 14-17)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,7 +21,7 @@ SHORTCUT_NAME2="TIM - The Incredible Machine 3"
 SHORTCUT_NAME3="TIM - Return of the Incredible Machine Contraptions"
 SHORTCUT_NAME4="TIM - Even More Contraptions"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
