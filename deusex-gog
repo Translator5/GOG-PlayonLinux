@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-14 00-51)
-# Last revision : (2012-05-14 02-04)
+# Last revision : (2012-05-14 12-53)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -40,10 +40,14 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 POL_Wine_WaitExit "$TITLE"
 
 cd "$POL_USER_ROOT/tmp"
+# Direct3D driver update
+POL_Download "http://files.playonlinux.com/D3DDrv.dll" "8211caf827881d3969e1812fc6341146"
+cp D3DDrv.dll "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/System/D3DDrv.dll"
+
 # Default OpenGL renderer crashes on exit, pick a better one
 # Source http://www.cwdohnal.com/utglr/
-POL_Download "http://files.playonlinux.com/dxglr20.zip" "89bb00ef72ccd4e8535aa0e55b1d680f"
-POL_System_ExtractSingleFile "dxglr20.zip" "OpenGLDrv.dll" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/System/OpenGlDrv.dll"
+POL_Download "http://files.playonlinux.com/dxglr21.zip" "e25ec9940eff8aa1e3a74e94ffdba706"
+POL_System_ExtractSingleFile "dxglr21.zip" "OpenGLDrv.dll" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/System/OpenGlDrv.dll"
 
 # GoG work!
 Set_OS winxp
