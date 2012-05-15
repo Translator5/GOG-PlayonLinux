@@ -8,3 +8,25 @@ Starflight:
 	Improve icon setting
 
 Remove icon extraction tricks and put right icons on server in /files/resources/icones/
+
+Install DLLs with POL_Install_* before GOG installer
+  Rationale: POL_Install_* usually install DLLs directly, so may fail to
+  overwrite them because of case issues.
+Impact:
+$ git grep -l POL_Install_|cat  
+ageofwonders3-shadowmagic-gog
+anachronox-gog
+callofduty-modernwarfare3-steam
+icewinddale-gog
+incoming&incomingforces-gog
+legendofgrimrock-gog
+sacredgold-gog
+syberia-gog
+templeofelementalevil-gog-co8-modpack-7
+twoworlds-gog
+untested/europauniversalis3divinewind
+untested/warinthepacific_admiralsedition
+wip/shadowgrounds-gog
+  Why not?
+  Check that installer doesn't overwrite DLLs
+  
