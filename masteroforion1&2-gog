@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-17 20-12)
-# Last revision : (2012-05-17 21-11)
+# Last revision : (2012-05-17 22-02)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,7 +42,7 @@ POL_Wine_WaitExit "$TITLE"
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Master of Orion 1 and 2" || POL_Debug_Fatal "Game not installed in standard path?"
 
-# Problem with shortizing "Redneck Rampage" and "Redneck Rides Again" subdirectories side-by-side :(
+# Problem with shortizing "Master of Orion 1" and "Master of Orion 2" subdirectories side-by-side :(
 ORION1="MOO1"
 ORION2="MOO2"
 mv "Master of Orion 1" "$ORION1"
