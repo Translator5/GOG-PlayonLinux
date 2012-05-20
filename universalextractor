@@ -1,0 +1,50 @@
+#!/bin/bash
+# Date : (2012-05-20 19-45)
+# Last revision : (2012-05-20 19-50)
+# Wine version used : 1.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="UniversalExtractor"
+WORKING_WINE_VERSION="1.4"
+INSTALLBIN="uniextract161.exe"
+
+TITLE="Universal Extractor"
+URL="http://www.legroom.net/software/uniextract"
+SHORTCUT_NAME="Universal Extractor"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Legroom" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd "$POL_USER_ROOT/tmp"
+    POL_Download "http://files.playonlinux.com/$INSTALLBIN" "551ab65daa00a24089b40725d9f97be1"
+    ARCHIVE="$POL_USER_ROOT/tmp/$INSTALLBIN"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+POL_Shortcut "UniExtract.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+
+POL_SetupWindow_Close
+
+exit
