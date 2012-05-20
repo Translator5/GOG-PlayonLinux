@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-20 19-45)
-# Last revision : (2012-05-20 19-50)
+# Last revision : (2012-05-20 20-05)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,6 +36,8 @@ fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_Install_LunaTheme
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
