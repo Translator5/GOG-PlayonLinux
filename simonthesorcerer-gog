@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-05-06 16-28)
+# Last revision : (2012-05-22 23-19)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,8 +44,6 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "2" # 640x480x256
 
-Set_Desktop "On" 640 480
-
 # Doesn't hurt ;)
 POL_Wine_reboot
 
@@ -54,5 +52,25 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 # C:\Program Files\GOG.com\Simon the Sorcerer\walkthrough.doc
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Simon the Sorcerer/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+
+POL_Wine ScummVM/scummvm.exe -c simon.ini
+
+exit
+_EOF_
 
 exit
