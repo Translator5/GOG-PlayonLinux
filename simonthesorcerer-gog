@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2012-05-23 00-30)
-# Wine version used : 1.5.0
+# Last revision : (2012-05-23 20-27)
+# Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="simon_the_sorcerer"
 PREFIX="SimonTheSorcerer_gog"
-WORKING_WINE_VERSION="1.5.0"
+WORKING_WINE_VERSION="1.4"
 
 TITLE="Simon the Sorcerer (GoG release)"
 SHORTCUT_NAME="Simon the Sorcerer"
@@ -44,7 +44,7 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "2" # 640x480x256
 
-Set_Desktop "On" 800 600
+Set_Desktop "On" 640 480
 
 # Doesn't hurt ;)
 POL_Wine_reboot
