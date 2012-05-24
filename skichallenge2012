@@ -37,7 +37,7 @@ fi
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine --ignore-errors "$ARCHIVE"
 case "$?" in
@@ -47,8 +47,6 @@ case "$?" in
         POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
         ;;
 esac
-
-POL_Wine_WaitExit "$TITLE"
 
 
 POL_SetupWindow_VMS "128"

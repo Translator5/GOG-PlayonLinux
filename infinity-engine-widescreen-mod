@@ -70,11 +70,9 @@ check_install () {
 	    POL_SetupWindow_question "\$(eval_gettext 'Run widescreen setup?')" "\$TITLE"
 	    if [ "\$APP_ANSWER" = "TRUE" ]; then
 
-	        POL_SetupWindow_wait "\$TITLE" "\$TITLE"
+	        POL_Wine_WaitBefore "\$TITLE"
 
 	        POL_Wine wineconsole setup-widescreen.exe
-
-	        POL_Wine_WaitExit "\$TITLE"
 	    fi
 	fi
 	_EOF_

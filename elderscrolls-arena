@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-04-29 16-44)
+# Last revision : (2012-05-24 20-09)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -61,11 +61,9 @@ DOCUMENT="$(dirname $ARCHIVE)/Arena106 Setup.pdf"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
-
-POL_Wine_WaitExit "$TITLE"
 
 
 cp "$POL_USER_ROOT/tmp/Arena106 Setup.pdf" "$WINEPREFIX/drive_c/ARENA/Docs/"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-20 19-45)
-# Last revision : (2012-05-20 20-05)
+# Last revision : (2012-05-24 19-51)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -39,11 +39,9 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_Install_LunaTheme
 
-POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
-
-POL_Wine_WaitExit "$TITLE"
 
 POL_Shortcut "UniExtract.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 
