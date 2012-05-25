@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-17 16-12)
-# Last revision : (2012-05-24 19-54)
+# Last revision : (2012-05-26 00-48)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.4"
 TITLE="Another World 15th Anniversary Edition (GoG release)"
 SHORTCUT_NAME="Another World"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -42,6 +42,8 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 Set_OS winxp
 
 POL_SetupWindow_VMS "32"
+
+POL_Wine_DirectInput "MouseWarpOverride" "disable"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
