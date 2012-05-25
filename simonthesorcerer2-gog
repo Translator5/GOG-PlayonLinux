@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 22-47)
-# Last revision : (2012-05-24 20-02)
+# Last revision : (2012-05-24 21-49)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,6 +42,8 @@ POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while ins
 Set_OS winxp
 
 POL_SetupWindow_VMS "2"
+
+Set_Desktop "On" 640 480
 
 # Doesn't hurt ;)
 POL_Wine_reboot
