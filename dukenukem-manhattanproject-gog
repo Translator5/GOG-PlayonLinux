@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 21-29)
-# Last revision : (2012-05-24 19-55)
+# Last revision : (2012-05-26 03-04)
 # Wine version used : 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.5.4"
 TITLE="Duke Nukem - Manhattan Project (GoG release)"
 SHORTCUT_NAME="Duke Nukem: Manhattan Project"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
