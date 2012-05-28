@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-05-24 19-54)
+# Last revision : (2012-05-28 11-19)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,10 +36,10 @@ TITLE="ShadowGrounds (GoG release)"
 SHORTCUT_NAME="ShadowGrounds"
 
 POL_SetupWindow_Init
-POL_Debug_Init
-
 # 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
-POL_RequiredVersion "4.0.15"
+POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is required to install $TITLE"
+
+POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Frozenbyte / Meridian4" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 

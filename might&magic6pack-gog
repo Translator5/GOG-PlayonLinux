@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-05-24 20-06)
+# Last revision : (2012-05-28 11-18)
 # Wine version used : 1.4-dos_support_0.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,10 +27,10 @@ SHORTCUT_NAME345PW="Might and Magic Password reference card 3-4-5"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
-
 # For POL_unbase64
-POL_RequiredVersion "4.0.17"
+POL_RequiredVersion "4.0.17" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.17 is required to install $TITLE"
+
+POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
