@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2012-05-24 20-02)
+# Last revision : (2012-05-30 21-29)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "16"
 POL_Call POL_Install_vcrun6
 
 cd "$POL_USER_ROOT/tmp"
-POL_Download "http://www.nirsoft.net/utils/nircmd.zip" "3d6d3f094633c5c97f8b15f8fe1023bf"
+POL_Download "http://files.playonlinux.com/nircmd.zip" "3d6d3f094633c5c97f8b15f8fe1023bf"
 POL_System_ExtractSingleFile "nircmd.zip" "nircmd.exe" "$WINEPREFIX/drive_c/windows/nircmd.exe"
 
 # Doesn't hurt ;)
