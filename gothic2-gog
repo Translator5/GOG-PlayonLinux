@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-31 20-09)
-# Last revision : (2012-06-01 23-10)
+# Last revision : (2012-06-02 03-18)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,50 +48,45 @@ POL_Call POL_Install_directmusic
 # Doesn't hurt ;)
 POL_Wine_reboot
 
+# extendedMenu allows to set resolution ingame
+# tip from http://www.gog.com/en/forum/gothic_series/notes_on_widescreen_resolution
 cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/gothic2_funcs"
 
 # echo statements to set \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP
 read_g2_settings () {
-  perl -ne 'print if /^(zVidResFullscreenX|zVidResFullscreenY|zVidResFullscreenBPP)=/' "$PROGRAMFILES/GOG.com/Gothic 2 Gold/system/Gothic.ini"
+  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_g2_settings: \$WINEPREFIX must be set'
+  perl -ne 'print "\$1\n" if /^((zVidResFullscreenX|zVidResFullscreenY|zVidResFullscreenBPP)=\d+)/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 2 Gold/system/Gothic.ini"
 }
 
 # update Gothic.ini with value of \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP
 write_g2_settings () {
-  perl -i.bak -pe 's/^zVidResFullscreenX=\d+/zVidResFullscreenX=\$zVidResFullscreenX/;
-                   s/^zVidResFullscreenY=\d+/zVidResFullscreenY=\$zVidResFullscreenY/;
-                   s/^zVidResFullscreenBPP=\d+/zVidResFullscreenBPP=\$zVidResFullscreenBPP/;' "$PROGRAMFILES/GOG.com/Gothic 2 Gold/system/Gothic.ini"
+  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'write_g2_settings: \$WINEPREFIX must be set'
+  perl -i.bak -pe 's/^zVidResFullscreenX=\d+/zVidResFullscreenX='"\$zVidResFullscreenX"'/;
+                   s/^zVidResFullscreenY=\d+/zVidResFullscreenY='"\$zVidResFullscreenY"'/;
+                   s/^zVidResFullscreenBPP=\d+/zVidResFullscreenBPP='"\$zVidResFullscreenBPP"'/;
+                   s/^extendedMenu=\d+/extendedMenu=1/;' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 2 Gold/system/Gothic.ini"
+}
+
+# until POL_LoadVar_ScreenResolution does it?
+LoadVar_ScreenDepth () {
+  export ScreenBpp=\$(xdpyinfo |perl -ne 'print \$1 if /^bitmap unit, bit order, padding:\s*(\d+)/')
+  POL_Debug_Message "Screen depth: \$ScreenBpp"
 }
 
 _EOFFUNC_
 
 
 POL_Shortcut "Gothic.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source "$WINEPREFIX/drive_c/gothic2_funcs" || exit 0'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'eval $(read_g2_settings)'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'LoadVar_ScreenDepth'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '[ "$zVidResFullscreenBPP" != "$ScreenBpp" ] && zVidResFullscreenBPP=$ScreenBpp write_g2_settings'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'Set_Desktop On $zVidResFullscreenX $zVidResFullscreenY'
+
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 2 Gold/manual.pdf"
 # C:\Program Files\GOG.com\Gothic 2 Gold\Readme.txt
 # C:\Program Files\GOG.com\Gothic 2 Gold\manual_addon.pdf
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG="-all"
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Game Install Directory/" || exit 1
-
-TITLE="$TITLE"
-
-POL_SetupWindow_Init
-POL_Debug_Init
-
-# ...
-
-POL_SetupWindow_Close
-exit
-_EOF_
 
 exit
