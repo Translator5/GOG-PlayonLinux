@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-31 20-09)
-# Last revision : (2012-06-02 03-18)
+# Last revision : (2012-06-02 14-07)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -16,7 +16,7 @@ PREFIX="Gothic2_gog"
 WORKING_WINE_VERSION="1.5.5"
 
 TITLE="Gothic 2 Gold (GoG release)"
-SHORTCUT_NAME="Gothic 2"
+SHORTCUT_NAME="Gothic 2 Gold"
 
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -50,7 +50,7 @@ POL_Wine_reboot
 
 # extendedMenu allows to set resolution ingame
 # tip from http://www.gog.com/en/forum/gothic_series/notes_on_widescreen_resolution
-cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/gothic2_funcs"
+cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 2 Gold/gothic2_funcs"
 
 # echo statements to set \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP
 read_g2_settings () {
@@ -77,7 +77,8 @@ _EOFFUNC_
 
 
 POL_Shortcut "Gothic.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source "$WINEPREFIX/drive_c/gothic2_funcs" || exit 0'
+# Using $WINEPREFIX here causes trouble, bug #953
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source "../gothic2_funcs" || exit 0'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'eval $(read_g2_settings)'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'LoadVar_ScreenDepth'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '[ "$zVidResFullscreenBPP" != "$ScreenBpp" ] && zVidResFullscreenBPP=$ScreenBpp write_g2_settings'
