@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-03 18-35)
-# Last revision : (2012-06-03 21-40)
+# Last revision : (2012-06-03 21-53)
 # Wine version used : 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,7 +25,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Altar Interactive / 1C Publishing" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" ""
+POL_Call POL_GoG_setup "$GOGID" "05695ec48464ca85b9dc9545f4411642" "6c5b8e5aef90de8afb97ed3c14291810" "2c9d4f4ed2da3b8aaa392384ec3eb322"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
