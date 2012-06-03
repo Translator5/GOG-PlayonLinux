@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-06-03 23-29)
+# Last revision : (2012-06-03 23-35)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -60,7 +60,7 @@ POL_Shortcut "BGE.exe" "$SHORTCUT_NAME"
 # Fixes a problem with CPU management on modern computers (specially laptops):
 # BGE doesn't handle variable frequency, so make sure they stay at top frequency
 # with a background busy loop (other means are less portable and/or require root privileges)
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -c 0 -p $$'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -pc 0 $$'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do let i=1; done" &'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
 echo 'kill $BUSYLOOP_PID' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"

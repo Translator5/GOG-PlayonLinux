@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 22-01)
-# Last revision : (2012-06-03 23-28)
+# Last revision : (2012-06-03 23-35)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "64"
 POL_Wine_reboot
 
 POL_Shortcut "bs4pc.exe" "$SHORTCUT_NAME"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -c 0 -p $$'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -pc 0 $$'
 
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword - The Angel of Death/manual.pdf"
 
