@@ -1,15 +1,18 @@
 #!/bin/bash
 
 local GAME="$1"
-# 2.. MD5 hash of the pieces
+# option: --altername 'basename' baseindex: get pieces starting from another index than 0
+# 2.. MD5: hash of the pieces
 # Will download as many pieces as extra parameters
 # Hashes are recommended for large downloads anyway
 shift
 
-INDEX=0
-if [ "$1" = "--start-index" ]; then
-  INDEX="$2"
-  shift 2
+local BASENAME="$GAME"
+local INDEX=0
+if [ "$1" = "--alternate" ]; then
+	BASENAME="$2"
+	INDEX="$3"
+	shift 3
 fi
 
 local PIECES="$#"
@@ -25,7 +28,7 @@ fi
 
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
 while true; do
-	POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $GAME')" "$TITLE" "http://www.gog.com/"
+	POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $BASENAME')" "$TITLE" "http://www.gog.com/"
 
 	POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
@@ -81,16 +84,16 @@ download_piece ()
 	fi
 }
 
-download_piece "http://www.gog.com/en/download/game/$GAME/$INDEX" "setup_$GAME.exe" "$1" "$GAME (1/$PIECES)"
+download_piece "http://www.gog.com/en/download/game/$GAME/$INDEX" "setup_$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
 	local n=2
 	while [ $n -le $PIECES ]; do
-		download_piece "http://www.gog.com/en/download/game/$GAME/$((INDEX+n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
+		download_piece "http://www.gog.com/en/download/game/$GAME/$((INDEX+n-1))" "setup_$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
 		let n=$((n+1))
 	done
 fi
 
 rm -f "$COOKIES"
 
-POL_GoG_location="$PWD/setup_$GAME.exe"
+POL_GoG_location="$PWD/setup_$BASENAME.exe"
