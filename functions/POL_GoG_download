@@ -5,6 +5,13 @@ local GAME="$1"
 # Will download as many pieces as extra parameters
 # Hashes are recommended for large downloads anyway
 shift
+
+INDEX=0
+if [ "$1" = "--start-index" ]; then
+  INDEX="$2"
+  shift 2
+fi
+
 local PIECES="$#"
 
 local GOG_REPO="$(POL_Config_Read GOG_REPO)"
@@ -48,9 +55,6 @@ download_piece ()
 	# 3: MD5 hash
 	# 4: Title
 
-	# Hack to retrieve specific resources (Alone in the Dark 2 and 3)
-	[ "$3" = "skip" ] && return
-
 	# Failed piece from previous download, maybe reference MD5 was corrected?
 	local FAILEDPIECE="$2.failed"
 	if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
@@ -77,12 +81,12 @@ download_piece ()
 	fi
 }
 
-download_piece "http://www.gog.com/en/download/game/$GAME/0" "setup_$GAME.exe" "$1" "$GAME (1/$PIECES)"
+download_piece "http://www.gog.com/en/download/game/$GAME/$INDEX" "setup_$GAME.exe" "$1" "$GAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
 	local n=2
 	while [ $n -le $PIECES ]; do
-		download_piece "http://www.gog.com/en/download/game/$GAME/$((n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
+		download_piece "http://www.gog.com/en/download/game/$GAME/$((INDEX+n-1))" "setup_$GAME-$((n-1)).bin" "${!n}" "$GAME ($n/$PIECES)"
 		let n=$((n+1))
 	done
 fi
