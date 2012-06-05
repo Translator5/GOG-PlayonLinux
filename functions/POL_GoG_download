@@ -48,6 +48,9 @@ download_piece ()
 	# 3: MD5 hash
 	# 4: Title
 
+	# Hack to retrieve specific resources (Alone in the Dark 2 and 3)
+	[ "$3" = "skip" ] && return
+
 	# Failed piece from previous download, maybe reference MD5 was corrected?
 	local FAILEDPIECE="$2.failed"
 	if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
