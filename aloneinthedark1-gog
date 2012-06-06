@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-05 20-05)
-# Last revision : (2012-06-06 22-15)
+# Last revision : (2012-06-06 22-30)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -67,5 +67,46 @@ POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.c
 POL_Shortcut "INDARK2.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "16 1"
 
 POL_SetupWindow_Close
+
+# Configurators are only useful to set language
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Alone in the Dark/INDARK/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+
+POL_Wine INSTALL.EXE
+
+exit
+_EOF_
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Alone in the Dark/JACK/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+
+POL_Wine INSTALL.EXE
+
+exit
+_EOF_
 
 exit
