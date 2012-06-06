@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-15 18-02)
-# Last revision : (2012-04-29 13-00)
-# Wine version used : 1.4-dos_support_0.4
+# Last revision : (2012-06-06 21-04)
+# Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="ElderScrolls_Daggerfall"
-WORKING_WINE_VERSION="1.4-dos_support_0.4"
+WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
 TITLE="The Elder Scrolls II - Daggerfall"
 SHORTCUT_NAME="The Elder Scrolls II: Daggerfall"

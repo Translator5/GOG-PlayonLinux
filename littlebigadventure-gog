@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-30 12-44)
-# Last revision : (2012-05-24 19-44)
-# Wine version used : 1.4-dos_support_0.4
+# Last revision : (2012-06-06 21-01)
+# Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="little_big_adventure"
 PREFIX="LittleBigAdventure_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.4"
+WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
 TITLE="Little Big Adventure: Twinsen's Adventure (GoG release)"
 SHORTCUT_NAME="Little Big Adventure: Twinsen's Adventure"
