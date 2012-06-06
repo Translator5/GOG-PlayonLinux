@@ -18,7 +18,7 @@ fi
 
 local BASEURL="http://www.gog.com/en/download/game"
 if [ "$1" = "--secure" ]; then
-	BASEURL="https://secure.gog.com/en/download/game"
+	BASEURL="https://secure.gog.com/en/download/file"
 	shift
 fi
 
