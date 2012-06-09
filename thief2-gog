@@ -1,0 +1,62 @@
+#!/bin/bash
+# Date : (2012-06-09 16-26)
+# Last revision : (2012-06-10 00-03)
+# Wine version used : 1.3.37
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="thief_2_the_metal_age"
+PREFIX="Thief2_gog"
+WORKING_WINE_VERSION="1.3.37"
+
+TITLE="Thief 2 - The Metal Age (GoG release)"
+SHORTCUT_NAME="Thief 2: The Metal Age"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Looking Glass Studios / Square Enix" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "580b15ebec40af636ec8d9ceedf69eb2"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+cd "$POL_USER_ROOT/tmp"
+POL_Download "ftp://ftp.us.dell.com/audio/IV5PLAY.EXE" "24e0c7e08fb3e06b431803a896fc8b25"
+cabextract -F IR50_32.DLL -d "$WINEPREFIX/drive_c/windows/system32/" IV5PLAY.EXE
+POL_Wine regsvr32 IR50_32.DLL
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "thief2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/Manual.pdf"
+
+POL_Shortcut "thief2_no_ddfix.exe" "$SHORTCUT_NAME (no DDFix)" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME (no DDFix)" 'taskset -pc 0 $$'
+
+POL_SetupWindow_Close
+
+exit
