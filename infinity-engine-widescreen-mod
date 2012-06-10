@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-11 13-22)
-# Last revision : (2012-05-19 18-07)
+# Last revision : (2012-06-10 20-54)
 # Wine version used : N/A
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -85,6 +85,7 @@ check_install "BaldursGate1_gog" "Baldur.exe" "Baldur's Gate"
 check_install "BaldursGate2_gog" "BGMain.exe" "Baldur's Gate II"
 check_install "IcewindDale_gog" "IDMain.exe" "Icewind Dale"
 check_install "IcewindDale2_gog" "IWD2.exe" "Icewind Dale II"
+check_install "PlanetscapeTorment_gog" "Torment.exe" "Planetscape: Torment"
 
 # FIXME add more Infinity Engine games here
 # Potentially supported:
