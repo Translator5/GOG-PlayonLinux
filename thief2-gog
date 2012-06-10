@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-09 16-26)
-# Last revision : (2012-06-10 00-03)
+# Last revision : (2012-06-10 03-30)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.3.37"
 TITLE="Thief 2 - The Metal Age (GoG release)"
 SHORTCUT_NAME="Thief 2: The Metal Age"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -51,12 +51,74 @@ POL_Wine regsvr32 IR50_32.DLL
 # Doesn't hurt ;)
 POL_Wine_reboot
 
+cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/thief2_funcs"
+
+read_t2_settings () {
+  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_t2_settings: \$WINEPREFIX must be set'
+  perl -ne 'BEGIN { \$width=800; \$height=600; }
+            \$width=\$1, \$height=\$2 if /^game_screen_size (\d+) (\d+)/;
+            END { print "WIDTH=\$width\nHEIGHT=\$height\n" }' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/cam.cfg"
+}
+
+write_t2_settings () {
+  [ -z "\$WINEPREFIX" -o -z "\$WIDTH" -o -z "\$HEIGHT" ] && POL_Debug_Fatal 'write_t2_settings: \$WINEPREFIX, \$WIDTH and \$HEIGHT must be set'
+  perl -i.bak -pe 's/^game_screen_size \d+ \d+/game_screen_size '"\$WIDTH \$HEIGHT"'/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/cam.cfg"
+  perl -i.bak -pe 's/^gWidth=\d+/gWidth='"\$WIDTH"'/;
+                   s/^gHeight=\d+/gHeight='"\$HEIGHT"'/;' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/ddfix.ini"
+}
+
+sync_resolutions () {
+  eval \$(read_t2_settings)
+  write_t2_settings
+  POL_LoadVar_ScreenResolution
+  if [ "\$WIDTH" = "\$ScreenWidth" -a "\$HEIGHT" = "\$ScreenHeight" ]; then
+    Set_Desktop "Off"
+  else
+    Set_Desktop "On" "\$WIDTH" "\$HEIGHT"
+  fi
+}
+
+_EOFFUNC_
+
 POL_Shortcut "thief2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source thief2_funcs || exit 0'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'sync_resolutions'
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/Manual.pdf"
 
-POL_Shortcut "thief2_no_ddfix.exe" "$SHORTCUT_NAME (no DDFix)" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME (no DDFix)" 'taskset -pc 0 $$'
+#POL_Shortcut "thief2_no_ddfix.exe" "$SHORTCUT_NAME (no DDFix)" "$SHORTCUT_NAME.png" ""
+#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME (no DDFix)" 'taskset -pc 0 $$'
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Thief 2/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+source thief2_funcs || exit 1
+eval \$(read_t2_settings)
+POL_Debug_Message "Resolution read: \$WIDTH \$HEIGHT"
+
+POL_SetupWindow_menu_list "\$(eval_gettext 'Select game resolution:')" "\$TITLE" "800x600~1024x768~1280x1024" "~" "\${WIDTH}x\${HEIGHT}"
+WIDTH="\$(echo \$APP_ANSWER|cut -dx -f1)"
+HEIGHT="\$(echo \$APP_ANSWER|cut -dx -f2)"
+
+POL_Debug_Message "Resolution written: \$WIDTH \$HEIGHT"
+write_t2_settings
+
+POL_SetupWindow_Close
+exit
+_EOF_
 
 exit
