@@ -1,0 +1,105 @@
+#!/bin/bash
+# Date : (2012-06-13 19-32)
+# Last revision : (2012-06-13 21-44)
+# Wine version used : 1.5.5
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="arx_fatalis"
+PREFIX="ArxFatalis_gog"
+WORKING_WINE_VERSION="1.5.5"
+
+TITLE="Arx Fatalis (GoG release)"
+SHORTCUT_NAME="Arx Fatalis"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Arkane Studios" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "0dd8ec13c10146db1a741258b624040a"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "32"
+
+POL_Wine_DirectInput "MouseWarpOverride" "force"
+
+# Disable forcegdi, remove keyboard settings to revert to defaults
+cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+[MISC]
+forcegdi=0
+softfog=0
+clearnearcorrection=0
+forcenoeax=0
+forcemetaltwopass=0
+forcezbias=0
+newcontrol=1
+forcetoggle=0
+fg=1
+[LANGUAGE]
+string="english"
+[FIRSTRUN]
+int=1
+[VIDEO]
+resolution=800x600
+bpp=32
+full_screen=1
+bump=1
+texture=2
+mesh_reduction=0
+others_details=2
+fog=5
+gamma=5
+luminosity=4
+contrast=5
+show_crosshair=1
+antialiasing=0
+[AUDIO]
+master_volume=10
+effects_volume=10
+speech_volume=10
+ambiance_volume=8
+EAX=0
+[INPUT]
+invert_mouse=0
+auto_ready_weapon=0
+mouse_look_toggle=1
+mouse_sensitivity=4
+mouse_smoothing=0
+auto_description=1
+link_mouse_look_to_use=0
+[KEY]
+_EOFCFG_
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "ARX.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/manual.pdf"
+# C:\Program Files\GOG.com\Arx Fatalis\readme.txt
+# C:\Program Files\GOG.com\Arx Fatalis\map.pdf
+
+POL_SetupWindow_Close
+
+exit
