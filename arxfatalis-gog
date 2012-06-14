@@ -1,24 +1,27 @@
 #!/bin/bash
 # Date : (2012-06-13 19-32)
-# Last revision : (2012-06-13 21-44)
-# Wine version used : 1.5.5
+# Last revision : (2012-06-14 21-25)
+# Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# Problem with Wine 1.5.1+
+# http://bugs.winehq.org/show_bug.cgi?id=30328
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="arx_fatalis"
 PREFIX="ArxFatalis_gog"
-WORKING_WINE_VERSION="1.5.5"
+WORKING_WINE_VERSION="1.5.0"
 
 TITLE="Arx Fatalis (GoG release)"
 SHORTCUT_NAME="Arx Fatalis"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -47,50 +50,25 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 
 # Disable forcegdi, remove keyboard settings to revert to defaults
 cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
-[MISC]
-forcegdi=0
-softfog=0
-clearnearcorrection=0
-forcenoeax=0
-forcemetaltwopass=0
-forcezbias=0
-newcontrol=1
-forcetoggle=0
-fg=1
-[LANGUAGE]
-string="english"
-[FIRSTRUN]
-int=1
 [VIDEO]
 resolution=800x600
-bpp=32
 full_screen=1
 bump=1
-texture=2
-mesh_reduction=0
-others_details=2
-fog=5
-gamma=5
-luminosity=4
-contrast=5
-show_crosshair=1
-antialiasing=0
-[AUDIO]
-master_volume=10
-effects_volume=10
-speech_volume=10
-ambiance_volume=8
-EAX=0
-[INPUT]
-invert_mouse=0
-auto_ready_weapon=0
-mouse_look_toggle=1
-mouse_sensitivity=4
-mouse_smoothing=0
-auto_description=1
-link_mouse_look_to_use=0
-[KEY]
 _EOFCFG_
+
+cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/arx_funcs"
+
+read_arx_settings () {
+  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_arx_settings: \$WINEPREFIX must be set'
+  perl -ne 'print "RESOLUTION=\$1\n" if /^resolution=(\d+x\d+)/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+}
+
+write_arx_settings () {
+  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_arx_settings: \$WINEPREFIX must be set'
+  perl -i.bak -pe 's/^resolution=\d+x\d+/resolution='"\$RESOLUTION"'/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+}
+
+_EOFFUNC_
 
 # Doesn't hurt ;)
 POL_Wine_reboot
@@ -101,5 +79,32 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 # C:\Program Files\GOG.com\Arx Fatalis\map.pdf
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arx Fatalis/" || exit 1
+
+TITLE="$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+source arx_funcs
+eval \$(read_arx_settings)
+
+# drop 320x200, 400x300 and 512x384
+POL_SetupWindow_menu_list "\$(eval_gettext 'Select game resolution:')" "\$TITLE" "640x480~800x600~1024x768~1152x864~1280x1024" "~" "\$RESOLUTION"
+[ "\$APP_ANSWER" != "\$RESOLUTION" ] && RESOLUTION="\$APP_ANSWER" write_arx_settings
+
+POL_SetupWindow_Close
+exit
+_EOF_
 
 exit
