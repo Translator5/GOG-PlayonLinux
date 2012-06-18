@@ -1,0 +1,90 @@
+#!/bin/bash
+# Date : (2012-06-18 19-00)
+# Last revision : (2012-06-18 20-19)
+# Wine version used : 1.4-dos_support_0.5
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="lands_of_lore_1_2"
+PREFIX="LandsOfLore_1_2_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.5"
+
+TITLE="Lands of Lore 1+2 (GoG release)"
+SHORTCUT_NAME1="Lands of Lore 1: The Throne of Chaos"
+SHORTCUT_NAME2="Lands of Lore 2: Guardians of Destiny"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Westwood Studios / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "0e08e1a30297ce04358e8ff592e6b6f3"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2" || POL_Debug_Fatal "Game not installed in standard path?"
+
+# Problem with shortizing "Lands of Lore 1" and "Lands of Lore 2" subdirectories side-by-side :(
+LOL1="LOL1"
+LOL2="LOL2"
+mv "Lands of Lore 1" "$LOL1"
+mv "Lands of Lore 2" "$LOL2"
+
+
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
+manual_mount=true
+dosbox_memsize=30
+render_aspect=true
+sdl_autolock=false
+cpu_core=auto
+cputype=auto
+cycles=max
+mixer_rate=44100
+mixer_blocksize=1024
+mixer_prebuffer=240
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=5
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_sbmixer=true
+sblaster_oplmode=opl3
+sblaster_oplemu=default
+sblaster_oplrate=44100
+_EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/LOL1.BAT"
+@ECHO OFF
+CONFIG -set "sblaster irq=7"
+CONFIG -set "sblaster oplemu=old"
+imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/GAME.DAT" -t iso -fs iso
+LOLCD.EXE
+EXIT
+_EOFBAT_
+
+POL_Shortcut "LOL1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/manual.pdf"
+
+POL_Shortcut "LOLG.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "-CD ."
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL2/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
