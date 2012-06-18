@@ -60,7 +60,7 @@ mixer_blocksize=1024
 mixer_prebuffer=240
 sblaster_sbtype=sb16
 sblaster_sbbase=220
-sblaster_irq=5
+sblaster_irq=7
 sblaster_dma=1
 sblaster_hdma=5
 sblaster_sbmixer=true
@@ -72,12 +72,12 @@ _EOFCFG_
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/LOL1.BAT"
 @ECHO OFF
-CONFIG -set "sblaster irq=7"
-CONFIG -set "sblaster oplemu=old"
 imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/GAME.DAT" -t iso -fs iso
 LOLCD.EXE
 EXIT
 _EOFBAT_
+
+perl -pe 's/^DeviceIRQ=5/DeviceIRQ=7/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL2/LOLSETUP.INI"
 
 POL_Shortcut "LOL1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lands Of Lore 1 and 2/$LOL1/manual.pdf"
