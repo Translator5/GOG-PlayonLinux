@@ -1,0 +1,54 @@
+#!/bin/bash
+# Date : (2012-05-18 16-10)
+# Last revision : (2012-05-20 19-54)
+# Wine version used : 1.4.0
+# Distribution used to test : Ubuntu 12.04 LTS
+# Author : Jan Nytra jannytra@seznam.cz
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+ 
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="knights_and_merchants_the_peasants_rebellion"
+PREFIX="KnightsAndMerchantsTPR_gog"
+WORKING_WINE_VERSION="1.5.3"
+ 
+TITLE="Knights and Merchants: The Peasants Rebellion (GOG release)"
+SHORTCUT_NAME="Knights and Merchants: The Peasants Rebellion"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Joymania Development / TopWare Interactive " "http://www.gog.com/en/gamecard/$GOGID" "Jan Nytra" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "6f7212f523a94aa606f39eaf2f3116b8"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+ 
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+ 
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "KM_TPR.exe" "$SHORTCUT_NAME"
+ 
+POL_SetupWindow_Close
+
+exit
