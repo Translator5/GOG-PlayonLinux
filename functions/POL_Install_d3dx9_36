@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last revision : (2012-06-30 00:46)
+# Last revision : (2012-06-30 01:14)
 # Creator: petch
 #  based on POL_Install_d3dx9 by Berillions/GNU_Raziel
 # Only For : http://www.playonlinux.com
@@ -28,13 +28,13 @@ install_dx_dlls () {
 
 if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Message "Extracting x86 and x64 dlls"
-        install_dx_dlls '*d3dx9*x64.cab' "$WINEPREFIX/drive_c/windows/system32" '*.dll'
-        install_dx_dlls '*d3dx9*x86.cab' "$WINEPREFIX/drive_c/windows/syswow64" '*.dll'
+        install_dx_dlls '*d3dx9*36_x64.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dx9_36.dll'
+        install_dx_dlls '*d3dx9*36_x86.cab' "$WINEPREFIX/drive_c/windows/syswow64" 'd3dx9_36.dll'
 else
-	POL_Debug_Message "Extracting only x86 dlls"
-        install_dx_dlls '*d3dx9*x86.cab' "$WINEPREFIX/drive_c/windows/system32" '*.dll'
+	POL_Debug_Message "Extracting only x86 dll"
+        install_dx_dlls '*d3dx9*36_x86.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dx9_36.dll'
 fi
 
 # Overriding dlls
-POL_Debug_Message "Overriding all d3dx9 dlls"
-POL_Wine_OverrideDLL "native, builtin" "d3dx9_24" "d3dx9_25" "d3dx9_26" "d3dx9_27" "d3dx9_28" "d3dx9_29" "d3dx9_30" "d3dx9_31" "d3dx9_32" "d3dx9_33" "d3dx9_34" "d3dx9_35" "d3dx9_36" "d3dx9_37" "d3dx9_38" "d3dx9_39" "d3dx9_40" "d3dx9_42" "d3dx9_42" "d3dx9_43"
+POL_Debug_Message "Overriding all d3dx9_36 dll"
+POL_Wine_OverrideDLL "native, builtin" "d3dx9_36"
