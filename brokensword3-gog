@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 21-27)
-# Last revision : (2012-06-30 23-08)
+# Last revision : (2012-06-30 00-12)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,7 +54,7 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "BSTSD.exe" "$SHORTCUT_NAME"
+POL_Shortcut "BSTSD.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword - The Sleeping Dragon/Readme.html"
 
 POL_SetupWindow_Close
