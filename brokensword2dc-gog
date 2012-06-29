@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-29 18-29)
-# Last revision : (2012-05-24 20-06)
+# Last revision : (2012-06-30 00-15)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,7 +44,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "BrokenSword2.exe" "$SHORTCUT_NAME"
+POL_Shortcut "BrokenSword2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword II - The Smoking Mirror Directors Cut/manual.pdf"
 # C:\Program Files\GOG.com\Broken Sword II - The Smoking Mirror Directors Cut\Readme.txt
 
