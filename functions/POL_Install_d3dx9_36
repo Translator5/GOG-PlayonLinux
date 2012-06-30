@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last revision : (2012-06-30 01:14)
+# Last revision : (2012-06-30 12:33)
 # Creator: petch
 #  based on POL_Install_d3dx9 by Berillions/GNU_Raziel
 # Only For : http://www.playonlinux.com
@@ -36,5 +36,5 @@ else
 fi
 
 # Overriding dlls
-POL_Debug_Message "Overriding all d3dx9_36 dll"
+POL_Debug_Message "Overriding d3dx9_36 dll"
 POL_Wine_OverrideDLL "native, builtin" "d3dx9_36"
