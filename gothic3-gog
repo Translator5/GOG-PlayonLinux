@@ -1,0 +1,66 @@
+#!/bin/bash
+# Date : (2012-06-30 21-24)
+# Last revision : (2012-07-01 01-13)
+# Wine version used : 1.5.5
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="gothic_3"
+PREFIX="Gothic3_gog"
+WORKING_WINE_VERSION="1.5.5"
+
+TITLE="Gothic 3 (GoG release)"
+SHORTCUT_NAME="Gothic 3"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "5bf43af9551b82f2d6860be364935ca9" "fefdb19e7c71f836cb5ab9c699ebc079" "9b3cd1ab56da71abf6b3b05d6994f459"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+POL_Call POL_Install_d3dx9_36
+POL_Call POL_Install_d3dx9_40
+
+# Workaround for black sky
+POL_Wine_Direct3D "AlwaysOffscreen" "enabled"
+
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+POL_Wine_X11Drv "DXGrab" "Y"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Gothic3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Manual.pdf"
+# C:\Program Files\GOG.com\Gothic 3\readme.txt
+
+POL_SetupWindow_message "$(eval_gettext 'It is highly recommended that you install the Community patch now, as it contains lots of bug fixes and enhancements over the original game.')" "$TITLE"
+
+POL_SetupWindow_Close
+
+exit

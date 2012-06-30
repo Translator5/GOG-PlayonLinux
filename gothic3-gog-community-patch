@@ -1,0 +1,63 @@
+#!/bin/bash
+# Date : (2012-06-30 23-30)
+# Last revision : (2012-06-30 23-43)
+# Wine version used : 1.5.5
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Freeware
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+# Must match gothic3-gog script values
+TITLE_REQUIRED="Gothic 3 (GoG release)"
+PREFIX="Gothic3_gog"
+WORKING_WINE_VERSION="1.5.5"
+INSTALLBIN="Gothic_3_EE_Patch_v1.75.14_Int_Full.exe"
+
+DOWNLOAD_URL="http://www.worldofgothic.de/download.php?id=1283"
+DOWNLOAD_MD5="d0722159170def9e78676b089f18f5e2"
+
+TITLE="Gothic 3 - Community patch 1.75"
+# SHORTCUT_NAME?
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Mad Vulture Games / Nordic Games" "http://www.worldofgothic.de/dl/download_478.htm" "Pierre Etchemaite" "$PREFIX"
+
+if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
+    POL_Debug_Fatal "$(eval_gettext 'Please install $TITLE_REQUIRED first')"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_AutoSetVersionEnv
+POL_LoadVar_PROGRAMFILES
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    POL_SetupWindow_InstallMethod "DOWNLOAD,LOCAL"
+    if [ "$INSTALL_METHOD" = "LOCAL" ]; then
+        cd "$HOME"
+        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
+        ARCHIVE="$APP_ANSWER"
+    else # $INSTALL_METHOD = DOWNLOAD
+        cd "$POL_USER_ROOT/tmp"
+        POL_Download "$DOWNLOAD_URL" "$DOWNLOAD_MD5"
+        mv "$(basename $DOWNLOAD_URL)" "$INSTALLBIN"
+        ARCHIVE="$POL_USER_ROOT/tmp/$INSTALLBIN"
+    fi
+fi
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+POL_SetupWindow_Close
+
+exit
