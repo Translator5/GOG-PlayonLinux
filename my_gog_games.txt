@@ -52,6 +52,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Gabriel Knight 2: The Beast Within
 * Gabriel Knight 3: Blood of the Sacred, Blood of the Damned
 * Gabriel Knight: Sins of the Fathers
+* Geneforge 1-5
 * Giants: Citizen Kabuto
 * Gobliiins pack
 * Gothic
@@ -139,6 +140,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Ultima Worlds of Adventure 2: Martian Dreams
 * Unreal Gold
 * Uru: Complete Chronicles
+* Whispered World, The
 * Wing Commander™ 4: The Price of Freedom
 * Witcher: Enhanced Edition, The
 * Worlds of Ultima: The Savage Empire
