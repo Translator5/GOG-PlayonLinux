@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 21-24)
-# Last revision : (2012-07-01 01-13)
+# Last revision : (2012-07-01 02-31)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,6 +48,9 @@ POL_Call POL_Install_d3dx9_40
 # Workaround for black sky
 POL_Wine_Direct3D "AlwaysOffscreen" "enabled"
 
+# Performance tweak http://appdb.winehq.org/objectManager.php?sClass=version&iId=6012&iTestingId=71819
+perl -i.bak -pe 'print "Timer.ThreadSafe=false\r\n" if /^Timer\.bIsSmooth=/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Ini/ge3.ini"
+
 POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_X11Drv "DXGrab" "Y"
 
@@ -59,7 +62,7 @@ POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Manual.pdf"
 # C:\Program Files\GOG.com\Gothic 3\readme.txt
 
-POL_SetupWindow_message "$(eval_gettext 'It is highly recommended that you install the Community patch now, as it contains lots of bug fixes and enhancements over the original game.')" "$TITLE"
+POL_SetupWindow_message "$(eval_gettext 'It is highly recommended that you install the Community patch now, as it contains LOTS of bug fixes and enhancements over the original game.')" "$TITLE"
 
 POL_SetupWindow_Close
 

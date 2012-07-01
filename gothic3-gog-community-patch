@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 23-30)
-# Last revision : (2012-06-30 23-43)
+# Last revision : (2012-07-01 11-16)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -57,6 +57,10 @@ POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" 
 POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Wine_WaitExit "$TITLE"
+
+# Performance tweak http://appdb.winehq.org/objectManager.php?sClass=version&iId=6012&iTestingId=71819
+perl -i.bak -pe 's/^Timer\.ThreadSafe=true/Timer.ThreadSafe=false/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Ini/ge3.ini"
+
 
 POL_SetupWindow_Close
 
