@@ -30,6 +30,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
 * Deus Ex™ GOTY Edition
+* Disciples 2 Gold
 * Divine Divinity
 * Dragonsphere
 * Dream Pinball 3D
@@ -95,6 +96,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Populous™ 2: Trials of the Olympian Gods
 * POSTAL 2 Complete
 * Prince of Persia®: The Sands of Time
+* Pro Pinball Big Race USA
 * Psychonauts
 * Realms of Arkania 3
 * Realms of the Haunting
