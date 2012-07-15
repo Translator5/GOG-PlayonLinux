@@ -27,10 +27,6 @@ Use_WineVersion "$WORKINGWINEVERSION"
 
 POL_SetupWindow_prefixcreate
 
-#fetching PROGRAMFILES environmental variable
-PROGRAMFILES="Program Files" 
-POL_LoadVar_PROGRAMFILES
-
 #fetching APPDATA environmental variable
 APPDATA=`wine cmd /c echo "%AppData%"`
 USER=`wine cmd /c echo "%User%" |tr -d '\015' | tr -d '\010'`
