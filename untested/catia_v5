@@ -1,0 +1,107 @@
+#!/bin/bash
+# Date : (2009-06-05 20-00)
+# Last revision : (2010-04-01 08-00)
+# Wine version used : 1.1.33
+# Distribution used to test : Fedora 12 (by NSLW) and Ubuntu 9.04 (by diegobalangione)
+# Author : NSLW (with tips from diegobalangione)
+# Licence : Retail
+ 
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TYTUL="CATIA V5"
+PREFIX="CATIAV5"
+WORKINGWINEVERSION="1.1.33"
+
+POL_SetupWindow_Init
+POL_SetupWindow_presentation "$TYTUL" "Dassault Systèmes" "www.3ds.com" "NSLW" "$PREFIX" 
+
+select_prefix "$REPERTOIRE/wineprefix/$PREFIX"
+POL_SetupWindow_message "Please insert $TYTUL media into your disk drive."
+POL_SetupWindow_cdrom
+POL_SetupWindow_check_cdrom "setup.exe"
+
+POL_SetupWindow_install_wine "$WORKINGWINEVERSION"
+Use_WineVersion "$WORKINGWINEVERSION"
+
+POL_SetupWindow_prefixcreate
+
+#fetching PROGRAMFILES environmental variable
+PROGRAMFILES="Program Files" 
+POL_LoadVar_PROGRAMFILES
+
+#fetching APPDATA environmental variable
+APPDATA=`wine cmd /c echo "%AppData%"`
+USER=`wine cmd /c echo "%User%" |tr -d '\015' | tr -d '\010'`
+APPDATA=`echo $APPDATA | sed -e "s/$USER/\./" | cut -d'.' -f2 | cut -d'\' -f2`
+
+mkdir "$HOME/.winetrickscache"
+cd "$HOME/.winetrickscache"
+
+# checking if ffdshow is in winetricks cache if not then download
+if [ ! -e "ffdshow_beta5_rev2033_20080705_clsid.exe" ]
+then
+POL_SetupWindow_download "PlayOnLinux is downloading ffdshow" "ffdshow3" "http://downloads.sourceforge.net/ffdshow-tryout/ffdshow_beta5_rev2033_20080705_clsid.exe"
+fi
+
+# checking if xvid is in winetricks cache if not then download
+if [ ! -e "Xvid-1.2.2-07062009.exe" ]
+then
+POL_SetupWindow_download "PlayOnLinux is downloading Xvid" "Xvid" "http://www.koepi.info/Xvid-1.2.2-07062009.exe"
+fi
+
+# checking if Intel is in winetricks cache if not then download
+if [ ! -e "codinstl.exe" ]
+then
+POL_SetupWindow_download "PlayOnLinux is downloading Intel Codecs (Indeo)" "Intel Codecs (Indeo)" "http://downloadmirror.intel.com/2846/eng/codinstl.exe"
+fi
+
+# checking if vcrun6 is in winetricks cache if not then download
+if [ ! -e "vc6redistsetup_enu.exe" ]
+then
+POL_SetupWindow_download "PlayOnLinux is downloading MS Visual C++ 6 runtime libraries" "MS Visual C++" "http://download.microsoft.com/download/vc60pro/update/1/w9xnt4/en-us/vc6redistsetup_enu.exe"
+fi
+
+mkdir "$HOME/.winetrickscache/vcrun2005-ms09-035"
+cd "$HOME/.winetrickscache/vcrun2005-ms09-035"
+# checking if vcrun2005 is in winetricks cache if not then download
+if [ ! -e "vcredist_x86.exe" ]
+then
+POL_SetupWindow_download "PlayOnLinux is downloading MS Visual C++ 2005 sp1 libraries" "MS Visual C++" "http://download.microsoft.com/download/6/B/B/6BB661D6-A8AE-4819-B79F-236472F6070C/vcredist_x86.exe"
+fi
+
+cd "$REPERTOIRE/ressources"
+#downloading winetricks
+if [ ! -e "winetricks" ]
+then
+wget http://www.kegel.com/wine/winetricks --output-document=winetricks
+fi
+
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing video codecs on your prefix" "$TYTUL"
+bash winetricks -q icodecs xvid ffdshow vcrun2005
+POL_SetupWindow_detect_exit
+
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing MS Visual C++ 2005 sp1 libraries on your prefix" "$TYTUL"
+bash winetricks -q vcrun2005
+POL_SetupWindow_detect_exit
+
+POL_SetupWindow_wait_next_signal "Installation in progress..." "$TYTUL"
+cd "$CDROM"
+wine "setup.exe"
+POL_SetupWindow_detect_exit
+
+POL_SetupWindow_message "$TYTUL has been installed successfully" "$TYTUL"
+
+POL_SetupWindow_textbox "What version of CATIA V5 do you have got? \n For example if you've got \"CATIA V5R16\" then enter \"16\" into text entry" "Text zone"
+CATVER="$APP_ANSWER"
+
+#making shortcut
+cp "$CDROM/DS.bmp" "$REPERTOIRE/icones/32/$TYTUL"
+POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/Dassault Systemes/B$CATVER/intel_a/code/bin/" "catstart.exe" "" "$TYTUL" "" "-run \"CNEXT.exe\" -env CATIA.V5R$CATVER.B$CATVER -direnv \"C:\\users\\Public\\$APPDATA\\DassaultSystemes\\CATEnv\" -nowindow"
+Set_WineVersion_Assign "$WORKINGWINEVERSION" "$TYTUL"
+
+POL_SetupWindow_reboot
+POL_SetupWindow_message "$TYTUL has been installed successfully" "$TYTUL"
+
+POL_SetupWindow_Close
+exit
