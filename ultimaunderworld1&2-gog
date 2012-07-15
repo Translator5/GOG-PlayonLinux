@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-15 10-34)
-# Last revision : (2012-07-15 14-48)
+# Last revision : (2012-07-15 17-00)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -19,7 +19,7 @@ TITLE="Ultima Underworld 1+2 (GoG release)"
 SHORTCUT_NAME1="Ultima Underworld 1"
 SHORTCUT_NAME2="Ultima Underworld 2"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
