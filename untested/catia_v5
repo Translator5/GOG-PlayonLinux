@@ -4,20 +4,21 @@
 # Wine version used : 1.1.33
 # Distribution used to test : Fedora 12 (by NSLW) and Ubuntu 9.04 (by diegobalangione)
 # Author : NSLW (with tips from diegobalangione)
+#   Updates by petch
 # Licence : Retail
- 
+
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-TYTUL="CATIA V5"
+TITLE="CATIA V5"
 PREFIX="CATIAV5"
 WORKINGWINEVERSION="1.1.33"
 
 POL_SetupWindow_Init
-POL_SetupWindow_presentation "$TYTUL" "Dassault Systèmes" "www.3ds.com" "NSLW" "$PREFIX" 
+POL_SetupWindow_presentation "$TITLE" "Dassault Systèmes" "www.3ds.com" "NSLW" "$PREFIX" 
 
 select_prefix "$REPERTOIRE/wineprefix/$PREFIX"
-POL_SetupWindow_message "Please insert $TYTUL media into your disk drive."
+POL_SetupWindow_message "Please insert $TITLE media into your disk drive."
 POL_SetupWindow_cdrom
 POL_SetupWindow_check_cdrom "setup.exe"
 
@@ -77,31 +78,31 @@ then
 wget http://www.kegel.com/wine/winetricks --output-document=winetricks
 fi
 
-POL_SetupWindow_wait_next_signal "PlayOnLinux is installing video codecs on your prefix" "$TYTUL"
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing video codecs on your prefix" "$TITLE"
 bash winetricks -q icodecs xvid ffdshow vcrun2005
 POL_SetupWindow_detect_exit
 
-POL_SetupWindow_wait_next_signal "PlayOnLinux is installing MS Visual C++ 2005 sp1 libraries on your prefix" "$TYTUL"
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing MS Visual C++ 2005 sp1 libraries on your prefix" "$TITLE"
 bash winetricks -q vcrun2005
 POL_SetupWindow_detect_exit
 
-POL_SetupWindow_wait_next_signal "Installation in progress..." "$TYTUL"
+POL_SetupWindow_wait_next_signal "Installation in progress..." "$TITLE"
 cd "$CDROM"
 wine "setup.exe"
 POL_SetupWindow_detect_exit
 
-POL_SetupWindow_message "$TYTUL has been installed successfully" "$TYTUL"
+POL_SetupWindow_message "$TITLE has been installed successfully" "$TITLE"
 
 POL_SetupWindow_textbox "What version of CATIA V5 do you have got? \n For example if you've got \"CATIA V5R16\" then enter \"16\" into text entry" "Text zone"
 CATVER="$APP_ANSWER"
 
 #making shortcut
-cp "$CDROM/DS.bmp" "$REPERTOIRE/icones/32/$TYTUL"
-POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/Dassault Systemes/B$CATVER/intel_a/code/bin/" "catstart.exe" "" "$TYTUL" "" "-run \"CNEXT.exe\" -env CATIA.V5R$CATVER.B$CATVER -direnv \"C:\\users\\Public\\$APPDATA\\DassaultSystemes\\CATEnv\" -nowindow"
-Set_WineVersion_Assign "$WORKINGWINEVERSION" "$TYTUL"
+cp "$CDROM/DS.bmp" "$REPERTOIRE/icones/32/$TITLE"
+POL_SetupWindow_make_shortcut "$PREFIX" "$PROGRAMFILES/Dassault Systemes/B$CATVER/intel_a/code/bin/" "catstart.exe" "" "$TITLE" "" "-run \"CNEXT.exe\" -env CATIA.V5R$CATVER.B$CATVER -direnv \"C:\\users\\Public\\$APPDATA\\DassaultSystemes\\CATEnv\" -nowindow"
+Set_WineVersion_Assign "$WORKINGWINEVERSION" "$TITLE"
 
 POL_SetupWindow_reboot
-POL_SetupWindow_message "$TYTUL has been installed successfully" "$TYTUL"
+POL_SetupWindow_message "$TITLE has been installed successfully" "$TITLE"
 
 POL_SetupWindow_Close
 exit
