@@ -27,10 +27,12 @@ Use_WineVersion "$WORKINGWINEVERSION"
 
 POL_SetupWindow_prefixcreate
 
-#fetching APPDATA environmental variable
-APPDATA=`wine cmd /c echo "%AppData%"`
-USER=`wine cmd /c echo "%User%" |tr -d '\015' | tr -d '\010'`
-APPDATA=`echo $APPDATA | sed -e "s/$USER/\./" | cut -d'.' -f2 | cut -d'\' -f2`
+POL_LoadVar_APPDATA () {
+	#fetching APPDATA environmental variable
+	APPDATA=$(POL_Wine cmd /c echo '%AppData%' | sed -e 's/^.*'$(id -un)'\\//')
+}
+
+POL_LoadVar_APPDATA
 
 mkdir "$HOME/.winetrickscache"
 cd "$HOME/.winetrickscache"
