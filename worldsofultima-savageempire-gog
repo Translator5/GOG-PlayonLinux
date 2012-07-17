@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-16 19-55)
-# Last revision : (2012-07-16 21-16)
+# Last revision : (2012-07-17 00-32)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -41,7 +41,8 @@ cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
 cpu_core=auto
 cpu_cputype=auto
-cpu_cycles=auto
+cpu_cycles=5000
+sdl_autolock=false
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
