@@ -1,0 +1,94 @@
+#!/bin/bash
+# Date : (2012-07-20 01-46)
+# Last revision : (2012-07-20 02-28)
+# Wine version used : 1.4
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="disciples_2_gold"
+PREFIX="Disciples2Gold_gog"
+WORKING_WINE_VERSION="1.4"
+
+TITLE="Disciples 2 Gold (GoG release)"
+SHORTCUT_NAME1="Disciples 2: Dark Prophecy and Gallean's Return"
+SHORTCUT_NAME2="Disciples 2: Rise of the Elves"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Strategy First" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "3740b5d7abc3af4eaa8647462085ed98"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Dark Prophecy and Gallean's Return/Discipl2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Dark Prophecy and Gallean's Return/manual.pdf"
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Dark Prophecy and Gallean's Return\ScenEdit.exe
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Dark Prophecy and Gallean's Return\Readme.txt
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Dark Prophecy and Gallean's Return\manual addon.pdf
+
+POL_Shortcut "$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Rise of the Elves/Discipl2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Rise of the Elves/manual addon.pdf"
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Rise of the Elves\ScenEdit.exe
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Rise of the Elves\Readme.txt
+# C:\Program Files\GOG.com\Disciples 2 Gold\Disciples 2 - Rise of the Elves\manual.pdf   (same as other game's one)
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Dark Prophecy and Gallean's Return/" || exit 1
+TITLE="$TITLE"
+POL_Debug_Init
+POL_Wine ConfigEditor.exe
+exit
+_EOF_
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Rise of the Elves/" || exit 1
+TITLE="$TITLE"
+POL_Debug_Init
+POL_Wine ConfigEditor.exe
+exit
+_EOF_
+
+exit
