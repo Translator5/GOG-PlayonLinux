@@ -27,7 +27,7 @@ else
 
 	if [ "$INSTALL_METHOD" = "LOCAL" ]; then
 		cd "$HOME"
-		POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" ""
+		POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" ".exe;.EXE"
 		POL_GoG_location="$APP_ANSWER"
 	fi
 	INSTALL_METHOD="$INSTALL_METHOD_BACK"
