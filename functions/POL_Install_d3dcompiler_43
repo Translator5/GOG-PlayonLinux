@@ -28,11 +28,11 @@ install_dx_dlls () {
 
 if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Message "Extracting x86 and x64 dlls"
-        install_dx_dlls '*d3dx9*43_x64.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dcompiler_43.dll'
-        install_dx_dlls '*d3dx9*43_x86.cab' "$WINEPREFIX/drive_c/windows/syswow64" 'd3dcompiler_43.dll'
+        install_dx_dlls '*d3dcompiler_43_x64.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dcompiler_43.dll'
+        install_dx_dlls '*d3dcompiler_43_x86.cab' "$WINEPREFIX/drive_c/windows/syswow64" 'd3dcompiler_43.dll'
 else
 	POL_Debug_Message "Extracting only x86 dll"
-        install_dx_dlls '*d3dx9*43_x86.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dcompiler_43.dll'
+        install_dx_dlls '*d3dcompiler_43_x86.cab' "$WINEPREFIX/drive_c/windows/system32" 'd3dcompiler_43.dll'
 fi
 
 # Overriding dlls
