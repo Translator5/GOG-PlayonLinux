@@ -43,16 +43,12 @@ while true; do
 	rm "$COOKIES" 2> /dev/null
 	rm "$COOKIES_2" 2> /dev/null
 	gutm="$($POL_WGET http://www.gog.com/ -O- --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" | sed -n 's/^.*id="gutm" value="\([^"]*\)".*$/\1/p')"
-	sleep 2
+	gutm="$(POL_Website_urlencode "$gutm")"
+
 	buk="$($POL_WGET "http://www.gog.com/user/ajax" -O- --post-data="a=get&c=gamecard&p1=false&p2=false&auth=&gutm=$gutm" --save-cookies=$COOKIES_2 --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" |sed -n 's/^.*"buk":"\([^"]*\)".*/\1/p')"
-	sleep 2
+	buk="$(POL_Website_urlencode "$buk")"
 
-	if [ "$POL_OS" = "Mac" ]; then
-		wget -q -4 https://secure.gog.com/en/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
-	else
-		$POL_WGET https://secure.gog.com/en/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
-	fi
-
+	$POL_WGET https://secure.gog.com/en/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
 
 	unset POL_LOGIN POL_PASSWORD
 
