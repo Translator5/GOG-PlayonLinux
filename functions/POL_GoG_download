@@ -40,7 +40,6 @@ while true; do
 
 	POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
-	
 	rm "$COOKIES" 2> /dev/null
 	rm "$COOKIES_2" 2> /dev/null
 	gutm="$($POL_WGET http://www.gog.com/ -O- --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" | sed -n 's/^.*id="gutm" value="\([^"]*\)".*$/\1/p')"
@@ -72,6 +71,7 @@ done
 [ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
 cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
 POL_Debug_Message "Will download into $PWD"
+local FAILURE=""
 
 download_piece ()
 {
@@ -96,8 +96,10 @@ download_piece ()
 		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
 		if [ ! -e "$TMPPIECE" ]; then
 			POL_Debug_Error "Download seems to have failed"
+			FAILURE=1
 		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
 			POL_Debug_Error "Download seems to be corrupted"
+			FAILURE=1
 			mv "$TMPPIECE" "$FAILEDPIECE"
 		else
 			mv "$TMPPIECE" "$2"
@@ -118,4 +120,5 @@ fi
 
 rm -f "$COOKIES"
 
-POL_GoG_location="$PWD/setup_$BASENAME.exe"
+POL_GoG_location=""
+[ -z "$FAILURE" ] && POL_GoG_location="$PWD/setup_$BASENAME.exe"
