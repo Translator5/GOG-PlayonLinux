@@ -1,0 +1,91 @@
+#!/bin/bash
+# Date : (2012-07-23 19-46)
+# Last revision : (2012-07-23 20-07)
+# Wine version used : 1.5.9
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="the_witcher_2"
+PREFIX="TheWitcher2_gog"
+WORKING_WINE_VERSION="1.5.9"
+
+TITLE="The Witcher 2 Enhanced Edition (GoG release)"
+SHORTCUT_NAME="The Witcher 2: Assassins of Kings EE"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "b8c84b47644b53c5d3c9e1a2c9bb3a2e" "bc207a9ee725ccce2fad933861ffa299" "740dc01dfa936ea4755049d0fd8a3fe4" "b96ba44d1f33f4e73941f490f2828982" "b56b54012f218d887863ce778ef77e5a" "5d06e0b2bd1aa47697578cacbc8c1ed4" "8698adebaafab3ff9aa0303934bac1e3" "7efb39400446f2609ad11eeb7a7e2a14" "01a8b34c6a115cc16da61a8510072351" "ce4a8cb2360a358c35dc72d959652725"
+
+POL_System_SetArch "auto"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "512"
+
+POL_Call POL_Install_d3dcompiler_43
+# POL_Call POL_Install_xact
+# POL_Call POL_Install_dotnet40
+
+# POL_Wine_Direct3D "UseGLSL" "disabled"
+# POL_Wine_SetVideoDriver
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+MANUAL="manual_EN.rtf"
+[ "$POL_LANG" = "es" ] && MANUAL="manual_ES.rtf"
+[ "$POL_LANG" = "it" ] && MANUAL="manual_IT.rtf"
+[ "$POL_LANG" = "de" ] && MANUAL="manual_DE.rtf"
+[ "$POL_LANG" = "fr" ] && MANUAL="manual_FR.rtf"
+[ "$POL_LANG" = "pl" ] && MANUAL="manual_PL.rtf"
+[ "$POL_LANG" = "cz" ] && MANUAL="manual_CZ.rtf"
+[ "$POL_LANG" = "hu" ] && MANUAL="manual_HU.rtf"
+[ "$POL_LANG" = "jp" ] && MANUAL="manual_JP.rtf"
+[ "$POL_LANG" = "ru" ] && MANUAL="manual_RU.rtf"
+[ "$POL_LANG" = "zh" ] && MANUAL="manual_ZH.rtf"
+[ "$POL_LANG" = "tr" ] && MANUAL="manual_TR.rtf"
+
+POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/$MANUAL"
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/" || exit 1
+TITLE="$TITLE"
+POL_Debug_Init
+POL_Wine Configurator.exe
+exit
+_EOF_
+
+exit
