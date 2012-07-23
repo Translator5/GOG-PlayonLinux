@@ -116,5 +116,7 @@ fi
 
 rm -f "$COOKIES"
 
-POL_GoG_location=""
-[ -z "$FAILURE" ] && POL_GoG_location="$PWD/setup_$BASENAME.exe"
+POL_GoG_downloaded="False"
+[ -z "$FAILURE" ] && POL_GoG_downloaded="True"
+
+POL_GoG_location="$PWD/setup_$BASENAME.exe"
