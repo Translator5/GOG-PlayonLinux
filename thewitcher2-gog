@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2012-07-23 23-25)
+# Last revision : (2012-07-24 07-45)
 # Wine version used : 1.5.9
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -68,24 +68,24 @@ POL_Call POL_Install_d3dcompiler_43
 # POL_Call POL_Install_xact
 # POL_Call POL_Install_dotnet40
 
-# POL_Wine_Direct3D "UseGLSL" "disabled"
+POL_Wine_Direct3D "UseGLSL" "disabled"
 # POL_Wine_SetVideoDriver
 
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-MANUAL="manual_EN.rtf"
-[ "$POL_LANG" = "es" ] && MANUAL="manual_ES.rtf"
-[ "$POL_LANG" = "it" ] && MANUAL="manual_IT.rtf"
-[ "$POL_LANG" = "de" ] && MANUAL="manual_DE.rtf"
-[ "$POL_LANG" = "fr" ] && MANUAL="manual_FR.rtf"
-[ "$POL_LANG" = "pl" ] && MANUAL="manual_PL.rtf"
-[ "$POL_LANG" = "cz" ] && MANUAL="manual_CZ.rtf"
-[ "$POL_LANG" = "hu" ] && MANUAL="manual_HU.rtf"
-[ "$POL_LANG" = "jp" ] && MANUAL="manual_JP.rtf"
-[ "$POL_LANG" = "ru" ] && MANUAL="manual_RU.rtf"
-[ "$POL_LANG" = "zh" ] && MANUAL="manual_ZH.rtf"
-[ "$POL_LANG" = "tr" ] && MANUAL="manual_TR.rtf"
+MANUAL="manual_EN.pdf"
+[ "$POL_LANG" = "es" ] && MANUAL="manual_ES.pdf"
+[ "$POL_LANG" = "it" ] && MANUAL="manual_IT.pdf"
+[ "$POL_LANG" = "de" ] && MANUAL="manual_DE.pdf"
+[ "$POL_LANG" = "fr" ] && MANUAL="manual_FR.pdf"
+[ "$POL_LANG" = "pl" ] && MANUAL="manual_PL.pdf"
+[ "$POL_LANG" = "cz" ] && MANUAL="manual_CZ.pdf"
+[ "$POL_LANG" = "hu" ] && MANUAL="manual_HU.pdf"
+[ "$POL_LANG" = "jp" ] && MANUAL="manual_JP.pdf"
+[ "$POL_LANG" = "ru" ] && MANUAL="manual_RU.pdf"
+[ "$POL_LANG" = "zh" ] && MANUAL="manual_ZH.pdf"
+[ "$POL_LANG" = "tr" ] && MANUAL="manual_TR.pdf"
 
 POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/$MANUAL"
