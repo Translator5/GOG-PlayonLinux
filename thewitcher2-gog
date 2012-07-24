@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2012-07-24 21-39)
+# Last revision : (2012-07-24 23-03)
 # Wine version used : 1.5.9
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -74,18 +74,15 @@ POL_Wine_Direct3D "UseGLSL" "disabled"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-MANUAL="manual_EN.pdf"
-[ "$POL_LANG" = "es" ] && MANUAL="manual_ES.pdf"
-[ "$POL_LANG" = "it" ] && MANUAL="manual_IT.pdf"
-[ "$POL_LANG" = "de" ] && MANUAL="manual_DE.pdf"
-[ "$POL_LANG" = "fr" ] && MANUAL="manual_FR.pdf"
-[ "$POL_LANG" = "pl" ] && MANUAL="manual_PL.pdf"
-[ "$POL_LANG" = "cz" ] && MANUAL="manual_CZ.pdf"
-[ "$POL_LANG" = "hu" ] && MANUAL="manual_HU.pdf"
-[ "$POL_LANG" = "jp" ] && MANUAL="manual_JP.pdf"
-[ "$POL_LANG" = "ru" ] && MANUAL="manual_RU.pdf"
-[ "$POL_LANG" = "zh" ] && MANUAL="manual_ZH.pdf"
-[ "$POL_LANG" = "tr" ] && MANUAL="manual_TR.pdf"
+MANUAL="manual_en.pdf"
+[ "$POL_LANG" = "es" ] && MANUAL="manual_es.pdf"
+[ "$POL_LANG" = "it" ] && MANUAL="manual_it.pdf"
+[ "$POL_LANG" = "de" ] && MANUAL="manual_de.pdf"
+[ "$POL_LANG" = "fr" ] && MANUAL="manual_fr.pdf"
+[ "$POL_LANG" = "pl" ] && MANUAL="manual_pl.pdf"
+[ "$POL_LANG" = "cz" ] && MANUAL="manual_cz.pdf"
+[ "$POL_LANG" = "hu" ] && MANUAL="manual_hu.pdf"
+[ "$POL_LANG" = "jp" ] && MANUAL="manual_jp.pdf"
 
 POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/$MANUAL"
