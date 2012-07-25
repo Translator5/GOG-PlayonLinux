@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2012-07-24 23-03)
-# Wine version used : 1.5.9
+# Last revision : (2012-07-26 00-38)
+# Wine version used : 1.5.8
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_witcher_2"
 PREFIX="TheWitcher2_gog"
-WORKING_WINE_VERSION="1.5.9"
+WORKING_WINE_VERSION="1.5.8"
 
 TITLE="The Witcher 2 Enhanced Edition (GoG release)"
 SHORTCUT_NAME="The Witcher 2: Assassins of Kings EE"
@@ -46,14 +46,10 @@ else
     fi
 fi
 
-POL_System_SetArch "auto"
+# POL_System_SetArch "auto"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-POL_Call POL_Install_d3dcompiler_43
-# POL_Call POL_Install_xact
-# POL_Call POL_Install_dotnet40
 
 # Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
@@ -62,6 +58,9 @@ POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
+POL_Call POL_Install_d3dcompiler_43
+# POL_Call POL_Install_xact
+# POL_Call POL_Install_dotnet40
 
 # GoG work!
 Set_OS winxp
@@ -69,7 +68,7 @@ Set_OS winxp
 POL_SetupWindow_VMS "512"
 
 POL_Wine_Direct3D "UseGLSL" "disabled"
-# POL_Wine_SetVideoDriver
+POL_Wine_SetVideoDriver
 
 # Doesn't hurt ;)
 POL_Wine_reboot
