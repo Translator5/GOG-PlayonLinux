@@ -35,6 +35,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Divine Divinity
 * Dragonsphere
 * Dream Pinball 3D
+* Dreamfall: The Longest Journey
 * Duke Nukem 3D: Atomic Edition
 * Duke Nukem: Manhattan Project
 * Dungeon Keeper™ 2
@@ -72,6 +73,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Jack Orlando: A Cinematic Adventure (DC)
 * Jagged Alliance 2
 * Journeyman Project 2, The
+* Journeyman Project 3: Legacy of Time, The
 * Kingpin: Life of Crime
 * Lands of Lore™ 1+2
 * Last Express, The
