@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-21 11-57)
-# Last revision : (2012-07-21 17-52)
+# Last revision : (2012-07-29 03-22)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -34,6 +34,10 @@ POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
+cd "$POL_USER_ROOT/tmp" || POL_Debug_Fatal 'Temporary directory not found!'
+POL_Download "http://files.playonlinux.com/empty.iso.gz" "ba835afa9c5b7d0202bc595ed0231275"
+zcat empty.iso.gz > "$WINEPREFIX/drive_c/empty.iso"
+
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 dosbox_memsize=16
@@ -54,7 +58,7 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-mount D /dev/cdrom -t cdrom
+imgmount D "$WINEPREFIX/drive_c/empty.iso" -t iso
 set dos4gvm=
 _EOFAE_
 
