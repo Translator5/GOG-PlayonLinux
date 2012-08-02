@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-30 12-44)
-# Last revision : (2012-08-02 15-12)
+# Last revision : (2012-08-02 15-29)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -65,15 +65,10 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Little Big Adventure/" || exit 1
-
 TITLE="$TITLE"
-
 POL_Debug_Init
-
 POL_Wine Language.exe
-
 exit
 _EOF_
 
