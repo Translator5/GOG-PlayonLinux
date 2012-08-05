@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-04 18-10)
-# Last revision : (2012-08-05 14-30)
+# Last revision : (2012-08-05 16-03)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,6 +30,7 @@ POL_Call POL_GoG_setup "$GOGID" "d8bcd539d6a5e6999b242348259694f8"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
+# native devenum => black screen!
 POL_Call POL_Install_quartz
 POL_Call POL_Install_amstream
 POL_Call POL_Install_wmp9
