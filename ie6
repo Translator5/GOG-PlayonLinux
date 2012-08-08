@@ -1,0 +1,84 @@
+#!/bin/bash
+# Changelog
+# [Quentin PARIS] (2012-04-24) Fixed bug 815
+
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TITLE="Internet Explorer 6"
+PREFIX="InternetExplorer6"
+WORKING_WINE_VERSION="1.4"
+
+POL_GetSetupImages "" "http://files.playonlinux.com/resources/setups/ie6/left.jpg" "$TITLE"
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Microsoft corporation" "http://www.microsoft.com/" "Tinou" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_System_SetArch "x86"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_System_TmpCreate "$PREFIX"
+cd "$POL_System_TmpDir"
+
+wget -q "$SITE/divers/ie_license.txt"
+POL_SetupWindow_licence "Please read this carrefully" "$TITLE" "$POL_System_TmpDir/ie_license.txt"
+
+POL_Wine_InstallFonts
+POL_Call POL_Function_FontsSmoothRGB
+POL_Call POL_Install_msls31
+
+if [ ! -f "$WINEPREFIX/drive_c/windows/system32/plugin.ocx" ]
+then
+    POL_Wine iexplore -unregserver
+fi
+
+POL_Wine_OverrideDLL native,builtin iexplore.exe itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Internet Explorer/"
+mv iexplore.exe iexplore.bak
+  
+cd "$WINEPREFIX/drive_c/windows/system32"
+for dll in itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
+do
+    [ -f "$dll.dll" ] && mv "$dll.dll" "$dll.bak"
+done
+
+Set_OS win2k
+
+cd "$POL_System_TmpDir"
+POL_Download "http://download.microsoft.com/download/ie6sp1/finrel/6_sp1/W98NT42KMeXP/EN-US/ie6setup.exe" "34429b572e1ff3ebcba8090c811ae8f1"
+
+rm -f "$WINEPREFIX/drive_c/windows/system32/browseui.dll"
+rm -f "$WINEPREFIX/drive_c/windows/system32/inseng.dll"
+rm -f "$WINEPREFIX/drive_c/windows/system32/inetcpl.cpl"
+
+cabextract -F "inseng.dll" "ie6setup.exe"
+mv "inseng.dll" "$WINEPREFIX/drive_c/windows/system32/"
+POL_Wine_OverrideDLL native inseng
+  
+POL_Wine_WaitBefore "$TITLE"
+wget "$SITE/divers/ie6reg.reg"
+POL_Wine regedit ie6reg.reg
+POL_Wine --ignore-errors ie6setup.exe # /q:a /r:n /c:"ie6wzd /S:""#e"" /q:a /r:n"
+POL_Wine_WaitExit "$TITLE"
+ 
+POL_SetupWindow_pulsebar "$(eval_gettext "Registering libraries, please wait\n(It can take a while)")" "$TITLE"
+cd "$WINEPREFIX/drive_c/windows/system32"
+PULSE=0
+for file in actxprxy.dll browseui.dll browsewm.dll cdfview.dll ddraw.dll dispex.dll dsound.dll iedkcs32.dll iepeers.dll iesetup.dll imgutil.dll inetcomm.dll isetup.dll jscript.dll laprxy.dll mlang.dll mshtml.dll mshtmled.dll msi.dll msident.dll msoeacct.dll msrating.dll mstime.dll msxml3.dll occache.dll ole32.dll oleaut32.dll olepro32.dll pngfilt.dll quartz.dll rpcrt4.dll rsabase.dll rsaenh.dll scrobj.dll scrrun.dll shdocvw.dll shell32.dll urlmon.dll vbscript.dll webcheck.dll wshcon.dll wshext.dll asctrls.ocx hhctrl.ocx mscomct2.ocx plugin.ocx proctexe.ocx tdc.ocx webcheck.dll wshom.ocx
+do
+    sleep 0.1
+    POL_SetupWindow_set_text "$file"
+    POL_Wine --ignore-errors regsvr32 /i "$file"
+    [ $PULSE = 100 ] || PULSE=$(( PULSE + 2 ))
+    POL_SetupWindow_pulse "$PULSE"
+done
+ 
+rm "$WINEPREFIX/drive_c/windows/system32/iexplore.exe"
+POL_Shortcut "iexplore.exe" "$TITLE"
+POL_System_TmpDelete
+
+POL_SetupWindow_Close
+exit
