@@ -1,6 +1,7 @@
 #!/bin/bash
 # Changelog
 # [Quentin PARIS] (2012-04-24) Fixed bug 815
+#   petch: fixed after ie6setup.exe disappearance
 
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -25,6 +26,11 @@ cd "$POL_System_TmpDir"
 wget -q "$SITE/divers/ie_license.txt"
 POL_SetupWindow_licence "Please read this carrefully" "$TITLE" "$POL_System_TmpDir/ie_license.txt"
 
+cd "$POL_System_TmpDir"
+POL_Download "http://download.oldapps.com/Internet_Explorer/ie60.exe" "f34f7f96e8307a01d51c9cc82abe90c2"
+
+POL_Wine ie60.exe
+
 POL_Wine_InstallFonts
 POL_Call POL_Function_FontsSmoothRGB
 POL_Call POL_Install_msls31
@@ -34,10 +40,10 @@ then
     POL_Wine iexplore -unregserver
 fi
 
-POL_Wine_OverrideDLL native,builtin iexplore.exe itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
+POL_Wine_OverrideDLL native,builtin iexplore.exe inetcpl.cpl itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Internet Explorer/"
-mv iexplore.exe iexplore.bak
+[ -f "iexplore.exe" ] && mv iexplore.exe iexplore.bak
   
 cd "$WINEPREFIX/drive_c/windows/system32"
 for dll in itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
@@ -47,27 +53,22 @@ done
 
 Set_OS win2k
 
-cd "$POL_System_TmpDir"
-POL_Download "http://download.microsoft.com/download/ie6sp1/finrel/6_sp1/W98NT42KMeXP/EN-US/ie6setup.exe" "34429b572e1ff3ebcba8090c811ae8f1"
-
 rm -f "$WINEPREFIX/drive_c/windows/system32/browseui.dll"
 rm -f "$WINEPREFIX/drive_c/windows/system32/inseng.dll"
 rm -f "$WINEPREFIX/drive_c/windows/system32/inetcpl.cpl"
 
-cabextract -F "inseng.dll" "ie6setup.exe"
+cabextract -F "inseng.dll" "$POL_System_TmpDir/IE 6.0 Full/ACTSETUP.CAB"
 mv "inseng.dll" "$WINEPREFIX/drive_c/windows/system32/"
 POL_Wine_OverrideDLL native inseng
-  
-POL_Wine_WaitBefore "$TITLE"
-wget "$SITE/divers/ie6reg.reg"
-POL_Wine regedit ie6reg.reg
-POL_Wine --ignore-errors ie6setup.exe # /q:a /r:n /c:"ie6wzd /S:""#e"" /q:a /r:n"
+
+cd "$POL_System_TmpDir/IE 6.0 Full"
+POL_Wine --ignore-errors IE6SETUP.EXE # /q:a /r:n /c:"ie6wzd /S:""#e"" /q:a /r:n"
 POL_Wine_WaitExit "$TITLE"
  
 POL_SetupWindow_pulsebar "$(eval_gettext "Registering libraries, please wait\n(It can take a while)")" "$TITLE"
 cd "$WINEPREFIX/drive_c/windows/system32"
 PULSE=0
-for file in actxprxy.dll browseui.dll browsewm.dll cdfview.dll ddraw.dll dispex.dll dsound.dll iedkcs32.dll iepeers.dll iesetup.dll imgutil.dll inetcomm.dll isetup.dll jscript.dll laprxy.dll mlang.dll mshtml.dll mshtmled.dll msi.dll msident.dll msoeacct.dll msrating.dll mstime.dll msxml3.dll occache.dll ole32.dll oleaut32.dll olepro32.dll pngfilt.dll quartz.dll rpcrt4.dll rsabase.dll rsaenh.dll scrobj.dll scrrun.dll shdocvw.dll shell32.dll urlmon.dll vbscript.dll webcheck.dll wshcon.dll wshext.dll asctrls.ocx hhctrl.ocx mscomct2.ocx plugin.ocx proctexe.ocx tdc.ocx webcheck.dll wshom.ocx
+for file in actxprxy.dll browseui.dll browsewm.dll cdfview.dll ddraw.dll dispex.dll dsound.dll iedkcs32.dll iepeers.dll iesetup.dll imgutil.dll inetcomm.dll inetcpl.cpl inseng.dll isetup.dll jscript.dll laprxy.dll mlang.dll mshtml.dll mshtmled.dll msi.dll msident.dll msoeacct.dll msrating.dll mstime.dll msxml3.dll occache.dll ole32.dll oleaut32.dll olepro32.dll pngfilt.dll quartz.dll rpcrt4.dll rsabase.dll rsaenh.dll scrobj.dll scrrun.dll shdocvw.dll shell32.dll urlmon.dll vbscript.dll webcheck.dll wshcon.dll wshext.dll asctrls.ocx hhctrl.ocx mscomct2.ocx plugin.ocx proctexe.ocx tdc.ocx webcheck.dll wshom.ocx
 do
     sleep 0.1
     POL_SetupWindow_set_text "$file"
@@ -75,7 +76,9 @@ do
     [ $PULSE = 100 ] || PULSE=$(( PULSE + 2 ))
     POL_SetupWindow_pulse "$PULSE"
 done
- 
+
+# install pngfilt?
+
 rm "$WINEPREFIX/drive_c/windows/system32/iexplore.exe"
 POL_Shortcut "iexplore.exe" "$TITLE"
 POL_System_TmpDelete
