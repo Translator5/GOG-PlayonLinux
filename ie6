@@ -62,6 +62,9 @@ mv "inseng.dll" "$WINEPREFIX/drive_c/windows/system32/"
 POL_Wine_OverrideDLL native inseng
 
 cd "$POL_System_TmpDir/IE 6.0 Full"
+POL_Wine_WaitBefore "$TITLE"
+POL_System_wget "$SITE/divers/ie6reg.reg"
+POL_Wine regedit ie6reg.reg
 POL_Wine --ignore-errors IE6SETUP.EXE # /q:a /r:n /c:"ie6wzd /S:""#e"" /q:a /r:n"
 POL_Wine_WaitExit "$TITLE"
  
@@ -77,9 +80,10 @@ do
     POL_SetupWindow_pulse "$PULSE"
 done
 
-# install pngfilt?
+POL_Call POL_Install_pngfilt
 
 rm "$WINEPREFIX/drive_c/windows/system32/iexplore.exe"
+
 POL_Shortcut "iexplore.exe" "$TITLE"
 POL_System_TmpDelete
 
