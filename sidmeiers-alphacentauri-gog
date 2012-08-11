@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-11 16-57)
+# Last revision : (2012-08-11 17-40)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,9 +21,11 @@ SHORTCUT_NAME="Alpha Centauri"
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Firaxis Games / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+sox --version || POL_Debug_Fatal "Please install sox before installing $TITLE"
+POL_Debug_Init
 
 POL_Call POL_GoG_setup "$GOGID" "d9bd6f055c1d08ee4aacf480ad4d62a0"
 
@@ -43,10 +45,27 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "2"
 
+POL_SetupWindow_wait "$(eval_gettext 'Making a backup of sounds')" "$TITLE"
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Sid Meiers Alpha Centauri/fx" || POL_Debug_Fatal "Could not find sounds directory"
+mkdir orig
+cp *.wav orig/
+
+POL_SetupWindow_wait "$(eval_gettext 'Fixing sounds gain')" "$TITLE"
+cat <<'_EOFBAT_' > fixsounds.sh
+#!/bin/bash
+for i in orig/*.wav; do
+  echo $i
+  sox "$i" "${i#orig/}" gain -3
+done
+_EOFBAT_
+chmod +x fixsounds.sh
+bash fixsounds.sh
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "terran.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Sid Meiers Alpha Centauri/Manual.pdf"
 # C:\Program Files\GOGcom\Sid Meiers Alpha Centauri\readme.txt
 
