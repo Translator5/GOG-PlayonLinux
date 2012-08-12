@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-12 23-40)
+# Last revision : (2012-08-13 00-10)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -69,17 +69,16 @@ for i in *.wav; do # 291 files
   case "$i" in
     "CPU please don't go.wav"|"CPU review your options.wav")
       # those loop if modified - possibly more to go
-      [ -f "$i.orig" ] && cp "$i.orig" "$i"
       ;;
     "opening menu.wav")
       # Need looping, but the whole sound!
-      [ -f "$i.orig" ] || mv "$i" "$i.orig"
-      sox "$i.orig" "$i.orig" "$i.orig" "$i.orig" "$i.orig" "$i.orig" silence.wav "$i"
+      mv "$i" "$i.orig" &&
+      sox "$i.orig" "$i.orig" "$i.orig" "$i.orig" "$i.orig" "$i.orig" silence.wav "$i" && rm "$i.orig"
       ;;
     *)
       # avoid clipping
-      [ -f "$i.orig" ] || mv "$i" "$i.orig"
-      sox "$i.orig" "$i" gain -3
+      mv "$i" "$i.orig" &&
+      sox "$i.orig" "$i" gain -3 && rm "$i.orig"
       ;;
     esac
     let PULSE++
