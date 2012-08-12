@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-11 17-45)
+# Last revision : (2012-08-12 15-01)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,6 +47,7 @@ POL_SetupWindow_VMS "2"
 
 POL_SetupWindow_wait "$(eval_gettext 'Making a backup of sounds')" "$TITLE"
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Sid Meiers Alpha Centauri/fx" || POL_Debug_Fatal "Could not find sounds directory"
+# make a backup so you can repeatedly "fix" sounds
 mkdir orig
 cp *.wav orig/
 
@@ -55,7 +56,16 @@ cat <<'_EOFBAT_' > fixsounds.sh
 #!/bin/bash
 for i in orig/*.wav; do
   echo $i
-  sox "$i" "${i#orig/}" gain -3
+  case "${i#orig/}" in
+    "CPU please don't go.wav"|"CPU review your options.wav")
+      # those loop if modified - possibly more to go
+      cp "$i" "${i#orig/}"
+      ;;
+    *)
+      # avoid clipping
+      sox "$i" "${i#orig/}" gain -3
+      ;;
+    esac
 done
 _EOFBAT_
 chmod +x fixsounds.sh
