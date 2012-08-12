@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-12 18-24)
+# Last revision : (2012-08-12 19-55)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -49,42 +49,34 @@ Set_OS winxp
 POL_SetupWindow_VMS "2"
 
 if [ "$POL_OS" = "Mac" ]; then
-    cd "$POL_USER_ROOT/tmp" || POL_Debug_Fatal "Can't find temporary directory"
-    POL_Download "http://files.playonlinux.com/sox-osx.zip" "13150a15985786c6ead045a95f55f521"
+    POL_System_TmpCreate "$PREFIX"
+    cd "$POL_System_TmpDir"
+    POL_Download "http://files.playonlinux.com/sox-osx.7z" "3c97904fa3799513a31fbbb48c8edf4b"
+    POL_System_ExtractSingleFile "$PWD/sox-osx.zip" "sox" "$PWD/sox"
+    chmod +x sox
+    PATH="$POL_System_TmpDir:$PATH"
 fi
 
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Sid Meiers Alpha Centauri/fx" || POL_Debug_Fatal "Could not find sounds directory"
 
-if [ "$POL_OS" = "Mac" ]; then
-    POL_System_ExtractSingleFile "$POL_USER_ROOT/tmp/sox-osx.zip" "sox" "sox"
-    chmod +x sox
-fi
-
-POL_SetupWindow_wait "$(eval_gettext 'Making a backup of sounds')" "$TITLE"
-# make a backup so you can repeatedly "fix" sounds
-mkdir orig
-cp *.wav orig/
-
-POL_SetupWindow_wait "$(eval_gettext 'Fixing sounds gain')" "$TITLE"
-cat <<'_EOFBAT_' > fixsounds.sh
-#!/bin/bash
-PATH=".:$PATH"
-for i in orig/*.wav; do
-  echo $i
-  case "${i#orig/}" in
+# Activate pulsebar if you want to turn a 4 seconds job into a 3 minutes one (POL 4.1.6)
+#POL_SetupWindow_pulsebar "$(eval_gettext 'Fixing sounds gain')" "$TITLE"
+PULSE=0
+for i in *.wav; do # 291 files
+  case "$i" in
     "CPU please don't go.wav"|"CPU review your options.wav")
       # those loop if modified - possibly more to go
-      cp "$i" "${i#orig/}"
       ;;
     *)
       # avoid clipping
-      sox "$i" "${i#orig/}" gain -3
+      #POL_SetupWindow_set_text "$i"
+      mv "$i" "$i.orig"
+      sox "$i.orig" "$i" gain -3
+      #POL_SetupWindow_pulse "$((PULSE/3))"
+      let PULSE++
       ;;
     esac
 done
-_EOFBAT_
-chmod +x fixsounds.sh
-bash fixsounds.sh
 
 # Doesn't hurt ;)
 POL_Wine_reboot
