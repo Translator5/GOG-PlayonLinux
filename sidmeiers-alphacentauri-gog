@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-12 15-01)
+# Last revision : (2012-08-12 18-24)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,11 @@ POL_SetupWindow_Init
 
 POL_SetupWindow_presentation "$TITLE" "Firaxis Games / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-sox --version || POL_Debug_Fatal "Please install sox before installing $TITLE"
+# For OS/X we automatically download sox
+if [ "$POL_OS" != "Mac" ]; then
+    sox --version || POL_Debug_Fatal "Please install sox before installing $TITLE"
+fi
+
 POL_Debug_Init
 
 POL_Call POL_GoG_setup "$GOGID" "d9bd6f055c1d08ee4aacf480ad4d62a0"
@@ -39,14 +43,24 @@ POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
-
 # GoG work!
 Set_OS winxp
 
 POL_SetupWindow_VMS "2"
 
-POL_SetupWindow_wait "$(eval_gettext 'Making a backup of sounds')" "$TITLE"
+if [ "$POL_OS" = "Mac" ]; then
+    cd "$POL_USER_ROOT/tmp" || POL_Debug_Fatal "Can't find temporary directory"
+    POL_Download "http://files.playonlinux.com/sox-osx.zip" "13150a15985786c6ead045a95f55f521"
+fi
+
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Sid Meiers Alpha Centauri/fx" || POL_Debug_Fatal "Could not find sounds directory"
+
+if [ "$POL_OS" = "Mac" ]; then
+    POL_System_ExtractSingleFile "$POL_USER_ROOT/tmp/sox-osx.zip" "sox" "sox"
+    chmod +x sox
+fi
+
+POL_SetupWindow_wait "$(eval_gettext 'Making a backup of sounds')" "$TITLE"
 # make a backup so you can repeatedly "fix" sounds
 mkdir orig
 cp *.wav orig/
@@ -54,6 +68,7 @@ cp *.wav orig/
 POL_SetupWindow_wait "$(eval_gettext 'Fixing sounds gain')" "$TITLE"
 cat <<'_EOFBAT_' > fixsounds.sh
 #!/bin/bash
+PATH=".:$PATH"
 for i in orig/*.wav; do
   echo $i
   case "${i#orig/}" in
