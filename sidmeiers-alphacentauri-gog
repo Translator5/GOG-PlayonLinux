@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2012-08-13 00-10)
+# Last revision : (2012-08-14 18-54)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,7 +52,7 @@ if [ "$POL_OS" = "Mac" ]; then
     POL_System_TmpCreate "$PREFIX"
     cd "$POL_System_TmpDir"
     POL_Download "http://files.playonlinux.com/sox-osx.7z" "3c97904fa3799513a31fbbb48c8edf4b"
-    POL_System_ExtractSingleFile "$PWD/sox-osx.zip" "sox" "$PWD/sox"
+    POL_System_ExtractSingleFile "$PWD/sox-osx.7z" "sox" "$PWD/sox"
     chmod +x sox
     PATH="$POL_System_TmpDir:$PATH"
 fi
