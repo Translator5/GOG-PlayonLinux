@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2012-08-12 16-34)
+# Last revision : (2012-08-15 20-57)
 # Wine version used : 1.5.10
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -35,6 +35,9 @@ POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
+cd "$POL_USER_ROOT/tmp"
+POL_Download "http://files.playonlinux.com/nircmd.zip" "3d6d3f094633c5c97f8b15f8fe1023bf"
+POL_System_ExtractSingleFile "nircmd.zip" "nircmd.exe" "$WINEPREFIX/drive_c/windows/nircmd.exe"
 
 # GoG work!
 Set_OS winxp
@@ -49,9 +52,18 @@ POL_Call POL_Install_quartz
 POL_Call POL_Install_ffdshow
 
 # Doesn't hurt ;)
-POL_Wine_reboot
+#POL_Wine_reboot
+POL_Wine wineboot -u
 
 POL_Shortcut "rayne.exe" "$SHORTCUT_NAME"
+# double quotes around "P"OL_Wine prevent POL getArgs to pickup this line, sorry for the hack
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'passvideo () {'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  POL_Debug_Message "waiting for video to start"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  while ! pidof "video\\cutscene.exe"; do sleep 1; done'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  POL_Debug_Message "waiting for video to end"'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  "P"OL_Wine nircmd.exe waitprocess cutscene.exe'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '}'
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '(passvideo; passvideo; "P"OL_Wine nircmd.exe win hideshow title BloodRayne; POL_Debug_Message "done with repaint")&'
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/BloodRayne 1/manual.pdf"
 # C:\Program Files\GOG.com\BloodRayne 1\readme.txt
 
