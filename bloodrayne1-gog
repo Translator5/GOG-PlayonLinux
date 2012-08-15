@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2012-08-15 20-57)
+# Last revision : (2012-08-15 23-00)
 # Wine version used : 1.5.10
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,12 @@ WORKING_WINE_VERSION="1.5.10"
 TITLE="BloodRayne (GoG release)"
 SHORTCUT_NAME="BloodRayne"
 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
 POL_SetupWindow_Init
+# 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
+POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is required to install $TITLE"
+
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
