@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-15 10-34)
-# Last revision : (2012-07-15 17-00)
+# Last revision : (2012-08-25 01-47)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="ultima_underworld_1_2"
 PREFIX="UltimaUnderworld_1_2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Ultima Underworld 1+2 (GoG release)"
+TITLE="Ultima Underworld 1 and 2 (GoG release)"
 SHORTCUT_NAME1="Ultima Underworld 1"
 SHORTCUT_NAME2="Ultima Underworld 2"
 

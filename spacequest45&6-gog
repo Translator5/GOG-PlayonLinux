@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 20-22)
-# Last revision : (2012-06-06 21-02)
+# Last revision : (2012-08-25 01-45)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="space_quest_4_5_6"
 PREFIX="SpaceQuest456_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Space Quest 4+5+6 (GoG release)"
+TITLE="Space Quest 4, 5 and 6 (GoG release)"
 SHORTCUT_NAME1="Space Quest 4: Roger Wilco and The Time Rippers"
 SHORTCUT_NAME2="Space Quest 5: Roger Wilco - The Next Mutation"
 SHORTCUT_NAME3="Space Quest 6: Roger Wilco in The Spinal Frontier"
