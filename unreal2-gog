@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-25 18-58)
-# Last revision : (2012-08-25 20-18)
+# Last revision : (2012-08-25 21-18)
 # Wine version used : 1.5.11
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,7 +48,8 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 
 # Workaround
 cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal 2 – The Awakening SE/Music" || POL_Debug_Fatal "Couldn't find music directory"
-for i in *.con; do mv "$i" "$i.disabled"; done
+mkdir -p disabled
+mv *.con disabled
 
 # Doesn't hurt ;)
 POL_Wine_reboot
