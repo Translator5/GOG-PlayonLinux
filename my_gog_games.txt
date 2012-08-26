@@ -141,6 +141,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Thief™ 2: The Metal Age
 * Tom Clancy's Ghost Recon®
 * Tom Clancy's Splinter Cell®
+* Torchlight
 * Two Worlds
 * Tyrian 2000
 * UFO: Afterlight
