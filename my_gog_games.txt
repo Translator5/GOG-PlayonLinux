@@ -2,6 +2,8 @@ Authoritative notes will be stored in Github Wiki,
 https://github.com/petchema/playonlinux/wiki/My-GoG-list
 
 * Advent Rising
+* Age of Wonders
+* Age of Wonders 2: The Wizard's Throne
 * Age of Wonders 3: Shadow Magic
 * Alien Breed + Tower Assault
 * Alone in the Dark 1+2+3
@@ -86,6 +88,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Little Big Adventure 2 (Twinsen's Odyssey)
 * Longest Journey, The
 * Lure of the Temptress
+* Master of Magic
 * Master of Orion 1+2
 * Might and Magic® 6-pack: Limited Edition
 * MDK 2
@@ -99,6 +102,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Oddworld: Abe's Oddysee
 * Outcast
 * Painkiller Black Edition
+* Pharaoh + Cleopatra
 * Planescape: Torment
 * Populous™ 2: Trials of the Olympian Gods
 * POSTAL 2 Complete
@@ -142,6 +146,8 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Tom Clancy's Ghost Recon®
 * Tom Clancy's Splinter Cell®
 * Torchlight
+* Total Annihilation: Commander Pack
+* Total Annihilation: Kingdoms + Expansion
 * Two Worlds
 * Tyrian 2000
 * UFO: Afterlight
@@ -153,9 +159,11 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Unreal Gold
 * Unreal Tournament 2004 ECE
 * Uru: Complete Chronicles
+* Warlords Battlecry 3
 * Whispered World, The
 * Wing Commander™ 4: The Price of Freedom
 * Witcher: Enhanced Edition, The
 * Witcher 2: Assassins Of Kings, The
 * Worlds of Ultima: The Savage Empire
 * XIII
+* Zeus + Poseidon (Acropolis)
