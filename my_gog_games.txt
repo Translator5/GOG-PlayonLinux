@@ -12,6 +12,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Arcanum: Of Steamworks and Magick Obscura
 * ArmA: Cold War Assault
 * Arx Fatalis
+* Back to the Future: The Game
 * Baldur's Gate 2 Complete
 * Baldur's Gate: The Original Saga
 * Battle Isle Platinum
@@ -116,6 +117,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Runaway: A Road Adventure
 * Sacred Gold
 * Sacrifice
+* Sam & Max: The Devil’s Playhouse
 * Sanitarium
 * Screamer
 * Septerra Core: Legacy of the Creator
@@ -159,6 +161,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Unreal Gold
 * Unreal Tournament 2004 ECE
 * Uru: Complete Chronicles
+* Wallace & Gromit's Grand Adventures
 * Warlords Battlecry 3
 * Whispered World, The
 * Wing Commander™ 4: The Price of Freedom
