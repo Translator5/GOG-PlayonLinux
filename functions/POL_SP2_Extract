@@ -1,0 +1,31 @@
+#!/bin/bash
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+POL_RequiredVersion 4.1.6
+WORKING_DIRECTORY="$OLD_PC_DIR"
+file="$1"
+file_shorted="${file%?}_"
+if [ "$POL_LANG" = "fr" ]; then
+	src="http://download.microsoft.com/download/c/3/e/c3ea9fa6-d8e6-4832-8795-06dd27be9bc9/WindowsXP-KB936929-SP3-x86-FRA.exe" 
+        sparchive="WindowsXP-KB936929-SP3-x86-FRA.exe"
+	md5="a9a9a86e7330bffaf64ae2acfb73d959"
+else
+	src="http://download.microsoft.com/download/d/3/0/d30e32d8-418a-469d-b600-f32ce3edf42d/WindowsXP-KB936929-SP3-x86-ENU.exe"
+        sparchive="WindowsXP-KB936929-SP3-x86-ENU.exe"
+	md5="bb25707c919dd835a9d9706b5725af58"
+fi
+
+
+POL_Download_Resource "$src" "$md5"
+
+if [ ! "$1" = "--only-download" ]; then
+	cd "$POL_USER_ROOT/tmp/" || POL_Debug_Fatal "Unable to change directory"
+	POL_Wine_WaitBefore "$TITLE"
+	cabextract "$POL_USER_ROOT/ressources/$sparchive" -F i386/$file_shorted
+	cabextract i386/$file_shorted
+	echo mv "$file" "$WORKING_DIRECTORY"
+	mv "$file" "$WORKING_DIRECTORY"
+fi
+
+cd "$WORKING_DIRECTORY"
