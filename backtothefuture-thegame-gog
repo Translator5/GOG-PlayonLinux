@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-08 18-30)
-# Last revision : (2012-09-08 18-50)
+# Last revision : (2012-09-08 20-47)
 # Wine version used : 1.5.12
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -22,7 +22,7 @@ SHORTCUT_NAME3="Back To The Future E3: Citizen Brown"
 SHORTCUT_NAME4="Back To The Future E4: Double Visions"
 SHORTCUT_NAME5="Back To The Future E5: OUTATIME"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
