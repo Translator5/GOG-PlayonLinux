@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-08 18-30)
-# Last revision : (2012-09-08 20-47)
+# Last revision : (2012-09-08 21-43)
 # Wine version used : 1.5.12
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,9 +52,13 @@ POL_Wine_reboot
 POL_Shortcut "BackToTheFuture101.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME1"
 POL_Shortcut "BackToTheFuture102.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME2"
 POL_Shortcut "BackToTheFuture103.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME3"
 POL_Shortcut "BackToTheFuture104.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME4"
 POL_Shortcut "BackToTheFuture105.exe" "$SHORTCUT_NAME5" "$SHORTCUT_NAME5.png" ""
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME5"
 
 POL_SetupWindow_Close
 
