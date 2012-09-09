@@ -1,22 +1,18 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2009-11-21 21:00)
-# Last revision : (2012-06-10 21:00)
+# Last revision : (2012-09-09 12:13)
 # Author : Berillions
-# Updated by : GNU_Raziel
+# Updated by : GNU_Raziel, petch
 # Only For : http://www.playonlinux.com
 
-#POL_Call POL_Install_dotnet11sp1
-#return 0
-#We can't do that as POL_Install_dotnet11sp1 uses POL_Install_dotnet11, catch 22
-
 # Checking wine arch
-if [ "$POL_ARCH" == "amd64" ]; then
+if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
 # Remove wine-mono if present
-POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}' || true
+POL_Wine --ignore-errors uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}'
 
 # Setting OS check Fix
 Set_OS "win2k"
