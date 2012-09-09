@@ -1,14 +1,14 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2009-11-21 21:00)
-# Last revision : (2012-06-10 21:00)
+# Last revision : (2012-09-09 12:47)
 # Author : Berillions
 # Updated by : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
 
 # Checking wine arch
-if [ "$POL_ARCH" == "amd64" ]; then
+if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
