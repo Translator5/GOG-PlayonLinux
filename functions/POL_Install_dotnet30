@@ -1,0 +1,57 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2009-11-21 16:00)
+# Last revision : (2012-06-10 21:00)
+# Author : Berillions
+# Updated by : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+# Checking wine arch
+if [ "$POL_ARCH" == "amd64" ]; then
+	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
+fi
+
+# Remove wine-mono if present
+POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}' || true
+
+# Install dotnet20sp1 if needed
+if [ ! -e "$WINEPREFIX/drive_c/windows/assembly/NativeImages_v2.0.50727_32/indexb.dat" ]; then
+	POL_Call POL_Install_dotnet20sp1
+fi
+
+# Setting OS check Fix
+Set_OS "winxp" "sp3"
+cat << EOF > "dotnet30_fix.reg"
+[HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion]
+"ProductName"="Microsoft Windows XP"
+"CSDVersion"="Service Pack 3"
+"CurrentVersion"="5.3"
+"CurrentBuildNumber"="2600"
+[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows]
+"CSDVersion"=dword:00000300
+EOF
+POL_Wine regedit "dotnet30_fix.reg"
+
+# Setting Fix 1
+POL_Wine_WaitBefore ".NET Framework 3.0 fix"
+if [ ! -e "$WINEPREFIX/drive_c/windows/SYSMSICache/Framework/v3.0" ]; then
+	mkdir -p "$WINEPREFIX/drive_c/windows/SYSMSICache/Framework/v3.0"
+fi
+
+for lang in ar cs da de el es fi fr he it jp ko nb nl pl pt-BR pt-PT ru sv tr zh-CHS zh-CHT
+do
+ln -sf "$WINEPREFIX/drive_c/windows/system32/spupdsvc.exe" "$WINEPREFIX/drive_c/windows/SYSMSICache/Framework/v3.0/dotnetfx3langpack${lang}.exe"
+done
+
+mkdir "$POL_USER_ROOT/ressources/dotnet30"
+cd "$POL_USER_ROOT/ressources/dotnet30"
+# Downloading dotnet30
+POL_Download_Resource "http://files.playonlinux.com/dotnet/3/dotnetfx3.exe" "7b26435437e8d779ff0084d4ea96d15a" "dotnet30"
+
+# Setting Fix 2
+POL_Wine sc delete "FontCache3.0.0.0"
+
+# Installing dotnet30
+POL_Wine_WaitBefore ".NET Framework 3.0"
+POL_Wine --ignore-errors dotnetfx3.exe /q /c:"install.exe /q"
+wineserver -k

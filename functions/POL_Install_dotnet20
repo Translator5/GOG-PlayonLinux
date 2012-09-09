@@ -1,0 +1,67 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2009-11-21 21:00)
+# Last revision : (2012-06-10 21:00)
+# Author : Berillions
+# Updated by : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+
+# Checking wine arch
+if [ "$POL_ARCH" == "amd64" ]; then
+	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
+fi
+
+# Remove wine-mono if present
+POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}' || true
+
+# Setting OS check Fix
+Set_OS "win2k"
+cat << EOF > "dotnet20_fix.reg"
+[HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion]
+"ProductName"="Microsoft Windows 2000"
+"CSDVersion"=""
+"CurrentVersion"="5.0"
+"CurrentBuildNumber"="2195"
+[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows]
+"CSDVersion"=dword:00000000
+EOF
+POL_Wine regedit "dotnet20_fix.reg"
+
+mkdir "$POL_USER_ROOT/ressources/dotnet20"
+cd "$POL_USER_ROOT/ressources/dotnet20"
+
+# Downloading dotnet20 pre-install fix
+POL_Download_Resource "http://files.playonlinux.com/l_intl.nls" "3f138c7677ede64e8ad41e3277c86e9e" "dotnet20"
+
+# Downloading dotnet20
+POL_Download_Resource "http://files.playonlinux.com/dotnet/2/dotnetfx.exe" "93a13358898a54643adbca67d1533462" "dotnet20"
+
+# Setting Fix 1
+cp -f "l_intl.nls" "$WINEPREFIX/drive_c/windows/system32"
+rm -rf "$WINEPREFIX/drive_c/windows/Microsoft.NET/Framework/v2.0.50727"
+POL_Wine_InstallFonts
+
+# Installing dotnet20
+POL_Wine_WaitBefore ".NET Framework 2.0"
+POL_Wine --ignore-errors dotnetfx.exe /q /c:"install.exe /q"
+
+# Setting Fix 2
+rm -f "$WINEPREFIX/drive_c/windows/system32/msvcm80.dll"
+rm -f "$WINEPREFIX/drive_c/windows/system32/msvcp80.dll"
+rm -f "$WINEPREFIX/drive_c/windows/system32/msvcr80.dll"
+POL_Call POL_Install_vcrun2005
+
+# Restoring wine version
+wineserver -k
+Set_OS "winxp" "sp3"
+cat << EOF > "Default_OS_Version.reg"
+[HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion]
+"ProductName"="Microsoft Windows XP"
+"CSDVersion"="Service Pack 3"
+"CurrentVersion"="5.3"
+"CurrentBuildNumber"="2600"
+[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows]
+"CSDVersion"=dword:00000300
+EOF
+POL_Wine regedit "Default_OS_Version.reg"
