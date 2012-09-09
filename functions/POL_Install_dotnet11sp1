@@ -1,12 +1,12 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2012-02-28 21:00)
-# Last revision : (2012-03-17 21:00)
+# Last revision : (2012-09-09 12:38)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
 # Checking wine arch
-if [ "$POL_ARCH" == "amd64" ]; then
+if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
@@ -16,7 +16,7 @@ if [ ! -e "$WINEPREFIX/drive_c/windows/Microsoft.NET/Framework/v1.1.4322/ndpsetu
 fi
 
 cd "$POL_USER_ROOT/ressources/dotnet11"
-# Downloading dotnet20sp1
+# Downloading dotnet11sp1
 POL_Download_Resource "http://download.microsoft.com/download/8/b/4/8b4addd8-e957-4dea-bdb8-c4e00af5b94b/NDP1.1sp1-KB867460-X86.exe" "22e38a8a7d90c088064a0bbc882a69e5" "dotnet11"
 
 # Setting OS check Fix
@@ -32,7 +32,7 @@ cat << EOF > "dotnet11sp1_fix.reg"
 EOF
 POL_Wine regedit "dotnet11sp1_fix.reg"
 
-# Installing dotnet20sp1
+# Installing dotnet11sp1
 POL_Wine_WaitBefore ".NET Framework 1.1 SP1 update"
 POL_Wine --ignore-errors NDP1.1sp1-KB867460-X86.exe /q /c:"install.exe /q"
 
