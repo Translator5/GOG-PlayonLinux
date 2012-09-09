@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2012-02-25 21:00)
-# Last revision : (2012-06-10 21:00)
+# Last revision : (2012-09-09 14:26)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
@@ -30,8 +30,8 @@ POL_Download_Resource "http://download.microsoft.com/download/9/5/A/95A9616B-7A3
 POL_Download_Resource "http://files.playonlinux.com/gacutil-net40.zip" "c6f6c18e70097538752b4e327b612846" "dotnet40"
 
 # Setting Fix 1
-POL_Wine reg delete "HKLM\Software\Microsoft\NET Framework Setup\NDP\v4" /f
-if [ "$POL_ARCH" == "amd64" ]; then
+POL_Wine --ignore-errors reg delete "HKLM\Software\Microsoft\NET Framework Setup\NDP\v4" /f
+if [ "$POL_ARCH" = "amd64" ]; then
 	rm "$WINEPREFIX/drive_c/windows/syswow64/mscoree.dll"
 	rm "$WINEPREFIX/drive_c/windows/system32/mscoree.dll"
 else
@@ -46,8 +46,8 @@ POL_Wine --ignore-errors dotNetFx40_Full_x86_x64.exe /q /c:"install.exe /q"
 POL_Wine_OverrideDLL "native" "mscoree"
 
 # Setting Fix 2
-POL_Wine reg add "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full" /v Install /t REG_DWORD /d 0001 /f
-POL_Wine reg add "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full" /v Version /t REG_SZ /d "4.0.30319" /f
+POL_Wine --ignore-errors reg add "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full" /v Install /t REG_DWORD /d 0001 /f
+POL_Wine --ignore-errors reg add "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full" /v Version /t REG_SZ /d "4.0.30319" /f
 
 # Setting Fix 3 - for wine 1.5.4 and older
 POL_AdvisedVersion  4.0.16 || POL_Debug_Error "$(eval_gettext '.NET Framework 4.0 might fail to install')"
