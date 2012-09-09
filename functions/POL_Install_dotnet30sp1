@@ -1,12 +1,12 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2012-02-25 21:00)
-# Last revision : (2012-03-17 21:00)
+# Last revision : (2012-09-09 13:38)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
 # Checking wine arch
-if [ "$POL_ARCH" == "amd64" ]; then
+if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
@@ -45,7 +45,7 @@ POL_Download_Resource "http://download.microsoft.com/download/8/D/4/8D4C4B2F-269
 POL_Wine "XPSEPSC-x86-en-US.exe" /quiet /passive /norestart
 POL_Wine_WaitExit ".NET Framework 3.0 SP1 fix 2"
 wineserver -k
-POL_Wine sc delete FontCache3.0.0.0
+POL_Wine --ignore-errors sc delete FontCache3.0.0.0
 
 # Installing dotnet30sp1
 POL_Wine_WaitBefore ".NET Framework 3.0 SP1 update"
