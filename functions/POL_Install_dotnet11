@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2009-11-21 21:00)
-# Last revision : (2012-09-09 12:13)
+# Last revision : (2012-09-09 12:19)
 # Author : Berillions
 # Updated by : GNU_Raziel, petch
 # Only For : http://www.playonlinux.com
@@ -12,7 +12,7 @@ if [ "$POL_ARCH" = "amd64" ]; then
 fi
 
 # Remove wine-mono if present
-POL_Wine --ignore-errors uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}'
+POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}'
 
 # Setting OS check Fix
 Set_OS "win2k"
@@ -35,8 +35,8 @@ POL_Download_Resource "http://files.playonlinux.com/dotnet/1/dotnetfx.exe" "5245
 
 # Setting Fix 1
 POL_Wine_InstallFonts
-POL_Wine reg delete "HKLM\Software\Microsoft\.NETFramework\policy\v2.0" /f
-POL_Wine reg delete "HKLM\Software\Microsoft\.NETFramework" /v InstallRoot /f
+POL_Wine --ignore-errors reg delete "HKLM\Software\Microsoft\.NETFramework\policy\v2.0" /f
+POL_Wine --ignore-errors reg delete "HKLM\Software\Microsoft\.NETFramework" /v InstallRoot /f
 
 # Setting Fix 2
 WINEDLLOVERRIDES="regsvcs.exe=b"
