@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2009-11-21 16:00)
-# Last revision : (2012-09-09 13:17)
+# Last revision : (2012-09-09 14:01)
 # Author : Berillions
 # Updated by : GNU_Raziel
 # Only For : http://www.playonlinux.com
@@ -49,7 +49,7 @@ cd "$POL_USER_ROOT/ressources/dotnet30"
 POL_Download_Resource "http://files.playonlinux.com/dotnet/3/dotnetfx3.exe" "7b26435437e8d779ff0084d4ea96d15a" "dotnet30"
 
 # Setting Fix 2
-POL_Wine sc delete "FontCache3.0.0.0"
+POL_Wine --ignore-errors sc delete "FontCache3.0.0.0"
 
 # Installing dotnet30
 POL_Wine_WaitBefore ".NET Framework 3.0"
