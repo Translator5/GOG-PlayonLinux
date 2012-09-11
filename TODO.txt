@@ -30,3 +30,9 @@ wip/shadowgrounds-gog
   Why not?
   Check that installer doesn't overwrite DLLs
   
+
+* Old scripts: make sure shortcuts icons are on server
+    (already noted above)
+* Age of Wonders *: uniformisation
+    - Editor for everyone or for no one
+    - use Launcher.exe for all versions?
