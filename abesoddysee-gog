@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-08 14-46)
-# Last revision : (2012-05-24 19-58)
+# Last revision : (2012-09-11 20-03)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -45,6 +45,9 @@ POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
 
 # "16-bit SVGA"
 POL_SetupWindow_VMS "2"
+
+# http://www.playonlinux.com/fr/topic-9443-Probleme_daffichage_et_de_lancement_sur_Oddword_Abe_Exodus_.html
+[ "$POL_OS" = "Mac" ] && Set_Desktop "On" "640" "480"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
