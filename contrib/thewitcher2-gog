@@ -1,0 +1,58 @@
+#!/bin/bash
+# Date : (2012-09-14 14:12)
+# Last revision : (2012-09-14 20:00)
+# Wine version used : 1.5.8
+# Distribution used to test : Archlinux
+# Author : libgradev
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="the_witcher_2"
+PREFIX="TheWitcher2_gog"
+WINE_VERSION="1.5.8"
+AUTHOR="libgradev"
+
+TITLE="The Witcher 2 Enhanced Edition (GoG release)"
+SHORTCUT_NAME="The Witcher 2 Enhanced Edition"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/en/gamecard/$GOGID" "$AUTHOR" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "b8c84b47644b53c5d3c9e1a2c9bb3a2e" "bc207a9ee725ccce2fad933861ffa299" "740dc01dfa936ea4755049d0fd8a3fe4" "b96ba44d1f33f4e73941f490f2828982" "b56b54012f218d887863ce778ef77e5a" "5d06e0b2bd1aa47697578cacbc8c1ed4" "8698adebaafab3ff9aa0303934bac1e3" "7efb39400446f2609ad11eeb7a7e2a14" "01a8b34c6a115cc16da61a8510072351" "ce4a8cb2360a358c35dc72d959652725"
+
+POL_SetupWindow_message "$(eval_gettext '** You must click Install when asked whether to install Wine Mono **')" "$(eval_gettext 'Information')" 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WINE_VERSION"
+
+POL_Call POL_Install_vcrun2010
+
+POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
+
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+POL_Wine_WaitExit "$TITLE"
+
+
+# Wine settings
+Set_OS winxp
+POL_Wine_OverrideDLL "builtin" mscoree
+
+POL_Call POL_Install_dxfullsetup
+
+POL_Wine_reboot
+
+POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME"
+POL_Shortcut "Configurator.exe" "$SHORTCUT_NAME Config"
+
+POL_SetupWindow_Close
+
+exit
