@@ -7,8 +7,6 @@ Outcast-gog-zenger-hires-patch:
 Starflight:
 	Improve icon setting
 
-Remove icon extraction tricks and put right icons on server in /files/resources/icones/
-
 Install DLLs with POL_Install_* before GOG installer
   Rationale: POL_Install_* usually install DLLs directly, so may fail to
   overwrite them because of case issues.
@@ -31,8 +29,6 @@ wip/shadowgrounds-gog
   Check that installer doesn't overwrite DLLs
   
 
-* Old scripts: make sure shortcuts icons are on server
-    (already noted above)
 * Age of Wonders *: uniformisation
     - Editor for everyone or for no one
     - use Launcher.exe for all versions?
