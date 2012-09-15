@@ -1,0 +1,23 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2010-11-14 21:00)
+# Last revision : (2012-02-22 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+FORCE_MODE=$1
+
+cd "$POL_USER_ROOT/ressources"
+mkdir -p mono28
+# Downloading Mono 2.8.x
+cd "$POL_USER_ROOT/ressources/mono28/"
+if [ ! -e "mono-2.8-gtksharp-2.12.10-win32-9.exe" ]; then
+POL_SetupWindow_download "$(eval_gettext 'Downloading Mono 2.8...')" "$TITLE" "http://ftp.novell.com/pub/mono/archive/2.8/windows-installer/9/mono-2.8-gtksharp-2.12.10-win32-9.exe"
+fi
+
+# Check if mono28 is already installed
+CHECK_MONO28=`find $WINEPREFIX -name "mono-2.0.dll"`
+if [ "$CHECK_MONO28" == "" ] || [ "$FORCE_MODE" == "--force" ]; then
+	POL_Wine start /unix "mono-2.8-gtksharp-2.12.10-win32-9.exe" /silent
+	POL_Wine_WaitExit "Mono 2.8"
+fi
