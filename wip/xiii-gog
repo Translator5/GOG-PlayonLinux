@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 23-07)
-# Last revision : (2012-05-24 19-55)
+# Last revision : (2012-09-11 20-25)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,7 +48,7 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "xiii.exe" "$SHORTCUT_NAME"
+POL_Shortcut "xiii.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/XIII/Support/English/Manual.pdf"
 # C:\Program Files\GOG.com\XIII\Support\English\Readme.doc
 

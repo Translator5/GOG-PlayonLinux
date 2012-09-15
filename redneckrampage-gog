@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-20 21-33)
-# Last revision : (2012-06-06 21-01)
+# Last revision : (2012-09-15 08-10)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -90,13 +90,13 @@ RA.EXE
 EXIT
 _EOFBAT_
 
-POL_Shortcut "RR.BAT" "$SHORTCUT_NAME1"
+POL_Shortcut "RR.BAT" "$SHORTCUT_NAME1"  "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/manual.pdf"
 
-POL_Shortcut "66.BAT" "$SHORTCUT_NAME2"
+POL_Shortcut "66.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/Redneck Rampage/ROUTE66.TXT"
 
-POL_Shortcut "RA.BAT" "$SHORTCUT_NAME3"
+POL_Shortcut "RA.BAT" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Redneck Rampage Collection/$REDNECK3/readme.TXT"
 
 POL_SetupWindow_Close

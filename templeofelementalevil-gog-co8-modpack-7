@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2012-04-21 19-41)
+# Last revision : (2012-09-15 09-56)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,8 +63,7 @@ POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing a
 
 POL_Wine_WaitExit "$TITLE"
 
-convert "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Temple of Elemental Evil/Circle of Eight Modpack "*".jpg" -geometry 32x32 "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-POL_Shortcut "TFE-X.exe" "$SHORTCUT_NAME"
+POL_Shortcut "TFE-X.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 
 POL_SetupWindow_Close
 

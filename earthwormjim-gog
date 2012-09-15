@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-08-25 01-35)
+# Last revision : (2012-09-15 12-33)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,12 +63,10 @@ EWJ2.EXE
 exit
 _EOFBAT_
 
-convert ico:"$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.ICO" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME1"
 POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/readme.txt"
 # C:\Program Files\GOG.com\Earthworm Jim 1 and 2\Earthworm Jim\WORM0.HLP
 
-convert ico:"$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.ICO" png:"$POL_USER_ROOT/icones/32/$SHORTCUT_NAME2"
 POL_Shortcut "EWJ2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/readme.txt"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-01 21-26)
-# Last revision : (2012-05-24 19-39)
+# Last revision : (2012-09-14 00-32)
 # Wine version used : 1.5.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "16"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "GhostRecon.exe" "$SHORTCUT_NAME" "" ""
+POL_Shortcut "GhostRecon.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tom Clancy’s Ghost Recon/GR manual.pdf"
 # ...\GR ReadMe.txt
 

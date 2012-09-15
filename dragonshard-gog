@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-18 22-56)
-# Last revision : (2012-05-24 19-44)
+# Last revision : (2012-09-13 05-04)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,7 +44,7 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Dragonshard.exe" "$SHORTCUT_NAME"
+POL_Shortcut "Dragonshard.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 # C:\Program Files\GOG.com\Dragonshard\DNDEditor.exe
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Dragonshard/manual.pdf"
 # C:\Program Files\GOG.com\Dragonshard\Readme.txt

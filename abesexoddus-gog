@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-08 16-43)
-# Last revision : (2012-09-11 20-03)
+# Last revision : (2012-09-11 23-07)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -50,7 +50,7 @@ POL_SetupWindow_VMS "2"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Exoddus.exe" "$SHORTCUT_NAME"
+POL_Shortcut "Exoddus.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Abe's Exoddus/manual.pdf"
 # C:\Program Files\GOG.com\Abe's Exoddus\README.TXT
 

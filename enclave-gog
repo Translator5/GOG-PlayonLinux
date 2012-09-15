@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-20 23-25)
-# Last revision : (2012-06-03 23-35)
+# Last revision : (2012-09-13 22-13)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -49,7 +49,7 @@ POL_SetupWindow_VMS "16"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME"
+POL_Shortcut "Enclave.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 # Fixes a problem with CPU management on modern computers (specially laptops):
 # Enclave doesn't handle variable frequency, so make sure they stay at top frequency
 # with a background busy loop (other means are less portable and/or require root privileges)

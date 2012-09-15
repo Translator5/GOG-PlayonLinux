@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-22 21-59)
-# Last revision : (2012-06-06 21-01)
+# Last revision : (2012-09-15 13-53)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,8 +46,6 @@ _EOFCFG_
 # The game expects itself in C:\ROTH and CDROM in C:\DATA
 mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/"{ROTH,DATA,mapper.txt} "$WINEPREFIX/drive_c/"
 
-POL_ExtractIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/gfw_high.ico" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/gfw_high.ico" "$POL_USER_ROOT/icones/full_size/$SHORTCUT_NAME"
 POL_Shortcut "ROTH/ROTH.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "@roth.res"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/Manual.pdf"
 

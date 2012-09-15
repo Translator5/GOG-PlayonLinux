@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-02-20 22:21)
-# Wine version used : 1.4-rc4
+# Last revision : (2012-09-13 23:26)
+# Wine version used : 1.4
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
 #    based on script by GNU_Raziel
@@ -24,7 +24,7 @@ source "$PLAYONLINUX/lib/sources"
 
 TITLE="Call of Duty: Modern Warfare 3"
 PREFIX="CallOfDutyMW3"
-WORKING_WINE_VERSION="1.4-rc4"
+WORKING_WINE_VERSION="1.4"
 GAME_VMS="256"
 VID="42690"
 
@@ -104,9 +104,7 @@ fi
 
 REALBIN="`find $WINEPREFIX -iname iw5mp.exe`"
 # Making shortcut
-POL_Shortcut "Steam.exe" "$TITLE" "" "steam://rungameid/$VID"
-POL_ExtractIcon "$REALBIN" "$POL_USER_ROOT/icones/32/$TITLE"
-POL_ExtractBiggestIcon "$REALBIN" "$POL_USER_ROOT/icones/full_size/$TITLE"
+POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID"
 
 POL_SetupWindow_Close
 exit 0

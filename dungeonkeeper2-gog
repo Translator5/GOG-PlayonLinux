@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 01-01)
-# Last revision : (2012-05-24 19-34)
+# Last revision : (2012-09-13 21-09)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,8 +47,8 @@ POL_SetupWindow_VMS "2"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "DKII.EXE" "$SHORTCUT_NAME"
-POL_Shortcut "DKII_SOFT.EXE" "$SHORTCUT_SAFE"
+POL_Shortcut "DKII.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "DKII_SOFT.EXE" "$SHORTCUT_SAFE" "$SHORTCUT_NAME - Failsafe.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/manual.pdf"
 # C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/reference_card.pdf
 # C:/$PROGRAMFILES/GOGcom/Dungeon Keeper 2/ReadMe.txt
