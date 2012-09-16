@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-09-12 00-24)
-# Wine version used : 1.3.34
+# Last revision : (2012-09-16 10-46)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="age_of_wonders_shadow_magic"
 PREFIX="AgeOfWonders3_gog"
-WORKING_WINE_VERSION="1.3.34"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="Age of Wonders III: Shadow Magic (GoG release)"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
@@ -58,17 +58,11 @@ rm "$POL_USER_ROOT/tmp/aow3_video.reg"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "AoWSM.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-# Now the trick: Shadow magic needs a "slow" wineserver to be responsive!
-# http://appdb.winehq.org/objectManager.php?sClass=version&iId=3101&iTestingId=14987
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "POL_Wine_AutoSetVersionEnv"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "wineserver -k"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "nice -19 wineserver"
-
+POL_Shortcut "Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "AoWSMCompat"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/QuickStart.pdf"
 # C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/Readme.html
 
-POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_EDITOR.png" ""
+POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" ""
 
 POL_SetupWindow_Close
 
