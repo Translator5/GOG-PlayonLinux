@@ -1,11 +1,5 @@
-Outcast-gog:
-	Improve icon setting
-
 Outcast-gog-zenger-hires-patch:
 	(Use registry instead of pol_settings file?)
-
-Starflight:
-	Improve icon setting
 
 Install DLLs with POL_Install_* before GOG installer
   Rationale: POL_Install_* usually install DLLs directly, so may fail to
