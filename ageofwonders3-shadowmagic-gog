@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-09-16 17-19)
+# Last revision : (2012-09-16 17-20)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -62,7 +62,7 @@ POL_Shortcut "Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "AoWSMCompat"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/QuickStart.pdf"
 # C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/Readme.html
 
-POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" ""
+#POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" ""
 
 POL_SetupWindow_Close
 
