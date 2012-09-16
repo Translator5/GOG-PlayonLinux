@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-16 11-43)
-# Last revision : (2012-09-16 16-37)
+# Last revision : (2012-09-16 17-19)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,21 +54,5 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 POL_Shortcut "AoW2Ed.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME.png" ""
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG="-all"
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Age of Wonders II/" || exit 1
-TITLE="$TITLE"
-POL_Debug_Init
-POL_Wine "aow2Setup.exe"
-exit
-_EOF_
 
 exit

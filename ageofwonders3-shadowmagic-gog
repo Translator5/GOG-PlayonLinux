@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-09-16 10-46)
+# Last revision : (2012-09-16 17-19)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -65,20 +65,5 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" ""
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG=""
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/" || exit 1
-
-POL_Wine AoWSMSetup.exe
-
-_EOF_
 
 exit
