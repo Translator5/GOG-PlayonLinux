@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-09 15-50)
-# Last revision : (2012-09-16 17-22)
+# Last revision : (2012-09-16 18-43)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,7 +54,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 # C:\Program Files\GOG.com\Age of Wonders\Readme.txt
 # C:\Program Files\GOG.com\Age of Wonders\AoWEd.exe
 
-#POL_Shortcut "AoWEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor" ""
+#POL_Shortcut "AoWEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" ""
 
 POL_SetupWindow_Close
 
