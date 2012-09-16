@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-09 15-50)
-# Last revision : (2012-09-16 17-20)
+# Last revision : (2012-09-16 17-22)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="age_of_wonders"
-PREFIX="AgeOfWonders_gog"
+PREFIX="AgeOfWonders1_gog"
 WORKING_WINE_VERSION="1.4.1"
 
 TITLE="Age of Wonders (GoG release)"
