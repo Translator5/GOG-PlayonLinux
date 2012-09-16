@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-09-16 17-20)
+# Last revision : (2012-09-16 17-40)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,6 +18,8 @@ WORKING_WINE_VERSION="1.4.1"
 TITLE="Age of Wonders III: Shadow Magic (GoG release)"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
