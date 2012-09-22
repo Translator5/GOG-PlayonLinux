@@ -31,6 +31,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Creatures Exodus
 * Dark Fall: The Journal
 * Dark Fall 2: Lights Out
+* Darklands
 * Darkstone
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
@@ -104,6 +105,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Outcast
 * Painkiller Black Edition
 * Pharaoh + Cleopatra
+* Pirates! Gold Plus
 * Planescape: Torment
 * Populous™ 2: Trials of the Olympian Gods
 * POSTAL 2 Complete
@@ -115,6 +117,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Redneck Rampage Collection
 * Resonance
 * Riven: The Sequel to Myst
+* RollerCoaster Tycoon 2: Triple Thrill Pack
 * Runaway: A Road Adventure
 * Sacred Gold
 * Sacrifice
@@ -125,6 +128,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Shadowgrounds
 * Sherlock Holmes: Secret of the Silver Earring
 * Sid Meier's Alpha Centauri™
+* Silver
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
 * Simon the Sorcerer 2
