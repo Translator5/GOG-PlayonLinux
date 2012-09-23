@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-13 10-53)
-# Last revision : (2012-06-06 21-03)
+# Last revision : (2012-09-23 19-12)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,6 +24,7 @@ SHORTCUT_NAME4="TIM - Even More Contraptions"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1186
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Dynamix / Playdom" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"

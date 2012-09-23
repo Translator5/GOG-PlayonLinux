@@ -12,6 +12,7 @@ WORKING_WINE_VERSION="1.4"
 
 POL_GetSetupImages "" "http://files.playonlinux.com/resources/setups/ie6/left.jpg" "$TITLE"
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 680
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microsoft corporation" "http://www.microsoft.com/" "Tinou" "$PREFIX"

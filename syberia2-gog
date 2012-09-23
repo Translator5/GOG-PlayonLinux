@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-27 21-44)
-# Last revision : (2012-05-27 22-46)
+# Last revision : (2012-09-23 19-07)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,6 +21,7 @@ SHORTCUT_NAME="Syberia 2"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1232
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"

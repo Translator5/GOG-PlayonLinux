@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-25 18-58)
-# Last revision : (2012-08-26 00-38)
+# Last revision : (2012-09-23 19-18)
 # Wine version used : 1.5.11
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,6 +21,7 @@ SHORTCUT_NAME="Unreal 2: The Awakening"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1381
 # 4.0.15 needed for complex POL_Shortcut_InsertBeforeWine
 POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is required to install $TITLE"
 POL_Debug_Init

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 19-15)
-# Last revision : (2012-05-24 19-32)
+# Last revision : (2012-09-23 18-46)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,6 +21,7 @@ SHORTCUT_NAME="Gabriel Knight 3: Blood of the Sacred, Blood of the Damned"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1220
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
