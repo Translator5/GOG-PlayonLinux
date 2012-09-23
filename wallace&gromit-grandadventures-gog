@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-22 22-30)
-# Last revision : (2012-09-22 23-15)
+# Last revision : (2012-09-23 10-09)
 # Wine version used : 1.5.13
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,7 +21,7 @@ SHORTCUT_NAME2="Wallace and Gromit EP102: The Last Resort"
 SHORTCUT_NAME3="Wallace and Gromit EP103: Muzzled"
 SHORTCUT_NAME4="Wallace and Gromit EP104: The Bogey Man"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
@@ -71,7 +71,8 @@ qwertyze "$SHORTCUT_NAME4"
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+for SHORTCUT in "$SHORTCUT_NAME1" "$SHORTCUT_NAME2" "$SHORTCUT_NAME3" "$SHORTCUT_NAME4"; do
+    cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
@@ -87,5 +88,6 @@ POL_Debug_Init
 POL_Wine Language.exe
 exit
 _EOF_
+done
 
 exit
