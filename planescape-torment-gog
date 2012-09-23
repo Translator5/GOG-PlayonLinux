@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 20-41)
-# Last revision : (2012-06-10 22-05)
+# Last revision : (2012-09-23 16-55)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -12,11 +12,11 @@
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="planescape_torment"
-PREFIX="PlanetscapeTorment_gog"
+PREFIX="PlanescapeTorment_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Planetscape: Torment (GoG release)"
-SHORTCUT_NAME="Planetscape: Torment"
+TITLE="Planescape: Torment (GoG release)"
+SHORTCUT_NAME="Planescape: Torment"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -47,8 +47,8 @@ POL_SetupWindow_VMS "4"
 POL_Wine_reboot
 
 POL_Shortcut "Torment.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Planetscape Torment/manual.pdf"
-# C:\Program Files\GOG.com\Planetscape Torment\Readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Planescape Torment/manual.pdf"
+# C:\Program Files\GOG.com\Planescape Torment\Readme.txt
 
 POL_SetupWindow_Close
 
@@ -61,7 +61,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Planetscape Torment/" || exit 1
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Planescape Torment/" || exit 1
 
 TITLE="$TITLE"
 
