@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2012-09-23 19:24)
+# Last revision : (2012-09-29 15:01)
 # Wine version used : 1.4
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
@@ -103,7 +103,6 @@ if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
 	rm -rf "$POL_USER_ROOT/tmp/*"
 fi
 
-REALBIN="`find $WINEPREFIX -iname iw5mp.exe`"
 # Making shortcut
 POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID"
 
