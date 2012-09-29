@@ -28,6 +28,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Broken Sword: Director's Cut + The Original Game
 * Chessmaster® 9000
 * Commandos 2+3
+* Conflict: Desert Storm
 * Creatures Exodus
 * Dark Fall: The Journal
 * Dark Fall 2: Lights Out
@@ -36,6 +37,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Descent 3 + Expansion
 * Desperados: Wanted Dead or Alive
 * Deus Ex™ GOTY Edition
+* Deus Ex 2: Invisible War
 * Disciples 2 Gold
 * Divine Divinity
 * Dragonsphere
@@ -71,9 +73,11 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Gothic 3
 * Ground Control 2: Operation Exodus SE
 * Guilty Gear X2
+* Hitman: Codename 47
+* Hitman 2: Silent Assassin
 * Icewind Dale 2 Complete
 * Icewind Dale Complete
-* In Cold Blood 
+* In Cold Blood
 * Incoming + Incoming Forces
 * Incredible Machine Mega Pack, The
 * Iron Storm
@@ -84,6 +88,9 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Kingpin: Life of Crime
 * Lands of Lore™ 1+2
 * Last Express, The
+* Legacy of Kain: Defiance
+* Legacy of Kain: Soul Reaver
+* Legacy of Kain: Soul Reaver 2
 * Legend of Grimrock
 * Lionheart: Legacy of the Crusader
 * Little Big Adventure (Relentless: Twinsen's Adventure)
@@ -105,6 +112,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Oddworld: Abe's Oddysee
 * Outcast
 * Painkiller Black Edition
+* Perimeter
 * Pharaoh + Cleopatra
 * Pirates! Gold Plus
 * Planescape: Torment
@@ -150,9 +158,13 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Tex Murphy: Under a Killing Moon
 * The Chronicles of Riddick: Assault on Dark Athena
 * Theme Hospital
+* THIEF™ GOLD
 * Thief™ 2: The Metal Age
+* Thief™ 3: Deadly Shadows
 * Tom Clancy's Ghost Recon®
 * Tom Clancy's Splinter Cell®
+* Tomb Raider 1+2+3
+* Tomb Raider: The Last Revelation + Chronicles
 * Torchlight
 * Total Annihilation: Commander Pack
 * Total Annihilation: Kingdoms + Expansion
