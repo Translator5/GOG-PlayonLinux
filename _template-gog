@@ -31,7 +31,7 @@ POL_Call POL_GoG_setup "$GOGID" "md5hash" # "md5hash" ...
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+# Prevent GoG installer from installing Acrobat Reader, Foxit or SumatraPDF in each prefix
 POL_Call POL_Function_SetNativeExtension "pdf"
 
 POL_Wine_WaitBefore "$TITLE"
