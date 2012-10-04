@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-14 21-36)
-# Last revision : (2012-09-23 18-53)
-# Wine version used : 1.5.4
+# Last revision : (2012-10-05 01-14)
+# Wine version used : 1.5.14
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="legend_of_grimrock"
 PREFIX="LegendOfGrimrock_gog"
-WORKING_WINE_VERSION="1.5.4"
+WORKING_WINE_VERSION="1.5.14"
 
 TITLE="Legend of Grimrock (GoG release)"
 SHORTCUT_NAME="Legend of Grimrock"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Almost Human" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "900f5d84a47118961a8d86ff156cea51"
+POL_Call POL_GoG_setup "$GOGID" "51039a7a2e3870e45a6114642bd9b450"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
