@@ -32,6 +32,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Creatures Exodus
 * Dark Fall: The Journal
 * Dark Fall 2: Lights Out
+* Dark Reign + Expansion
 * Darklands
 * Darkstone
 * Descent 3 + Expansion
@@ -80,6 +81,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * In Cold Blood
 * Incoming + Incoming Forces
 * Incredible Machine Mega Pack, The
+* Interstate '76 Arsenal, The
 * Iron Storm
 * Jack Orlando: A Cinematic Adventure (DC)
 * Jagged Alliance 2
@@ -121,11 +123,13 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Prince of Persia®: The Sands of Time
 * Pro Pinball Big Race USA
 * Psychonauts
+* Quest for Glory 1-5
 * Realms of Arkania 1+2
 * Realms of Arkania 3
 * Realms of the Haunting
 * Redneck Rampage Collection
 * Resonance
+* Return to Krondor
 * Riven: The Sequel to Myst
 * RollerCoaster Tycoon 2: Triple Thrill Pack
 * Runaway: A Road Adventure
@@ -150,6 +154,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Star Wolves
 * Still Life
 * Stonekeep
+* SWAT 3: Tactical Game of the Year Edition
 * Syberia
 * Syberia 2
 * Syndicate™
@@ -167,6 +172,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Tomb Raider 1+2+3
 * Tomb Raider: The Last Revelation + Chronicles
 * Torchlight
+* Torin's Passage
 * Total Annihilation: Commander Pack
 * Total Annihilation: Kingdoms + Expansion
 * Two Worlds
@@ -189,3 +195,4 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Worlds of Ultima: The Savage Empire
 * XIII
 * Zeus + Poseidon (Acropolis)
+* Zork: Grand Inquisitor
