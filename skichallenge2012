@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-02-05 18-36)
-# Last revision : (2012-09-23 21-11)
-# Wine version used : 1.4
+# Last revision : (2012-10-15 10-54)
+# Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -10,16 +10,17 @@
 
 # Tested with install archives:
 # TSR-SkiChallenge12.exe 71513656 "ca54f9f503159f933ac97ba123647cfb"
+# TSR-SkiChallenge12.exe ? "5434f04497aa6e5376ac781e3c1040dc"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="SkiChallenge2012"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.5.15"
 
 TITLE="Ski Challenge 2012"
 URL="http://www.skichallenge.ch/fr/"
-SHORTCUT_NAME="Ski Challenge 12 (TSR)"
+SHORTCUT_NAME="Ski Challenge 12 (FTV)"
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1045
@@ -31,8 +32,8 @@ if [ -n "$POL_SELECTED_FILE" ]; then
     ARCHIVE="$POL_SELECTED_FILE"
 else
     cd "$POL_USER_ROOT/tmp"
-    POL_Download "http://download.skichallenge.ch/SC12/installer/TSR-SkiChallenge12.exe" "5434f04497aa6e5376ac781e3c1040dc"
-    ARCHIVE="$POL_USER_ROOT/tmp/TSR-SkiChallenge12.exe"
+    POL_Download "http://download.greentube.com/magic/games/sc12/FR_FTV_MAIN/installer/FTV-SkiChallenge12.exe" "45bd1ce7ac1e12c8161f62907c7cbcdd"
+    ARCHIVE="$POL_USER_ROOT/tmp/FTV-SkiChallenge12.exe"
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
@@ -55,9 +56,9 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "updater.exe" "$SHORTCUT_NAME"
-POL_ExtractIcon "$WINEPREFIX/drive_c/Games/Ski Challenge 12 (TSR)/Game.exe" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
-POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/Games/Ski Challenge 12 (TSR)/Game.exe" "$POL_USER_ROOT/icones/Full_size/$SHORTCUT_NAME"
+POL_Shortcut "Games/Ski Challenge 12 (FTV)/Updater.exe" "$SHORTCUT_NAME"
+POL_ExtractIcon "$WINEPREFIX/drive_c/Games/Ski Challenge 12 (FTV)/Game.exe" "$POL_USER_ROOT/icones/32/$SHORTCUT_NAME"
+POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/Games/Ski Challenge 12 (FTV)/Game.exe" "$POL_USER_ROOT/icones/Full_size/$SHORTCUT_NAME"
 
 POL_SetupWindow_Close
 
