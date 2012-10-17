@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-17 18-02)
-# Last revision : (2012-10-17 23-23)
+# Last revision : (2012-10-18 00-57)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,8 +44,9 @@ SCALER=normal2x
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
 cpu_core=dynamic
-cpu_cputype=auto 
+cpu_cputype=auto
 cpu_cycles=max
+render_frameskip=1
 render_scaler=$SCALER
 mixer_prebuffer=50
 sblaster_type=sb16
