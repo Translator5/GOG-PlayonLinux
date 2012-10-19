@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-07 20-30)
-# Last revision : (2012-09-23 18-28)
+# Last revision : (2012-10-19 08-35)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_3' 1057 --secure "727c883904816441cdf7c46cda1409d9"
+POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_3' 1057 --bonus "727c883904816441cdf7c46cda1409d9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
