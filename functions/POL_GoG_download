@@ -16,9 +16,12 @@ if [ "$1" = "--alternate" ]; then
 	shift 3
 fi
 
-local BASEURL="http://www.gog.com/en/download/game"
-if [ "$1" = "--secure" ]; then
+# URL = ${BASEURL}/${GAME}/${INDEXPREFIX}${INDEX}
+local BASEURL="https://secure.gog.com/en/download/game2"
+local INDEXPREFIX="1_installer_"
+if [ "$1" = "--bonus" ]; then
 	BASEURL="https://secure.gog.com/en/download/file"
+        INDEXPREFIX=""
 	shift
 fi
 
@@ -104,12 +107,12 @@ download_piece ()
 	fi
 }
 
-download_piece "$BASEURL/$GAME/$INDEX" "setup_$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
+download_piece "$BASEURL/$GAME/${INDEXPREFIX}$INDEX" "setup_$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
 	local n=2
 	while [ $n -le $PIECES ]; do
-		download_piece "$BASEURL/$GAME/$((INDEX+n-1))" "setup_$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
+		download_piece "$BASEURL/$GAME/${INDEXPREFIX}$((INDEX+n-1))" "setup_$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
 		let n=$((n+1))
 	done
 fi
