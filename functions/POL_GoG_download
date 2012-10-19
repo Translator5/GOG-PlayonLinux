@@ -2,7 +2,7 @@
 
 local GAME="$1"
 # option: --altername 'basename' baseindex: get pieces starting from another index than 0
-# option: --secure: use HTTPS (bonus contents)
+# option: --bonus: bonus contents
 # 2.. MD5: hash of the pieces
 # Will download as many pieces as extra parameters
 # Hashes are recommended for large downloads anyway
