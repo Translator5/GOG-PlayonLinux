@@ -2,7 +2,7 @@
 
 local GAME="$1"
 # option: --altername 'basename' baseindex: get pieces starting from another index than 0
-# option: --bonus: bonus contents
+# options: --patch: patches | --bonus: bonus contents
 # 2.. MD5: hash of the pieces
 # Will download as many pieces as extra parameters
 # Hashes are recommended for large downloads anyway
@@ -19,7 +19,11 @@ fi
 # URL = ${BASEURL}/${GAME}/${INDEXPREFIX}${INDEX}
 local BASEURL="https://secure.gog.com/en/download/game2"
 local INDEXPREFIX="1_installer_"
-if [ "$1" = "--bonus" ]; then
+if [ "$1" = "--patch" ]; then
+	BASEURL="https://secure.gog.com/en/download/patch"
+        INDEXPREFIX=""
+	shift
+elif [ "$1" = "--bonus" ]; then
 	BASEURL="https://secure.gog.com/en/download/file"
         INDEXPREFIX=""
 	shift
