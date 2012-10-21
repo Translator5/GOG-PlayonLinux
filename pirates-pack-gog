@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-19 18-04)
-# Last revision : (2012-10-21 13-48)
+# Last revision : (2012-10-21 14-14)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -55,6 +55,7 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
+render_aspect=true
 _EOFCFG_
 # I prefer advmame2x over hq2x for Pirates! game - more "round" letters maybe
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=advmame2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
