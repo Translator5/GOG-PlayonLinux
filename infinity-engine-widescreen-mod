@@ -46,7 +46,8 @@ check_install () {
 
     POL_Wine_SelectPrefix "$PREFIX"
     local DRIVEC="$WINEPREFIX/drive_c"
-    DIR="$(find $DRIVEC -iname $EXE -printf '%h'|head -n 1)"
+    DIR="$(find $DRIVEC -iname $EXE -print|head -n 1)"
+    [ -n "$DIR" ] && DIR="$(dirname "$DIR")"
     if [ -z "$DIR" -o ! -d "$DIR" ]; then
         POL_Debug_Error "$(eval_gettext 'Could not find executable $EXE in virtual disk $PREFIX')"
         return
