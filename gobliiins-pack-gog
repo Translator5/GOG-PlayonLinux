@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-09 16-43)
-# Last revision : (2012-09-23 18-48)
+# Last revision : (2012-10-29 02-14)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="gobliiins_pack"
 PREFIX="GobliiinsPack_gog"
 WORKING_WINE_VERSION="1.4-scummvm_support"
 
-TITLE="Gobliiins Pack (GoG release)"
+TITLE="GOG.com - Gobliiins pack"
 SHORTCUT_NAME1="Gobliiins 1"
 SHORTCUT_NAME2="Gobliins 2 - Prince Buffoon"
 SHORTCUT_NAME3="Goblins Quest 3"

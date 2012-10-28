@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-11-28 22-00)
-# Last revision : (2012-09-23 19-20)
+# Last revision : (2012-10-29 02-35)
 # Wine version used : 1.3.27-rawinput2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -19,7 +19,7 @@ TITLE_REQUIRED="Outcast (GoG release)"
 PREFIX="Outcast_gog"
 SHORTCUT_NAME="Outcast"
 
-TITLE="Zenger s Outcast HI-RES patch v3"
+TITLE="GOG.com - Outcast: High-resolution patch"
 URL="http://www.gog.com/en/forum/outcast/experimental_outcast_hi_res_patch_up_to_1280x768_cyana_lighthouse_problem_fixed/"
 INSTALLBIN="OUTCASTP_V3.7z"
 

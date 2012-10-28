@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-21 11-57)
-# Last revision : (2012-09-23 19-09)
+# Last revision : (2012-10-29 02-51)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="tex_murphy_the_pandora_directive"
 PREFIX="TexMurphyTPD_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Tex Murphy - The Pandora Directive (GoG release)"
+TITLE="GOG.com - Tex Murphy: The Pandora Directive"
 SHORTCUT_NAME="Tex Murphy: The Pandora Directive"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

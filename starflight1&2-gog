@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-09-23 19-06)
+# Last revision : (2012-10-29 02-47)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="starflight_1_2"
 PREFIX="Starflight_1_2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Starflight 1 and 2 (GoG release)"
+TITLE="GOG.com - Starflight 1 and 2"
 SHORTCUT1_NAME="Starflight 1"
 SHORTCUT1_CODEWHEEL="$SHORTCUT1_NAME - $(eval_gettext 'Code wheel')"
 SHORTCUT2_NAME="Starflight 2"

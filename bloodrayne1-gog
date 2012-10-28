@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2012-09-23 18-35)
+# Last revision : (2012-10-29 01-52)
 # Wine version used : 1.5.10
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="bloodrayne"
 PREFIX="BloodRayne1_gog"
 WORKING_WINE_VERSION="1.5.10"
 
-TITLE="BloodRayne (GoG release)"
+TITLE="GOG.com - BloodRayne"
 SHORTCUT_NAME="BloodRayne"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

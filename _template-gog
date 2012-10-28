@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-XX-XX XX-XX)
 # Last revision : (2012-XX-XX XX-XX)
-# Wine version used : 1.5.0
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,15 +13,15 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="game_name"
 PREFIX="GameName_gog"
-WORKING_WINE_VERSION="1.5.0"
+WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Full Game Name (GoG release)"
+TITLE="GOG.com - Script Name"
 SHORTCUT_NAME="Shortcut Game Name"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID XXXX
+#POL_SetupWindow_SetID ScriptIDNumber
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Studio / Publisher" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-09-15 12-09)
+# Last revision : (2012-10-29 02-06)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -32,7 +32,7 @@ GOGID="shadowgrounds"
 PREFIX="ShadowGrounds_gog"
 WORKING_WINE_VERSION="1.5.0"
 
-TITLE="ShadowGrounds (GoG release)"
+TITLE="GOG.com - Shadowgrounds"
 SHORTCUT_NAME="Shadowgrounds"
 SHORTCUT_EDITOR="Shadowgrounds Editor"
 

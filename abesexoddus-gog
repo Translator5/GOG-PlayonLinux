@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-08 16-43)
-# Last revision : (2012-09-23 18-58)
+# Last revision : (2012-10-28 01-39)
 # Wine version used : 1.5.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="oddworld_abes_exoddus"
 PREFIX="AbesExoddus_gog"
 WORKING_WINE_VERSION="1.5.1"
 
-TITLE="Oddworld: Abe's Exoddus (GoG release)"
+TITLE="GOG.com - Oddworld: Abe's Exoddus"
 SHORTCUT_NAME="Oddworld: Abe's Exoddus"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

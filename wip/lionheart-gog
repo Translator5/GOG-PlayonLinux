@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-15 15-33)
-# Last revision : (2012-05-24 19-54)
+# Last revision : (2012-10-29 02-05)
 # Wine version used : 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="lionheart_legacy_of_the_crusader"
 PREFIX="Lionheart_gog"
 WORKING_WINE_VERSION="1.5.4"
 
-TITLE="Lionheart - Legacy of the Crusader (GoG release)"
+TITLE="GOG.com - Lionheart: Legacy of the Crusader"
 SHORTCUT_NAME="Lionheart: Legacy of the Crusader"
 
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

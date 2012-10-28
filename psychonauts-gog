@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-01 03-19)
-# Last revision : (2012-09-23 19-00)
+# Last revision : (2012-10-29 02-39)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="psychonauts"
 PREFIX="Psychonauts_gog"
 WORKING_WINE_VERSION="1.5.5"
 
-TITLE="Psychonauts (GoG release)"
+TITLE="GOG.com - Psychonauts"
 SHORTCUT_NAME="Psychonauts"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

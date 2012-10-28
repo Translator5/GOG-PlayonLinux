@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-22 14-16)
-# Last revision : (2012-09-23 18-43)
+# Last revision : (2012-10-29 02-09)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="fallout_tactics"
 PREFIX="FalloutTactics_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Fallout Tactics (GoG release)"
+TITLE="GOG.com - Fallout Tactics"
 SHORTCUT_NAME="Fallout Tactics"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

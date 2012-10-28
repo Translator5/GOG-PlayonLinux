@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-01 19-55)
-# Last revision : (2012-07-01 20-03)
+# Last revision : (2012-10-29 02-04)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="geneforge_15"
 PREFIX="Geneforge_1_5_gog"
 WORKING_WINE_VERSION="1.5.5"
 
-TITLE="Geneforge 1-5 (GoG release)"
+TITLE="GOG.com - Geneforge 1-5"
 SHORTCUT_NAME1="Geneforge"
 SHORTCUT_NAME2="Geneforge 2"
 SHORTCUT_NAME3="Geneforge 3"

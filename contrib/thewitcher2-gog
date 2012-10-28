@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-14 14:12)
-# Last revision : (2012-09-14 20:00)
+# Last revision : (2012-10-29 01:58)
 # Wine version used : 1.5.8
 # Distribution used to test : Archlinux
 # Author : libgradev
@@ -16,7 +16,7 @@ PREFIX="TheWitcher2_gog"
 WINE_VERSION="1.5.8"
 AUTHOR="libgradev"
 
-TITLE="The Witcher 2 Enhanced Edition (GoG release)"
+TITLE="GOG.com - The Witcher 2 Enhanced Edition"
 SHORTCUT_NAME="The Witcher 2 Enhanced Edition"
 
 POL_SetupWindow_Init

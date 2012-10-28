@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-01 00-01)
-# Last revision : (2012-10-17 16-47)
+# Last revision : (2012-10-29 02-41)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="runaway_a_road_adventure"
 PREFIX="Runaway_gog"
 WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Runaway: A Road Adventure (GoG release)"
+TITLE="GOG.com - Runaway: A Road Adventure"
 SHORTCUT_NAME="Runaway: A Road Adventure"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

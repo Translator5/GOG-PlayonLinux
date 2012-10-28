@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-09-23 19-10)
+# Last revision : (2012-10-29 02-52)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="the_feeble_files"
 PREFIX="FeebleFiles_gog"
 WORKING_WINE_VERSION="1.4-scummvm_support"
 
-TITLE="The Feeble Files (GoG release)"
+TITLE="GOG.com - The Feeble Files"
 SHORTCUT_NAME="The Feeble Files"
 
 POL_SetupWindow_Init

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2012-09-23 19-25)
+# Last revision : (2012-10-29 02-06)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -14,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 PREFIX="ElderScrolls_Arena"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="The Elder Scrolls - Arena"
+TITLE="The Elder Scrolls I: Arena"
 SHORTCUT_NAME="The Elder Scrolls I: Arena"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

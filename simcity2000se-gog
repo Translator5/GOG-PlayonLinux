@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2012-09-23 19-04)
+# Last revision : (2012-10-29 02-44)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="simcity_2000_special_edition"
 PREFIX="Simcity2000SE_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Simcity 2000 Special Edition (GoG release)"
+TITLE="GOG.com - Simcity 2000 Special Edition"
 SHORTCUT_NAME1="Simcity 2000 SE"
 SHORTCUT_NAME2="Simcity 2000 SE: Urban Renewal Kit"
 

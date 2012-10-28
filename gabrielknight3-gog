@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 19-15)
-# Last revision : (2012-09-23 18-46)
+# Last revision : (2012-10-29 02-12)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="gabriel_knight_3_blood_of_the_sacred_blood_of_the_damned"
 PREFIX="GabrielKnight3_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Gabriel Knight - Blood of the Sacred, Blood of the Damned (GoG release)"
+TITLE="GOG.com - Gabriel Knight 3: Blood of the Sacred, of the Damned"
 SHORTCUT_NAME="Gabriel Knight 3: Blood of the Sacred, Blood of the Damned"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

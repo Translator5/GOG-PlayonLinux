@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-25 23-27)
-# Last revision : (2012-09-23 19-02)
+# Last revision : (2012-10-29 02-41)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="riven_the_sequel_to_myst"
 PREFIX="Riven_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Riven: The sequel to Myst (GoG release)"
+TITLE="GOG.com - Riven: The sequel to Myst"
 SHORTCUT_NAME="Riven: The sequel to Myst"
 
 POL_SetupWindow_Init

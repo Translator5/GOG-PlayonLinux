@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-02 15-20)
-# Last revision : (2012-09-23 18-54)
+# Last revision : (2012-10-29 02-27)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="little_big_adventure_2"
 PREFIX="LittleBigAdventure2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Little Big Adventure 2: Twinsen's Odyssey (GoG release)"
+TITLE="GOG.com - Little Big Adventure 2"
 SHORTCUT_NAME="Little Big Adventure 2: Twinsen's Odyssey"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

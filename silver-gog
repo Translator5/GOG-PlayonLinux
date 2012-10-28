@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-19 13-04)
-# Last revision : (2012-10-19 15-10)
+# Last revision : (2012-10-29 02-44)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="silver"
 PREFIX="Silver_gog"
 WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Silver (GoG release)"
+TITLE="GOG.com - Silver"
 SHORTCUT_NAME="Silver"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

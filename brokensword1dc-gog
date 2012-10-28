@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-29 17-31)
-# Last revision : (2012-09-23 18-35)
+# Last revision : (2012-10-29 01-54)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -16,7 +16,7 @@ GOGID="broken_sword_directors_cut"
 PREFIX="BrokenSword1DC_gog"
 WORKING_WINE_VERSION="1.4-rc2"
 
-TITLE="Broken Sword: Shadow of the Templars (DC) (GoG release)"
+TITLE="GOG.com - Broken Sword 1: Shadow of The Templars"
 SHORTCUT_NAME="Broken Sword 1: Shadow of the Templars"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/min.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

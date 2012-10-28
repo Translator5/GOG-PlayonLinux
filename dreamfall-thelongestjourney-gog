@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-06 19-20)
-# Last revision : (2012-09-23 18-40)
+# Last revision : (2012-10-29 02-03)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="dreamfall_the_longest_journey"
 PREFIX="Dreamfall_gog"
 WORKING_WINE_VERSION="1.5.5"
 
-TITLE="Dreamfall - The Longest Journey (GoG release)"
+TITLE="GOG.com - Dreamfall: The longest journey"
 SHORTCUT_NAME="Dreamfall: The longest journey"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-19 18-04)
-# Last revision : (2012-10-21 14-14)
+# Last revision : (2012-10-29 02-36)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="pirates_gold_plus"
 PREFIX="PiratesPack_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Pirates! Gold Plus (GoG release)"
+TITLE="GOG.com - Pirates Pack"
 SHORTCUT_NAME1='Pirates!'
 SHORTCUT_NAME2='Pirates! Gold'
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-25 18-58)
-# Last revision : (2012-09-23 19-18)
+# Last revision : (2012-10-29 02-00)
 # Wine version used : 1.5.11
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="unreal_2_the_awakening_se"
 PREFIX="Unreal2_gog"
 WORKING_WINE_VERSION="1.5.11"
 
-TITLE="Unreal 2 - The Awakening SE (GoG release)"
+TITLE="GOG.com - Unreal 2"
 SHORTCUT_NAME="Unreal 2: The Awakening"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

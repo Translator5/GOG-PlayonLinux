@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-09-23 18-55)
+# Last revision : (2012-10-29 02-29)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="might_and_magic_6_limited_edition"
 PREFIX="MightAndMagic6Pack_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Might and Magic 6-Pack Limited Edition (GoG release)"
+TITLE="GOG.com - Might and Magic 6-Pack"
 SHORTCUT_NAME1="Might and Magic 1 - Book I"
 SHORTCUT_NAME2="Might and Magic 2 - Gates to Another World"
 SHORTCUT_NAME3="Might and Magic 3 - Isles of Terra"

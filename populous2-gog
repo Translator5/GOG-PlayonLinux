@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-12 21-15)
-# Last revision : (2012-09-23 19-00)
+# Last revision : (2012-10-29 02-37)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="populous_2"
 PREFIX="Populous2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Populous 2 - Trials of The Olympian Gods (GoG release)"
+TITLE="GOG.com - Populous 2"
 SHORTCUT_NAME="Populous 2: Trials of The Olympian Gods"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

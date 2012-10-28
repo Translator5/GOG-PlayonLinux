@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 11-37)
-# Last revision : (2012-09-23 18-50)
+# Last revision : (2012-10-29 02-21)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="in_cold_blood"
 PREFIX="InColdBlood_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="In Cold Blood (GoG release)"
+TITLE="GOG.com - In Cold Blood"
 SHORTCUT_NAME="In Cold Blood"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

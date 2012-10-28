@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-29 16-22)
-# Last revision : (2012-09-30 16-16)
+# Last revision : (2012-10-29 02-01)
 # Wine version used : 1.5.14
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="deus_ex_invisible_war"
 PREFIX="DeusEx2_gog"
 WORKING_WINE_VERSION="1.5.14"
 
-TITLE="Deus Ex 2 - Invisible War (GoG release)"
+TITLE="GOG.com - Deus Ex 2: Invisible War"
 SHORTCUT_NAME="Deus Ex 2: Invisible War"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

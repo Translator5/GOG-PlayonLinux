@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-23 19-42)
-# Last revision : (2012-10-27 01-05)
+# Last revision : (2012-10-29 02-29)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="might_and_magic_7_for_blood_and_honor"
 PREFIX="MightAndMagic7_gog"
 WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Might and Magic 7 - For Blood and Honor (GoG release)"
+TITLE="GOG.com - Might and Magic 7"
 SHORTCUT_NAME="Might and Magic 7 - For Blood and Honor"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

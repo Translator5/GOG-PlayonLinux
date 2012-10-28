@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2012-09-23 18-26)
+# Last revision : (2012-10-29 01-43)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="age_of_wonders_shadow_magic"
 PREFIX="AgeOfWonders3_gog"
 WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Age of Wonders III: Shadow Magic (GoG release)"
+TITLE="GOG.com - Age of Wonders: Shadow Magic"
 SHORTCUT_NAME="Age of Wonders: Shadow Magic"
 SHORTCUT_EDITOR="$SHORTCUT_NAME - $(eval_gettext 'Editor')"
 

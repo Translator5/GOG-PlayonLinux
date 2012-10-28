@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2012-07-26 00-38)
+# Last revision : (2012-10-29 01-53)
 # Wine version used : 1.5.8
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="the_witcher_2"
 PREFIX="TheWitcher2_gog"
 WORKING_WINE_VERSION="1.5.8"
 
-TITLE="The Witcher 2 Enhanced Edition (GoG release)"
+TITLE="GOG.com - The Witcher 2 Enhanced Edition"
 SHORTCUT_NAME="The Witcher 2: Assassins of Kings EE"
 
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

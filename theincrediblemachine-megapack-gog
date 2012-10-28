@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-13 10-53)
-# Last revision : (2012-09-23 19-12)
+# Last revision : (2012-10-29 02-52)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="the_incredible_machine_mega_pack"
 PREFIX="TheIncredibleMachine_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="The Incredible Machine Mega Pack (GoG release)"
+TITLE="GOG.com - The Incredible Machine Mega Pack"
 SHORTCUT_NAME1="TIM - Even More Incredible Machine"
 SHORTCUT_NAME2="TIM - The Incredible Machine 3"
 SHORTCUT_NAME3="TIM - Return of the Incredible Machine Contraptions"

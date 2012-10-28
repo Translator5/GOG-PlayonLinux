@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-27 21-44)
-# Last revision : (2012-09-23 19-07)
+# Last revision : (2012-10-29 02-49)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="syberia_2"
 PREFIX="Syberia2_gog"
 WORKING_WINE_VERSION="1.5.3"
 
-TITLE="Syberia 2 (GoG release)"
+TITLE="GOG.com - Syberia 2"
 SHORTCUT_NAME="Syberia 2"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

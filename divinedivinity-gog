@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2012-09-23 18-39)
+# Last revision : (2012-10-29 02-02)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="divine_divinity"
 PREFIX="DivineDivinity_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Divine Divinity (GoG release)"
+TITLE="GOG.com - Divine Divinity"
 SHORTCUT_NAME="Divine Divinity"
 
 POL_SetupWindow_Init

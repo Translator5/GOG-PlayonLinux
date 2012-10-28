@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-29 03-54)
-# Last revision : (2012-09-29 13-54)
+# Last revision : (2012-10-29 02-08)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="zeus_poseidon"
 PREFIX="ZeusAndPoseidon_gog"
 WORKING_WINE_VERSION="1.4.1"
 
-TITLE="Zeus + Poseidon (GoG release)"
+TITLE="GOG.com - Zeus and Poseidon"
 SHORTCUT_NAME="Zeus + Poseidon"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

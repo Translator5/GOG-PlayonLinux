@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-29 18-29)
-# Last revision : (2012-09-23 18-35)
+# Last revision : (2012-10-29 01-55)
 # Wine version used : 1.4-rc2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="broken_sword_2__the_smoking_mirror"
 PREFIX="BrokenSword2DC_gog"
 WORKING_WINE_VERSION="1.4-rc2"
 
-TITLE="Broken Sword II: The Smoking Mirror (DC) (GoG release)"
+TITLE="GOG.com - Broken Sword 2: The Smoking Mirror"
 SHORTCUT_NAME="Broken Sword 2: The Smoking Mirror"
 
 POL_SetupWindow_Init

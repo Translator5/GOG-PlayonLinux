@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-14 21-36)
-# Last revision : (2012-10-05 01-14)
+# Last revision : (2012-10-29 02-26)
 # Wine version used : 1.5.14
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="legend_of_grimrock"
 PREFIX="LegendOfGrimrock_gog"
 WORKING_WINE_VERSION="1.5.14"
 
-TITLE="Legend of Grimrock (GoG release)"
+TITLE="GOG.com - Legend of Grimrock"
 SHORTCUT_NAME="Legend of Grimrock"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

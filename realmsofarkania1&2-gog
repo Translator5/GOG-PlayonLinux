@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-27 22-51)
-# Last revision : (2012-10-27 23-57)
+# Last revision : (2012-10-29 02-39)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="realms_of_arkania_1_2"
 PREFIX="RealmsOfArkania1_2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Realms of Arkania 1 and 2 (GoG release)"
+TITLE="GOG.com - Realms of Arkania 1 and 2"
 SHORTCUT_NAME1="Realms of Arkania 1: Blade of Destiny"
 SHORTCUT_NAME2="Realms of Arkania 2: Star Trail"
 

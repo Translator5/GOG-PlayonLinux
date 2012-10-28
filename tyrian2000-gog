@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-25 20-58)
-# Last revision : (2012-09-23 19-16)
+# Last revision : (2012-10-29 02-57)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="tyrian_2000"
 PREFIX="Tyrian2000_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Tyrian 2000 (GoG release)"
+TITLE="GOG.com - Tyrian 2000"
 SHORTCUT_NAME="Tyrian 2000"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

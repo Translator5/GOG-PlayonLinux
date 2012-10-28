@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-12 14-11)
-# Last revision : (2012-09-23 18-33)
+# Last revision : (2012-10-29 01-50)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="baldurs_gate_2_complete"
 PREFIX="BaldursGate2_gog"
 WORKING_WINE_VERSION="1.5.3"
 
-TITLE="Baldur's Gate II Complete (GoG release)"
+TITLE="GOG.com - Baldur's Gate II Complete"
 SHORTCUT_NAME="Baldur's Gate II"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/BG2/top.jpg" "http://files.playonlinux.com/resources/setups/BG2/left.jpg" "$TITLE"

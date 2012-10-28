@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-15 21-41)
-# Last revision : (2012-09-23 19-09)
+# Last revision : (2012-10-29 02-52)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="tex_murphy_under_a_killing_moon"
 PREFIX="TexMurphyUAKM_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Tex Murphy - Under a Killing Moon (GoG release)"
+TITLE="GOG.com - Tex Murphy: Under a Killing Moon"
 SHORTCUT_NAME="Tex Murphy: Under a Killing Moon"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"

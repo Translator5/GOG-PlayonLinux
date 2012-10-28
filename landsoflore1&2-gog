@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-18 19-00)
-# Last revision : (2012-09-23 18-53)
+# Last revision : (2012-10-29 02-25)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="lands_of_lore_1_2"
 PREFIX="LandsOfLore_1_2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.5"
 
-TITLE="Lands of Lore 1 and 2 (GoG release)"
+TITLE="GOG.com - Lands of Lore 1 and 2"
 SHORTCUT_NAME1="Lands of Lore 1: The Throne of Chaos"
 SHORTCUT_NAME2="Lands of Lore 2: Guardians of Destiny"
 

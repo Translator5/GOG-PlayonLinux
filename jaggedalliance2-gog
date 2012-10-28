@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-09 14-38)
-# Last revision : (2012-09-23 18-52)
+# Last revision : (2012-10-29 02-24)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="jagged_alliance_2"
 PREFIX="JaggedAlliance2_gog"
 WORKING_WINE_VERSION="1.4"
 
-TITLE="Jagged Alliance 2 (GoG release)"
+TITLE="GOG.com - Jagged Alliance 2"
 SHORTCUT_NAME="Jagged Alliance 2"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
