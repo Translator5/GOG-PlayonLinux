@@ -31,6 +31,8 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Commandos 2+3
 * Conflict: Desert Storm
 * Creatures Exodus
+* Crusader: No Regret™
+* Crusader: No Remorse™
 * Dark Fall: The Journal
 * Dark Fall 2: Lights Out
 * Dark Reign + Expansion
@@ -91,6 +93,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Journeyman Project 3: Legacy of Time, The
 * Kingpin: Life of Crime
 * Lands of Lore™ 1+2
+* Lands of Lore 3
 * Last Express, The
 * Legacy of Kain: Defiance
 * Legacy of Kain: Soul Reaver
@@ -193,7 +196,10 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Wallace & Gromit's Grand Adventures
 * Warlords Battlecry 3
 * Whispered World, The
+* Wing Commander™ 1+2
+* Wing Commander™ 3 Heart of the Tiger™
 * Wing Commander™ 4: The Price of Freedom
+* Wing Commander ®: Privateer ™
 * Witcher: Enhanced Edition, The
 * Witcher 2: Assassins Of Kings, The
 * Worlds of Ultima: The Savage Empire
