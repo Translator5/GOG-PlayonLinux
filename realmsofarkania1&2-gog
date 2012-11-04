@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-27 22-51)
-# Last revision : (2012-10-29 02-39)
+# Last revision : (2012-10-29 17-48)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,14 +54,27 @@ cpu_core=auto
 cpu_cycles=max
 sblaster_sbtype=sb16
 sblaster_sbbase=220
-sblaster_irq=7
+sblaster_irq=5
 sblaster_dma=1
 sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+if [ "$POL_OS" = "Linux" ]; then
+	# use pmidi -l or aconnect -o list to check your (emulated) midi device
+	# 128:0 is just default software emulation port (usually Timidity)
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	render_scaler=hq2x
+	midi_mididevice=alsa
+	midi_midiconfig=128:0
+	_EOFCFG_
+fi
+if [ "$POL_OS" = "Mac" ]; then
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	midi_mididevice=coreaudio
+	_EOFCFG_
+fi
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA1/ROA1.BAT"
 @ECHO OFF
