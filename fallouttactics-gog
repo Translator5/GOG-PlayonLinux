@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-22 14-16)
-# Last revision : (2012-10-29 02-09)
-# Wine version used : 1.4
+# Last revision : (2012-11-05 22-29)
+# Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="fallout_tactics"
 PREFIX="FalloutTactics_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.5.16"
 
 TITLE="GOG.com - Fallout Tactics"
 SHORTCUT_NAME="Fallout Tactics"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Micro Forté / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8f3a7096b93d54e13397cea365beb29e"
+POL_Call POL_GoG_setup "$GOGID" "280a1f49f8ef375bdeccec83a559e51e" "3bd6d8f6b10403e0ad09fa849e29685b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
