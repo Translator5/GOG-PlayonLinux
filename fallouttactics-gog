@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-22 14-16)
-# Last revision : (2012-11-10 01-29)
+# Last revision : (2012-11-10 10-48)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,8 +46,10 @@ POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
 POL_Wine_reboot
 
 POL_Shortcut "BOS.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Fallout Tactics/MANUAL.PDF"
-# C:\Program Files\GOG.com\Fallout Tactics\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Fallout Tactics/MANUAL.PDF"
+# C:\GOG Games\Fallout Tactics\readme.txt
+# C:\GOG Games\Fallout Tactics\FT Tools.exe
+# C:\GOG Games\Fallout Tactics\EDITOR_README.txt
 
 POL_SetupWindow_Close
 
