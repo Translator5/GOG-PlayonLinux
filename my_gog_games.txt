@@ -142,6 +142,8 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Runaway: A Road Adventure
 * Sacred Gold
 * Sacrifice
+* Sam & Max Beyond Time and Space
+* Sam & Max Save the World
 * Sam & Max: The Devil’s Playhouse
 * Sanitarium
 * Screamer
@@ -165,6 +167,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Syberia
 * Syberia 2
 * Syndicate™
+* Tales of Monkey Island
 * Teenagent
 * Temple of Elemental Evil, The
 * Tex Murphy: The Pandora Directive
