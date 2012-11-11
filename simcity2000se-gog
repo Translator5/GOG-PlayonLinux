@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2012-10-29 02-44)
+# Last revision : (2012-11-11 00-39)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="simcity_2000_special_edition"
 PREFIX="Simcity2000SE_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Simcity 2000 Special Edition"
 SHORTCUT_NAME1="Simcity 2000 SE"
@@ -32,12 +32,8 @@ POL_Call POL_GoG_setup "$GOGID" "1a282a9d885053255a0ef79cdfeb5eed"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # "SVGA 256 colors"
 POL_SetupWindow_VMS "2"
@@ -49,14 +45,10 @@ cpu_core=dynamic
 cpu_cycles=20000
 mixer_prebuffer=240
 _EOFCFG_
-if [ "$POL_OS" = "Linux" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	render_scaler=hq2x
-	_EOFCFG_
-fi
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # Internal SB16 sounds better than external MIDI... And that's one less dependency
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000.CFG"
+cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/GOG Games/SimCity 2000 Special Edition/SC2000.CFG"
 [SimCity 2000 Configuration File]
 
 [Video]
@@ -88,19 +80,19 @@ _EOFCFG_
 
 # Game looks for its CDROM in D:
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000SE.DAT" -t iso -fs iso
+imgmount D "$WINEPREFIX/drive_c/GOG Games/SimCity 2000 Special Edition/SC2000SE.DAT" -t iso -fs iso
 _EOFAE_
 
-echo "EXIT" >> "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SC2000.BAT"
+echo "EXIT" >> "$WINEPREFIX/drive_c/GOG Games/SimCity 2000 Special Edition/SC2000.BAT"
 
-cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/SCURK.BAT"
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/GOG Games/SimCity 2000 Special Edition/SCURK.BAT"
 @ECHO OFF
 SCURK.COM
 exit
 _EOFBAT_
 
 POL_Shortcut "SC2000.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SimCity 2000 Special Edition/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/SimCity 2000 Special Edition/manual.pdf"
 
 POL_Shortcut "SCURK.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 
