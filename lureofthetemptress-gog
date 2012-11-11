@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-11 19-24)
-# Last revision : (2012-10-29 02-27)
+# Last revision : (2012-11-11 23-05)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,22 +25,18 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "dcc8c74c53670f308a37dbead4181965"
+POL_Call POL_GoG_setup "$GOGID" "4650bfa2cbcef03980ba1e0a57f49a7f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # "SVGA videocard" (?)
 POL_SetupWindow_VMS "2"
 
-cat <<_EOFCFG_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/lure.polcfg"
+cat <<_EOFCFG_ > "$WINEPREFIX/drive_c/GOG Games/Lure of the Temptress/lure.polcfg"
 [lure]
 description=Lure of the Temptress (VGA/DOS/English)
 platform=pc
@@ -53,8 +49,8 @@ native_mt32=true
 _EOFCFG_
 
 POL_Shortcut "lure.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Lure of the Temptress/Manual.pdf"
-# C:\Program Files\GOG.com\Lure of the Temptress\solution.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Lure of the Temptress/Manual.pdf"
+# C:\GOG Games\Lure of the Temptress\solution.txt
 
 POL_SetupWindow_Close
 
