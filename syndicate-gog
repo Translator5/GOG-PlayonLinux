@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-21 21-20)
-# Last revision : (2012-10-29 02-49)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-11 21-07)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="syndicate"
 PREFIX="Syndicate_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Syndicate"
 SHORTCUT_NAME="Syndicate"
@@ -26,17 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "000d4f3b438d7ee8cccc3d05c1e3dc0f"
+POL_Call POL_GoG_setup "$GOGID" "c89681f2a1266ff768a6727718544be0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
@@ -57,7 +53,7 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 POL_Shortcut "main.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" '>nul: /iirq7 /idma1 /iio\$220 /c0'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Syndicate/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Syndicate/manual.pdf"
 
 POL_SetupWindow_Close
 
