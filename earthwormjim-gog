@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-10-29 02-05)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-12 23-29)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="earthworm_jim_1_2"
 PREFIX="EarthwormJim_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Earthworm Jim 1 and 2"
 SHORTCUT_NAME1="Earthworm Jim"
@@ -27,49 +27,61 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Shiny Entertainment / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c48f2fa00a7af4b713c113fdf3fca6c9"
+POL_Call POL_GoG_setup "$GOGID" "6ede06eaceb6afa370bc30b2138e0d74"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
-dosbox_memsize=16
+dosbox_memsize=32
 render_frameskip=1
+cpu_core=auto
+cpu_cputype=auto
+cpu_cycles=auto
+mixer_rate=44100
+mixer_blocksize=2048
+mixer_prebuffer=40
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=7
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_sbmixer=true
+sblaster_oplmode=auto
+sblaster_oplemu=default
+sblaster_oplrate=44100
+dos_keyboardlayout=auto
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/EWJ1.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/EWJ1.BAT"
 @ECHO OFF
-mount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/"
-imgmount B "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.inst" -t iso -fs fat
+mount A "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim/"
+imgmount B "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim/EWJ1.inst" -t iso -fs fat
 A:
 EWJ1.EXE 320x224
 exit
 _EOFBAT_
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/EWJ2.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/EWJ2.BAT"
 @ECHO OFF
-mount A "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/"
-imgmount B "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.inst" -t iso -fs fat
+mount A "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim 2/"
+imgmount B "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim 2/EWJ2.inst" -t iso -fs fat
 A:
 EWJ2.EXE
 exit
 _EOFBAT_
 
 POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim/readme.txt"
-# C:\Program Files\GOG.com\Earthworm Jim 1 and 2\Earthworm Jim\WORM0.HLP
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim/readme.txt"
+# C:\GOG Games\Earthworm Jim 1 and 2\Earthworm Jim\WORM0.HLP
 
 POL_Shortcut "EWJ2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Earthworm Jim 1 and 2/Earthworm Jim 2/readme.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim 2/readme.txt"
 
 POL_SetupWindow_Close
 
