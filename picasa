@@ -1,0 +1,75 @@
+#!/bin/bash
+# Date : (2012-11-12 19-39)
+# Last revision : (2012-11-12 20-16)
+# Wine version used : 1.4.1
+# Distribution used to test : 
+# Author : Script Author
+# Script licence : GPL v.2
+# Program licence : Freeware
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="GooglePicasa"
+WORKING_WINE_VERSION="1.4.1"
+INSTALLBIN="picasa39-setup.exe"
+
+TITLE="Google Picasa"
+URL="http://picasa.google.com/"
+SHORTCUT_NAME="Google Picasa"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Google" "$URL" "Script Author" "$PREFIX"
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd "$POL_USER_ROOT/tmp"
+    POL_Download "http://dl.google.com/picasa/$INSTALLBIN" "683e007ec762aae71132ada52352142c"
+    ARCHIVE="$POL_USER_ROOT/tmp/$INSTALLBIN"
+fi
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# http://wiki.winehq.org/picasa
+#POL_Call POL_Install_wininet
+POL_Call POL_Install_ie6
+
+POL_Wine_WaitBefore "$TITLE"
+
+POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Picasa3.exe" "$SHORTCUT_NAME" "" "" # $SHORTCUT_NAME.png
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/Google/Picasa3/" || exit 1
+
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine "PicasaPhotoViewer.exe" /reconfig
+POL_SetupWindow_Close
+exit
+_EOF_
+
+exit
