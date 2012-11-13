@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-09 13-03)
-# Last revision : (2012-10-29 02-48)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-13 22-19)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="stonekeep"
 PREFIX="Stonekeep_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Stonekeep"
 SHORTCUT_NAME="Stonekeep"
@@ -26,17 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8eb751d616b15cb519d041153ba134e2"
+POL_Call POL_GoG_setup "$GOGID" "d5a3f02749a2a59e32fa14731d0ada6d"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_SetupWindow_VMS "1"
 
@@ -46,23 +42,32 @@ dosbox_memsize=16
 cpu_core=auto
 cpu_cycles=auto
 render_aspect=true
+mixer_prebuffer=80
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=7
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_mixer=true
+sblaster_oplmode=auto
+sblaster_oplrate=22050
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Stonekeep/STONKEEP.GOG" -t iso -fs iso
+imgmount D "$WINEPREFIX/drive_c/GOG Games/Stonekeep/STONKEEP.GOG" -t iso -fs iso
 set dos4gvm=
 _EOFAE_
 
-cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Stonekeep/SK.BAT"
+cat <<'_EOFBAT_' > "$WINEPREFIX/drive_c/GOG Games/Stonekeep/SK.BAT"
 @ECHO OFF
 D:\data\SK.EXE %1
 EXIT
 _EOFBAT_
 
 POL_Shortcut "SK.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Stonekeep/manual.pdf"
-# C:\Program Files\GOG.com\Stonekeep\readme.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Stonekeep/manual.pdf"
+# C:\GOG Games\Stonekeep\readme.TXT
 
 POL_SetupWindow_Close
 
