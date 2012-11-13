@@ -17,14 +17,14 @@ if [ "$1" = "--alternate" ]; then
 fi
 
 # URL = ${BASEURL}/${GAME}/${INDEXPREFIX}${INDEX}
-local BASEURL="https://secure.gog.com/en/download/game2"
+local BASEURL="https://secure.gog.com/en/downlink/game2"
 local INDEXPREFIX="1_installer_"
 if [ "$1" = "--patch" ]; then
-	BASEURL="https://secure.gog.com/en/download/patch"
+	BASEURL="https://secure.gog.com/en/downlink/patch"
         INDEXPREFIX=""
 	shift
 elif [ "$1" = "--bonus" ]; then
-	BASEURL="https://secure.gog.com/en/download/file"
+	BASEURL="https://secure.gog.com/en/downlink/file"
         INDEXPREFIX=""
 	shift
 fi
