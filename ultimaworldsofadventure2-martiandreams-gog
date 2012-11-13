@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-29 23-13)
-# Last revision : (2012-10-29 02-59)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-13 23-02)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="ultima_worlds_of_adventure_2_martian_dreams"
 PREFIX="UltimaWorldsOfAdventure2MD_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Ultima Worlds of Adventure 2: Martian Dreams"
 SHORTCUT_NAME="Ultima Worlds of Adventure 2: Martian Dreams"
@@ -26,17 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c5187acaed5a7f39de4bafe67af047ff"
+POL_Call POL_GoG_setup "$GOGID" "918adc12a4048c18d13f1d660d75fc20"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
@@ -49,10 +45,10 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 POL_Shortcut "MARTIAN.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Martian Dreams/secret answers.txt"
-# C:\Program Files\GOG.com\Martian Dreams\Mysteries of the Red Planet - manual.pdf
-# C:\Program Files\GOG.com\Martian Dreams\Use of the Orb of the Moons - manual.pdf
-# C:\Program Files\GOG.com\Martian Dreams\reference card.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Worlds of Ultima - Martian Dreams/secret answers.txt"
+# C:\GOG Games\Martian Dreams\Mysteries of the Red Planet - manual.pdf
+# C:\GOG Games\Martian Dreams\Use of the Orb of the Moons - manual.pdf
+# C:\GOG Games\Martian Dreams\reference card.pdf
 
 POL_SetupWindow_message "$(eval_gettext 'The codes needed to start a new game can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual".')" "$TITLE"
 
