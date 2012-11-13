@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2012-11-12 23-35)
+# Last revision : (2012-11-13 19-27)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -50,8 +50,7 @@ cd "$POL_USER_ROOT/tmp"
 POL_Download "http://files.playonlinux.com/nircmd.zip" "3d6d3f094633c5c97f8b15f8fe1023bf"
 POL_System_ExtractSingleFile "nircmd.zip" "nircmd.exe" "$WINEPREFIX/drive_c/windows/nircmd.exe"
 
-# My tweak only works with a virtual desktop
-Set_Desktop On 800 600
+Set_Managed Off
 
 # Doesn't hurt ;)
 POL_Wine_reboot
