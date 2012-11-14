@@ -109,6 +109,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Might and Magic® 6-pack: Limited Edition
 * Might and Magic® 7: For Blood and Honor™
 * Might and Magic® 8: Day of the Destroyer™
+* MDK
 * MDK 2
 * Moto Racer
 * Moto Racer 2
