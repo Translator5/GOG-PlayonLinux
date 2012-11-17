@@ -1,0 +1,65 @@
+#!/bin/bash
+# Date : (2012-11-17 17-14)
+# Last revision : (2012-11-17 17-50)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="swat_3_tactical_game_of_the_year_edition"
+PREFIX="Swat3TGOTY_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Swat 3 TGOTY"
+SHORTCUT_NAME="Swat 3 Tactical Game of the Year"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "13e108e74fca0b0ccb24f321e16e607b"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+POL_Call POL_Install_devenum
+POL_Call POL_Install_quartz
+POL_Call POL_Install_amstream
+POL_Call POL_Install_iv50
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "swat.exe" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/SWAT 3/game/FAQs/TGOTYFAQ/FAQ.htm"
+# C:\Program Files\GOG.com\SWAT 3\game\ReadMe.txt
+# C:\Program Files\GOG.com\SWAT 3\game\Customer_support.htm
+# C:\Program Files\GOG.com\SWAT 3\game\FAQs\Modselectorfaq\modselector.html
+# C:\Program Files\GOG.com\SWAT 3\game\FAQs\ModHQ\index.html
+
+# C:\Program Files\GOG.com\SWAT 3\game\Tools\Compsound\compsound.exe
+# C:\Program Files\GOG.com\SWAT 3\game\Tools\Worldcraft\wc.exe
+# C:\Program Files\GOG.com\SWAT 3\game\Tools\ScenarioEd.exe
+# C:\Program Files\GOG.com\SWAT 3\game\RunTactics.exe
+# C:\Program Files\GOG.com\SWAT 3\game\MOD.exe
+
+POL_SetupWindow_Close
+
+exit
