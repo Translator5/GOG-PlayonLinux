@@ -1,0 +1,69 @@
+#!/bin/bash
+# Date : (2012-11-17 14-13)
+# Last revision : (2012-11-17 15-38)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="might_and_magic_8_day_of_the_destroyer"
+PREFIX="MightAndMagic8_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Might and Magic 8"
+SHORTCUT_NAME="Might and Magic 8 - Day of the Destroyer"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1463
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "1d3a4566ed4f41f85aff9c06fdd76515"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "MM8.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might and Magic VIII/MANUAL.PDF"
+# C:\Program Files\GOG.com\Might and Magic VIII\Reference_card.PDF
+# C:\Program Files\GOG.com\Might and Magic VIII\Readme.txt
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Might and Magic VIII/" || exit 1
+
+TITLE="$TITLE"
+POL_Debug_Init
+POL_Wine MM8Setup.Exe
+exit
+_EOF_
+
+exit
