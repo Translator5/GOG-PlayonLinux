@@ -1,0 +1,48 @@
+#!/bin/bash
+# Date : (2012-11-18 16-24)
+# Last revision : (2012-11-18 20-45)
+# Wine version used : 1.4.1
+# Distribution used to test : Ubuntu 12.10 64-bit
+# Author : Kweepeer (Based on Broken Sword DC script by Pierre Etchemaite)
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="deponia"
+PREFIX="Deponia_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Deponia"
+SHORTCUT_NAME="Deponia"
+
+POL_GetSetupImages "" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1467
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/en/gamecard/$GOGID" "Kweepeer" "$PREFIX"
+POL_Call POL_GoG_setup "$GOGID" "cc3a6c5dc69393ab5d138ebb8aa60650" "94697861a04aaac8ab8b012aecbe66c4" "6d4cbd688fc7dc9a1eac934cde1dd20c"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Deponia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Deponia/Manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
