@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-11-18 11-45)
+# Last revision : (2012-11-20 22-03)
 # Wine version used : 1.5.17
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,8 +42,6 @@ POL_SetupWindow_Init
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Frozenbyte / Meridian4" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
-
-POL_SetupWindow_message "$(eval_gettext 'Now, the bad news. No matter what version of Wine I tried, the game\nshowed some probability of crashing when displaying\nthe map/objectives 2D panel. Only use it when necessary and\nyou should be able to complete the game.\n(If that really bothers you, the Linux version of ShadowGrounds does\nnot have this problem).')" "$TITLE"
 
 POL_Call POL_GoG_setup "$GOGID" "398af39f2b133fde083897c6c6a1c2f6"
 
