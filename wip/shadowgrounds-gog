@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2012-11-20 22-03)
+# Last revision : (2012-11-20 22-08)
 # Wine version used : 1.5.17
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,7 +36,6 @@ WORKING_WINE_VERSION="1.5.17"
 
 TITLE="GOG.com - Shadowgrounds"
 SHORTCUT_NAME="Shadowgrounds"
-SHORTCUT_EDITOR="Shadowgrounds Editor"
 
 POL_SetupWindow_Init
 POL_Debug_Init
