@@ -1,0 +1,51 @@
+#!/bin/bash
+# Date : (2012-11-23 21-22)
+# Last revision : (2012-11-23 21-31)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="rollercoaster_tycoon_2"
+PREFIX="RollerCoasterTycoon2_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - RollerCoaster Tycoon 2"
+SHORTCUT_NAME="RollerCoaster Tycoon 2: Triple Thrill Pack"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Chris Sawyer Productions / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "d4ff028e6deee76a77faad4dcf0a8389"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "64"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "RCT2.EXE" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOGcom/RollerCoaster Tycoon 2 Triple Thrill Pack/manual.pdf"
+# C:\Program Files\GOGcom\RollerCoaster Tycoon 2 Triple Thrill Pack\readme.txt
+
+POL_SetupWindow_Close
+
+exit
