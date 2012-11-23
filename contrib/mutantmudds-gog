@@ -1,0 +1,28 @@
+#!/bin/bash
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+POL_SetupWindow_Init
+
+POL_SetupWindow_presentation "Mutant Mudds"
+
+POL_Wine_SelectPrefix "MutantMudds"
+POL_Wine_PrefixCreate "1.5.9"
+
+POL_System_TmpCreate "MutantMudds"
+
+POL_SetupWindow_browse "Please select the Mutant Mudds installer." "Mutant Mudds Installation"
+POL_Call POL_Install_d3dx9
+POL_Call POL_Install_d3dcompiler_43
+POL_SetupWindow_wait "Installation in progress." "Mutant Mudds"
+
+POL_Wine start /unix "$APP_ANSWER"
+POL_Wine_WaitExit "Mutant Mudds Setup: Completed"
+
+
+POL_System_TmpDelete
+
+POL_Shortcut "MutantMudds.exe" "Mutant Mudds"
+
+POL_SetupWindow_Close
+exit
