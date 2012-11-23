@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-03 22-02)
-# Last revision : (2012-10-29 02-53)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-23 20-13)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="theme_hospital"
 PREFIX="ThemeHospital_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Theme Hospital"
 SHORTCUT_NAME="Theme Hospital"
@@ -26,17 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d79126b277bc155b5acee2822f4203b5"
+POL_Call POL_GoG_setup "$GOGID" "9bc7c8181a088c7d5412e93d742f87c9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # "640x480 256 colors"
 POL_SetupWindow_VMS "2"
@@ -45,14 +41,18 @@ cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 cpu_core=auto
 cpu_cputype=auto
 cpu_cycles=auto
+render_frameskip=1
 mixer_rate=44100
-mixer_prebuffer=50
+mixer_prebuffer=240
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=7
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_sbmixer=true
 sblaster_oplmode=auto
 sblaster_oplemu=default
-#sblaster_oplrate=44100
-ipx_enable=1
-ipx_connection=1
-ipx_ipx=true
+sblaster_oplrate=44100
 
 speaker_pcspeaker=false
 speaker_tandy=off
@@ -61,16 +61,17 @@ joystick_joysticktype=none
 midi_mpu401=none
 gus_gus=false
 _EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # Set real install path
-cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Theme Hospital/HOSPITAL.CFG"
-INSTALL_PATH=c:\PROGRA~1\GOG.COM\THEMEH~1\
+cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/GOG Games/Theme Hospital/HOSPITAL.CFG"
+INSTALL_PATH=c:\GOGGAM~1\THEMEH~1\
 INSTALL_TYPE=MAX
 LANGUAGE=ENG
 _EOFCFG_
 
 POL_Shortcut "HOSPITAL.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Theme Hospital/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Theme Hospital/manual.pdf"
 
 POL_SetupWindow_Close
 
