@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 23-07)
-# Last revision : (2012-10-29 01-55)
+# Last revision : (2012-11-25 22-29)
 # Wine version used : 1.5.7
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,20 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Sodtware" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "04286672cfe5a99ec65e04d35d9e0b8c" "54f55cedc88e3ca94f81b99c102f6cf6" "259e76b3604e0ef871647093f8a0fb64"
+POL_Call POL_GoG_setup "$GOGID" "40fbfd144dbe49ab192f6aba4e0e4633" "7d3033e9e446d20fef782e315bac8193"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Remove wine-mono if present
-POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}'
+POL_Call POL_GoG_install
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Call POL_Install_d3dx9_36
 
@@ -51,8 +44,8 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "bs4pc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Broken Sword - The Angel of Death/manual.pdf"
+POL_Shortcut "bs4pc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-language=english"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Broken Sword - The Angel of Death/manual.pdf"
 
 POL_SetupWindow_Close
 
