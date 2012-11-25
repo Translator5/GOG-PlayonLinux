@@ -1,0 +1,52 @@
+#!/bin/bash
+# Date : (2012-11-24 21:30)
+# Last revision : (2012-11-24 21:30)
+# Wine version used : 1.5.5
+# Distribution used to test : OpenSuSE 12.2 64-bit
+# Author : hmdai (Based on Deponia DC script by Kweepeer)
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="the_dark_eye_chains_of_satinav"
+PREFIX="TheDarkEyeChainofSatinav_gog"
+WORKING_WINE_VERSION="1.5.5"
+
+TITLE="GOG.com - The Dark Eye: Chain of Satinav"
+SHORTCUT_NAME="The Dark Eye: Chain of Satinav"
+
+POL_GetSetupImages "" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1478
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/en/gamecard/$GOGID" "hmdai" "$PREFIX"
+POL_Call POL_GoG_setup "$GOGID" "43cf1d1cc74e3087f016f5a05a393598" "fcef6232dd11388d09a56b32231f63e5" "9d666731082fb981b0682e049af83980" "6cff6ce263dab6bf67d9d78c3524afda" "5d044e334a7b3ffb05982ba3957c5ed0"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "satinav.exe" "$SHORTCUT_NAME" "" ""
+POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'unset SDL_AUDIODRIVER'
+
+# Create a tmp directory for the game to create thumbnail image for save game
+cd "$WINEPREFIX/drive_c/"
+mkdir "tmp"
+
+POL_SetupWindow_Close
+
+exit
