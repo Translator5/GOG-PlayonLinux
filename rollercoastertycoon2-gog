@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-23 21-22)
-# Last revision : (2012-11-23 21-31)
+# Last revision : (2012-11-25 10-54)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.4.1"
 TITLE="GOG.com - RollerCoaster Tycoon 2"
 SHORTCUT_NAME="RollerCoaster Tycoon 2: Triple Thrill Pack"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
