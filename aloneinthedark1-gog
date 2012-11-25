@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-05 20-05)
-# Last revision : (2012-10-29 01-44)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-25 16-40)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="alone_in_the_dark"
 PREFIX="AloneInTheDark1_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Alone in the Dark 1"
 SHORTCUT_NAME1="Alone in the Dark 1"
@@ -27,17 +27,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "ae06b057f6f24d2430d8b80df7c88b71"
+POL_Call POL_GoG_setup "$GOGID" "1f83b99036088346f37f3de6cd8955d4"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
@@ -60,11 +56,11 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Alone in the Dark/GAME.INST" -t iso
+imgmount D "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/GAME.INST" -t iso
 _EOFAE_
 
 POL_Shortcut "INDARK.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Alone in the Dark/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/manual.pdf"
 POL_Shortcut "INDARK2.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "16 1"
 
 POL_SetupWindow_Close
@@ -78,13 +74,9 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Alone in the Dark/INDARK/" || exit 1
-
+cd "\$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/INDARK/" || exit 1
 TITLE="$TITLE"
-
 POL_Debug_Init
-
 POL_Wine INSTALL.EXE
 
 exit
@@ -98,13 +90,9 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Alone in the Dark/JACK/" || exit 1
-
+cd "\$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/JACK/" || exit 1
 TITLE="$TITLE"
-
 POL_Debug_Init
-
 POL_Wine INSTALL.EXE
 
 exit
