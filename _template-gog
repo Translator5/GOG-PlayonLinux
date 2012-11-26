@@ -55,16 +55,12 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Game Install Directory/" || exit 1
-
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
-
 # ...
-
 POL_SetupWindow_Close
 exit
 _EOF_
