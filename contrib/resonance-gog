@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-11-27 00-14)
-# Last revision : (2012-11-27 00-14)
-# Wine version used : 1.4
+# Last revision : (2012-11-27 01-13)
+# Wine version used : 1.4.1
 # Distribution used to test : Slackware 14.0
 # Author : ... (Based on Gemini Rue script by Pierre Etchemaite)
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
  
 GOGID="resonance"
 PREFIX="Resonance_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
  
 TITLE="GOG.com - Resonance"
 SHORTCUT_NAME="Resonance"
