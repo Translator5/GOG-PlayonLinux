@@ -10,10 +10,12 @@
   miniatures/
     <scriptname>
     PNG or JPEG 200 x 150
+    (obsolete, submit screenshots online)
 
   screenshots/
     <prefixname?>-##.jpg
     JPEG 800 x 600
+    (obsolete, submit screenshots online)
 
   setups/
     <prefixname>/
