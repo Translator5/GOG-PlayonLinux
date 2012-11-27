@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-27 00-14)
-# Last revision : (2012-11-27 01-24)
+# Last revision : (2012-11-27 02-00)
 # Wine version used : 1.4.1
 # Distribution used to test : Slackware 14.0, Debian Sid (Unstable)
 # Author : ... (Based on Gemini Rue script by Pierre Etchemaite)
@@ -22,7 +22,7 @@ SHORTCUT_NAME="Resonance"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ####
+POL_SetupWindow_SetID 1487
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Wadjet Eye Games" "http://www.gog.com/en/gamecard/$GOGID" "....." "$PREFIX"
