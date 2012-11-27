@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-21 21-14)
-# Last revision : (2012-10-29 02-31)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2012-11-27 20-53)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="one_unit_whole_blood"
 PREFIX="OneUnitWholeBlood_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - One Unit Whole Blood"
 SHORTCUT_NAME1="Blood: One Unit Whole Blood"
@@ -27,45 +27,41 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Monolith Productions / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "a72a31def93390c794fc80a906328536"
+POL_Call POL_GoG_setup "$GOGID" "e34a8c33bc0d5e34a24bed43ad6a763a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
-dosbox_memsize=64
+dosbox_memsize=63
 cpu_core=auto
+cpu_type=auto
 cpu_cycles=max
+mixer_rate=44100
 mixer_blocksize=2048
 mixer_prebuffer=240
 sblaster_sbtype=sb16
 sblaster_sbbase=220
-sblaster_irq=5
+sblaster_irq=7
 sblaster_dma=1
 sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
-ipx_enable=1
-ipx_connection=1
-ipx_ipx=true
 _EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/One Unit Whole Blood/game.inst" -t iso
+imgmount D "$WINEPREFIX/drive_c/GOG Games/One Unit Whole Blood/game.ins" -t iso
 _EOFAE_
 
 POL_Shortcut "BLOOD.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/One Unit Whole Blood/Manual.pdf"
-# C:\Program Files\GOG.com\One Unit Whole Blood\README.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/One Unit Whole Blood/Manual.pdf"
+# C:\GOG Games\One Unit Whole Blood\README.TXT
 
 POL_Shortcut "CRYPTIC.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 
@@ -79,15 +75,10 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/One Unit Whole Blood/" || exit 1
-
+cd "\$WINEPREFIX/drive_c/GOG Games/One Unit Whole Blood/" || exit 1
 TITLE="$TITLE"
-
 POL_Debug_Init
-
 POL_Wine SETUP.EXE
-
 exit
 _EOF_
 
