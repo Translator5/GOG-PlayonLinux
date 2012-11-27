@@ -1,0 +1,70 @@
+#!/bin/bash
+# Date : (2012-11-27 00-14)
+# Last revision : (2012-11-27 00-14)
+# Wine version used : 1.4
+# Distribution used to test : Slackware 14.0
+# Author : ... (Based on Gemini Rue script by Pierre Etchemaite)
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+ 
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="resonance"
+PREFIX="Resonance_gog"
+WORKING_WINE_VERSION="1.4"
+ 
+TITLE="GOG.com - Resonance"
+SHORTCUT_NAME="Resonance"
+ 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+ 
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1329
+POL_Debug_Init
+ 
+POL_SetupWindow_presentation "$TITLE" "Wadjet Eye Games" "http://www.gog.com/en/gamecard/$GOGID" "....." "$PREFIX"
+ 
+POL_Call POL_GoG_setup "$GOGID" "6d7bf055bd79bb272e558302b09b0109"
+ 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+ 
+# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
+POL_Call POL_Function_SetNativeExtension "pdf"
+ 
+POL_Wine_WaitBefore "$TITLE"
+ 
+POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+ 
+ 
+# GoG work!
+Set_OS winxp
+ 
+POL_SetupWindow_VMS "128"
+ 
+# Doesn't hurt ;)
+POL_Wine_reboot
+ 
+POL_Shortcut "Resonance.exe" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
+ 
+POL_SetupWindow_Close
+ 
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+ 
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Resonance/" || exit 1
+TITLE="$TITLE"
+POL_Debug_Init
+POL_Wine winsetup.exe
+exit
+_EOF_
+ 
+exit
