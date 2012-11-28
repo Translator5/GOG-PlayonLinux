@@ -1,0 +1,47 @@
+#!/bin/bash
+# Date : (2012-11-25 17:56)
+# Last revision : (2012-11-25 17:56)
+# Wine version used : 1.5.5
+# Distribution used to test : OpenSuSE 12.2 64-bit
+# Author : hmdai (Based on Deponia DC script by Kweepeer)
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="the_book_of_unwritten_tales"
+PREFIX="TheBookofUnwrittenTales_gog"
+WORKING_WINE_VERSION="1.5.5"
+
+TITLE="GOG.com - The Book of Unwritten Tales"
+SHORTCUT_NAME="The Book of Unwritten Tales"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/bout_64x64.png" "http://files.playonlinux.com/resources/setups/$PREFIX/bout_left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1488
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "King Art/Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "hmdai" "$PREFIX"
+POL_Call POL_GoG_setup "$GOGID" "5b88b486a40f5fd2a4e2f65bab9f82bb" "eaf5761b688e61f091269166eab99165" "a3bd5956c30835b3e6904da6725d586b" "2926abb44170719459849a2830866141"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "bout.exe" "$SHORTCUT_NAME" "" ""
+
+POL_SetupWindow_Close
+
+exit
