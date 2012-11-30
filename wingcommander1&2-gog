@@ -1,0 +1,81 @@
+#!/bin/bash
+# Date : (2012-11-30 20-18)
+# Last revision : (2012-11-30 22-24)
+# Wine version used : 1.4-dos_support_0.6
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="wing_commander_1_2"
+PREFIX="WingCommander_1_2_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
+
+TITLE="GOG.com - Wing Commander 1 and 2"
+SHORTCUT_NAME1="Wing Commander"
+SHORTCUT_NAME2="Wing Commander II"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "78dab28b2966d1d2d53d3abce0f7d224"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
+dosbox_memsize=16
+cpu_core=auto
+cpu_cputype=auto
+cpu_cycles=4000
+mixer_rate=44100
+mixer_blocksize=1024
+mixer_prebuffer=20
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=5
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_sbmixer=true
+sblaster_oplmode=auto
+sblaster_oplemu=default
+sblaster_oplrate=44100
+render_aspect=true
+_EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Wing Commander 1 and 2/WC/WC.BAT"
+@ECHO OFF
+CONFIG -set "cpu cycles=4000"
+loadfix -1 wc
+EXIT
+_EOFBAT_
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Wing Commander 1 and 2/WC2/WC2.BAT"
+@ECHO OFF
+CONFIG -set "cpu cycles=8000"
+loadfix -32 wc2
+EXIT
+_EOFBAT_
+
+POL_Shortcut "WC.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Wing Commander 1 and 2/WC/manual.pdf"
+
+POL_Shortcut "WC2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Wing Commander 1 and 2/WC2/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
