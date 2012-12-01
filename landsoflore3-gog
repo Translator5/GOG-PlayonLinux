@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-30 23-44)
-# Last revision : (2012-12-01 01-00)
+# Last revision : (2012-12-01 18-30)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -12,13 +12,13 @@
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="lands_of_lore_3"
-PREFIX="LandsOfLore_3_gog"
+PREFIX="LandsOfLore3_gog"
 WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Lands of Lore 3"
 SHORTCUT_NAME="Lands of Lore 3"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
@@ -32,9 +32,9 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 # fake sdbinst.exe
-POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe"
 
-POL_Call POL_GoG_install "/nogui"
+POL_Call POL_GoG_install
 
 
 # GoG work!
