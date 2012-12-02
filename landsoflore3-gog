@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-30 23-44)
-# Last revision : (2012-12-01 18-30)
+# Last revision : (2012-12-02 13-30)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -41,6 +41,9 @@ POL_Call POL_GoG_install
 Set_OS winxp
 
 POL_SetupWindow_VMS "2"
+
+# Kill spurious "Not enough available video RAM" message
+dd if=/dev/zero of="$WINEPREFIX/drive_c/GOG Games/Lands of Lore 3/PROMPT.TRR" conv=notrunc bs=1 seek=2902 count=1
 
 # Doesn't hurt ;)
 POL_Wine_reboot
