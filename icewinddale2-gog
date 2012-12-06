@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-19 12-38)
-# Last revision : (2012-10-29 02-20)
-# Wine version used : 1.4
+# Last revision : (2012-12-06 23-18)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="icewind_dale_2"
 PREFIX="IcewindDale2_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Icewind Dale II Complete"
 SHORTCUT_NAME="Icewind Dale II"
@@ -26,17 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Hasbro Inc." "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7174cb05f8fbd8458ab60c2db8177359"
+POL_Call POL_GoG_setup "$GOGID" "9f6587dfc8779d9c541194bae7c6a0db"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
@@ -48,7 +43,7 @@ POL_SetupWindow_VMS "4"
 POL_Wine_reboot
 
 POL_Shortcut "IWD2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Icewind Dale II/README.htm"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Icewind Dale II/README.htm"
 
 POL_SetupWindow_Close
 
@@ -60,13 +55,13 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Icewind Dale II/" || exit 1
-
+cd "\$WINEPREFIX/drive_c/GOG Games/Icewind Dale II/" || exit 1
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
+
+POL_Wine Config.exe
 
 POL_Call POL_Configurator_runparts
 
