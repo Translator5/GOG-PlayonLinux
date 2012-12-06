@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-12 14-11)
-# Last revision : (2012-10-29 01-50)
-# Wine version used : 1.5.3
+# Last revision : (2012-12-06 17-54)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="baldurs_gate_2_complete"
 PREFIX="BaldursGate2_gog"
-WORKING_WINE_VERSION="1.5.3"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Baldur's Gate II Complete"
 SHORTCUT_NAME="Baldur's Gate II"
@@ -26,17 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Hasbro Inc." "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "334d116cb431eb9cd5e18e06f99d13dd" "f6866e2d77e2e0fcd5f72456f513f5dc" "9a3bbfc56216ed73cac9e9f1638cc5bb"
+POL_Call POL_GoG_setup "$GOGID" "7129c3caa365931bd2a18552f16c806a" "d174cf1c13625ecda8a4024a2ef023e3" "c199d5f671a4585ece29bc3cb5018e34"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
@@ -48,9 +43,9 @@ POL_SetupWindow_VMS "4"
 POL_Wine_reboot
 
 POL_Shortcut "BGMain.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Baldurs Gate II/manual.pdf"
-# C:\Program Files\GOG.com\Baldurs Gate II\Readme.txt
-# C:\Program Files\GOG.com\Baldurs Gate II\Readme_totsc.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Baldur's Gate 2/manual.pdf"
+# C:\GOG Games\Baldur's Gate 2\Readme.txt
+# C:\GOG Games\Baldur's Gate 2\Readme_addon.txt
 
 #POL_Shortcut "CharView.exe" "$SHORTCUT_NAME - Character Viewer" "$SHORTCUT_NAME.png" ""
 
@@ -65,7 +60,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Baldurs Gate II/" || exit 1
+cd "\$WINEPREFIX/drive_c/GOG Games/Baldur's Gate 2/" || exit 1
 
 TITLE="$TITLE"
 
@@ -73,7 +68,6 @@ POL_SetupWindow_Init
 POL_Debug_Init
 
 POL_Wine BGConfig.exe
-
 POL_Call POL_Configurator_runparts
 
 POL_SetupWindow_Close
