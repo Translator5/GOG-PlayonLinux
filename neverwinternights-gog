@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 10-47)
-# Last revision : (2012-12-06 16-52)
+# Last revision : (2012-12-06 17-13)
 # Wine version used : 1.3.27
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,14 +46,28 @@ POL_SetupWindow_VMS "16"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "nwn.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "nwmain.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Neverwinter Nights Diamond Edition/NWN_OnlineManual.pdf"
+# C:\GOG Games\Neverwinter Nights Diamond Edition\readme.txt
 # C:\GOG Games\Neverwinter Nights Diamond Edition\NWNHordes_Manual.pdf
 # C:\GOG Games\Neverwinter Nights Diamond Edition\NWN_SoU_OnlineManual.pdf
-# C:\GOG Games\Neverwinter Nights Diamond Edition\readme.txt
-# C:\GOG Games\Neverwinter Nights Diamond Edition\HotUreadme.txt
-# C:\GOG Games\Neverwinter Nights Diamond Edition\SoUreadme.txt
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/GOG Games/Neverwinter Nights Diamond Edition/" || exit 1
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine nwconfig.exe
+exit
+_EOF_
 
 exit
