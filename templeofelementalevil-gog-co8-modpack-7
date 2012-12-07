@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2012-10-29 02-51)
-# Wine version used : 1.3.36
+# Last revision : (2012-12-07 12-20)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -9,11 +9,9 @@
 # Depend :
 
 # Tested with install archives:
-# 2011_12_19_Circle_of_Eight_Modpack_7.0.0_Setup.exe 144230937 "f5794aaf9e6be982757f4e4f3ad66afe"
+# Circle_of_Eight_Modpack_7.5.0_Setup.exe 164818525 "aa09ab4ca3619ed83ced588146d2d948"
 # and
-# Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe 295527044 "d8046e6174c4d6eb9a4c5e958b691963"
-
-# Got a crash with 1.3.37, backoff to 1.3.36
+# Circle_of_Eight_Modpack_7.5.0_NC_Setup.exe 295527044 "c81f56b578e4be0d53e39d8eb8c2e48d"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -21,10 +19,10 @@ source "$PLAYONLINUX/lib/sources"
 # Must match templeofelementalevil-gog script values
 TITLE_REQUIRED="The Temple of Elemental Evil (GoG release)"
 PREFIX="TempleElementalEvil_gog"
-WORKING_WINE_VERSION="1.3.36"
-INSTALLBIN="Circle_of_Eight_Modpack_7.0.0_NC_Setup.exe"
+WORKING_WINE_VERSION="1.4.1"
+INSTALLBIN="Circle_of_Eight_Modpack_7.5.0_NC_Setup.exe"
 
-DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack/news/circle-of-eight-modpacks-700-and-700-nc-released"
+DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack"
 
 TITLE="GOG.com - Temple of Elemental Evil patch CO8 Modpack 7"
 SHORTCUT_NAME="Temple of Elemental Evil - Circle of Eight Modpack 7"
@@ -56,7 +54,7 @@ fi
 
 POL_Call POL_Install_mono28
 
-POL_SetupWindow_message "$(eval_gettext 'Now you must install the modpack in directory:')\nC:\\$PROGRAMFILES\\GOG.com\\Temple of Elemental Evil\\" "$TITLE"
+POL_SetupWindow_message "$(eval_gettext 'Now you must install the modpack in directory:')\nC:\\GOG Games\\Temple of Elemental Evil\\" "$TITLE"
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
