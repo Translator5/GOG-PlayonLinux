@@ -16,13 +16,17 @@ if [ ! -d "$WINEPREFIX" ]; then
     exit 1
 fi
 
-if [ ! -d "$WINEPREFIX/drive_c/users/Public/Start Menu" ]; then
+if [ -d "$WINEPREFIX/drive_c/users/Public/Start Menu" ]; then
+    MENUNAME='Start Menu'
+elif [ -d "$WINEPREFIX/drive_c/users/Public/Menu Démarrer" ]; then
+    MENUNAME='Menu Démarrer'
+else
     echo "Could not find global menu data"
     exit 1
 fi
 
 for user in "Public" "`id -un`"; do
-    cd "$WINEPREFIX/drive_c/users/$user/Start Menu" &&
+    cd "$WINEPREFIX/drive_c/users/$user/$MENUNAME" &&
     find . -type f -a -name '*.lnk' -print| \
     while read lnkname; do
 #        echo "----------"
