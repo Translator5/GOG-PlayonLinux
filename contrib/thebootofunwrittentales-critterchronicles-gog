@@ -1,0 +1,48 @@
+#!/bin/bash
+# Date : (2012-12-6 18:56)
+# Last revision : (2012-12-6 18:56)
+# Wine version used : 1.5.5
+# Distribution used to test : OpenSuSE 12.2 64-bit
+# Author : hmdai (Based on Deponia DC script by Kweepeer)
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="the_book_of_unwritten_tales_critter_chronicles"
+PREFIX="TheBookofUnwrittenTalesCritterChronicles_gog"
+WORKING_WINE_VERSION="1.5.5"
+
+TITLE="GOG.com - The Book of Unwritten Tales: The Critter Chronicles"
+SHORTCUT_NAME="The Book of Unwritten Tales: The Critter Chronicles"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1503
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "King Art/Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "hmdai" "$PREFIX"
+POL_Call POL_GoG_setup "$GOGID" "93a67394f49e17dba6546bb5fa9575e4"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_Install_d3dx9
+POL_Call POL_GoG_install
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "128"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "CritterChronicles.exe" "$SHORTCUT_NAME" "" ""
+
+POL_SetupWindow_Close
+
+exit
