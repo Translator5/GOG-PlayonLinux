@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-08 09-28)
-# Last revision : (2012-12-08 10-51)
+# Last revision : (2012-12-08 10-57)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,7 +21,7 @@ SHORTCUT_NAME="Hitman: Codename 47"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1506
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "IO Interactive / Square Enix" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
