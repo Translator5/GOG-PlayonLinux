@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-06 22-14)
-# Last revision : (2012-11-25 17-30)
+# Last revision : (2012-12-08 23-07)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,23 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_2' 1056 --bonus "6597966a34543dc506447b6afdf4f925"
+# This is getting really ugly
+if [ "$POL_SELECTED_FILE" ]; then
+    POL_GoG_location="$POL_SELECTED_FILE"
+elif [ -e "$(POL_Config_Read GOG_REPO)/alone_in_the_dark_2_3_pc.zip" ]; then
+    # Already downloaded and renamed
+    POL_GoG_location="$(POL_Config_Read GOG_REPO)/alone_in_the_dark_2_3_pc.zip"
+    else
+    POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_2_3' 1056 --bonus "b3be7275c5638c6ddcc2d7bede4bb030"
+    if [ "$POL_GoG_downloaded" = "True" ]; then
+        cd "$(POL_Config_Read GOG_REPO)"
+        mv setup_alone_in_the_dark_2_3.exe alone_in_the_dark_2_3_pc.zip
+        POL_GoG_location="$PWD/alone_in_the_dark_2_3_pc.zip"
+    fi
+fi
+cd "$POL_USER_ROOT/tmp"
+unzip "$POL_GoG_location" alone_in_the_dark_1_2_pc/setup_alone_in_the_dark2_2.0.0.7.exe || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_GoG_location="$POL_USER_ROOT/tmp/alone_in_the_dark_1_2_pc/setup_alone_in_the_dark2_2.0.0.7.exe"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
