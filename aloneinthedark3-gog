@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-07 20-30)
-# Last revision : (2012-11-25 17-52)
+# Last revision : (2012-12-08 23-53)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,6 +18,9 @@ WORKING_WINE_VERSION="1.4-dos_support_0.6"
 TITLE="GOG.com - Alone in the Dark 3"
 SHORTCUT_NAME="Alone in the Dark 3"
 
+# hash ecd22e7c0f7d83bc31abd366a8210b0b
+INSTALLBIN="setup_alone_in_the_dark3_2.0.0.5.exe"
+
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
@@ -26,7 +29,26 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_3' 1057 --bonus "ecd22e7c0f7d83bc31abd366a8210b0b"
+# This is getting really ugly
+if [ "$POL_SELECTED_FILE" ]; then
+    POL_GoG_location="$POL_SELECTED_FILE"
+else
+    if [ ! -e "$(POL_Config_Read GOG_REPO)/$INSTALLBIN" ]; then
+        ARCHIVE="$(POL_Config_Read GOG_REPO)/alone_in_the_dark_2_3_pc.zip"
+
+        # download archive
+        if [ ! -e "$ARCHIVE" ]; then
+            POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_2_3' 1056 --bonus "b3be7275c5638c6ddcc2d7bede4bb030"
+            [ "$POL_GoG_downloaded" = "True" ] && mv "$POL_GoG_location" "$ARCHIVE"
+        fi
+
+        # unzip archive
+        unzip -j "$ARCHIVE" -d "$(POL_Config_Read GOG_REPO)" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+        rm "$ARCHIVE"
+    fi
+
+    POL_GoG_location="$(POL_Config_Read GOG_REPO)/$INSTALLBIN"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
