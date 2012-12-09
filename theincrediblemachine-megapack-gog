@@ -27,7 +27,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1186
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Dynamix / Playdom" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Dynamix / Playdom" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "021e9371ce23f438315eb26c079c1c95"
 

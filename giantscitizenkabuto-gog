@@ -23,7 +23,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1061
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Planet Moon Studios / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Planet Moon Studios / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "a2df158ef6c21c8a5767daf4a63d8b65" "8ae9cd94266e32fb6b17c75aabefda13"
 

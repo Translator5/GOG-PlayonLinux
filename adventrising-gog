@@ -22,7 +22,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1027
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "GlyphX Games / Majesco" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "GlyphX Games / Majesco" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "28869aa14b25d9705f65ed916458a9aa" "16038e27a471a710b06bf8d737fc3679" "3f98999aa162600b4b8cb0fe036cbe21" "e210f8aace0110d0ab20b46a1d10ee92"
 

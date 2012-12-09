@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1312
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "840ad64ea594c1467222fa2e82256456"
 

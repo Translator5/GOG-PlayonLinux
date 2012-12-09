@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1040
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "299f5cb319d023b502937a10fc21fc83"
 

@@ -28,7 +28,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1099
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Bioware / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Bioware / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "e78344b7d375bf4e223f4216efdd375d" "5411d09d76c2d358364d1b269e067611" "c893f8c3864741b8683e7ae55a44acd3"
 

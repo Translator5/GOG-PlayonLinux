@@ -27,7 +27,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1247
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 # This is getting really ugly
 if [ "$POL_SELECTED_FILE" ]; then

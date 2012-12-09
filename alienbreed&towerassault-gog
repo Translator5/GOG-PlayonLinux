@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1368
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Team17 Software" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Team17 Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "91d1470411fff4f6760631498bb389ea"
 

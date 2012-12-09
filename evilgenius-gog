@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1228
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Elixir Studio / Rebellion" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Elixir Studio / Rebellion" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "5577cb8cf2fda362ecc80d44c3e5b90c"
 

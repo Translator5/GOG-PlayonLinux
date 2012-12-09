@@ -27,7 +27,7 @@ POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is re
 
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "b9925ca60f016cf67cdfafceeb5623e7"
 

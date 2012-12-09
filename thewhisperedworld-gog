@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1309
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "db37f968a19619405138cc859c5b04f0" "bd43954c2ca5e93329fbb81598d0cda5" "4a0deaf5698f2e8e86723725aaef3eab"
 

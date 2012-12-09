@@ -28,7 +28,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1024
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Crytek Studios / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Crytek Studios / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "964f27d319571bd614db5d1df08e1912" "77a792e45ba865d6bbd0ca4e5a39a2a7" "d6c8edb29a4a1cce4e9f46774bf47eb0"
 

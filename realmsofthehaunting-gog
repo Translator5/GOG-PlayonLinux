@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1144
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Gremlin Interactive Ltd. / Funbox Media" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Gremlin Interactive Ltd. / Funbox Media" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "46ca37445be06ce05812795be922451f"
 

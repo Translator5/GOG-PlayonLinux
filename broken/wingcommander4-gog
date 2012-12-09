@@ -23,7 +23,7 @@ SHORTCUT_NAME="Wing Commander 4: The Price of Freedom"
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "23b66d7ecec15f105cf675343af8d60c" "cf61c4cda510062a7ddcb3224dd99ed3" "855de57d2fc43b3388cf33199d9799b6" "f0fadbb85e9b498520315561b55848a1" "47e2c9c22f31853a947a5150552bc5fa"
 

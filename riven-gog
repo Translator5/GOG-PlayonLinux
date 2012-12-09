@@ -22,7 +22,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1074
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Cyan Worlds / Cyan Inc" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Cyan Worlds / Cyan Inc" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "e261a0e2ffceddc04ff6917c94a64e57"
 

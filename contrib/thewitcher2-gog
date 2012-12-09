@@ -22,7 +22,7 @@ SHORTCUT_NAME="The Witcher 2 Enhanced Edition"
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/en/gamecard/$GOGID" "$AUTHOR" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/gamecard/$GOGID" "$AUTHOR" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "b8c84b47644b53c5d3c9e1a2c9bb3a2e" "bc207a9ee725ccce2fad933861ffa299" "740dc01dfa936ea4755049d0fd8a3fe4" "b96ba44d1f33f4e73941f490f2828982" "b56b54012f218d887863ce778ef77e5a" "5d06e0b2bd1aa47697578cacbc8c1ed4" "8698adebaafab3ff9aa0303934bac1e3" "7efb39400446f2609ad11eeb7a7e2a14" "01a8b34c6a115cc16da61a8510072351" "ce4a8cb2360a358c35dc72d959652725"
 

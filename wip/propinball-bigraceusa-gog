@@ -23,7 +23,7 @@ SHORTCUT_NAME="Pro Pinball Big Race USA"
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Cunning Developments / Strategy First" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Cunning Developments / Strategy First" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "23b754c41d52e379434f13dc4a4ff6d2"
 

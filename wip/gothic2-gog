@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1239
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "62ca675dafe649497c03fe52de41433f"
 
@@ -52,7 +52,7 @@ POL_Call POL_Install_DisableCrashDialog
 POL_Wine_reboot
 
 # extendedMenu allows to set resolution ingame
-# tip from http://www.gog.com/en/forum/gothic_series/notes_on_widescreen_resolution
+# tip from http://www.gog.com/forum/gothic_series/notes_on_widescreen_resolution
 cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 2 Gold/gothic2_funcs"
 
 # echo statements to set \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP

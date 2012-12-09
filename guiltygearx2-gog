@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1153
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Arc System Works Co. / Funbox Media" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Arc System Works Co. / Funbox Media" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "3ba91b3b7b0fe033d4ba597410d5d982"
 

@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1177
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "ASCARON Entertainment / Strategy First" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "ASCARON Entertainment / Strategy First" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "f8392a03dd78739ede7169ca77ddfd8d"
 

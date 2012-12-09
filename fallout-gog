@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1032
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "b83c9e539fc68f1e8f3a3e68d3667ecf"
 

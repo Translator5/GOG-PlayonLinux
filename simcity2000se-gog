@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1151
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Maxis Software Inc. / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Maxis Software Inc. / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "044e4853b51974a8c708ca57f921b928"
 

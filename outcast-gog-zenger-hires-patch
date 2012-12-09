@@ -20,7 +20,7 @@ PREFIX="Outcast_gog"
 SHORTCUT_NAME="Outcast"
 
 TITLE="GOG.com - Outcast: High-resolution patch"
-URL="http://www.gog.com/en/forum/outcast/experimental_outcast_hi_res_patch_up_to_1280x768_cyana_lighthouse_problem_fixed/"
+URL="http://www.gog.com/forum/outcast/experimental_outcast_hi_res_patch_up_to_1280x768_cyana_lighthouse_problem_fixed/"
 INSTALLBIN="OUTCASTP_V3.7z"
 
 POL_SetupWindow_Init

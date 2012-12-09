@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1478
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/en/gamecard/$GOGID" "hmdai" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "hmdai" "$PREFIX"
 POL_Call POL_GoG_setup "$GOGID" "43cf1d1cc74e3087f016f5a05a393598" "fcef6232dd11388d09a56b32231f63e5" "9d666731082fb981b0682e049af83980" "6cff6ce263dab6bf67d9d78c3524afda" "5d044e334a7b3ffb05982ba3957c5ed0"
 
 POL_Wine_SelectPrefix "$PREFIX"

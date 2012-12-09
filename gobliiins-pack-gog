@@ -27,7 +27,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1354
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Coktel Vision / DotEmu" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Coktel Vision / DotEmu" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "7a03488043d5c2e8a9c0c99222bd8b1f"
 

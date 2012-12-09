@@ -28,7 +28,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1392
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "71def52be8380f71f38407d1e27f811f"
 

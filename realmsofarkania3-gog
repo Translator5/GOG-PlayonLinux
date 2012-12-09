@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1206
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Attic Entertainment / Fantasy Productions" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Attic Entertainment / Fantasy Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "61c1ca2dc633ac36d55837ee9c7ab813"
 

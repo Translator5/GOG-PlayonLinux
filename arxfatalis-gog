@@ -27,7 +27,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1256
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Arkane Studios" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Arkane Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "0dd8ec13c10146db1a741258b624040a"
 

@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1340
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Double Fine Productions" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Double Fine Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "6ba666fb42890dc271811243173b2c59" "562c61cfef74b76efba77e797e0ce920" "3ab364b4bc3a183da51b06db92c2a875"
 

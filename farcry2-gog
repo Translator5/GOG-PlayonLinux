@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1382
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Ubisoft Montréal / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Ubisoft Montréal / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "2e4e11dcae8a9f9ab5c0b782e12bf33e" "e77f62e1835c92de348ed6db68a44b46" "6bc7cc8b721e846b1388ef99f4581fd3"
 

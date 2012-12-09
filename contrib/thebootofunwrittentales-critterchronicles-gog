@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1503
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "King Art/Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "hmdai" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "King Art/Nordic Games" "http://www.gog.com/gamecard/$GOGID" "hmdai" "$PREFIX"
 POL_Call POL_GoG_setup "$GOGID" "93a67394f49e17dba6546bb5fa9575e4"
 
 POL_Wine_SelectPrefix "$PREFIX"

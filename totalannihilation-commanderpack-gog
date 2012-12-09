@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Cavedog Entertainment / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Cavedog Entertainment / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "889220e9ba8306fa15e08684d30d3455"
 

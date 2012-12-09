@@ -26,7 +26,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1136
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Xatrix Entertainment / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Xatrix Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "cab24f0b67c148fda28d8adb3fd820fa"
 

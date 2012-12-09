@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1323
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Starbreeze Studios & Tigon Studios / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Starbreeze Studios & Tigon Studios / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "2aa011a2f73cbcc1427a62173be7cb60" "f25f5e5b36d019c995a080c5cb6435ac" "bdd4b203fde34f68418fa7ef9e8ef8a0" "7db0c50a23083fcebea63b7c470ef035" "ed06a88a199493a02c3e46b87516b34a"
 

@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1020
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Triumph Studios" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Triumph Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "85786a3a6872896adc1720536a626f05"
 

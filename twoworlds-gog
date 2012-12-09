@@ -22,7 +22,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1019
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Reality Pump Studios / Topware Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Reality Pump Studios / Topware Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "f59283baad1d482806a4302c6a105c66" "d0eab18be86037476a7cd4e47f1afc0a" "eb19df7336379a5b1355354ed69f124e"
 

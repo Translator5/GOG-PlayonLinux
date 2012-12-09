@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1313
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Elemental Games / 1C Publishing" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Elemental Games / 1C Publishing" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "90b36e2d043d3fdd6d1603b7f22f85ca"
 

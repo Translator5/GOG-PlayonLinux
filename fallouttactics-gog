@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1139
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Micro Forté / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Micro Forté / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "280a1f49f8ef375bdeccec83a559e51e" "3bd6d8f6b10403e0ad09fa849e29685b"
 

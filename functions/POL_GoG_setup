@@ -16,7 +16,7 @@ else
 		POL_Debug_Message "PlayOnLinux do not understand GoG_Download"
 		INSTALL_METHOD="LOCAL"
 		POL_SetupWindow_question "$(eval_gettext 'Do you want to download $TITLE from GOG.com?')" "$TITLE"
-		[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "http://www.gog.com/en/gamecard/$GOGID"
+		[ "$APP_ANSWER" = "TRUE" ] && POL_Browser "http://www.gog.com/gamecard/$GOGID"
 	fi
 
 	POL_Debug_Message "Install method $INSTALL_METHOD"

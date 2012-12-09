@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1271
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Joymania Development / TopWare Interactive " "http://www.gog.com/en/gamecard/$GOGID" "Jan Nytra" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Joymania Development / TopWare Interactive " "http://www.gog.com/gamecard/$GOGID" "Jan Nytra" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "6f7212f523a94aa606f39eaf2f3116b8"
 

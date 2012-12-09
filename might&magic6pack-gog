@@ -33,7 +33,7 @@ POL_RequiredVersion "4.0.17" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.17 is re
 
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "8d83c2301cf9f58567e34e395cd08738"
 
@@ -79,7 +79,7 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # Using SBPro 0x220 7 1 fixes lockups in WoX and SoX
-# http://www.gog.com/en/forum/might_and_magic_series/world_of_xeen_crashes_when_i_sign_in_in_a_tavern
+# http://www.gog.com/forum/might_and_magic_series/world_of_xeen_crashes_when_i_sign_in_in_a_tavern
 cd "$POL_USER_ROOT/tmp"
 POL_unbase64 <<_EOFCFG_ > "XEEN.CFG"
 BwAgAgMAIAIHAAAAAAAAAAAAAQABAAAAAQAAAA==

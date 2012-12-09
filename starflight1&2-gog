@@ -23,7 +23,7 @@ SHORTCUT2_NAME="Starflight 2"
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1015
 POL_Debug_Init
-POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "eb8e0f1785709af1bd5d4a6543742edc"
 

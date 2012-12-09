@@ -28,7 +28,7 @@ POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is re
 
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Delphine Software / Anuman Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Delphine Software / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "39ffda45ac7504064cb9bd8ca193861e"
 

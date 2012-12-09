@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1233
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "JoWooD Productions Software / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "JoWooD Productions Software / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "d4ae4d4fd94a11f8730fb8d34f161967"
 

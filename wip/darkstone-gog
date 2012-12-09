@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1346
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Delphine Software International / VectorCell" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Delphine Software International / VectorCell" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "d8bcd539d6a5e6999b242348259694f8"
 

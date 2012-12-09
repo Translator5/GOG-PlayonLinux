@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1348
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Funcom" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Funcom" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "1091dd106f114d2d20a91d76aa1655ed" "76b01bcf0928a586a20437b2d3bda7a5" "d8a0841f377d027e1a098b73f085250b" "85337cd0b34a273dcb073b7e8e1b203c"
 

@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1287
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Revolution Sodtware" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Revolution Sodtware" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "40fbfd144dbe49ab192f6aba4e0e4633" "7d3033e9e446d20fef782e315bac8193"
 

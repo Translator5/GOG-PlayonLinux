@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1201
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Altar Interactive / 1C Publishing" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Altar Interactive / 1C Publishing" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "c3be0ee13c14a6c2369678ed74fc5e29"
 

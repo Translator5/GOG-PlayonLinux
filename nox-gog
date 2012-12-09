@@ -26,7 +26,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1022
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Westwood Studios / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Westwood Studios / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "279986cc83f7b966efa1e627065ee95c"
 

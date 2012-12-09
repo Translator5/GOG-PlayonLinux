@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1230
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Eric Chahi / Digital Lounge" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Eric Chahi / Digital Lounge" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "c9e10dbdd5fb26e92a939f03938192cb"
 

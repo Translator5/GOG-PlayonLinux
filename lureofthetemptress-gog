@@ -23,7 +23,7 @@ POL_SetupWindow_SetID 1096
 
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "4650bfa2cbcef03980ba1e0a57f49a7f"
 

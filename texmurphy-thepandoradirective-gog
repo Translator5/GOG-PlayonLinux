@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1328
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Access Software / Worldplay LLC" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Access Software / Worldplay LLC" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "bd943dac3ecd79d6911b9dd77d7551a5" "5af0cd2331d7a0c8e33093b7043e0215" "8f4fe1610daed1db85e8a536b90ddd70"
 

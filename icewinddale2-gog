@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1213
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Hasbro Inc." "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Hasbro Inc." "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "9f6587dfc8779d9c541194bae7c6a0db"
 

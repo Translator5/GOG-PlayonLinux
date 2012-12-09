@@ -22,7 +22,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1041
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "22839e19bc5c8db1e557810e01be6e42"
 

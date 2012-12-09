@@ -23,7 +23,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1112
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Ubisoft Paris Studios / Ubisoft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Ubisoft Paris Studios / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "6933e1a9f8e17c0a8b816e47f39bded5"
 

@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1155
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Adeline Software International / Didier Chanfray SARL" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Adeline Software International / Didier Chanfray SARL" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "8ec70c0d61802e04dab4406962a4f7e3"
 

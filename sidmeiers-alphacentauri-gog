@@ -23,7 +23,7 @@ POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jp
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1361
 
-POL_SetupWindow_presentation "$TITLE" "Firaxis Games / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Firaxis Games / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 # For OS/X we automatically download sox
 if [ "$POL_OS" != "Mac" ]; then

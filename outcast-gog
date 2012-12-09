@@ -24,7 +24,7 @@ POL_SetupWindow_SetID 1013
 POL_RequiredVersion "4.1.2" || POL_Debug_Fatal "$APPLICATION_TITLE 4.1.2 is required to install $TITLE"
 
 POL_Debug_Init
-POL_SetupWindow_presentation "$TITLE" "Appeal S.A. / Atari" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Appeal S.A. / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "a8bf2336a580527f0eb99f8b90009c33"
 

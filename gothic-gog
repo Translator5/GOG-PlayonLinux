@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1275
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Piranha Bytes" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Piranha Bytes" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "f8f06e5c4d79e89e7427fb3ab0085401"
 
@@ -52,7 +52,7 @@ POL_Call POL_Install_directmusic
 POL_Wine_reboot
 
 # extendedMenu allows to set resolution ingame
-# tip from http://www.gog.com/en/forum/gothic_series/notes_on_widescreen_resolution
+# tip from http://www.gog.com/forum/gothic_series/notes_on_widescreen_resolution
 cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic/gothic_funcs"
 
 # echo statements to set \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP

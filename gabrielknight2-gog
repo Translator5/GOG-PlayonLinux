@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1215
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "2d83cb2af5ca7faad6565b73fcf1deec" "f2a6c96731716ce10257dd8f14f8d416" "2b3b64b886486ddb25417d51d3b366dd"
 

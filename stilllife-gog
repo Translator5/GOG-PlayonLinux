@@ -24,7 +24,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1259
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "4abd4141e245b0bfc232a402a06f2876" "d630b945e2096248dba02b7c9af038e5" "6d414021e211c0cd047f211f548c445c"
 

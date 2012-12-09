@@ -25,7 +25,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1258
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "9499377e9b329067218f8164ab5b455e" "cfd007eb9a27eea5aad3dbb72909aea9" "360d4b8dcc7b08874d7e92dc6596a496"
 

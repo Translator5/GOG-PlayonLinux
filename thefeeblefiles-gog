@@ -22,7 +22,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1034
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "16f0ec3760c68d646abc6671f657361a" "df8a0031ac21f2efe93da1440d0fb024" "27197e9622d4ee349a8f4766f949426b"
 

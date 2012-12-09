@@ -26,7 +26,7 @@ POL_SetupWindow_Init
 POL_SetupWindow_SetID 1035
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "04779d4d56e828daff8f82ba239d96a3" "7db45f6fb84caa50f4b4679a63f30418" "23f6f6b2078b5b909eaacff0a8238586"
 

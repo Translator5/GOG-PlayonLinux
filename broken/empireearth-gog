@@ -22,7 +22,7 @@ SHORTCUT_NAME2="Empire Earth: The Art of Conquest"
 POL_SetupWindow_Init
 POL_Debug_Init
 
-POL_SetupWindow_presentation "$TITLE" "Stainless Steel Studios / Rebellion" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+POL_SetupWindow_presentation "$TITLE" "Stainless Steel Studios / Rebellion" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 POL_Call POL_GoG_setup "$GOGID" "1d5c5587ab26488b3a38f1ba288ce89a"
 
