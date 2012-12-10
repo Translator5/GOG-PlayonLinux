@@ -1,0 +1,86 @@
+#!/bin/bash
+# Date : (2012-12-10 10-53)
+# Last revision : (2012-12-10 12-00)
+# Wine version used : 1.4-dos_support_0.6
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="darklands"
+PREFIX="Darklands_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
+
+TITLE="GOG.com - Darklands"
+SHORTCUT_NAME="Darklands"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "MPS Labs / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "6f1c6dc232f35227dfd8eb462e3a5cb2"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# Game expects itself in C:\DARKLAND
+mv "$WINEPREFIX/drive_c/GOG Games/Darklands/DARKLAND" "$WINEPREFIX/drive_c/"
+
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
+manual_mount=true
+dosbox_memsize=16
+cpu_core=auto
+cpu_cputype=auto
+cpu_cycles=10000
+mixer_rate=44100
+mixer_blocksize=1024
+mixer_prebuffer=240
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=5
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_sbmixer=true
+sblaster_oplmode=auto
+sblaster_oplemu=default
+sblaster_oplrate=44100
+render_aspect=true
+_EOFCFG_
+#[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+if [ "$POL_OS" = "Linux" ]; then
+	# use pmidi -l or aconnect -o list to check your (emulated) midi device
+	# 128:0 is just default software emulation port (usually Timidity)
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	render_scaler=hq2x
+	midi_mididevice=alsa
+	midi_midiconfig=128:0
+	_EOFCFG_
+fi
+if [ "$POL_OS" = "Mac" ]; then
+	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+	midi_mididevice=coreaudio
+	_EOFCFG_
+fi
+
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
+@ECHO OFF
+mount D "$WINEPREFIX/drive_c/GOG Games/Darkland/GAME.GOG"
+_EOFBAT_
+
+POL_Shortcut "DARKLAND.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Darklands/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
