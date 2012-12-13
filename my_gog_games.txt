@@ -20,6 +20,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Betrayal at Krondor Pack
 * Beyond Divinity
 * Beyond Good and Evil™
+* Bioforge
 * Blackwell Bundle
 * Blood (One Unit Whole Blood)
 * BloodRayne
@@ -27,6 +28,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Broken Sword 3: The Sleeping Dragon
 * Broken Sword 4: The Angel of Death ( Secrets of the Ark )
 * Broken Sword: Director's Cut + The Original Game
+* Cannon Fodder
 * Carmageddon Max Pack
 * Chessmaster® 9000
 * Commandos 2+3
@@ -49,6 +51,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Dragonsphere
 * Dream Pinball 3D
 * Dreamfall: The Longest Journey
+* Duke Nukem 1+2
 * Duke Nukem 3D: Atomic Edition
 * Duke Nukem: Manhattan Project
 * Dungeon Keeper™ 2
@@ -107,6 +110,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Lure of the Temptress
 * Master of Magic
 * Master of Orion 1+2
+* Medal of Honor: Allied Assault War Chest
 * Might and Magic® 6-pack: Limited Edition
 * Might and Magic® 7: For Blood and Honor™
 * Might and Magic® 8: Day of the Destroyer™
@@ -132,6 +136,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Prince of Persia®: The Sands of Time
 * Pro Pinball Big Race USA
 * Psychonauts
+* Puddle
 * Quest for Glory 1-5
 * Realms of Arkania 1+2
 * Realms of Arkania 3
@@ -161,10 +166,12 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Simon the Sorcerer
 * Simon the Sorcerer 2
 * Soulbringer
+* Space Colony HD
 * Space Quest 4+5+6
 * Space Rangers 2: Reboot
 * Spellforce Platinum
 * Starflight™ 1+2
+* Startopia
 * Star Wolves
 * Still Life
 * Stonekeep
@@ -200,6 +207,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Unreal 2: The Awakening SE
 * Unreal Gold
 * Unreal Tournament 2004 ECE
+* Urban Chaos
 * Uru: Complete Chronicles
 * Wallace & Gromit's Grand Adventures
 * Warlords Battlecry 3
