@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-02-25 23-27)
-# Last revision : (2012-10-29 02-41)
-# Wine version used : 1.4
+# Last revision : (2012-12-14 03-14)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="riven_the_sequel_to_myst"
 PREFIX="Riven_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Riven: The sequel to Myst"
 SHORTCUT_NAME="Riven: The sequel to Myst"
@@ -45,8 +45,7 @@ POL_SetupWindow_VMS "2" # "640x480 16bit"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-# Icon from http://www.iconarchive.com/show/mega-games-pack-30-icons-by-3xhumed/Myst-Riven-1-icon.html
-POL_Shortcut "Riven.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Riven.exe" "$SHORTCUT_NAME" "" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Riven/manual.pdf"
 
 POL_SetupWindow_Close
