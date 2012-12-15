@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-10 10-53)
-# Last revision : (2012-12-10 12-00)
+# Last revision : (2012-12-15 11-28)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.4-dos_support_0.6"
 TITLE="GOG.com - Darklands"
 SHORTCUT_NAME="Darklands"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
@@ -34,11 +34,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-# Game expects itself in C:\DARKLAND
-mv "$WINEPREFIX/drive_c/GOG Games/Darklands/DARKLAND" "$WINEPREFIX/drive_c/"
-
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
-manual_mount=true
 dosbox_memsize=16
 cpu_core=auto
 cpu_cputype=auto
@@ -55,28 +51,17 @@ sblaster_sbmixer=true
 sblaster_oplmode=auto
 sblaster_oplemu=default
 sblaster_oplrate=44100
+gus_gus=false
 render_aspect=true
 _EOFCFG_
-#[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
-if [ "$POL_OS" = "Linux" ]; then
-	# use pmidi -l or aconnect -o list to check your (emulated) midi device
-	# 128:0 is just default software emulation port (usually Timidity)
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	render_scaler=hq2x
-	midi_mididevice=alsa
-	midi_midiconfig=128:0
-	_EOFCFG_
-fi
-if [ "$POL_OS" = "Mac" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	midi_mididevice=coreaudio
-	_EOFCFG_
-fi
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
-@ECHO OFF
-mount D "$WINEPREFIX/drive_c/GOG Games/Darkland/GAME.GOG"
-_EOFBAT_
+# SoundBlaster-only configuration, see README.TXT
+cd "$WINEPREFIX/drive_c/GOG Games/Darklands/DARKLAND" || POL_Debug_Fatal "Could not find game directory"
+cp PSOUND.DC PSOUND.DLC
+cp PSOUND.DB PSOUND.DLB
+cp ASOUND.DC ASOUND.DLC
+cp ASOUND.DB ASOUND.DLB
 
 POL_Shortcut "DARKLAND.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Darklands/manual.pdf"
