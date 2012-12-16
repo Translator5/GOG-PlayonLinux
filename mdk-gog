@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-16 21-06)
-# Last revision : (2012-12-16 23-30)
+# Last revision : (2012-12-17 00-55
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -23,7 +23,7 @@ SHORTCUT_NAME="MDK"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1514
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Shiny Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
