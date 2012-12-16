@@ -82,6 +82,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Gothic 3
 * Ground Control 2: Operation Exodus SE
 * Guilty Gear X2
+* Heroes of Might and Magic® 3: Complete Edition
 * Hitman: Codename 47
 * Hitman 2: Silent Assassin
 * Icewind Dale 2 Complete
@@ -90,6 +91,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Incoming + Incoming Forces
 * Incredible Machine Mega Pack, The
 * Interstate '76 Arsenal, The
+* Ishar Compilation
 * Iron Storm
 * Jack Orlando: A Cinematic Adventure (DC)
 * Jagged Alliance 2
@@ -157,6 +159,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Sam & Max: The Devil’s Playhouse
 * Sanitarium
 * Screamer
+* Screamer 2
 * Septerra Core: Legacy of the Creator
 * Shadowgrounds
 * Sherlock Holmes: Secret of the Silver Earring
@@ -165,6 +168,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * SimCity 2000™ Special Edition
 * Simon the Sorcerer
 * Simon the Sorcerer 2
+* Snapshot
 * Soulbringer
 * Space Colony HD
 * Space Quest 4+5+6
