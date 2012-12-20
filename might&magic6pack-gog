@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-12-20 23-09)
+# Last revision : (2012-12-20 23-44)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -39,6 +39,9 @@ POL_Call POL_GoG_setup "$GOGID" "1f451df6a6c891234dcb79e597f6755a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# For Might&Magic 6
+POL_Call POL_Install_vcrun2008
 
 POL_Call POL_GoG_install
 
@@ -92,11 +95,11 @@ _EOFCFG_
 # Using SBPro 0x220 7 1 fixes lockups in WoX and SoX
 # http://www.gog.com/forum/might_and_magic_series/world_of_xeen_crashes_when_i_sign_in_in_a_tavern
 POL_unbase64 <<_EOFCFG_ > "$POL_USER_ROOT/tmp/XEEN.CFG"
-BwAgAgMAIAIHAAAAAAAAAAAAAQABAAAAAQAAAA==
+BgAgAgIAiAMHAAAAAAAAAAAAAQAAAAAAAQABAA==
 _EOFCFG_
 if [ -s "$POL_USER_ROOT/tmp/XEEN.CFG" ]; then
-	cp -b "$POL_USER_ROOT/tmp/XEEN.CFG" "$MIGHTANDMAGIC45/XEEN.CFG"
-	cp -b "$POL_USER_ROOT/tmp/XEEN.CFG" "$MIGHTANDMAGIC5A/XEEN.CFG"
+	cp "$POL_USER_ROOT/tmp/XEEN.CFG" "$MIGHTANDMAGIC45/XEEN.CFG"
+	cp "$POL_USER_ROOT/tmp/XEEN.CFG" "$MIGHTANDMAGIC5A/XEEN.CFG"
 fi
 
 cat <<_EOFBAT_ > "$MIGHTANDMAGIC1/MM1.BAT"
