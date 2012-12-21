@@ -1,0 +1,53 @@
+#!/bin/bash
+# Date : (2012-12-21 16-46)
+# Last revision : (2012-12-21 18-02)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="pharaoh_cleopatra"
+PREFIX="PharaohCleopatra_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Pharaoh and Cleopatra"
+SHORTCUT_NAME="Pharaoh Gold"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Impression Games / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "4ec5d555409a2bffd61ba438bd741186"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "1"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Pharaoh.exe" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Pharaoh/Pharaoh - manual.pdf"
+# C:\Program Files\GOG.com\Pharaoh\Cleopatra - manual.pdf
+# C:\Program Files\GOG.com\Pharaoh\Pharaoh - reference card.pdf
+# C:\Program Files\GOG.com\Pharaoh\Pharaoh - Mission Editor Guide.pdf
+
+POL_SetupWindow_Close
+
+exit
