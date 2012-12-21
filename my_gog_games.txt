@@ -1,6 +1,7 @@
 Authoritative notes will be stored in Github Wiki,
 https://github.com/petchema/playonlinux/wiki/My-GoG-list
 
+* 1nsane
 * Advent Rising
 * Age of Wonders
 * Age of Wonders 2: The Wizard's Throne
@@ -90,6 +91,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * In Cold Blood
 * Incoming + Incoming Forces
 * Incredible Machine Mega Pack, The
+* Incredipede
 * Interstate '76 Arsenal, The
 * Ishar Compilation
 * Iron Storm
@@ -127,6 +129,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Nox™
 * Oddworld: Abe's Exoddus
 * Oddworld: Abe's Oddysee
+* Original War
 * Outcast
 * Painkiller Black Edition
 * Perimeter
@@ -174,6 +177,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * Space Quest 4+5+6
 * Space Rangers 2: Reboot
 * Spellforce Platinum
+* Spycraft: The Great Game
 * Starflight™ 1+2
 * Startopia
 * Star Wolves
