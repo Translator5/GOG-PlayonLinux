@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-29 22-49)
-# Last revision : (2012-12-30 01-26)
+# Last revision : (2012-12-30 15-04)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,7 +25,7 @@ SHORTCUT_NAME5="Sam and Max S2E5: What's New, Beelzebub"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1523
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
