@@ -1,0 +1,57 @@
+#!/bin/bash
+# Date : (2012-12-29 19-40)
+# Last revision : (2012-12-30 01-55)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="warlords_battlecry_3"
+PREFIX="WarlordsBattlecry3_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Warlords Battlecry 3"
+SHORTCUT_NAME="Warlords Battlecry 3"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Infinite Interactive / Enlight Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "e2b34391c7fcd36e060fe190a6c2e2cf"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "16"
+
+# Can scroll by moving mouse to screen borders
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+
+# Prevent minimized windows
+Set_Managed "Off"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Battlecry III.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Warlords Battlecry 3/Manual.pdf"
+# C:\Program Files\GOG.com\Warlords Battlecry 3\Readme.txt
+
+POL_SetupWindow_Close
+
+exit
