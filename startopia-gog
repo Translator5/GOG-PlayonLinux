@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-03 20-04)
-# Last revision : (2013-01-03 23-10)
+# Last revision : (2013-01-05 00-39)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,7 +25,7 @@ SHORTCUT_NAME="Startopia"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1527
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Mucky Foot Productions / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
