@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-05 12-53)
-# Last revision : (2013-01-05 13-38)
+# Last revision : (2013-01-05 14-05)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,7 +21,7 @@ SHORTCUT_NAME="Puddle"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1528
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Neko Entertainment" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
