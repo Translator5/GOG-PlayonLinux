@@ -1,9 +1,10 @@
 #!/bin/bash
 # Date : (2012-17-02 21-00)
-# Last revision : (2012-17-02 21:00)
-# Wine version used : 1.3.27-rawinput2
+# Last revision : (2013-01-05 16:44)
+# Wine version used : 1.5.21
 # Distribution used to test : Debian GNU/Linux Testing
 # Author : Vladimír "Thang" Kincl
+#    updated : petch
 # Script licence : GNU GPLv3
 # Program licence : Proprietary
 # Depend : None
@@ -13,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 
 TITLE="OnLive"
 PREFIX="OnLive"
-WORKING_WINE_VERSION="1.3.27-onlive"
+WORKING_WINE_VERSION="1.5.21"
 #GAME_VMS="1024"
 
 # Starting the script
