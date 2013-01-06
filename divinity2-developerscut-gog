@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-06 16-20)
-# Last revision : (2013-01-06 18-15)
+# Last revision : (2013-01-06 19-15)
 # Wine version used : 1.5.21
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,7 +52,7 @@ POL_Wine_Direct3D "UseGLSL" "disabled"
 POL_Wine_reboot
 
 POL_Shortcut "Divinity2.exe" "$SHORTCUT_NAME Developer's Cut" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divinity 2 Developers Cut/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME Developer's Cut" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divinity 2 Developers Cut/manual.pdf"
 # C:\Program Files\GOG.com\Divinity 2 Developers Cut\readme.txt
 
 POL_Shortcut "Divinity2-debug.exe" "$SHORTCUT_NAME [Developer Mode]" "$SHORTCUT_NAME.png" ""
