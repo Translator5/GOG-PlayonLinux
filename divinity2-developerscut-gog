@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-06 16-20)
-# Last revision : (2013-01-06 20-46)
+# Last revision : (2013-01-06 21-28)
 # Wine version used : 1.5.21
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,9 +44,6 @@ POL_Call POL_GoG_install
 Set_OS winxp
 
 POL_SetupWindow_VMS "256"
-
-# Performance tweak
-POL_Wine_Direct3D "UseGLSL" "disabled"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
