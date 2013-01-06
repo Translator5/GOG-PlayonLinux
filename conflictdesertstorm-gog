@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-05 22-55)
-# Last revision : (2013-01-06 11-48)
+# Last revision : (2013-01-06 12-22)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -31,6 +31,9 @@ POL_Call POL_GoG_setup "$GOGID" "b84e9b930a5b3cc733506297d7fec087"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
+# Didn't manage to get it working, but prevents game crash on exit
+POL_Call POL_Install_directplay
+
 POL_Call POL_GoG_install
 
 
@@ -39,14 +42,10 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "64"
 
-# Game often crashes harmlessly of exit :/
-POL_Call POL_Install_DisableCrashDialog
-
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "DesertStorm.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Desert Storm/manual.pdf"
 
 POL_SetupWindow_Close
