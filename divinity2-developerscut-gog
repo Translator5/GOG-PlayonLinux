@@ -1,0 +1,75 @@
+#!/bin/bash
+# Date : (2013-01-06 16-20)
+# Last revision : (2013-01-06 16-35)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="divinity_2_developers_cut"
+PREFIX="Divinity2_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Divinity 2 Developer's Cut"
+SHORTCUT_NAME="Divinity 2"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "350cfe5309c140b8215dc9535b892f74" "74e9288ae4b5f82eefeefdbb820227ac" "e8e7f87e05006ece3ff8a293d8945fe5" "6c5e50b5d27119a3bb36c113a5233c89" "88ccf789ec9d60ca65bd6147f56ec49f"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_Install_dxfullsetup
+POL_Call POL_Install_devenum
+POL_Call POL_Install_quartz
+POL_Call POL_Install_wmp9
+POL_Call POL_Install_wmpcodecs
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "256"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Divinity2.exe" "$SHORTCUT_NAME Developer's Cut" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divinity 2 Developers Cut/manual.pdf"
+# C:\Program Files\GOG.com\Divinity 2 Developers Cut\readme.txt
+
+POL_Shortcut "Divinity2-debug.exe" "$SHORTCUT_NAME [Developer Mode]" "$SHORTCUT_NAME.png" ""
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/windows/system32/" || exit 1
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine PhysX.cpl
+exit
+_EOF_
+
+exit
