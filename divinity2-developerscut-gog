@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-06 16-20)
-# Last revision : (2013-01-06 19-15)
+# Last revision : (2013-01-06 19-43)
 # Wine version used : 1.5.21
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -59,7 +59,7 @@ POL_Shortcut "Divinity2-debug.exe" "$SHORTCUT_NAME [Developer Mode]" "$SHORTCUT_
 
 POL_SetupWindow_Close
 
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME Developer's Cut"
 #!/bin/bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
