@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 21:00)
-# Last revision : (2013-01-07 15:10)
+# Last revision : (2013-01-07 15:11)
 # Wine version used : 1.4
 # Distribution used to test : Mint 12 x64
 # Author : GNU_Raziel
@@ -45,7 +45,7 @@ POL_Call POL_Install_wininet # Fix EA Connexion's issue 1
 
 # Installing Origin
 cd "$POL_USER_ROOT/tmp/"
-POL_Wine start /unix "OriginSetup.exe"
+POL_Wine "OriginSetup.exe"
 POL_Wine_WaitExit "$TITLE"
 
 # Asking about memory size of graphic card
