@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 21:00)
-# Last revision : (2013-01-07 15:12)
+# Last revision : (2013-01-07 15:26)
 # Wine version used : 1.4
 # Distribution used to test : Mint 12 x64
 # Author : GNU_Raziel
@@ -27,16 +27,16 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "$EDITOR" "$GAME_URL" "$AUTHOR" "$PREFIX"
 
+# Downloading latest Origin
+cd "$POL_USER_ROOT/tmp/"
+POL_SetupWindow_download "$(eval_gettext 'Downloading $TITLE, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
+
 # Setting prefix path
 POL_Wine_SelectPrefix "$PREFIX"
 
 # Downloading wine if necessary and creating prefix
 POL_System_SetArch "x86"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
-
-# Downloading latest Origin
-cd "$POL_USER_ROOT/tmp/"
-POL_SetupWindow_download "$(eval_gettext 'Downloading $TITLE, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
 
 # Installing mandatory dependencies
 POL_Wine_InstallFonts
@@ -46,7 +46,7 @@ POL_Call POL_Install_vcrun2010
 
 # Installing Origin
 cd "$POL_USER_ROOT/tmp/"
-POL_Wine "OriginSetup.exe"
+POL_Wine start /unix "OriginSetup.exe"
 POL_Wine_WaitExit "$TITLE"
 
 # Asking about memory size of graphic card
