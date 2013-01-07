@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 21:00)
-# Last revision : (2013-01-07 15:11)
+# Last revision : (2013-01-07 15:12)
 # Wine version used : 1.4
 # Distribution used to test : Mint 12 x64
 # Author : GNU_Raziel
@@ -42,6 +42,7 @@ POL_SetupWindow_download "$(eval_gettext 'Downloading $TITLE, please wait...')" 
 POL_Wine_InstallFonts
 POL_Function_FontsSmoothRGB
 POL_Call POL_Install_wininet # Fix EA Connexion's issue 1
+POL_Call POL_Install_vcrun2010
 
 # Installing Origin
 cd "$POL_USER_ROOT/tmp/"
