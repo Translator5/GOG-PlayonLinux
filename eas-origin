@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 21:00)
-# Last revision : (2012-05-12 21:00)
+# Last revision : (2013-01-07 15:10)
 # Wine version used : 1.4
 # Distribution used to test : Mint 12 x64
 # Author : GNU_Raziel
@@ -35,10 +35,8 @@ POL_System_SetArch "x86"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 # Downloading latest Origin
-cd "$POL_USER_ROOT/ressources/"
-if [ ! -e "$POL_USER_ROOT/ressources/OriginSetup.exe" ]; then
-	POL_SetupWindow_download "$(eval_gettext 'Downloading $TITLE, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
-fi
+cd "$POL_USER_ROOT/tmp/"
+POL_SetupWindow_download "$(eval_gettext 'Downloading $TITLE, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
 
 # Installing mandatory dependencies
 POL_Wine_InstallFonts
@@ -46,7 +44,7 @@ POL_Function_FontsSmoothRGB
 POL_Call POL_Install_wininet # Fix EA Connexion's issue 1
 
 # Installing Origin
-cd "$POL_USER_ROOT/ressources/"
+cd "$POL_USER_ROOT/tmp/"
 POL_Wine start /unix "OriginSetup.exe"
 POL_Wine_WaitExit "$TITLE"
 
