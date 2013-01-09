@@ -1,0 +1,39 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2010-02-12 21-00)
+# Last revision : (2012-03-25 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+# RealName: Steam
+
+if [ "$POL_LANG" == "fr" ]; then
+STEAM_EXEC="SteamInstall_French.msi"
+elif [ "$POL_LANG" == "de" ]; then
+STEAM_EXEC="SteamInstall_German.msi"
+elif [ "$POL_LANG" == "es" ]; then
+STEAM_EXEC="SteamInstall_Spanish.msi"
+else
+STEAM_EXEC="SteamInstall.msi"
+fi
+
+# Setting default path for installers
+POL_LoadVar_PROGRAMFILES
+
+# Downloading latest Steam
+cd "$POL_USER_ROOT/ressources/"
+if [ ! -e "$POL_USER_ROOT/ressources/$STEAM_EXEC" ]; then
+	POL_SetupWindow_download "$(eval_gettext 'Please wait while Steam is downloaded...')" "$TITLE" "http://cdn.steampowered.com/download/$STEAM_EXEC"
+fi
+
+# Installing mandatory dependencies 
+POL_Wine_InstallFonts
+POL_Call POL_Function_FontsSmoothRGB
+
+# Installing Steam
+cd "$POL_USER_ROOT/ressources/"
+POL_Wine msiexec /i "$STEAM_EXEC" /q
+POL_Wine_WaitExit "Steam"
+
+# Fix for Steam (cause wine crash for many games if enabled) - Empty value = disabled
+POL_Wine_OverrideDLL "" "gameoverlayrenderer"
+POL_Wine_OverrideDLL "" "dwrite.dll"
