@@ -60,7 +60,7 @@ POL_Wine_SelectPrefix "$PREFIX"
 POL_System_SetArch "x86"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Wine_EnableOSXNativeDock # A new feature for PlayOnMac. Firefox is the first test  
+POL_Wine_EnableOSXNativeDock # A new feature for PlayOnMac. Firefox is the first test
 
 POL_System_TmpCreate "$PREFIX"
 
@@ -211,7 +211,7 @@ fi
 #    POL_Wine msiexec /i "$PLUGIN_FILE_SHOCKWAVE" /q
 #fi
 
-# Desactivation du plugin-container (qui fait planter firefox sur les pages ou flash/shockwave est utilise) 
+# Desactivation du plugin-container (qui fait planter firefox sur les pages ou flash/shockwave est utilise)
 echo "pref(\"dom.ipc.plugins.enabled\", false);" > "$WINEPREFIX/drive_c/$PROGRAMFILES/Mozilla Firefox/defaults/pref/firefox.js"
 
 POL_System_TmpDelete
