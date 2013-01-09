@@ -1,5 +1,5 @@
 #!/bin/bash
-   
+
 # CHANGELOG
 # [SuperPlumus] (2011-11-27 08:24)
 #   Correction links + md5 for Flash Player and Shockwave Player (bug 567)
@@ -13,16 +13,16 @@
 #   Add support $POL_SELECTED_FILE
 # [Quentin PÂRIS] (2012-05-12 23-05)
 #   Improving theme
-   
+
 # Date : (2011-06-13 17-29)
 # Last revision : (2012-04-11 09-32)
 # Wine version used : 1.4
 # Distribution used to test : Ubuntu 10.04
 # Author : SuperPlumus
-    
+
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
-    
+
 TITLE="Mozilla Firefox"
 PREFIX="MozillaFirefox"
 WORKING_WINE_VERSION="1.4"
@@ -30,15 +30,15 @@ WORKING_WINE_VERSION="1.4"
 PLUGIN_NAME_FLASH="Flash Player"
 PLUGIN_NAME_FLASH_AX="Flash Player Ax"
 PLUGIN_NAME_SHOCKWAVE="Shockwave Player"
-   
+
 PLUGIN_FILE_FLASH="install_flash_player_32bit.exe"
 PLUGIN_FILE_FLASH_AX="install_flash_player_ax_32bit.exe"
 PLUGIN_FILE_SHOCKWAVE="sw_lic_full_installer.msi"
-   
+
 PLUGIN_URL_FLASH="http://fpdownload.macromedia.com/get/flashplayer/current/$PLUGIN_FILE_FLASH"
 PLUGIN_URL_FLASH_AX="http://fpdownload.macromedia.com/get/flashplayer/current/$PLUGIN_FILE_FLASH_AX"
 PLUGIN_URL_SHOCKWAVE="http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/$PLUGIN_FILE_SHOCKWAVE"
-    
+
 # Fonction pour simplifier l'utilisation de POL_SetupWindow_checkbox_list
 is_checked ()
 {
@@ -48,14 +48,14 @@ is_checked ()
         return 1
     fi
 }
-    
+
 POL_GetSetupImages "$SITE/setups/firefox/top.jpg" "$SITE/setups/firefox/left.jpg" "$TITLE"
 POL_SetupWindow_Init
 POL_Debug_Init
-   
+
 POL_SetupWindow_presentation "$TITLE" "Mozilla" "http://www.mozilla.com" "SuperPlumus" "$PREFIX"
 
-  
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_System_SetArch "x86"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -73,7 +73,7 @@ then
 
 # Language version
 POL_SetupWindow_menu "$(eval_gettext 'Which language version would you like to install?')" "$TITLE" "Afrikaans~Albanian~Arabic~Asturian~Basque~Belarusian~Bengali (Bangladesh)~Bengali (India)~Breton~Bulgarian~Catalan~Chinese (Simplified)~Chinese (Traditional)~Croatian~Czech~Danish~Dutch~English (British)~English (South African)~English (US)~Esperanto~Estonian~Finnish~French~Frisian~Gaelic (Scotland)~Galician~German~Greek~Gujarati~Hebrew~Hindi (India)~Hungarian~Indonesian~Icelandic~Irish (Ireland)~Italian~Japanese~Kannada~Korean~Latvian~Lithuanian~Macedonian~Malayalam~Marathi~Norwegian (Bokmål)~Norwegian (Nynorsk)~Persian~Polish~Portuguese (Brazilian)~Portuguese (Portugal)~Punjabi~Romanian~Romansh~Russian~Sinhala~Slovak~Slovenian~Spanish (Argentina)~Spanish (Chile)~Spanish (Mexico)~Spanish (Spain)~Swedish~Telugu~Thai~Turkish~Ukrainian~Vietnamese~Welsh" "~"
-   
+
 case "$APP_ANSWER" in
     "Afrikaans") FIREFOX_LANG="af" ;;
     "Albanian") FIREFOX_LANG="sq" ;;
@@ -146,29 +146,29 @@ case "$APP_ANSWER" in
     "Welsh") FIREFOX_LANG="cy" ;;
     *) POL_Debug_Fatal "$APP_ANSWER : Incorrect value, bug." ;;
 esac
-   
+
 # Detection de la derniere version
 cd "$POL_System_TmpDir"
 wget "http://mirror3.mirrors.tds.net/pub/mozilla.org/firefox/releases/latest/win32/$FIREFOX_LANG/" --output-document="FirefoxIndex.html"
 FIREFOX_FILE="$(sed -n "s#.*Firefox%20Setup%20[0-9.]*.exe\">\(Firefox Setup [0-9.]*.exe\).*#\1#p" FirefoxIndex.html)"
 [ "$FIREFOX_FILE" = "" ] && POL_Debug_Fatal "Firefox version : detection failure. bug"
-   
+
 # Pas de MD5, car le script detecte la derniere version automatiquement
 POL_Download "http://mirror3.mirrors.tds.net/pub/mozilla.org/firefox/releases/latest/win32/$FIREFOX_LANG/$FIREFOX_FILE"
 POL_Wine_WaitBefore "$TITLE"
 POL_Wine "$FIREFOX_FILE"
 POL_Wine_WaitExit "$TITLE"
-   
+
 fi
 if [ "$INSTALL_METHOD" = "LOCAL" ]
 then
-   
+
 cd "$HOME"
 POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run')" "$TITLE"
 POL_Wine_WaitBefore "$TITLE"
 POL_Wine "$APP_ANSWER"
 POL_Wine_WaitExit "$TITLE"
-   
+
 fi
 if [ -n "$POL_SELECTED_FILE" ]
 then
@@ -176,50 +176,50 @@ then
 POL_Wine_WaitBefore "$TITLE"
 POL_Wine "$POL_SELECTED_FILE"
 POL_Wine_WaitExit "$TITLE"
-   
+
 fi
 
 POL_SetupWindow_checkbox_list "$(eval_gettext 'Check which components do you want to install additionally:')" "$TITLE" "$PLUGIN_NAME_FLASH~$PLUGIN_NAME_SHOCKWAVE" "~"
 CHECKS="$APP_ANSWER"
-   
+
 cd "$POL_System_TmpDir"
 # Flash Player
 if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH" ]; then
     POL_Download "$PLUGIN_URL_FLASH" ""
 fi
-   
+
 # Flash Player Ax
 if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH_AX" ]; then
     POL_Download "$PLUGIN_URL_FLASH_AX" ""
 fi
-   
+
 # Shockwave Player
 if is_checked "$PLUGIN_NAME_SHOCKWAVE" && [ ! -e "$PLUGIN_FILE_SHOCKWAVE" ]; then
     POL_Download "$PLUGIN_URL_SHOCKWAVE" ""
 fi
-   
+
 # Flash Player
 if is_checked "$PLUGIN_NAME_FLASH"; then
     POL_Wine_WaitBefore "$PLUGIN_NAME_FLASH"
     POL_Wine "$PLUGIN_FILE_FLASH_AX" /install
     POL_Wine "$PLUGIN_FILE_FLASH" /install
 fi
-   
+
 # Shockwave Player
 if is_checked "$PLUGIN_NAME_SHOCKWAVE"; then
     POL_Wine_WaitBefore "$PLUGIN_NAME_SHOCKWAVE"
     POL_Wine msiexec /i "$PLUGIN_FILE_SHOCKWAVE" /q
 fi
-   
+
 # Desactivation du plugin-container (qui fait planter firefox sur les pages ou flash/shockwave est utilise) 
 echo "pref(\"dom.ipc.plugins.enabled\", false);" > "$WINEPREFIX/drive_c/$PROGRAMFILES/Mozilla Firefox/defaults/pref/firefox.js"
-   
+
 POL_System_TmpDelete
- 
+
 POL_Shortcut "firefox.exe" "$TITLE"
-    
+
 POL_SetupWindow_message "$(eval_gettext '$TITLE has been successfully installed.')" "$TITLE"
-   
+
 POL_SetupWindow_Close
-   
+
 exit
