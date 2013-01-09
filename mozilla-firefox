@@ -179,37 +179,37 @@ POL_Wine_WaitExit "$TITLE"
 
 fi
 
-POL_SetupWindow_checkbox_list "$(eval_gettext 'Check which components do you want to install additionally:')" "$TITLE" "$PLUGIN_NAME_FLASH~$PLUGIN_NAME_SHOCKWAVE" "~"
-CHECKS="$APP_ANSWER"
-
-cd "$POL_System_TmpDir"
-# Flash Player
-if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH" ]; then
-    POL_Download "$PLUGIN_URL_FLASH" ""
-fi
-
-# Flash Player Ax
-if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH_AX" ]; then
-    POL_Download "$PLUGIN_URL_FLASH_AX" ""
-fi
-
-# Shockwave Player
-if is_checked "$PLUGIN_NAME_SHOCKWAVE" && [ ! -e "$PLUGIN_FILE_SHOCKWAVE" ]; then
-    POL_Download "$PLUGIN_URL_SHOCKWAVE" ""
-fi
-
-# Flash Player
-if is_checked "$PLUGIN_NAME_FLASH"; then
-    POL_Wine_WaitBefore "$PLUGIN_NAME_FLASH"
-    POL_Wine "$PLUGIN_FILE_FLASH_AX" /install
-    POL_Wine "$PLUGIN_FILE_FLASH" /install
-fi
-
-# Shockwave Player
-if is_checked "$PLUGIN_NAME_SHOCKWAVE"; then
-    POL_Wine_WaitBefore "$PLUGIN_NAME_SHOCKWAVE"
-    POL_Wine msiexec /i "$PLUGIN_FILE_SHOCKWAVE" /q
-fi
+#POL_SetupWindow_checkbox_list "$(eval_gettext 'Check which components do you want to install additionally:')" "$TITLE" "$PLUGIN_NAME_FLASH~$PLUGIN_NAME_SHOCKWAVE" "~"
+#CHECKS="$APP_ANSWER"
+#
+#cd "$POL_System_TmpDir"
+## Flash Player
+#if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH" ]; then
+#    POL_Download "$PLUGIN_URL_FLASH" ""
+#fi
+#
+## Flash Player Ax
+#if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH_AX" ]; then
+#    POL_Download "$PLUGIN_URL_FLASH_AX" ""
+#fi
+#
+## Shockwave Player
+#if is_checked "$PLUGIN_NAME_SHOCKWAVE" && [ ! -e "$PLUGIN_FILE_SHOCKWAVE" ]; then
+#    POL_Download "$PLUGIN_URL_SHOCKWAVE" ""
+#fi
+#
+## Flash Player
+#if is_checked "$PLUGIN_NAME_FLASH"; then
+#    POL_Wine_WaitBefore "$PLUGIN_NAME_FLASH"
+#    POL_Wine "$PLUGIN_FILE_FLASH_AX" /install
+#    POL_Wine "$PLUGIN_FILE_FLASH" /install
+#fi
+#
+## Shockwave Player
+#if is_checked "$PLUGIN_NAME_SHOCKWAVE"; then
+#    POL_Wine_WaitBefore "$PLUGIN_NAME_SHOCKWAVE"
+#    POL_Wine msiexec /i "$PLUGIN_FILE_SHOCKWAVE" /q
+#fi
 
 # Desactivation du plugin-container (qui fait planter firefox sur les pages ou flash/shockwave est utilise) 
 echo "pref(\"dom.ipc.plugins.enabled\", false);" > "$WINEPREFIX/drive_c/$PROGRAMFILES/Mozilla Firefox/defaults/pref/firefox.js"
