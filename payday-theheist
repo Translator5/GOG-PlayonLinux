@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-02 21:00)
-# Last revision : N/A
-# Wine version used : 1.3.37
+# Last revision : (2013-01-11 00:00)
+# Wine version used : 1.5.20
 # Distribution used to test : Linux Mint 12 x64
 # Author : GNU_Raziel
 # Licence : Retail
@@ -15,7 +15,7 @@ PREFIX="Payday_The_Heist"
 EDITOR="Overkill"
 GAME_URL="http://www.overkillsoftware.com/payday/"
 AUTHOR="GNU_Raziel"
-WORKING_WINE_VERSION="1.3.37"
+WORKING_WINE_VERSION="1.5.20"
 GAME_VMS="256"
 
 # Starting the script
