@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2010-02-12 21-00)
-# Last revision : (2012-03-25 21:00)
+# Last revision : (2013-01-08 19:48)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 # RealName: Steam
@@ -36,4 +36,6 @@ POL_Wine_WaitExit "Steam"
 
 # Fix for Steam (cause wine crash for many games if enabled) - Empty value = disabled
 POL_Wine_OverrideDLL "" "gameoverlayrenderer"
-POL_Wine_OverrideDLL "" "dwrite.dll"
+
+# Bug #31374 http://bugs.winehq.org/show_bug.cgi?id=31374
+POL_Wine_OverrideDLL "" "dwrite"  
