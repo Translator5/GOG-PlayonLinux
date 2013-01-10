@@ -1,0 +1,79 @@
+#!/bin/bash
+# Date : (2012-03-02 21:00)
+# Last revision : N/A
+# Wine version used : 1.3.37
+# Distribution used to test : Linux Mint 12 x64
+# Author : GNU_Raziel
+# Licence : Retail
+# Only For : http://www.playonlinux.com
+
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TITLE="Payday : The Heist"
+PREFIX="Payday_The_Heist"
+EDITOR="Overkill"
+GAME_URL="http://www.overkillsoftware.com/payday/"
+AUTHOR="GNU_Raziel"
+WORKING_WINE_VERSION="1.3.37"
+GAME_VMS="256"
+
+# Starting the script
+rm "$POL_USER_ROOT/tmp/*.jpg"
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/PaydayTH/top.jpg" "http://files.playonlinux.com/resources/setups/PaydayTH/left.jpg" "$TITLE"
+POL_SetupWindow_Init
+
+# Starting debugging API
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "$EDITOR" "$GAME_URL" "$AUTHOR" "$PREFIX"
+
+# Setting prefix path
+POL_Wine_SelectPrefix "$PREFIX"
+
+# Downloading wine if necessary and creating prefix
+POL_System_SetArch "x86" # to avoid some crashes
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# Installing mandatory dependencies
+POL_Call POL_Install_steam
+POL_Call POL_Install_dxfullsetup
+POL_Call POL_Install_physx
+
+# Mandatory pre-install fix for steam
+POL_Call POL_Install_steam_flags "24240"
+
+# Begin game installation
+POL_SetupWindow_message "$(eval_gettext 'When $TITLE download by Steam is finished,\nDo NOT click on Play.\n\nClose COMPLETELY the Steam interface, \nso that the installation script can continue.')" "$TITLE"
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
+POL_Wine start /unix "steam.exe" steam://install/24240
+POL_Wine_WaitExit "$TITLE"
+
+# Asking about memory size of graphic card
+POL_SetupWindow_VMS $GAME_VMS
+
+# Set Graphic Card information keys for wine
+POL_Wine_SetVideoDriver
+
+## Fix for this game
+# Sound problem fix - pulseaudio related
+[ "$POL_OS" = "Linux" ] && Set_SoundDriver "alsa"
+[ "$POL_OS" = "Linux" ] && Set_SoundEmulDriver "Y"
+## End Fix
+
+## Begin Common PlayOnMac Section ##
+[ "$POL_OS" = "Mac" ] && Set_Managed "Off"
+## End Section ##
+
+# Cleaning temp
+if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
+	rm -rf "$WINEPREFIX/drive_c/windows/temp/*"
+	chmod -R 777 "$POL_USER_ROOT/tmp/"
+	rm -rf "$POL_USER_ROOT/tmp/*"
+fi
+
+# Making shortcut
+POL_Shortcut "steam.exe" "$TITLE" "" "steam://rungameid/24240"
+
+POL_SetupWindow_Close
+exit 0
