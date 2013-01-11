@@ -15,7 +15,7 @@
 #   Improving theme
 
 # Date : (2011-06-13 17-29)
-# Last revision : (2012-04-11 09-32)
+# Last revision : (2012-04-11 15-05)
 # Wine version used : 1.4
 # Distribution used to test : Ubuntu 10.04
 # Author : SuperPlumus
@@ -31,11 +31,9 @@ PLUGIN_NAME_FLASH="Flash Player"
 PLUGIN_NAME_FLASH_AX="Flash Player Ax"
 PLUGIN_NAME_SHOCKWAVE="Shockwave Player"
 
-PLUGIN_FILE_FLASH="install_flash_player_32bit.exe"
 PLUGIN_FILE_FLASH_AX="install_flash_player_ax_32bit.exe"
 PLUGIN_FILE_SHOCKWAVE="sw_lic_full_installer.msi"
 
-PLUGIN_URL_FLASH="http://fpdownload.macromedia.com/get/flashplayer/current/$PLUGIN_FILE_FLASH"
 PLUGIN_URL_FLASH_AX="http://fpdownload.macromedia.com/get/flashplayer/current/$PLUGIN_FILE_FLASH_AX"
 PLUGIN_URL_SHOCKWAVE="http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/$PLUGIN_FILE_SHOCKWAVE"
 
@@ -175,21 +173,16 @@ then
     POL_Wine_WaitExit "$TITLE"
 fi
 
-#AVAILABLE_PLUGINS="$PLUGIN_NAME_FLASH~$PLUGIN_NAME_SHOCKWAVE"
-AVAILABLE_PLUGINS=""
+#AVAILABLE_PLUGINS="$PLUGIN_NAME_FLASH~$PLUGIN_NAME_FLASH_AX~$PLUGIN_NAME_SHOCKWAVE"
+AVAILABLE_PLUGINS="$PLUGIN_NAME_FLASH"
 
 APP_ANSWER=""
 [ -n "$AVAILABLE_PLUGINS" ] && POL_SetupWindow_checkbox_list "$(eval_gettext 'Check which components do you want to install additionally:')" "$TITLE" "$AVAILABLE_PLUGINS" "~"
 CHECKS="$APP_ANSWER"
 
 cd "$POL_System_TmpDir"
-# Flash Player
-if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH" ]; then
-    POL_Download "$PLUGIN_URL_FLASH" ""
-fi
-
 # Flash Player Ax
-if is_checked "$PLUGIN_NAME_FLASH" && [ ! -e "$PLUGIN_FILE_FLASH_AX" ]; then
+if is_checked "$PLUGIN_NAME_FLASH_AX" && [ ! -e "$PLUGIN_FILE_FLASH_AX" ]; then
     POL_Download "$PLUGIN_URL_FLASH_AX" ""
 fi
 
@@ -198,11 +191,15 @@ if is_checked "$PLUGIN_NAME_SHOCKWAVE" && [ ! -e "$PLUGIN_FILE_SHOCKWAVE" ]; the
     POL_Download "$PLUGIN_URL_SHOCKWAVE" ""
 fi
 
+# Flash Player ActiveX
+if is_checked "$PLUGIN_NAME_FLASH_AX"; then
+    POL_Wine_WaitBefore "$PLUGIN_NAME_FLASH_AX"
+    POL_Wine "$PLUGIN_FILE_FLASH_AX" /install
+fi
+
 # Flash Player
 if is_checked "$PLUGIN_NAME_FLASH"; then
-    POL_Wine_WaitBefore "$PLUGIN_NAME_FLASH"
-    POL_Wine "$PLUGIN_FILE_FLASH_AX" /install
-    POL_Wine "$PLUGIN_FILE_FLASH" /install
+    POL_Call POL_Install_flashplayer
 fi
 
 # Shockwave Player
@@ -211,7 +208,7 @@ if is_checked "$PLUGIN_NAME_SHOCKWAVE"; then
     POL_Wine msiexec /i "$PLUGIN_FILE_SHOCKWAVE" /q
 fi
 
-# Desactivation du plugin-container (qui fait planter firefox sur les pages ou flash/shockwave est utilise)
+# Disables plugin container (that makes Firefox crash on pages that already used flash/shockwave)
 echo "pref(\"dom.ipc.plugins.enabled\", false);" > "$WINEPREFIX/drive_c/$PROGRAMFILES/Mozilla Firefox/defaults/pref/firefox.js"
 
 POL_System_TmpDelete
