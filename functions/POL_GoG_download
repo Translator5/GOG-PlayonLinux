@@ -55,7 +55,7 @@ while true; do
 	buk="$($POL_WGET "http://www.gog.com/user/ajax" -O- --post-data="a=get&c=gamecard&p1=false&p2=false&auth=&gutm=$gutm" --save-cookies=$COOKIES_2 --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" |sed -n 's/^.*"buk":"\([^"]*\)".*/\1/p')"
 	buk="$(POL_Website_urlencode "$buk")"
 
-	$POL_WGET https://secure.gog.com/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$POL_LOGIN&log_password=$POL_PASSWORD&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
+	$POL_WGET https://secure.gog.com/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$(POL_Website_urlencode "$POL_LOGIN")&log_password=$(POL_Website_urlencode "$POL_PASSWORD")&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
 
 	unset POL_LOGIN POL_PASSWORD
 
