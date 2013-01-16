@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-13 14-14)
-# Last revision : (2013-01-14 09-03)
+# Last revision : (2013-01-16 01-11)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -41,6 +41,9 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "32"
 
+# Not 100% sure it helps Q3 engine
+POL_Call POL_Install_VideoDriver
+
 POL_Wine_X11Drv "GrabFullScreen" "Y"
 
 cat <<_EOFREG_ > "$POL_USER_ROOT/tmp/mohaa_disabled extenstions.reg"
@@ -52,20 +55,24 @@ _EOFREG_
 
 POL_Wine regedit "$POL_USER_ROOT/tmp/mohaa_disabled extenstions.reg"
 
+for dir in main mainta maintt; do
+  printf 'seta in_mouse -1\r\n' >> "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/$dir/newconfig.cfg"
+done
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "MOHAA.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" 'export __GL_ExtensionStringVersion=17700'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme.txt"
 
 POL_Shortcut "moh_spearhead.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME2" 'export __GL_ExtensionStringVersion=17700'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Spearhead.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Spearhead.txt"
 
 POL_Shortcut "moh_breakthrough.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME3" 'export __GL_ExtensionStringVersion=17700'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Breakthrough.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Breakthrough.txt"
 
 POL_SetupWindow_Close
 
