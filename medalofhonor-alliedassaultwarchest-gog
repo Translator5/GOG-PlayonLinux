@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-13 14-14)
-# Last revision : (2013-01-16 01-11)
+# Last revision : (2013-01-16 21-11)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -55,9 +55,10 @@ _EOFREG_
 
 POL_Wine regedit "$POL_USER_ROOT/tmp/mohaa_disabled extenstions.reg"
 
-for dir in main mainta maintt; do
-  printf 'seta in_mouse -1\r\n' >> "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/$dir/newconfig.cfg"
-done
+# Disable DirectInput mouse support
+#for dir in main mainta maintt; do
+#  printf 'seta in_mouse -1\r\n' >> "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/$dir/newconfig.cfg"
+#done
 
 # Doesn't hurt ;)
 POL_Wine_reboot
