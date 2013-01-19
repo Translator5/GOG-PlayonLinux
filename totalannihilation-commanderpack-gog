@@ -1,19 +1,23 @@
 #!/bin/bash
 # Date : (2012-12-02 15-45)
-# Last revision : (2012-12-21 10-46)
-# Wine version used : 1.4.1
+# Last revision : (2013-01-19 09-07)
+# Wine version used : 1.5.9
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# 1.4.1, 1.5.0: unimplemented function msvcp90.dll.??0?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAE@XZ, aborting
+# 1.5.7, 1.5.8: black screen
+# 1.5.9, 1.5.10, 1.5.12: ok
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="total_anihilation_commander_pack"
 PREFIX="TotalAnnihilationCP_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.5.9"
 
 TITLE="GOG.com - Total Annihilation: Commander Pack"
 SHORTCUT_NAME="Total Annihilation: Commander Pack"
