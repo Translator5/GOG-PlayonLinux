@@ -3,7 +3,7 @@
 # Last revision : (2011-20-07 21-00)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
- 
+
 if [ "$POL_LANG" == "fr" ]; then
 LNG_VC90_DL="Téléchargement de MSvc90..."
 LNG_VC90_INSTALL="Installation MSvc90..."
@@ -11,22 +11,22 @@ else
 LNG_VC90_DL="Downloading MSvc90..."
 LNG_VC90_INSTALL="Installing MSvc90..."
 fi
- 
+
 cd "$POL_USER_ROOT/ressources"
 # Downloading MSvc90
 cd "$POL_USER_ROOT/ressources/"
 if [ ! -e "$POL_USER_ROOT/ressources/Microsoft.vc90.crt.zip" ]; then
 POL_SetupWindow_download "$LNG_VC90_DL" "$TITLE" "http://files.playonlinux.com/Microsoft.vc90.crt.zip"
 fi
- 
+
 POL_SetupWindow_wait_next_signal "$LNG_VC90_INSTALL" "$TITLE"
- 
+
 cd "$WINEPREFIX/drive_c/windows/temp"
 unzip "$POL_USER_ROOT/ressources/Microsoft.vc90.crt.zip"
 cp Microsoft.vc90.crt/*.* ../system32/
 rm -rf Microsoft.vc90.crt
 
 # Overriding dll
-POL_Call POL_Function_OverrideDLL "native,builtin" "msvcr90" 
- 
+POL_Call POL_Function_OverrideDLL "native,builtin" "msvcr90"
+
 POL_SetupWindow_detect_exit
