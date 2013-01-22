@@ -1,0 +1,57 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2010-12-17 21:00)
+# Last revision : (2012-05-17 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+FORCE_MODE=$1
+
+# Downloading vcrun2010
+mkdir -p "$POL_USER_ROOT/ressources/vcrun2010"
+cd "$POL_USER_ROOT/ressources/vcrun2010"
+
+# Installing x64 version
+if [ "$POL_ARCH" == "amd64" ]; then
+	if [ ! -e "vcredist_x64.exe" ]; then
+		POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2010 sp1 x64...')" "$TITLE" "http://download.microsoft.com/download/A/8/0/A80747C3-41BD-45DF-B505-E9710D2744E0/vcredist_x64.exe"
+	fi
+fi
+
+if [ ! -e "vcredist_x86.exe" ]; then
+	POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2010 sp1 x86...')" "$TITLE" "http://download.microsoft.com/download/C/6/D/C6D0FD4E-9E53-4897-9B91-836EBA2AACD3/vcredist_x86.exe"
+fi
+
+# Check if vcrun2010 is already installed
+CHECK_VC2K10=`find $WINEPREFIX -name "mdia100.dll"`
+if [ "$CHECK_VC2K10" == "" ] || [ "$FORCE_MODE" == "--force" ]; then
+	if [ "$FORCE_MODE" == "--force" ]; then
+		POL_SetupWindow_message "$(eval_gettext 'Warning : vcrun2010 seems to be already installed.\nForcing reinstallation.')" "$TITLE"
+	fi
+
+	# Fix before install for wine 1.3.37 and older
+	POL_AdvisedVersion  4.0.16 || POL_Debug_Error "$(eval_gettext 'VCRun2010 might fail to install because your PlayOnLinux version is too old. Please update.')"
+	if VersionLower $(POL_Config_PrefixRead VERSION) 1.3.37; then
+		POL_Call POL_Install_msxml3
+		ln -s "$WINEPREFIX/drive_c" "$WINEPREFIX/harddiskvolume0"
+		rm -f "$WINEPREFIX/dosdevices/c:"
+		ln -s "$WINEPREFIX/harddiskvolume0" "$WINEPREFIX/dosdevices/c:"
+	fi
+
+	# Installing vcrun2010
+	if [ "$POL_ARCH" == "amd64" ]; then
+		rm "$WINEPREFIX/drive_c/windows/syswow64/msvcp100.dll"
+		rm "$WINEPREFIX/drive_c/windows/system32/msvcp100.dll"
+		POL_Wine start /unix "vcredist_x64.exe" /q
+		POL_Wine_WaitExit "vcrun2010 sp1 x64"
+		POL_Wine start /unix "vcredist_x86.exe" /q
+		POL_Wine_WaitExit "vcrun2010 sp1 x86"
+	else
+		rm "$WINEPREFIX/drive_c/windows/system32/msvcp100.dll"
+		POL_Wine start /unix "vcredist_x86.exe" /q
+		POL_Wine_WaitExit "vcrun2010 sp1 x86"
+	fi
+	
+	# Overriding dll
+	POL_Wine_OverrideDLL "native,builtin" "msvcr100"
+fi
