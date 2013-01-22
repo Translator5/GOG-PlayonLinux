@@ -1,0 +1,36 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2009-11-19 21-50)
+# Last revision : (2012-05-17 21:00)
+# Author : Berillions, Tinou
+# Updated by : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+# [Quentin PÂRIS] (2012-04-29 13:02)
+#   Fixing bug #820
+
+FORCE_MODE=$1
+
+# Downloading msxml3
+mkdir -p "$POL_USER_ROOT/ressources/msxml3/"
+cd "$POL_USER_ROOT/ressources/msxml3/"
+if [ ! -e "msxml3.msi" ]; then
+	POL_SetupWindow_download "$(eval_gettext 'Downloading msxml3...')" "$TITLE" "http://repository.playonlinux.com/divers/msxml3.msi"
+fi
+
+# Check if msxml3 is already installed
+CHECK_MSXML3=`find $WINEPREFIX -name "msxml3r.dll"`
+if [ "$CHECK_MSXML3" == "" ] || [ "$FORCE_MODE" == "--force" ]; then
+	# Installing msxml3
+	if [ "$POL_ARCH" == "amd64" ]; then
+		rm "$WINEPREFIX/drive_c/windows/syswow64/msxml3.dll"
+		rm "$WINEPREFIX/drive_c/windows/system32/msxml3.dll"
+	else
+		rm "$WINEPREFIX/drive_c/windows/system32/msxml3.dll"
+	fi
+	POL_Wine msiexec /i msxml3.msi /q
+	POL_Wine_WaitExit "msxml3"
+
+	# Overriding dll
+	POL_Wine_OverrideDLL "native,builtin" "msxml3"
+fi
