@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2011-17-07 21-00)
-# Last revision : (2012-03-25 21:00)
+# Last revision : (2013-01-22 21:34)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
@@ -9,16 +9,17 @@
 POL_LoadVar_PROGRAMFILES
 
 # Downloading latest Desura
-cd "$POL_USER_ROOT/ressources"
-if [ ! -e "DesuraInstaller.exe" ]; then
-	POL_SetupWindow_download "$(eval_gettext 'Please wait while Desura is downloaded...')" "$TITLE" "http://www.desura.com/DesuraInstaller.exe"
-fi
+cd "$POL_USER_ROOT/tmp"
+# Since we cannot validate the file with a hash (changes too often), do not put it into resources
+# Otherwise in case of corrupted download, the only solution for the user is to clean his cache
+# Download is not that large anyway (~1.2MB)
+POL_SetupWindow_download "$(eval_gettext 'Please wait while Desura is downloaded...')" "$TITLE" "http://www.desura.com/DesuraInstaller.exe"
 
 # Installing mandatory dependencies
 POL_Wine_InstallFonts
 POL_Call POL_Function_FontsSmoothRGB
 
 # Installing Desura
-cd "$POL_USER_ROOT/ressources"
+cd "$POL_USER_ROOT/tmp"
 POL_Wine start /unix "DesuraInstaller.exe" /q /s
 POL_Wine_WaitExit "Desura"
