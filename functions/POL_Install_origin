@@ -1,12 +1,12 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2012-03-09 21:00)
-# Last revision : N/A
+# Last revision : (2013-01-22 23:40)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
 # Checking wine arch
-if [ "$POL_ARCH" == "amd64" ]; then
+if [ "$POL_ARCH" = "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
@@ -14,10 +14,11 @@ fi
 POL_LoadVar_PROGRAMFILES
 
 # Downloading latest EA's Origin
-cd "$POL_USER_ROOT/ressources/"
-if [ ! -e "$POL_USER_ROOT/ressources/OriginSetup.exe" ]; then
-	POL_SetupWindow_download "$(eval_gettext 'Downloading Origin, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
-fi
+# Since we cannot validate the file with a hash (changes too often), do not put it into resources
+# Otherwise in case of corrupted download, the only solution for the user is to clean his cache
+# Download is beginning to be a big large though (~54MB)
+cd "$POL_USER_ROOT/tmp/"
+POL_SetupWindow_download "$(eval_gettext 'Downloading Origin, please wait...')" "$TITLE" "https://download.dm.origin.com/origin/live/OriginSetup.exe"
 
 # Installing mandatory dependencies
 POL_Wine_InstallFonts
@@ -25,10 +26,11 @@ POL_Call POL_Function_FontsSmoothRGB
 POL_Call POL_Install_wininet # Fix EA Connexion's issue 1
 
 # Installing Steam
-cd "$POL_USER_ROOT/ressources/"
+cd "$POL_USER_ROOT/tmp/"
 POL_SetupWindow_message "$(eval_gettext 'Setup will launch Origin after installation\n close it COMPLETELY to continue.')" "$TITLE"
 POL_Wine_WaitBefore "Origin"
 POL_Wine "OriginSetup.exe" /silent
+POL_Wine_WaitExit "Origin"
 
 # Fix EA connexion's issue 2
 mkdir -p "$POL_USER_ROOT/wineprefix/$PREFIX/drive_c/system32/drivers/etc/"
