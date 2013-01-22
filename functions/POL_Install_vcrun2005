@@ -1,12 +1,12 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : Unknown
-# Last revision : (2013-01-22 16:30)
+# Last revision : (2013-01-22 16:49)
 # Author : Berillions
 # Updated by : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
-# [petch] (2013-01-22 16:30)
+# [petch] (2013-01-22 16:49)
 #   Fixing bug #1787
 
 FORCE_MODE=$1
@@ -15,19 +15,19 @@ FORCE_MODE=$1
 if [ "$POL_ARCH" = "amd64" ]; then
 	if [ "$POL_LANG" = "fr" ]; then
 		# Downloading vcrun2005 sp1 x64 FR
-		POL_Download_Resource "http://download.microsoft.com/download/2/d/8/2d83625f-1af0-4807-9da0-5b994058d213/vcredist_x64.exe" "684871e3a5acf1a0be20d24abe897287"
+		POL_Download_Resource "http://download.microsoft.com/download/2/d/8/2d83625f-1af0-4807-9da0-5b994058d213/vcredist_x64.exe" "684871e3a5acf1a0be20d24abe897287" "vcrun2005"
 	else
 		# Downloading vcrun2005 sp1 x64 EN
-		POL_Download_Resource "http://download.microsoft.com/download/d/4/1/d41aca8a-faa5-49a7-a5f2-ea0aa4587da0/vcredist_x64.exe" "b55acaf32792a0627986aa724ebfcf07"
+		POL_Download_Resource "http://download.microsoft.com/download/d/4/1/d41aca8a-faa5-49a7-a5f2-ea0aa4587da0/vcredist_x64.exe" "b55acaf32792a0627986aa724ebfcf07" "vcrun2005"
 	fi
 fi
 
 if [ "$POL_LANG" = "fr" ]; then
 	# Downloading vcrun2005 sp1 x86 FR
-	POL_Download_Resource "http://download.microsoft.com/download/a/3/7/a379292d-24f2-4bbb-841b-c2aeb1100471/vcredist_x86.exe" "7edcbd8887a5d01c95517fb4483853b3"
+	POL_Download_Resource "http://download.microsoft.com/download/a/3/7/a379292d-24f2-4bbb-841b-c2aeb1100471/vcredist_x86.exe" "7edcbd8887a5d01c95517fb4483853b3" "vcrun2005"
 else
 	# Downloading vcrun2005 sp1 x86 EN
-	POL_Download_Resource "http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe" "5c82be7ad1775b67916ee19c15b99331"
+	POL_Download_Resource "http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe" "5c82be7ad1775b67916ee19c15b99331" "vcrun2005"
 fi
 
 # Check if vcrun2005 is already installed
