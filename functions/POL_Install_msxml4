@@ -1,0 +1,21 @@
+#!/bin/bash
+# PlayOnLinux Function
+ 
+# Date : (2009-11-21)
+# Author : Berillions
+# Licence : 
+# Depend : none
+
+cd "$REPERTOIRE/ressources"
+#downloading msxml4
+if [ ! -e "msxml.msi" ]; 
+then
+POL_SetupWindow_download "Downloading msxml4" "$TITLE" "http://download.microsoft.com/download/A/2/D/A2D8587D-0027-4217-9DAD-38AFDB0A177E/msxml.msi"
+fi
+
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing msxml4" "$TITLE"
+
+POL_Wine msiexec /i msxml.msi /q
+rm -rf msxml.msi
+
+POL_SetupWindow_detect_exit
