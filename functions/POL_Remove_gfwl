@@ -1,0 +1,22 @@
+#!/bin/bash
+# Date : (2011-08-18 21:00)
+# Last revision : (2011-08-19 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+# Checking if GFWL is installed
+if [ -e "$WINEPREFIX/drive_c/windows/system32/xlive/sqmapi.dll" ] || [ -e "$WINEPREFIX/drive_c/windows/syswow64/xlive/sqmapi.dll" ]; then
+	# Downloading GFW
+	cd "$POL_USER_ROOT/ressources"
+	if [ ! -e "xliveredist.msi" ]; then
+		POL_SetupWindow_download "$(eval_gettext 'Downloading Game For Windows Live...')" "$TITLE" "http://download.microsoft.com/download/D/6/0/D60F0E11-CF52-42B9-A13A-E7DAB124F08F/xliveredist.msi"
+	fi
+	POL_SetupWindow_wait_next_signal "$(eval_gettext 'Remove Game For Windows Live...')" "$TITLE"
+	# Product codes are located in [HKEY_LOCAL_MACHINE/Software/Microsoft/Windows/Current/Version/Uninstall]
+	POL_Wine msiexec /uninstall xliveredist.msi /q
+
+	# Removing dll Override
+	POL_Wine_OverrideDLL "builtin" "xlive"
+else
+	POL_SetupWindow_message "$(eval_gettext 'Game For Windows Live is not installed\nskipping uninstall routine.')" "$TITLE"
+fi
