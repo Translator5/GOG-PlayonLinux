@@ -1,19 +1,21 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2012-03-04 21:00)
-# Last revision : N/A
+# Last revision : (2013-01-22 23:52)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
+
+# Downloading Ubisoft Game Launcher - No md5 check since this kind of software is updated very often
+# Since we cannot validate the file with a hash (changes too often), do not put it into resources
+# Otherwise in case of corrupted download, the only solution for the user is to clean his cache
+# Download is not that large anyway (~23MB)
+cd "$POL_USER_ROOT/tmp/"
+POL_SetupWindow_download "$(eval_gettext 'Please wait while $APPLICATION_TITLE is downloading Ubisoft Game Launcher')" "$TITLE" "http://static3.cdn.ubi.com/orbit/launcher_installer/UbisoftGameLauncherInstaller.exe"
 
 # Installing mandatory dependencies
 POL_Call POL_Install_vcrun2008
 
-# Downloading Ubisoft Game Launcher - No md5 check since this kind of software is updated very often
-cd "$POL_USER_ROOT/ressources/"
-if [ ! -e "UbisoftGameLauncherInstaller.exe" ]; then
-	POL_SetupWindow_download "$(eval_gettext 'Please wait while $APPLICATION_TITLE is downloading Ubisoft Game Launcher')" "$TITLE" "http://static3.cdn.ubi.com/orbit/launcher_installer/UbisoftGameLauncherInstaller.exe"
-fi
-
 # Installing Ubisoft Game Launcher
+cd "$POL_USER_ROOT/tmp/"
 POL_Wine "UbisoftGameLauncherInstaller.exe" /q
 POL_Wine_WaitExit "Ubisoft Game Launcher"
