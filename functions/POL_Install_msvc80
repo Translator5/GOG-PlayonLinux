@@ -1,24 +1,17 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2010-09-07 19-00)
-# Last revision : (2011-20-07 21-00)
+# Last revision : (2013-01-22 23-00)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
-if [ "$POL_LANG" == "fr" ]; then
-LNG_VC80_DL="Téléchargement de MSvc80..."
-LNG_VC80_INSTALL="Installation MSvc80..."
+if [ "$POL_LANG" = "fr" ]; then
+	LNG_VC80_INSTALL="Installation MSvc80..."
 else
-LNG_VC80_DL="Downloading MSvc80..."
-LNG_VC80_INSTALL="Installing MSvc80..."
+	LNG_VC80_INSTALL="Installing MSvc80..."
 fi
 
-cd "$POL_USER_ROOT/ressources"
-# Downloading MSvc80
-cd "$POL_USER_ROOT/ressources/"
-if [ ! -e "$POL_USER_ROOT/ressources/microsoft.vc80.crt.zip" ]; then
-POL_SetupWindow_download "$LNG_VC80_DL" "$TITLE" "http://www.sweetpotatosoftware.com/files/microsoft.vc80.crt.zip"
-fi
+POL_Download_Resource "http://www.sweetpotatosoftware.com/files/microsoft.vc80.crt.zip" "53accbf0e1e7a67415ddcdd44f8e226e"
 
 POL_SetupWindow_wait_next_signal "$LNG_VC80_INSTALL" "$TITLE"
 
