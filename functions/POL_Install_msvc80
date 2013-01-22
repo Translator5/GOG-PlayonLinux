@@ -4,7 +4,7 @@
 # Last revision : (2011-20-07 21-00)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
- 
+
 if [ "$POL_LANG" == "fr" ]; then
 LNG_VC80_DL="Téléchargement de MSvc80..."
 LNG_VC80_INSTALL="Installation MSvc80..."
@@ -12,16 +12,16 @@ else
 LNG_VC80_DL="Downloading MSvc80..."
 LNG_VC80_INSTALL="Installing MSvc80..."
 fi
- 
+
 cd "$POL_USER_ROOT/ressources"
 # Downloading MSvc80
 cd "$POL_USER_ROOT/ressources/"
 if [ ! -e "$POL_USER_ROOT/ressources/microsoft.vc80.crt.zip" ]; then
 POL_SetupWindow_download "$LNG_VC80_DL" "$TITLE" "http://www.sweetpotatosoftware.com/files/microsoft.vc80.crt.zip"
 fi
- 
+
 POL_SetupWindow_wait_next_signal "$LNG_VC80_INSTALL" "$TITLE"
- 
+
 cd "$WINEPREFIX/drive_c/windows/temp"
 unzip "$POL_USER_ROOT/ressources/microsoft.vc80.crt.zip"
 cp Microsoft.VC80.CRT/*.* ../system32/
@@ -29,5 +29,5 @@ rm -rf Microsoft.VC80.CRT
 
 # Overriding dll
 POL_Call POL_Function_OverrideDLL "native,builtin" "msvcr80"
- 
+
 POL_SetupWindow_detect_exit
