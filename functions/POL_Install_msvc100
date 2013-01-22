@@ -3,17 +3,17 @@
 # Last revision : (2013-01-22 22-54)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
- 
+
 if [ "$POL_LANG" = "fr" ]; then
 	LNG_VC100_INSTALL="Installation MSvc100..."
 else
 	LNG_VC100_INSTALL="Installing MSvc100..."
 fi
- 
+
 POL_Download_Resource "http://files.playonlinux.com/Microsoft.VC100.zip" "5fc2ade663d069f4a0f98ad6d45beabe"
- 
+
 POL_SetupWindow_wait_next_signal "$LNG_VC100_INSTALL" "$TITLE"
- 
+
 cd "$WINEPREFIX/drive_c/windows/temp"
 unzip "$POL_USER_ROOT/ressources/Microsoft.VC100.zip"
 cp Microsoft.VC100/* ../system32/
@@ -21,5 +21,5 @@ rm -rf Microsoft.VC100
 
 # Overriding dll
 POL_Call POL_Function_OverrideDLL "native,builtin" "msvcr100"
- 
+
 POL_SetupWindow_detect_exit
