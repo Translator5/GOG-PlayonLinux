@@ -1,41 +1,42 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : Unknown
-# Last revision : (2012-05-17 21:00)
+# Last revision : (2013-01-22 16:30)
 # Author : Berillions
 # Updated by : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
+# [petch] (2013-01-22 16:30)
+#   Fixing bug #1787
+
 FORCE_MODE=$1
 
-# Downloading vcrun2005 sp1
-mkdir -p "$POL_USER_ROOT/ressources/vcrun2005"
-cd "$POL_USER_ROOT/ressources/vcrun2005"
-
 # Installing x64 version
-if [ "$POL_ARCH" == "amd64" ]; then
-	if [ ! -e "vcredist_x64.exe" ]; then
-		if [ "$POL_LANG" == "fr" ]; then
-			POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2005 sp1 x64...')" "$TITLE" "http://download.microsoft.com/download/2/d/8/2d83625f-1af0-4807-9da0-5b994058d213/vcredist_x64.exe"
-		else
-			POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2005 sp1 x64...')" "$TITLE" "http://download.microsoft.com/download/d/4/1/d41aca8a-faa5-49a7-a5f2-ea0aa4587da0/vcredist_x64.exe"
-		fi
+if [ "$POL_ARCH" = "amd64" ]; then
+	if [ "$POL_LANG" = "fr" ]; then
+		# Downloading vcrun2005 sp1 x64 FR
+		POL_Download_Resource "http://download.microsoft.com/download/2/d/8/2d83625f-1af0-4807-9da0-5b994058d213/vcredist_x64.exe" "684871e3a5acf1a0be20d24abe897287"
+	else
+		# Downloading vcrun2005 sp1 x64 EN
+		POL_Download_Resource "http://download.microsoft.com/download/d/4/1/d41aca8a-faa5-49a7-a5f2-ea0aa4587da0/vcredist_x64.exe" "b55acaf32792a0627986aa724ebfcf07"
 	fi
 fi
 
-if [ ! -e "vcredist_x86.exe" ]; then
-	if [ "$POL_LANG" == "fr" ]; then
-		POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2005 sp1 x86...')" "$TITLE" "http://download.microsoft.com/download/a/3/7/a379292d-24f2-4bbb-841b-c2aeb1100471/vcredist_x86.exe"
-	else
-		POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2005 sp1 x86...')" "$TITLE" "http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe"
-	fi
+if [ "$POL_LANG" = "fr" ]; then
+	# Downloading vcrun2005 sp1 x86 FR
+	POL_Download_Resource "http://download.microsoft.com/download/a/3/7/a379292d-24f2-4bbb-841b-c2aeb1100471/vcredist_x86.exe" "7edcbd8887a5d01c95517fb4483853b3"
+else
+	# Downloading vcrun2005 sp1 x86 EN
+	POL_Download_Resource "http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe" "5c82be7ad1775b67916ee19c15b99331"
 fi
 
 # Check if vcrun2005 is already installed
 CHECK_VC2K5=`find $WINEPREFIX -name "msdia80.dll"`
-if [ "$CHECK_VC2K5" == "" ] || [ "$FORCE_MODE" == "--force" ]; then
+if [ "$CHECK_VC2K5" = "" -o "$FORCE_MODE" = "--force" ]; then
+	cd "$POL_USER_ROOT/ressources/vcrun2005"
+
 	# Installing vcrun2005 sp1
-	if [ "$POL_ARCH" == "amd64" ]; then
+	if [ "$POL_ARCH" = "amd64" ]; then
 		rm "$WINEPREFIX/drive_c/windows/syswow64/msvcp80.dll"
 		rm "$WINEPREFIX/drive_c/windows/system32/msvcp80.dll"
 		POL_Wine start /unix "vcredist_x64.exe" /q
