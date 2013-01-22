@@ -1,22 +1,26 @@
 #!/bin/bash
 # PlayOnLinux Function
- 
+
 # Date : (2009-11-21)
+# Last Revision : (2013-01-22 19:54)
 # Author : Berillions
 # Licence : 
 # Depend : none
- 
-cd "$REPERTOIRE/ressources"
-#downloading msxml6
-if [ ! -e "msxml6_x86.msi" ]; 
+
+# [petch] (2013-01-22 19:54)
+#   Fixing bug #1787
+
+# Until fixed
+if [ "$POL_ARCH" = "amd64" ]
 then
-POL_SetupWindow_download "Downloading msxml6" "$TITLE" "http://download.microsoft.com/download/e/a/f/eafb8ee7-667d-4e30-bb39-4694b5b3006f/msxml6_x86.msi"
+    POL_Debug_Error "AMD64 is set, but msxml6 is needed."
+else
+    cd "$REPERTOIRE/ressources"
+    POL_Download_Resource "http://download.microsoft.com/download/e/a/f/eafb8ee7-667d-4e30-bb39-4694b5b3006f/msxml6_x86.msi" "85a5571258de322458f288b94ee28cfb"
+
+    rm "$WINEPREFIX"/drive_c/windows/system32/msxml6*
+    POL_Wine_WaitBefore "msxml6"
+    POL_Wine msiexec /i msxml6_x86.msi /q
+
+    POL_SetupWindow_detect_exit
 fi
-
-rm "$WINEPREFIX"/drive_c/windows/system32/msxml6*
-POL_Wine_WaitBefore "msxml6"
-POL_Wine msiexec /i msxml6_x86.msi /q
-rm -rf msxml6_x86.msi
-
-
-POL_SetupWindow_detect_exit
