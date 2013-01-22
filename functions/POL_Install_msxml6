@@ -1,0 +1,22 @@
+#!/bin/bash
+# PlayOnLinux Function
+ 
+# Date : (2009-11-21)
+# Author : Berillions
+# Licence : 
+# Depend : none
+ 
+cd "$REPERTOIRE/ressources"
+#downloading msxml6
+if [ ! -e "msxml6_x86.msi" ]; 
+then
+POL_SetupWindow_download "Downloading msxml6" "$TITLE" "http://download.microsoft.com/download/e/a/f/eafb8ee7-667d-4e30-bb39-4694b5b3006f/msxml6_x86.msi"
+fi
+
+rm "$WINEPREFIX"/drive_c/windows/system32/msxml6*
+POL_Wine_WaitBefore "msxml6"
+POL_Wine msiexec /i msxml6_x86.msi /q
+rm -rf msxml6_x86.msi
+
+
+POL_SetupWindow_detect_exit
