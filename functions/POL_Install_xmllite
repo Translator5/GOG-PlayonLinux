@@ -1,0 +1,36 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2011-14-05 21-00)
+# Last revision : (2011-14-05 21-00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+ 
+if [ "$POL_LANG" == "fr" ]; then
+	LNG_FILE_DL="Téléchargement de XMLlite..."
+	LNG_FILE2_DL="Téléchargement de catalogue correspondant..."
+	LNG_FILE_INSTALL="Installation XMLlite..."
+else
+	LNG_FILE_DL="Downloading XMLlite..."
+	LNG_FILE2_DL="Downloading matching catalog..."
+	LNG_FILE_INSTALL="Installing XMLlite..."
+fi
+
+mkdir -p "$POL_USER_ROOT/ressources/xmllite"
+cd "$POL_USER_ROOT/ressources/xmllite"
+#downloading XMLlite
+
+if [ ! -e "$POL_USER_ROOT/ressources/xmllite/winetest.cat" ]; then
+	POL_SetupWindow_download "$LNG_FILE2_DL" "$TITLE" "http://winezeug.googlecode.com/svn/trunk/winetricks_files/winetest.cat"
+fi
+ 
+POL_SetupWindow_wait_next_signal "$LNG_FILE_INSTALL" "$TITLE"
+mkdir -p "$WINEPREFIX/drive_c/windows/system32/catroot/{f750e6c3-38ee-11d1-85e5-00c04fc295ee}"
+cp -f "$POL_USER_ROOT/ressources/xmllite/winetest.cat" "$WINEPREFIX/drive_c/windows/system32/catroot/{f750e6c3-38ee-11d1-85e5-00c04fc295ee}/oem0.cat"
+
+
+cd "$WINEPREFIX/drive_c/windows/system32/"
+POL_Call POL_SP2_Extract xmllite.dll
+#Overriding dll
+POL_Call POL_Function_OverrideDLL "native" "xmllite"
+
+POL_SetupWindow_detect_exit
