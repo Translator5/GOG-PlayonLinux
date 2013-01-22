@@ -1,0 +1,32 @@
+#!/bin/bash
+# Date : (2011-03-04 21-00)
+# Last revision : (2011-20-07 21-00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+ 
+if [ "$POL_LANG" == "fr" ]; then
+LNG_VC100_DL="Téléchargement de MSvc100..."
+LNG_VC100_INSTALL="Installation MSvc100..."
+else
+LNG_VC100_DL="Downloading MSvc100..."
+LNG_VC100_INSTALL="Installing MSvc100..."
+fi
+ 
+cd "$POL_USER_ROOT/ressources"
+# Downloading MSvc100
+cd "$POL_USER_ROOT/ressources/"
+if [ ! -e "$POL_USER_ROOT/ressources/Microsoft.VC100.zip" ]; then
+POL_SetupWindow_download "$LNG_VC100_DL" "$TITLE" "http://files.playonlinux.com/Microsoft.VC100.zip"
+fi
+ 
+POL_SetupWindow_wait_next_signal "$LNG_VC100_INSTALL" "$TITLE"
+ 
+cd "$WINEPREFIX/drive_c/windows/temp"
+unzip "$POL_USER_ROOT/ressources/Microsoft.VC100.zip"
+cp Microsoft.VC100/* ../system32/
+rm -rf Microsoft.VC100
+
+# Overriding dll
+POL_Call POL_Function_OverrideDLL "native,builtin" "msvcr100"
+ 
+POL_SetupWindow_detect_exit
