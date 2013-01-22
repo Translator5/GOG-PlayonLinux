@@ -1,0 +1,66 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2010-08-02 21-00)
+# Last revision : (2012-05-17 21:00)
+# Author : Berillions
+# Updated by : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+FORCE_MODE=$1
+
+# Downloading vcrun2008 sp1
+mkdir -p "$POL_USER_ROOT/ressources/vcrun2008"
+cd "$POL_USER_ROOT/ressources/vcrun2008"
+
+# Installing x64 version
+if [ "$POL_ARCH" == "amd64" ]; then
+	if [ ! -e "vcredist_x64.exe" ]; then
+		if [ "$POL_LANG" == "fr" ]; then
+			POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2008 sp1 x64...')" "$TITLE" "http://download.microsoft.com/download/b/d/5/bd57058a-d6b4-40d6-9e31-35777dd48820/vcredist_x64.exe"
+		else
+			POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2008 sp1 x64...')" "$TITLE" "http://download.microsoft.com/download/2/d/6/2d61c766-107b-409d-8fba-c39e61ca08e8/vcredist_x64.exe"
+		fi
+	fi
+fi
+
+if [ ! -e "vcredist_x86.exe" ]; then
+	if [ "$POL_LANG" == "fr" ]; then
+		POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2008 sp1 x86...')" "$TITLE" "http://download.microsoft.com/download/9/e/d/9edd8390-011b-4c6d-9806-d8dc2b10c0fb/vcredist_x86.exe"
+	else
+		POL_SetupWindow_download "$(eval_gettext 'Downloading vcrun2008 sp1 x86...')" "$TITLE" "http://download.microsoft.com/download/d/d/9/dd9a82d0-52ef-40db-8dab-795376989c03/vcredist_x86.exe"
+	fi
+fi
+
+# Check if vcrun2008 is already installed
+CHECK_VC2K8=`find $WINEPREFIX -name "msdia90.dll"`
+if [ "$CHECK_VC2K8" == "" ] || [ "$FORCE_MODE" == "--force" ]; then
+	if [ "$FORCE_MODE" == "--force" ]; then
+		POL_SetupWindow_message "$(eval_gettext 'Warning : vcrun2008 seems to be already installed.\nForcing reinstallation.')" "$TITLE"
+	fi
+
+	# Fix before install for wine 1.3.37 and older
+	POL_AdvisedVersion  4.0.16 || POL_Debug_Error "$(eval_gettext 'VCRun2008 might fail to install because your PlayOnLinux version is too old. Please update.')"
+	if VersionLower $(POL_Config_PrefixRead VERSION) 1.3.37; then
+		POL_Call POL_Install_msxml3
+		ln -s "$WINEPREFIX/drive_c" "$WINEPREFIX/harddiskvolume0"
+		rm -f "$WINEPREFIX/dosdevices/c:"
+		ln -s "$WINEPREFIX/harddiskvolume0" "$WINEPREFIX/dosdevices/c:"
+	fi
+
+	# Installing vcrun2008 sp1
+	if [ "$POL_ARCH" == "amd64" ]; then
+		rm "$WINEPREFIX/drive_c/windows/syswow64/msvcp90.dll"
+		rm "$WINEPREFIX/drive_c/windows/system32/msvcp90.dll"
+		POL_Wine start /unix "vcredist_x64.exe" /q
+		POL_Wine_WaitExit "vcrun2008 sp1 x64"
+		POL_Wine start /unix "vcredist_x86.exe" /q
+		POL_Wine_WaitExit "vcrun2008 sp1 x86"
+	else
+		rm "$WINEPREFIX/drive_c/windows/system32/msvcp90.dll"
+		POL_Wine start /unix "vcredist_x86.exe" /q
+		POL_Wine_WaitExit "vcrun2008 sp1 x86"
+	fi
+
+	# Overriding dll
+	POL_Wine_OverrideDLL "native,builtin" "msvcr90"
+fi
