@@ -1,0 +1,46 @@
+#!/bin/bash
+#Creator : NSLW based on Berillions's d3dx9 script
+ 
+cd "$REPERTOIRE/ressources"
+#downloading directx 9
+if [ ! -e "directx_feb2010_redist.exe" ]; 
+then
+POL_SetupWindow_download "Downloading" "Directx 9" "http://download.microsoft.com/download/E/E/1/EE17FF74-6C45-4575-9CF4-7FC2597ACD18/directx_feb2010_redist.exe"
+fi
+ 
+POL_SetupWindow_wait_next_signal "PlayOnLinux is installing DirectPlay" "DirectPlay"
+ 
+mkdir "Directx"
+cd Directx
+cabextract "../directx_feb2010_redist.exe"
+
+mkdir "dxnt"
+cabextract -d "dxnt" dxnt.cab
+ 
+cd "dxnt"
+   
+mv -f dplaysvr.exe "$WINEPREFIX/drive_c/windows/system32"
+mv -f dplayx.dll "$WINEPREFIX/drive_c/windows/system32"
+mv -f dpnet.dll "$WINEPREFIX/drive_c/windows/system32"
+mv -f dpnhpast.dll "$WINEPREFIX/drive_c/windows/system32"
+mv -f dpwsockx.dll "$WINEPREFIX/drive_c/windows/system32"
+
+POL_Wine regsvr32 dplayx.dll
+POL_Wine regsvr32 dpnet.dll
+POL_Wine regsvr32 dpnhpast.dll
+     
+#Réglage directplay
+cd "$WINEPREFIX/drive_c/windows/temp"
+cat << EOF > OGL.reg
+[HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides]
+"dplayx"="native"
+"dpnet"="native"
+"dpnhpast"="native"
+"dpwsockx"="native"
+EOF
+POL_Wine regedit OGL.reg
+
+cd "$REPERTOIRE/ressources"
+rm -rf Directx
+ 
+POL_SetupWindow_detect_exit
