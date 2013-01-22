@@ -1,0 +1,40 @@
+#!/bin/bash
+# Date : (2010-09-18 20:00)
+# Last revision : (2011-08-19 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+FORCE_MODE=$1
+
+# Mandatory Change to avoid install failure in some cases
+Set_OS "winxp"
+cd "$WINEPREFIX/drive_c/windows/temp/"
+cat << EOF > Set_SP3.reg
+[HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion]
+"CSDVersion"="Service Pack 3"
+[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows]
+"CSDVersion"=dword:00000300
+EOF
+POL_Wine regedit Set_SP3.reg
+
+# Installing mandatory dependencies
+POL_Call POL_Install_msasn1
+
+# Downloading GFWL
+cd "$POL_USER_ROOT/ressources"
+if [ ! -e "xliveredist.msi" ]; then
+		POL_SetupWindow_download "$(eval_gettext 'Downloading Game For Windows Live...')" "$TITLE" "http://download.microsoft.com/download/D/6/0/D60F0E11-CF52-42B9-A13A-E7DAB124F08F/xliveredist.msi"
+fi
+
+# Checking if GFWL is installed
+if [ ! -e "$WINEPREFIX/drive_c/windows/system32/xlive/sqmapi.dll" ] || [ ! -e "$WINEPREFIX/drive_c/windows/syswow64/xlive/sqmapi.dll" ] || [ "$FORCE_MODE" == "--force" ]; then
+	if [ "$FORCE_MODE" == "--force" ]; then
+			POL_SetupWindow_message "$(eval_gettext 'Warning : GFWL seems to be already installed.\nForcing reinstallation.')" "$TITLE"
+	fi
+	# Installing GFWL
+	POL_Wine msiexec /qn /a xliveredist.msi
+	POL_Wine_WaitExit
+
+	# Overriding dll
+	POL_Wine_OverrideDLL "native,builtin" "xlive"
+fi
