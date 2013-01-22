@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2010-09-18 20:00)
-# Last revision : (2011-08-19 21:00)
+# Last revision : (2013-01-22 22:12)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
@@ -21,17 +21,19 @@ POL_Wine regedit Set_SP3.reg
 POL_Call POL_Install_msasn1
 
 # Downloading GFWL
-cd "$POL_USER_ROOT/ressources"
-if [ ! -e "xliveredist.msi" ]; then
-		POL_SetupWindow_download "$(eval_gettext 'Downloading Game For Windows Live...')" "$TITLE" "http://download.microsoft.com/download/D/6/0/D60F0E11-CF52-42B9-A13A-E7DAB124F08F/xliveredist.msi"
-fi
+# Since we cannot validate the file with a hash (changes too often), do not put it into resources
+# Otherwise in case of corrupted download, the only solution for the user is to clean his cache
+# Download is not that large anyway (~22MB)
+cd "$POL_USER_ROOT/tmp"
+POL_SetupWindow_download "$(eval_gettext 'Downloading Game For Windows Live...')" "$TITLE" "http://download.microsoft.com/download/D/6/0/D60F0E11-CF52-42B9-A13A-E7DAB124F08F/xliveredist.msi"
 
 # Checking if GFWL is installed
-if [ ! -e "$WINEPREFIX/drive_c/windows/system32/xlive/sqmapi.dll" ] || [ ! -e "$WINEPREFIX/drive_c/windows/syswow64/xlive/sqmapi.dll" ] || [ "$FORCE_MODE" == "--force" ]; then
-	if [ "$FORCE_MODE" == "--force" ]; then
-			POL_SetupWindow_message "$(eval_gettext 'Warning : GFWL seems to be already installed.\nForcing reinstallation.')" "$TITLE"
+if [ ! -e "$WINEPREFIX/drive_c/windows/system32/xlive/sqmapi.dll" -o ! -e "$WINEPREFIX/drive_c/windows/syswow64/xlive/sqmapi.dll" ] -o "$FORCE_MODE" = "--force" ]; then
+	if [ "$FORCE_MODE" = "--force" ]; then
+		POL_SetupWindow_message "$(eval_gettext 'Warning : GFWL seems to be already installed.\nForcing reinstallation.')" "$TITLE"
 	fi
 	# Installing GFWL
+	cd "$POL_USER_ROOT/tmp"
 	POL_Wine msiexec /qn /a xliveredist.msi
 	POL_Wine_WaitExit
 
