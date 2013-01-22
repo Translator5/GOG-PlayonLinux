@@ -1,0 +1,24 @@
+#!/bin/bash
+# PlayOnLinux Function
+# Date : (2011-17-07 21-00)
+# Last revision : (2012-03-25 21:00)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+# Setting default path for installers
+POL_LoadVar_PROGRAMFILES
+
+# Downloading latest Desura
+cd "$POL_USER_ROOT/ressources"
+if [ ! -e "DesuraInstaller.exe" ]; then
+	POL_SetupWindow_download "$(eval_gettext 'Please wait while Desura is downloaded...')" "$TITLE" "http://www.desura.com/DesuraInstaller.exe"
+fi
+
+# Installing mandatory dependencies
+POL_Wine_InstallFonts
+POL_Call POL_Function_FontsSmoothRGB
+
+# Installing Desura
+cd "$POL_USER_ROOT/ressources"
+POL_Wine start /unix "DesuraInstaller.exe" /q /s
+POL_Wine_WaitExit "Desura"
