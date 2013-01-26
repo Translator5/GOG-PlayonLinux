@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-12-23 17-44)
-# Last revision : (2012-12-26 11-00)
-# Wine version used : 1.4.1
+# Last revision : (2013-01-26 17-36)
+# Wine version used : 1.3.19
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,13 +13,16 @@
 # HoMM3 HD 3.26f.exe 7890918 "b7e260b3175ae2e8d489b009ae65c3ce"
 # HoMM3 HD 3.27f.exe 7876422 "2f9238592730621f05061900e96c8274"
 
+# Wine 1.3.19 choice:
+# http://appdb.winehq.org/objectManager.php?sClass=version&iId=24425&iTestingId=67710
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 # Must match heroesofmightandmagic3-gog script values
 TITLE_REQUIRED="GOG.com - Heroes of Might and Magic 3 Complete"
 PREFIX="HoMM3_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.3.19"
 
 DOWNLOAD_URL="https://sites.google.com/site/heroes3hd/eng/download"
 
