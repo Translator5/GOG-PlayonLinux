@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-26 12-16)
-# Last revision : (2013-01-26 19-55)
+# Last revision : (2013-01-26 20-05)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -22,7 +22,7 @@ SHORTCUT_NAME2="Dark Reign - The Rise of the Shadowhand"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1553
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Auran / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
