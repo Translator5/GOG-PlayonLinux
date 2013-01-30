@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-30 19-01)
-# Last revision : (2013-01-30 20-50)
+# Last revision : (2013-01-30 21-02)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,7 +25,7 @@ SHORTCUT_NAME5="ToMI S1E5: Rise of the Pirate God"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1555
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
