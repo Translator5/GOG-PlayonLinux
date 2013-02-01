@@ -142,6 +142,7 @@ https://github.com/petchema/playonlinux/wiki/My-GoG-list
 * POSTAL 2 Complete
 * Prince of Persia®: The Sands of Time
 * Pro Pinball Big Race USA
+* Pro Pinball Timeshock
 * Psychonauts
 * Puddle
 * Quest for Glory 1-5
