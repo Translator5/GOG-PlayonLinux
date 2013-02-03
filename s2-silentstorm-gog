@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-01 21-35)
-# Last revision : (2013-02-03 04-31)
+# Last revision : (2013-02-03 05-58)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -22,7 +22,7 @@ SHORTCUT_NAME2="Silent Storm Sentinels"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1560
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Nival Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
