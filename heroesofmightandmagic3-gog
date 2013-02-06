@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-23 16-55)
-# Last revision : (2013-02-03 22-43)
+# Last revision : (2013-02-06 23-49)
 # Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,10 +29,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7a39cfc99b1d41a45ea18474033ea0cb"
+POL_Call POL_GoG_setup "$GOGID" "0ecd5974b7939eb3f1a4bf1644c83138"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -49,13 +52,13 @@ Set_Managed "Off"
 POL_Wine_reboot
 
 POL_Shortcut "Heroes3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Heroes of Might and Magic 3 Complete/Heroes3_Manual.pdf"
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\Heroes3_AB_Manual.pdf
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\Heroes3_SoD_Manual.pdf
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\Heroes3_Tutorial.pdf
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\README.TXT
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\h3ccmped.exe
-# C:\Program Files\GOG.com\Heroes of Might and Magic 3\h3maped.exe
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Heroes of Might and Magic 3 Complete/Heroes3_Manual.pdf"
+# C:\GOG Games\Heroes of Might and Magic 3\Heroes3_AB_Manual.pdf
+# C:\GOG Games\Heroes of Might and Magic 3\Heroes3_SoD_Manual.pdf
+# C:\GOG Games\Heroes of Might and Magic 3\Heroes3_Tutorial.pdf
+# C:\GOG Games\Heroes of Might and Magic 3\README.TXT
+# C:\GOG Games\Heroes of Might and Magic 3\h3ccmped.exe
+# C:\GOG Games\Heroes of Might and Magic 3\h3maped.exe
 
 POL_SetupWindow_Close
 
