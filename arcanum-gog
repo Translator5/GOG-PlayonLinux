@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-02 19-30)
-# Last revision : (2013-02-06 21-59)
+# Last revision : (2013-02-07 11-49)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -43,12 +43,8 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "Arcanum.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-No3d -doublebuffer" # -fullscreen
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arcanum/manual.pdf"
-# C:\Program Files\GOG.com\Arcanum\readme.txt
-# C:\Program Files\GOG.com\Arcanum\Customer_support.htm
-# C:\Program Files\GOG.com\Arcanum\Reference.html
-# C:\Program Files\GOG.com\Arcanum\WorldEd.exe
-# C:\Program Files\GOG.com\Arcanum\ScrMaker.exe
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Arcanum/Manual.pdf"
+# C:\GOG Games\Arcanum\readme.txt
 
 POL_SetupWindow_Close
 
