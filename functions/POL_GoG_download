@@ -40,6 +40,7 @@ if [ -z "$GOG_REPO" ]; then
 fi
 
 
+# Login / open session
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
 local COOKIES_2="$POL_USER_ROOT/tmp/gog_cookies2"
 while true; do
@@ -70,7 +71,7 @@ while true; do
 	fi
 done
 
-
+# Download
 [ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
 cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
 POL_Debug_Message "Will download into $PWD"
@@ -121,9 +122,10 @@ if [ $PIECES -gt 1 ]; then
 	done
 fi
 
+# Close session
 rm -f "$COOKIES"
 
-POL_GoG_downloaded="False"
-[ -z "$FAILURE" ] && POL_GoG_downloaded="True"
+[ -n "$FAILURE" ] && POL_Debug_Fatal "One or more downloads failed"
 
+POL_GoG_downloaded="True"
 POL_GoG_location="$PWD/setup_$BASENAME.exe"
