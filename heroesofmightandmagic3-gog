@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-23 16-55)
-# Last revision : (2013-02-06 23-49)
+# Last revision : (2013-02-07 11-58)
 # Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,7 +52,7 @@ Set_Managed "Off"
 POL_Wine_reboot
 
 POL_Shortcut "Heroes3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Heroes of Might and Magic 3 Complete/Heroes3_Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Heroes of Might and Magic 3 Complete/Heroes3_Manual.pdf"
 # C:\GOG Games\Heroes of Might and Magic 3\Heroes3_AB_Manual.pdf
 # C:\GOG Games\Heroes of Might and Magic 3\Heroes3_SoD_Manual.pdf
 # C:\GOG Games\Heroes of Might and Magic 3\Heroes3_Tutorial.pdf
