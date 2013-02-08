@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-17 14-13)
-# Last revision : (2012-11-17 15-41)
+# Last revision : (2013-02-08 23-02)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "1d3a4566ed4f41f85aff9c06fdd76515"
+POL_Call POL_GoG_setup "$GOGID" "87e7745c047e9edc6e40e9620512f009"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,9 +43,9 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "MM8.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Might and Magic VIII/MANUAL.PDF"
-# C:\Program Files\GOG.com\Might and Magic VIII\Reference_card.PDF
-# C:\Program Files\GOG.com\Might and Magic VIII\Readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VIII - Day of the Destroyer/MANUAL.PDF"
+# C:\GOG Games\Might and Magic VIII - Day of the Destroyer\Reference_card.PDF
+# C:\GOG Games\Might and Magic VIII - Day of the Destroyer\Readme.txt
 
 POL_SetupWindow_Close
 
@@ -58,7 +58,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Might and Magic VIII/" || exit 1
+cd "\$WINEPREFIX/drive_c/GOG Games/Might and Magic VIII - Day of the Destroyer/" || exit 1
 
 TITLE="$TITLE"
 POL_Debug_Init
