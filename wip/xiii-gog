@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-17 23-07)
-# Last revision : (2012-10-29 02-07)
-# Wine version used : 1.5.0
+# Last revision : (2013-02-09 22-29)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,11 +13,13 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="xiii"
 PREFIX="XIII_gog"
-WORKING_WINE_VERSION="1.5.0"
+WORKING_WINE_VERSION="1.4.1"
 [ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.2.3"
 
 TITLE="GOG.com - XIII"
 SHORTCUT_NAME="XIII"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1112
@@ -25,17 +27,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft Paris Studios / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "6933e1a9f8e17c0a8b816e47f39bded5"
+POL_Call POL_GoG_setup "$GOGID" "eaa0497b762d36f88da5391acece2197" "55ce207ab42df8278b501be2f836b414" "b1900a394f69d4aba27c1dd585cd164f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
@@ -50,8 +47,8 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 POL_Wine_reboot
 
 POL_Shortcut "xiii.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/XIII/Support/English/Manual.pdf"
-# C:\Program Files\GOG.com\XIII\Support\English\Readme.doc
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/XIII/Manual.pdf"
+# C:\GOG Games\XIII\Support\English\Readme.doc
 
 POL_SetupWindow_Close
 
