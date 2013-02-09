@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2012-10-29 02-02)
+# Last revision : (2013-02-09 00-16)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,17 +28,16 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "75ccff61fc37b3b04245f094850dce88"
+POL_Call POL_GoG_setup "$GOGID" "e7dc56be50198036c81aa9a8e53b0f75"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
-POL_Wine_WaitBefore "$TITLE"
+POL_Call POL_GoG_install
 
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # Can only get lots of looping sounds (2s loops) without native DirectSound
 # (and emulated sound outputs?)
@@ -65,8 +64,8 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'nice -19 bash -c "while true; do
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'BUSYLOOP_PID=$!'
 echo 'kill $BUSYLOOP_PID' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Beyond Good and Evil/manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Beyond Good and Evil/readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Beyond Good and Evil/manual.pdf"
+# C:/GOG Games/Beyond Good and Evil/readme.txt
 
 POL_SetupWindow_Close
 
@@ -79,7 +78,7 @@ export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Beyond Good and Evil/" || exit 1
+cd "\$WINEPREFIX/drive_c/GOG Games/Beyond Good and Evil/" || exit 1
 
 TITLE="$TITLE"
 
