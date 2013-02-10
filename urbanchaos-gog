@@ -1,0 +1,55 @@
+#!/bin/bash
+# Date : (2013-02-10 16-42)
+# Last revision : (2013-02-10 23-25)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="urban_chaos"
+PREFIX="UrbanChaos_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Urban Chaos"
+SHORTCUT_NAME="Urban Chaos"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Mucky Foot Productions / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "73273183287610c4918eff02d1c64a68"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "4"
+
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Urban Chaos/text" || POL_Debug_Fatal "Unable to change directory"
+# At least warn of the issue
+cp lang_english.txt lang_english.txt.orig
+sed -e 's/^Restart Level/Restart Level(crash)/' lang_english.txt.orig > lang_english.txt
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "fallen.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Urban Chaos/Manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
