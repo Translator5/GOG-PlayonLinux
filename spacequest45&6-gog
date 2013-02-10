@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 20-22)
-# Last revision : (2013-02-10 13-01)
+# Last revision : (2013-02-10 16-00)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,6 +52,7 @@ cpu_core=simple
 cpu_cputype=386_slow
 cpu_cycles=auto
 render_aspect=true
+render_frameskip=1
 mixer_rate=22050
 mixer_blocksize=2048
 mixer_prebuffer=40
