@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-10-17 18-02)
-# Last revision : (2012-10-29 02-56)
-# Wine version used : 1.4-dos_support_0.5
+# Last revision : (2013-02-10 15-53)
+# Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="torins_passage"
 PREFIX="TorinsPassage_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.5"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Torins Passage"
 SHORTCUT_NAME="Torin's Passage"
@@ -26,17 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4b0e01e60bbb67d19c2eae468cea3ad9"
+POL_Call POL_GoG_setup "$GOGID" "6bbec4a926fea314b86bd6dfddbd155e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader, Foxit or SumatraPDF in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 SCALER=normal2x
 [ "$POL_OS" = "Linux" ] && SCALER=hq2x
@@ -48,7 +44,7 @@ cpu_cputype=auto
 cpu_cycles=max
 render_frameskip=1
 render_scaler=$SCALER
-mixer_prebuffer=50
+mixer_prebuffer=40
 sblaster_type=sb16
 sblaster_base=220
 sblaster_irq=7
@@ -67,7 +63,7 @@ gus_gus=false
 _EOFCFG_
 
 POL_Shortcut "SIERRAH.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Torrins Passage/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Torin's Passage/Manual.pdf"
 
 POL_SetupWindow_Close
 
