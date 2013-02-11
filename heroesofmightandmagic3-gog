@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-23 16-55)
-# Last revision : (2013-02-07 11-58)
+# Last revision : (2013-02-11 20-33)
 # Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -17,6 +17,7 @@ source "$PLAYONLINUX/lib/sources"
 GOGID="heroes_of_might_and_magic_3_complete_edition"
 PREFIX="HoMM3_gog"
 WORKING_WINE_VERSION="1.5.16"
+[ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.3.10"
 
 TITLE="GOG.com - Heroes of Might and Magic 3 Complete"
 SHORTCUT_NAME="Heroes of Might and Magic 3 Complete"
