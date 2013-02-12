@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-12 17-10)
-# Last revision : (2013-02-12 23-45)
+# Last revision : (2013-02-13 00-30)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,6 +47,11 @@ POL_SetupWindow_VMS "32"
 
 # For Avernum 4+
 POL_Wine_DirectInput "MouseWarpOverride" "force"
+
+# Enable "Change resolution: Ask at start"
+# Seems to starts more reliably that way, at least in virtual desktop
+cd "$WINEPREFIX/drive_c/GOG Games/Avernum Series" || POL_Debug_Fatal "Could not find game directory"
+dd if=/dev/zero of="Avernum 4/Data/Avernum4Settings.dat" conv=notrunc bs=1 seek=8 count=1
 
 # Doesn't hurt ;)
 POL_Wine_reboot
