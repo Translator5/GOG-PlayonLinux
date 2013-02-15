@@ -1,0 +1,121 @@
+#!/bin/bash
+# Date : (2013-02-14 21-24)
+# Last revision : (2013-02-14 22-25)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="tomb_raider_the_last_revelation_chronicles"
+PREFIX="TombRaider_4_5_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - Tomb Raider: The Last Revelation and Chronicles"
+SHORTCUT_NAME1="Tomb Raider 4: The Last Revelation"
+SHORTCUT_NAME2="Tomb Raider 5: Chronicles"
+SHORTCUT_EDITOR="Tomb Raider Editor"
+SHORTCUT_ROOMEDITOR="Tomb Raider Room Editor"
+SHORTCUT_CONVERTOR="Tomb Raider Level Convertor"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Core Design / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "fbf9c439f37ebd461d9a14527c2b1738"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "4"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+LNG_EDITOR="$(eval_gettext 'The level editor')"
+POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_EDITOR}" "~"
+SHORTCUTS="$APP_ANSWER"
+
+# The editor is also named tomb4.exe :(
+POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/tomb4.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/manual.pdf"
+
+POL_Shortcut "PCTomb5.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 5/manual.pdf"
+
+if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
+    POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/tomb4.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME1.png" ""
+    POL_Shortcut_Document "$SHORTCUT_EDITOR" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/Manual.pdf"
+
+    POL_Shortcut "winroomedit.exe" "$SHORTCUT_ROOMEDITOR" "$SHORTCUT_NAME1.png" ""
+
+    POL_Shortcut "tom2pc.exe" "$SHORTCUT_CONVERTOR" "$SHORTCUT_NAME1.png" ""
+fi
+
+POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/" || exit 1
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine tomb4.exe "setup"
+exit
+_EOF_
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 5/" || exit 1
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine PCTomb5.exe "setup"
+exit
+_EOF_
+
+if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_EDITOR"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/" || exit 1
+TITLE="$TITLE"
+
+POL_Debug_Init
+POL_Wine tomb4.exe "-setup"
+exit
+_EOF_
+fi
+
+exit
