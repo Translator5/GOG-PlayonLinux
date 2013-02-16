@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-01 19-55)
-# Last revision : (2012-10-29 02-04)
+# Last revision : (2013-02-16 09-37)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,17 +29,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Spiderweb Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "27769711c3f58bf35fa7e68cf2e6224f"
+POL_Call POL_GoG_setup "$GOGID" "28be4951fc0018de4d3c996f797ed003"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # GoG work!
 Set_OS winxp
@@ -52,15 +48,15 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 POL_Wine_reboot
 
 POL_Shortcut "Geneforge.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Geneforge/Geneforge/Geneforge Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Geneforge/Geneforge/Geneforge Manual.pdf"
 POL_Shortcut "Geneforge 2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Geneforge/Geneforge 2/Geneforge 2 Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Geneforge/Geneforge 2/Geneforge 2 Manual.pdf"
 POL_Shortcut "Geneforge 3.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Geneforge/Geneforge 3/Geneforge 3 Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME3" "$GOGROOT/Geneforge/Geneforge 3/Geneforge 3 Manual.pdf"
 POL_Shortcut "Geneforge 4.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME4" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Geneforge/Geneforge 4/Geneforge 4 Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME4" "$GOGROOT/Geneforge/Geneforge 4/Geneforge 4 Manual.pdf"
 POL_Shortcut "Geneforge 5.exe" "$SHORTCUT_NAME5" "$SHORTCUT_NAME5.png" ""
-POL_Shortcut_Document "$SHORTCUT_NAME5" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Geneforge/Geneforge 5/Geneforge 5 Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME5" "$GOGROOT/Geneforge/Geneforge 5/Geneforge 5 Manual.pdf"
 
 POL_SetupWindow_Close
 
