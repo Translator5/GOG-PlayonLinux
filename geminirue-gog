@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-21 20-58)
-# Last revision : (2012-10-29 02-12)
-# Wine version used : 1.4
+# Last revision : (2013-02-16 08-51)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="gemini_rue"
 PREFIX="GeminiRue_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Gemini Rue"
 SHORTCUT_NAME="Gemini Rue"
@@ -26,17 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Wadjet Eye Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d80bcb5a758f6e42ba354ce07121e323"
+POL_Call POL_GoG_setup "$GOGID" "c814641ba4e38a4f011e0ebf1f3732f4"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
@@ -60,7 +55,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Gemini Rue/" || exit 1
+cd "$GOGROOT/Gemini Rue/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine winsetup.exe
