@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 23-07)
-# Last revision : (2012-11-25 22-29)
+# Last revision : (2013-02-17 06-30)
 # Wine version used : 1.5.7
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Sodtware" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "40fbfd144dbe49ab192f6aba4e0e4633" "7d3033e9e446d20fef782e315bac8193"
+POL_Call POL_GoG_setup "$GOGID" "7d3033e9e446d20fef782e315bac8193"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
