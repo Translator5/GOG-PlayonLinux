@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-23 23-11)
-# Last revision : (2013-01-24 19-19)
+# Last revision : (2013-02-19 01-41)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "340861f486a8b84281f73e47d8e1893c"
+POL_Call POL_GoG_setup "$GOGID" "e66a6cc107020a8296e4560167a4a333"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -60,6 +60,9 @@ sed -e 's/MusicCardId=./MusicCardId=3/; s/MusicPort=0x.../MusicPort=0x388/' INST
 cp MUSIC/AILADLIB.DLL AILXMI.DLL
 
 POL_Shortcut "BIOFORGE.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Bioforge/BioForge - Manual.pdf"
+# C:\GOG Games\Bioforge\BioForge - Field Personel File.pdf
+# C:\GOG Games\Bioforge\BioForge - Reference Card.pdf
 
 POL_SetupWindow_Close
 
