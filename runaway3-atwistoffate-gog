@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-19 21-20)
-# Last revision : (2013-02-19 21-41)
+# Last revision : (2013-02-23 18-23)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -18,7 +18,7 @@ WORKING_WINE_VERSION="1.4.1"
 TITLE="GOG.com - Runaway 3: A Twist of Fate"
 SHORTCUT_NAME="Runaway 3: A Twist of Fate"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
@@ -45,7 +45,8 @@ POL_Call POL_Install_d3dx9_36
 POL_Wine_reboot
 
 POL_Shortcut "RATOF.exe" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
-echo "xrandr -s 0" >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
+#echo "xrandr -s 0" >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Runaway - A Twist Of Fate/manual.pdf"
 
 POL_SetupWindow_Close
