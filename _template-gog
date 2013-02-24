@@ -65,4 +65,4 @@ POL_SetupWindow_Close
 exit
 _EOF_
 
-exit
+exit 0
