@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2012-10-29 02-43)
-# Wine version used : 1.3.23
+# Last revision : (2013-02-24 23-37)
+# Wine version used : 1.5.20
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -12,18 +12,27 @@
 #    Same with 1.3.35
 #    Same with 1.3.34
 #    Same with 1.3.30
+#    Same with 1.4.1
+#    Crash with 1.5.3 when reaching to top of the stairs
 #    Crash with 1.3.29 when statue "lights up"
+#    Same with 1.5.0
 #    Heavy flickering with 1.3.27-rawinput2
 #    Ok with 1.3.24?
 #    Ok with 1.3.23?
 #    Ok with 1.2.3?
+#    Ok with 1.5.24?
+#    Ok with 1.5.20?
+#    Ok with 1.5.15?
+#    Ok with 1.5.10?
+#    Ok with 1.5.5?
+#    Ok with 1.5.4?
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="sanitarium"
 PREFIX="Sanitarium_gog"
-WORKING_WINE_VERSION="1.3.23"
+WORKING_WINE_VERSION="1.5.20"
 
 TITLE="GOG.com - Sanitarium"
 SHORTCUT_NAME="Sanitarium"
