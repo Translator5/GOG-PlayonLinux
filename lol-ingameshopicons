@@ -1,0 +1,60 @@
+#!/bin/bash
+# Date : (2013-02-24 19-44)
+# Last revision : (2013-02-24 21-26)
+# Wine version used : 1.5.12-LeagueOfLegendsShop
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+# Must match League of Legends script values
+TITLE_REQUIRED="League of Legends"
+PREFIX="LeagueOfLegends"
+WORKING_WINE_VERSION="1.5.12-LeagueOfLegendsShop"
+INSTALLBIN="LoL-Linux-Tools-master.zip"
+
+TITLE="League of Legends: ingame shop icons fix"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "A-Metaphysical-Drama" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
+    POL_Debug_Fatal "$(eval_gettext 'Please install $TITLE_REQUIRED first')"
+fi
+
+POL_SetupWindow_message "$(eval_gettext 'This patch replaces ingame shop icons with altered ones that Wine can display correctly.\nMake sure $TITLE_REQUIRED is fully updated before running this patch.')" "$TITLE"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_AutoSetVersionEnv
+POL_LoadVar_PROGRAMFILES
+
+if [ -n "$POL_SELECTED_FILE" ]; then
+    ARCHIVE="$POL_SELECTED_FILE"
+else
+    cd "$POL_USER_ROOT/tmp"
+    POL_Download "http://files.playonlinux.com/$INSTALLBIN" "bcbec539cd6abf4704974831a16bf8bb"
+    ARCHIVE="$POL_USER_ROOT/tmp/$INSTALLBIN"
+fi
+
+cd "$WINEPREFIX/drive_c"
+rm -rf "LoL-Linux-Tools-master"
+unzip "$ARCHIVE" || POL_Debug_Fatal "unzip failed with error $?!"
+
+cd "LoL-Linux-Tools-master" || POL_Debug_Fatal "Could not find patch directory"
+cp config.py config.py.orig
+sed -e 's@^lol_path = .*$@lol_path = '"'$WINEPREFIX/drive_c/Riot Games/League of Legends/'"'@' config.py.orig > config.py
+chmod +x lol_linux.py
+
+POL_SetupWindow_wait "$(eval_gettext 'Patching will take several minutes, please be patient...')" "$TITLE"
+SHELL=/bin/bash $POL_TERM -e "./lol_linux.py texture_patch || read -p 'Press enter to continue'"
+
+POL_SetupWindow_Close
+
+exit
