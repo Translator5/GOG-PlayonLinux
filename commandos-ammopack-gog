@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-25 21-49)
-# Last revision : (2013-02-26 00-36)
+# Last revision : (2013-02-26 22-26)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -20,7 +20,7 @@ SHORTCUT_NAME1="Commandos: Behind Enemy Lines"
 SHORTCUT_NAME2="Commandos: Beyond The Call Of Duty"
 SHORTCUT_NAMEDS="Commandos: Dedicated Server"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 #POL_SetupWindow_SetID ScriptIDNumber
@@ -65,7 +65,7 @@ convert_videos () {
 
     for i in "$@"; do
         POL_SetupWindow_set_text "$i"
-        ffmpeg -i "Cinepak/$i" -c:v wmv2 -b:v 2500k "$i"
+        ffmpeg -i "Cinepak/$i" -c:v wmv2 -b:v 2000k "$i"
         let FILES++
         POL_SetupWindow_pulse $((100 * FILES / TOTAL))
     done
@@ -80,6 +80,9 @@ convert_videos coman_mp/VIDEO/ 1_v.avi 2_v.avi 3_v.avi 4_v.avi h_intro.avi
 
 # "3D DirectX7"?
 POL_SetupWindow_VMS "4"
+
+# Mouse to borders to scroll around
+POL_Wine_X11Drv "GrabFullScreen" "Y"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
