@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-28 22-02)
-# Last revision : (2013-02-28 22-53)
+# Last revision : (2013-03-01 10-56)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -16,7 +16,7 @@ PREFIX="DukeNukem_1_2_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Duke Nukem 1 and 2"
-SHORTCUT_NAME11="Duke Nukem 1E1: Sharpnel City"
+SHORTCUT_NAME11="Duke Nukem 1E1: Shrapnel City"
 SHORTCUT_NAME12="Duke Nukem 1E2: Mission: Moonbase"
 SHORTCUT_NAME13="Duke Nukem 1E3: Trapped in the Future"
 SHORTCUT_NAME2="Duke Nukem 2"
