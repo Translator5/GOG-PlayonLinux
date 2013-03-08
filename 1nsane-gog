@@ -1,0 +1,51 @@
+#!/bin/bash
+# Date : (2013-03-07 20-17)
+# Last revision : (2013-03-08 19-45)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="1nsane"
+PREFIX="1nsane_gog"
+WORKING_WINE_VERSION="1.4.1"
+
+TITLE="GOG.com - 1nsane"
+SHORTCUT_NAME="1nsane"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1611
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Invictus Games / Codemasters" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "1542bb9e38099eb5080bf123b9103d6b"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+# GoG work!
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+POL_Shortcut "Game.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/1NSANE/manual.pdf"
+# C:\Program Files\GOG.com\1NSANE\Readme.chm
+
+POL_SetupWindow_Close
+
+exit 0
