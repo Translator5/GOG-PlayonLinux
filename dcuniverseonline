@@ -1,0 +1,27 @@
+#!/bin/bash
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TITLE="DC Universe Online"
+WINEVERSION="1.4.1"
+EDITOR="DC Universe Online"
+EDITOR_URL="http://www.dcuniverseonline.com/"
+PREFIX="DCUniverseOnline"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+POL_SetupWindow_presentation "$TITLE" "$EDITOR" "$EDITOR_URL" "" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WINEVERSION"
+
+cd "$WINEPREFIX/drive_c" 
+POL_Download "http://launch.soe.com/installer/DCUO_setup.exe" "2b4c63f963bba05b6ceb505ba59dde13"
+POL_Wine_WaitBefore "$TITLE"
+POL_Wine DCUO_setup.exe
+wineserver -k
+
+POL_Shortcut "LaunchPad.exe"  "$TITLE"
+
+POL_SetupWindow_Close
+exit 0
