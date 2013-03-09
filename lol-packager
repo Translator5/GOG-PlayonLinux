@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-09 10-38)
-# Last revision : (2013-03-09 13-15)
+# Last revision : (2013-03-09 16-25)
 # Wine version used : 1.5.12-LeagueOfLegendsShop
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -49,6 +49,9 @@ POL_Wine_PrefixCreate "$WINEVERSION"
 # "Sandbox" the prefix
 # Just that we're sure to find the files back
 find "$WINEPREFIX/drive_c/" -type l -exec sh -c 'echo "fixing {}"; rm "{}"; mkdir "{}"' \;
+
+# Try to avoid running out of file descriptors
+ulimit -n unlimited
 
 POL_Wine_WaitBefore "$TITLE"
 GC_DONT_GC=1 POL_Wine "$INSTALL_EXE"
