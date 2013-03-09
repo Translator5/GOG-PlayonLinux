@@ -1,0 +1,77 @@
+#!/bin/bash
+# Date : (2013-03-09 10-38)
+# Last revision : (2013-03-09 13-15)
+# Wine version used : 1.5.12-LeagueOfLegendsShop
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+# Need to be a LoL-patched Wine, otherwise the downloader crashes
+WINEVERSION="1.5.12-LeagueOfLegendsShop"
+PREFIX="LoLPackager"
+
+TITLE="League of Legends - PoL packager"
+URL="http://www.riotgames.com/"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+#POL_SetupWindow_SetID ScriptIDNumber
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Riot" "$URL" "Pierre Etchemaite" "$PREFIX"
+
+POL_SetupWindow_menu "$(eval_gettext 'What version would you like to package?')" "$TITLE" "EU West~Brasil~EU Nordic & East~North America~Turkey" "~"
+
+case "$APP_ANSWER" in
+    "EU West") DOWNLOAD_URL="http://l3cdn.riotgames.com/Installer/EUW_Installer/LeagueofLegends.exe";;
+    "Brasil") DOWNLOAD_URL="http://l3cdn.riotgames.com/Installer/BR_Installer/LeagueofLegends.exe";;
+    "EU Nordic & East") DOWNLOAD_URL="http://l3cdn.riotgames.com/Installer/EUNE_Installer/LeagueofLegends.exe";;
+    "North America") DOWNLOAD_URL="http://l3cdn.riotgames.com/Installer/NA_Installer/LeagueofLegends.exe";;
+    "Turkey") DOWNLOAD_URL="http://l3cdn.riotgames.com/Installer/TR_Installer/LeagueofLegends.exe";;
+esac
+
+POL_System_TmpCreate "LoLPackager"
+cd "$POL_System_TmpDir"
+
+POL_Download "$DOWNLOAD_URL"
+INSTALL_EXE="$POL_System_TmpDir/LeagueOfLegends.exe"
+
+POL_System_SetArch "x86"
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WINEVERSION"
+
+# "Sandbox" the prefix
+# Just that we're sure to find the files back
+find "$WINEPREFIX/drive_c/" -type l -exec sh -c 'echo "fixing {}"; rm "{}"; mkdir "{}"' \;
+
+POL_Wine_WaitBefore "$TITLE"
+GC_DONT_GC=1 POL_Wine "$INSTALL_EXE"
+# The downloader has quit but started the installer. Kill it.
+wineserver -k
+
+POL_SetupWindow_wait "$(eval_gettext 'Looking for downloaded files')" "$TITLE"
+cd "$WINEPREFIX/drive_c/" || POL_Debug_Fatal "Could not find game directory"
+setup_path="$(find ./ -name windows -prune -o -iname "setup.exe" -a -type f -print | tail -n 1)"
+[ -z "$setup_path" ] && POL_Debug_Fatal "$(eval_gettext 'Could not find downloaded files')"
+
+POL_SetupWindow_wait "$(eval_gettext 'Archiving downloaded files')" "$TITLE"
+cd "$(dirname "$setup_path")" || POL_Debug_Fatal "Could not find game directory"
+# tar doesn't like ':' in filenames, just use the day date
+OUTPUT="$HOME/LeagueOfLegends-$(date +%F).tar"
+tar cvf "$OUTPUT" * || POL_Debug_Fatal "$(eval_gettext 'Error archiving downloaded files')"
+
+POL_SetupWindow_wait "$(eval_gettext 'Removing temporary virtual drive')" "$TITLE"
+cd "$HOME"
+[ -d "$WINEPREFIX/drive_c" ] && rm -rf "$WINEPREFIX"
+
+POL_SetupWindow_message "$(eval_gettext 'League of Legends has been packaged in\n$OUTPUT\nThis file should be installable with League of Legends install script.')" "$TITLE"
+
+POL_SetupWindow_Close
+
+exit 0
