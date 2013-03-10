@@ -6,7 +6,7 @@
 # Licence : GPLv3
 # PlayOnLinux: 4.0.16
 # WineHQ: http://winebuild.playonlinux.com/wine/wine-patches/LeagueOfLegends/
- 
+
 # Changelog
 # (2012-05-11) 22:50 - Quentin PÂRIS
 #	- New wine patches for better perfomances
@@ -22,10 +22,10 @@
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-WINEVERSION="1.5.12-LeagueOfLegendsShop" 
+WINEVERSION="1.5.12-LeagueOfLegendsShop"
 
 TITLE="League of Legends"
-   
+
 # Initialisation
 POL_SetupWindow_Init
 POL_RequiredVersion "4.0.18" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.18 is required to install $TITLE"
@@ -38,38 +38,38 @@ if ! glxinfo | grep -q GL_EXT_texture_compression_s3tc; then
 fi
 
 POL_Debug_Init
-     
+
 # Presentation
 POL_SetupWindow_presentation "League of Legends" "Riot" "http://www.riotgames.com/" "Quentin PÂRIS, BlondVador" "LeagueOfLegends"
-      
+
 # Creation du préfixe
 POL_System_SetArch "x86"
 POL_Wine_SelectPrefix "LeagueOfLegends"
 POL_Wine_PrefixCreate "$WINEVERSION"
 POL_System_TmpCreate "LeagueOfLegends"
-   
+
 #Dependances
 POL_Call POL_Install_vcrun2005
 POL_Call POL_Install_vcrun2008
 POL_Call POL_Install_corefonts
 POL_Call POL_Install_d3dx9
 POL_Call POL_Install_wininet
-   
+
 # Configuration
 Set_OS "win7"
-     
+
 # Installation du jeu
 POL_SetupWindow_InstallMethod "DOWNLOAD,LOCAL"
- 
+
 POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
- 
+
 if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     cd "$POL_System_TmpDir"
     POL_Download "http://files.playonlinux.com/LeagueOfLegends.tar" "89b14c74d0b467fa8f78050644d58506"
-    
+
     POL_Wine_WaitBefore "$TITLE"
     tar -xvf LeagueOfLegends.tar || POL_Debug_Fatal "This is not a valid .tar file!"
-    
+
     GC_DONT_GC=1 POL_Wine "$POL_System_TmpDir/setup.exe"
 
 elif [ "$INSTALL_METHOD" = "LOCAL" ]; then
@@ -83,16 +83,16 @@ elif [ "$INSTALL_METHOD" = "LOCAL" ]; then
     GC_DONT_GC=1 POL_Wine "$POL_System_TmpDir/setup.exe"
 fi
 POL_Wine_WaitExit "$TITLE"
- 
+
 POL_System_TmpDelete
-  
+
 Set_OS winxp
 
 # Création du lanceur
 POL_Shortcut "rads_user_kernel.exe" "League of Legends" "League of Legends.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe"
 
 POL_Shortcut_InsertBeforeWine 'League of Legends' "rm \"$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/0.0.0.0\" 2> /dev/null"
- 
+
 POL_Shortcut_InsertBeforeWine 'League of Legends' "ln -s \"$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/\$(ls -1 \"$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/\" | tail -n 1)\" \"$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/0.0.0.0\""
 
 POL_Shortcut_InsertBeforeWine 'League of Legends' "rm \"$WINEPREFIX/.update-timestamp\""
