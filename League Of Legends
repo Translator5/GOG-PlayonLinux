@@ -2,7 +2,7 @@
 # Date : (2012-04-12)
 # Last revision : (2012-05-06)
 # Distribution used to test : ArchLinux
-# Author : Quentin PÂRIS, Valentin PERRUSSEL
+# Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
 # PlayOnLinux: 4.0.16
 # WineHQ: http://winebuild.playonlinux.com/wine/wine-patches/LeagueOfLegends/
@@ -16,6 +16,8 @@
 #	- Patches for osx
 # (2012-05-28) 11:00 - Quentin PÂRIS
 #	- Checks for recent version of PoL (InsertBeforeWine is bad supported by 4.0.14)
+# (2013-03-10) 22:51 - Pierre ETCHEMAITE
+#       - Use web downloader
 
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
