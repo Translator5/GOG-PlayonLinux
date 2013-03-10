@@ -1,0 +1,25 @@
+#!/bin/bash
+# Date : (2012-07-29 22-02)
+# Last revision : (2011-07-29 22-04)
+# Author : petch
+#   Based on script by GNU_Raziel
+# Only For : http://www.playonlinux.com
+ 
+# Installing DLL
+
+
+POL_Download_Resource "http://browsers-fr.mirrors.zensoft.net/ie/win32/5.01-sp2/ie501sp2.exe" "c9e395c26bce21ee21230437e5574846"
+
+cd "$WINEPREFIX/drive_c/windows/temp"
+unzip -o "$POL_USER_ROOT/ressources/ie501sp2.exe" "IE 5.01 SP2 Full/IEW2K_3.CAB"
+cabextract "IE 5.01 SP2 Full/IEW2K_3.CAB" -F wininet.dll
+
+
+if [ "$POL_ARCH" = "amd64" ]; then
+        cp -f wininet.dll ../syswow64/
+else
+        cp -f wininet.dll ../system32/
+fi
+
+# Overriding DLL
+POL_Wine_OverrideDLL "native, builtin" "wininet"
