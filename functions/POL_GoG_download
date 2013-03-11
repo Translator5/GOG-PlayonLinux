@@ -17,11 +17,10 @@ if [ "$1" = "--alternate" ]; then
 fi
 
 # URL = ${BASEURL}/${GAME}/${INDEXPREFIX}${INDEX}
-local BASEURL="https://secure.gog.com/downlink/game2"
-local INDEXPREFIX="1_installer_"
+local BASEURL="https://secure.gog.com/downlink"
+local INDEXPREFIX="en1installer"
 if [ "$1" = "--patch" ]; then
-	BASEURL="https://secure.gog.com/downlink/patch"
-        INDEXPREFIX=""
+        INDEXPREFIX="en1patch"
 	shift
 elif [ "$1" = "--bonus" ]; then
 	BASEURL="https://secure.gog.com/downlink/file"
@@ -95,7 +94,7 @@ download_piece ()
 
 	if [ ! -e "$2" ]; then
 		local TMPPIECE="$2.part"
-		POL_System_wget "$1" "$4" --load-cookies="$COOKIES" -O "$TMPPIECE"
+		POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" -O "$TMPPIECE"
 
 		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
 		if [ ! -e "$TMPPIECE" ]; then
