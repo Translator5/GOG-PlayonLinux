@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-12 10:36)
+# Last revision : (2013-03-12 11:33)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -90,16 +90,16 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     while true; do
         POL_Wine_WaitBefore "$TITLE"
         if GC_DONT_GC=1 POL_Wine --ignore-errors "$DOWNLOADER"; then
-            # The downloader starts the full installer when it's done. 
+            # The downloader starts the full installer when it's done.
             # Kill everything including Pando Media Booster in background.
             wineserver -k
-
-            DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
-            FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
             break
         fi
         POL_SetupWindow_message "$(eval_gettext 'Downloader crashed, likely because it opened more files than allowed. It will be restarted in the hope it completes its job.')" "$TITLE"
     done
+
+    DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
+    FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
 fi
 
 POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
