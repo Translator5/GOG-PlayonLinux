@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-11 20:35)
-# Distribution used to test : ArchLinux
+# Last revision : (2013-03-12 10:36)
+# Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
 # PlayOnLinux: 4.1.10-dev
@@ -48,7 +48,7 @@ POL_SetupWindow_InstallMethod "DOWNLOAD,LOCAL"
 
 if [ "$INSTALL_METHOD" = "LOCAL" ]; then
     cd "$HOME"
-    POL_SetupWindow_browse "$(eval_gettext 'Please select League Of Legends setup.exe file:')" "$TITLE"
+    POL_SetupWindow_browse "$(eval_gettext 'Please select League Of Legends setup.exe file:')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
     FULL_INSTALLER="$APP_ANSWER"
 
 else # DOWNLOAD
@@ -81,36 +81,31 @@ POL_Call POL_Install_wininet
 
 Set_OS "win7"
 
-POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
-
-if [ "$INSTALL_METHOD" = "LOCAL" ]; then
-    POL_Wine_WaitBefore "$TITLE"
-    GC_DONT_GC=1 POL_Wine "$FULL_INSTALLER"
-
-else # DOWNLOAD
+if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     # Try to avoid running out of file descriptors, set soft ulimit as high as possible
     ulimit -Sn hard
-
-    #POL_Wine_WaitBefore "$TITLE"
-    #GC_DONT_GC=1 POL_Wine "$DOWNLOADER"
 
     # Sadly, no guarantees, as nobody but root can increase "hard" ulimits.
     # So be prepared to retry
     while true; do
         POL_Wine_WaitBefore "$TITLE"
         if GC_DONT_GC=1 POL_Wine --ignore-errors "$DOWNLOADER"; then
-            # Bye Pando Media Booster, you prevent wineserver from closing
-            # generates an exitcode != 0
-            #taskkill.exe /f /im PMB.exe
-            # So instead give control to the user to shutdown PMB
-            POL_Wine control.exe "$WINEPREFIX/drive_c/$PROGRAMFILES/Pando Networks/Media Booster/PMB.cpl"
-            # The downloader starts the full installer when it's done
-            POL_Wine_WaitExit "$TITLE"
+            # The downloader starts the full installer when it's done. 
+            # Kill everything including Pando Media Booster in background.
+            wineserver -k
+
+            DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
+            FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
             break
         fi
         POL_SetupWindow_message "$(eval_gettext 'Downloader crashed, likely because it opened more files than allowed. It will be restarted in the hope it completes its job.')" "$TITLE"
     done
 fi
+
+POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
+
+POL_Wine_WaitBefore "$TITLE"
+GC_DONT_GC=1 POL_Wine "$FULL_INSTALLER"
 
 Set_OS winxp
 
@@ -125,11 +120,11 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'rm "$WINEPREFIX/.update-timestam
 
 if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     # Uninstall Pando Media Booster?
-    #POL_Wine uninstaller --remove '{980A182F-E0A2-4A40-94C1-AE0C1235902E}'
+    #POL_Wine "$WINEPREFIX/drive_c/$PROGRAMFILES/Pando Networks/Media Booster/uninst.exe"
 
     POL_System_TmpDelete
 
-    POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory on your desktop containing its installer. You can keep it to speed up reinstallations.')" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory on your desktop containing its installer. You may keep it to speed up reinstallations.')" "$TITLE"
 fi
 
 POL_SetupWindow_Close
