@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-12 11:33)
+# Last revision : (2013-03-13 10:26)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -48,7 +48,7 @@ POL_SetupWindow_InstallMethod "DOWNLOAD,LOCAL"
 
 if [ "$INSTALL_METHOD" = "LOCAL" ]; then
     cd "$HOME"
-    POL_SetupWindow_browse "$(eval_gettext 'Please select League Of Legends setup.exe file:')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
+    POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
     FULL_INSTALLER="$APP_ANSWER"
 
 else # DOWNLOAD
@@ -100,6 +100,16 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
 
     DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
     FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
+    INSTALLER_FOUND="FALSE"
+    [ -e "$FULL_INSTALLER" ] && INSTALLER_FOUND="TRUE"
+
+    if [ "$INSTALLER_FOUND" != "TRUE" ]; then
+        POL_SetupWindow_message "$(eval_gettext 'The installer could not be found in the default download directory.')" "$TITLE"
+
+        cd "$HOME"
+        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
+        FULL_INSTALLER="$APP_ANSWER"
+    fi
 fi
 
 POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
@@ -124,7 +134,7 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
 
     POL_System_TmpDelete
 
-    POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory on your desktop containing its installer. You may keep it to speed up reinstallations.')" "$TITLE"
+    [ "$INSTALLER_FOUND" = "TRUE" ] && POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory on your desktop containing its installer. You may keep it to speed up reinstallations.')" "$TITLE"
 fi
 
 POL_SetupWindow_Close
