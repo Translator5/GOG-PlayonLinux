@@ -62,4 +62,4 @@ POL_Shortcut "Dark Reign - Expansion.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png
 
 POL_SetupWindow_Close
 
-exit
+exit 0

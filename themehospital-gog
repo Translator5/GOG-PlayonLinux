@@ -75,4 +75,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Theme Hosp
 
 POL_SetupWindow_Close
 
-exit
+exit 0

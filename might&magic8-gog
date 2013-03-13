@@ -65,7 +65,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Might and Magic VIII - Day of the Destroyer/"
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine MM8Setup.Exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

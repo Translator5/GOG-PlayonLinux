@@ -87,7 +87,7 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine "WC3.BAT" "-install"
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

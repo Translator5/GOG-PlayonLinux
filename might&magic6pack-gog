@@ -163,4 +163,4 @@ POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME345PW" "" "'$WINEPREFIX/drive_c/GO
 
 POL_SetupWindow_Close
 
-exit
+exit 0

@@ -74,7 +74,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System" 
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine Postal2.exe -safe
-exit
+exit 0
 _EOF_
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
@@ -89,7 +89,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/Apocalyp
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine postal2.exe -safe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

@@ -100,10 +100,10 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/b
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine Configurator.exe
-exit
+exit 0
 _EOF_
 
 # Run the configurator? Ok!
 bash "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 
-exit
+exit 0

@@ -63,4 +63,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Heroes of Might and Magic 3 Com
 
 POL_SetupWindow_Close
 
-exit
+exit 0

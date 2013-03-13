@@ -109,4 +109,4 @@ POL_Shortcut "WC2SO2.BAT" "$SHORTCUT_NAME22" "$SHORTCUT_NAME2.png" ""
 
 POL_SetupWindow_Close
 
-exit
+exit 0

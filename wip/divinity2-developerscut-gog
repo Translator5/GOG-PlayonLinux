@@ -56,4 +56,4 @@ POL_Shortcut "Divinity2-debug.exe" "$SHORTCUT_NAME [Developer Mode]" "$SHORTCUT_
 
 POL_SetupWindow_Close
 
-exit
+exit 0

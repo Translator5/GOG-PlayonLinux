@@ -54,4 +54,4 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "export vblank_mode=1"         # 
 
 POL_SetupWindow_Close
 
-exit
+exit 0

@@ -73,7 +73,7 @@ POL_Wine Config.exe
 POL_Call POL_Configurator_runparts
 
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

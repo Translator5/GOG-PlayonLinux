@@ -80,7 +80,7 @@ POL_Debug_Init
 POL_Wine --ignore-errors Config.exe
 
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

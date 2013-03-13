@@ -71,4 +71,4 @@ POL_Shortcut "vmv2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 
 POL_SetupWindow_Close
 
-exit
+exit 0

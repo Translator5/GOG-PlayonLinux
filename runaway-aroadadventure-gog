@@ -73,11 +73,11 @@ TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine "Video Card Setup.exe"
 
-exit
+exit 0
 _EOF_
 
 # If the configurator was never launched, the game will call it... then crash
 # Second time around will be ok, but better call it ourselves :p
 bash "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 
-exit
+exit 0

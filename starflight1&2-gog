@@ -75,4 +75,4 @@ POL_Shortcut_Document "$SHORTCUT2_NAME" "$WINEPREFIX/drive_c/GOG Games/Starfligh
 
 POL_SetupWindow_Close
 
-exit
+exit 0

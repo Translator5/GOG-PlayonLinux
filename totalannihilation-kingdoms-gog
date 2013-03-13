@@ -69,7 +69,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Total Annihilation Kingdoms/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine ChooseRenderer.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

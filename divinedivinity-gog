@@ -59,7 +59,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Divine Divinity/" || exit 1
 
 POL_Wine configtool.exe
 
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

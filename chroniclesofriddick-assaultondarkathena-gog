@@ -71,7 +71,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/The Chronicles of Riddick - Assault on Dark A
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine DarkAthena_Launcher.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

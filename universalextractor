@@ -48,4 +48,4 @@ POL_Shortcut "UniExtract.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 
 POL_SetupWindow_Close
 
-exit
+exit 0

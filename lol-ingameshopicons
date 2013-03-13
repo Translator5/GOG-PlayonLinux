@@ -57,4 +57,4 @@ SHELL=/bin/bash $POL_TERM -e "./lol_linux.py texture_patch || read -p 'Press ent
 
 POL_SetupWindow_Close
 
-exit
+exit 0

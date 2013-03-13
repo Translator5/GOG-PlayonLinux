@@ -64,4 +64,4 @@ cd "$WINEPREFIX/drive_c/$PROGRAMFILES/OnLive"
 POL_Shortcut "OnLive.exe" "$TITLE" "" ""
 
 POL_SetupWindow_Close
-exit
+exit 0

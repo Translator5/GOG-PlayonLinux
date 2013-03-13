@@ -82,4 +82,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Space Que
 
 POL_SetupWindow_Close
 
-exit
+exit 0

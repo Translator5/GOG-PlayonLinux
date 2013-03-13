@@ -56,4 +56,4 @@ POL_Shortcut "nitro.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "-glide"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

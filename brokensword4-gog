@@ -49,4 +49,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Broken Swo
 
 POL_SetupWindow_Close
 
-exit
+exit 0

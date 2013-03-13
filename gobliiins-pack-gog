@@ -123,4 +123,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME3 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMF
 
 POL_SetupWindow_Close
 
-exit
+exit 0

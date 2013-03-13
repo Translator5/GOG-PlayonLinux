@@ -67,4 +67,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 
 POL_SetupWindow_Close
 
-exit
+exit 0

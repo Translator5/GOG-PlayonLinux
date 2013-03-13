@@ -68,7 +68,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Space Rangers 2 - Reboot/" || ex
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine setup.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

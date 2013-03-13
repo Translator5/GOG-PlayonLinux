@@ -77,4 +77,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Medal of 
 
 POL_SetupWindow_Close
 
-exit
+exit 0

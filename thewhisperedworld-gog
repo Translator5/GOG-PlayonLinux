@@ -48,4 +48,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Whispered World/documents/M
 
 POL_SetupWindow_Close
 
-exit
+exit 0

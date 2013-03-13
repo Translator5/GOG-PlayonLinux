@@ -54,4 +54,4 @@ POL_SetupWindow_message "$(eval_gettext 'The codes needed to start a new game ca
 
 POL_SetupWindow_Close
 
-exit
+exit 0

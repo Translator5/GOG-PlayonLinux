@@ -105,7 +105,7 @@ POL_SetupWindow_menu_list "\$(eval_gettext 'Select game resolution:')" "\$TITLE"
 [ "\$APP_ANSWER" != "\$RESOLUTION" ] && RESOLUTION="\$APP_ANSWER" write_arx_settings
 
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

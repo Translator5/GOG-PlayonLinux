@@ -165,4 +165,4 @@ POL_Wine SETUP.EXE
 
 _EOF_
 
-exit
+exit 0

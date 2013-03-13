@@ -104,4 +104,4 @@ POL_Shortcut "iexplore.exe" "$TITLE"
 POL_System_TmpDelete
 
 POL_SetupWindow_Close
-exit
+exit 0

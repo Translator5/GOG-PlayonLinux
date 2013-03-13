@@ -75,4 +75,4 @@ POL_Wine config.exe
 exit 0
 _EOF_
 
-exit
+exit 0

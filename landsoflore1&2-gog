@@ -87,4 +87,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Lands Of 
 
 POL_SetupWindow_Close
 
-exit
+exit 0

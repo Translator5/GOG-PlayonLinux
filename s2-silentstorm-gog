@@ -49,4 +49,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.c
 POL_Shortcut "Sentinels.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Silent Storm GOLD/Silent Storm Sentinels/UserManual/index.html"
 
-exit
+exit 0

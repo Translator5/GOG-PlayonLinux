@@ -61,4 +61,4 @@ Pol_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'HEIGHT=`xrandr -q | grep current
 
 POL_SetupWindow_Close
 
-exit
+exit 0

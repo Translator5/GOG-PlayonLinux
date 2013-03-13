@@ -74,7 +74,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - D
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine ConfigEditor.exe
-exit
+exit 0
 _EOF_
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
@@ -89,7 +89,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - R
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine ConfigEditor.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

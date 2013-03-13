@@ -67,7 +67,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arma Cold War Assault/" || exit 
 
 POL_Wine ColdWarAssaultPreferences.exe
 
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

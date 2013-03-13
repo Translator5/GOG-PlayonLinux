@@ -65,7 +65,7 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine Language.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

@@ -90,7 +90,7 @@ if [ "\$NEW_DRIVER" != "\$DRIVER" ]; then
 fi
 
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

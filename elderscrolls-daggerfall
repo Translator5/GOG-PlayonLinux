@@ -168,4 +168,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/DAGGER/DaggerfallMan
 
 POL_SetupWindow_Close
 
-exit
+exit 0

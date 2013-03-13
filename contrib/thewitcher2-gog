@@ -55,4 +55,4 @@ POL_Shortcut "Configurator.exe" "$SHORTCUT_NAME Config"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

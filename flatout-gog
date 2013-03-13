@@ -69,7 +69,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/FlatOut/" || exit 1
 
 POL_Wine "flatout.exe" "-setup"
 
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

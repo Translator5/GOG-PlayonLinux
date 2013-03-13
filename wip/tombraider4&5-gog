@@ -84,7 +84,7 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine tomb4.exe "setup"
-exit
+exit 0
 _EOF_
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
@@ -100,7 +100,7 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine PCTomb5.exe "setup"
-exit
+exit 0
 _EOF_
 
 if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
@@ -117,8 +117,8 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine tomb4.exe "-setup"
-exit
+exit 0
 _EOF_
 fi
 
-exit
+exit 0

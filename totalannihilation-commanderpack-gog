@@ -63,4 +63,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Total Anni
 
 POL_SetupWindow_Close
 
-exit
+exit 0

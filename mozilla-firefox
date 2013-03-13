@@ -219,4 +219,4 @@ POL_SetupWindow_message "$(eval_gettext '$TITLE has been successfully installed.
 
 POL_SetupWindow_Close
 
-exit
+exit 0

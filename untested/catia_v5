@@ -103,4 +103,4 @@ POL_SetupWindow_reboot
 POL_SetupWindow_message "$TITLE has been installed successfully" "$TITLE"
 
 POL_SetupWindow_Close
-exit
+exit 0

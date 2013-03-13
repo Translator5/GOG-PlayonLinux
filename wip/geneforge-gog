@@ -60,4 +60,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME5" "$GOGROOT/Geneforge/Geneforge 5/Geneforg
 
 POL_SetupWindow_Close
 
-exit
+exit 0

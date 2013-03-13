@@ -111,4 +111,4 @@ fi
 
 POL_SetupWindow_Close
 
-exit
+exit 0

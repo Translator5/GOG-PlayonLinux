@@ -66,4 +66,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Splinter Cell/Manual.pdf"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

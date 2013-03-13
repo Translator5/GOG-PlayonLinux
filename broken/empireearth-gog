@@ -81,4 +81,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.c
 # C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth - The Art of Conquest/technology_tree_aoc.pdf
 
 POL_SetupWindow_Close
-exit
+exit 0

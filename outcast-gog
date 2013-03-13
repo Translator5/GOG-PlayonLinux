@@ -722,8 +722,8 @@ done
 echo "CURRENT_LANG=\"\$CURRENT_LANG\"" > pol_configuration
 
 POL_SetupWindow_Close
-exit
+exit 0
 
 _EOF_
 
-exit
+exit 0

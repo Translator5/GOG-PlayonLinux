@@ -65,4 +65,4 @@ perl -i.bak -pe 's/^Timer\.ThreadSafe=true/Timer.ThreadSafe=false/' "$WINEPREFIX
 
 POL_SetupWindow_Close
 
-exit
+exit 0

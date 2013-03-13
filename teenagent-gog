@@ -49,4 +49,4 @@ POL_Shortcut "teenagent.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 
 POL_SetupWindow_Close
 
-exit
+exit 0

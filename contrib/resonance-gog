@@ -61,7 +61,7 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Resonance/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine winsetup.exe
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

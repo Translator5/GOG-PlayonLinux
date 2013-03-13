@@ -63,4 +63,4 @@ POL_SetupWindow_Close
 # VisionaireConfigurationTool.exe doesn't seem to work in GOG version of the game.
 # You can set advanced options by editing $WINEPREFIX/drive_c/GOG Games/Deponia/config.ini.
 
-exit
+exit 0

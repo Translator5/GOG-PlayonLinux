@@ -82,4 +82,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME6 (DirectX)" "$WINEPREFIX/drive_c/GOG Games
 
 POL_SetupWindow_Close
 
-exit
+exit 0

@@ -76,4 +76,4 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME (alternate)" "nice -19 wineserver"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

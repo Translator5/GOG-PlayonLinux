@@ -67,4 +67,4 @@ POL_SetupWindow_message "$(eval_gettext 'It is highly recommended that you insta
 
 POL_SetupWindow_Close
 
-exit
+exit 0

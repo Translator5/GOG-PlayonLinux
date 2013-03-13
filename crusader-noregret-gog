@@ -78,7 +78,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Crusader No Regret/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine INSTALL.EXE
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

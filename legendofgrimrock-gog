@@ -52,4 +52,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Legend of Grimrock/legend_of_gr
 
 POL_SetupWindow_Close
 
-exit
+exit 0

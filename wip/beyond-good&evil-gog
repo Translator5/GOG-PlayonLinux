@@ -84,10 +84,10 @@ TITLE="$TITLE"
 
 POL_Wine "SettingsApplication.exe"
 
-exit
+exit 0
 _EOF_
 
 # Run the configurator? Ok!
 bash "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 
-exit
+exit 0

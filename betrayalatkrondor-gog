@@ -90,4 +90,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Betrayal Pack/Betrayal in Anta
 
 POL_SetupWindow_Close
 
-exit
+exit 0

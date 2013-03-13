@@ -121,7 +121,7 @@ POL_Debug_Message "Resolution written: \$WIDTH \$HEIGHT"
 write_t2_settings
 
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

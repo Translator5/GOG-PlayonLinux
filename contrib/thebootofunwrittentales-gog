@@ -44,4 +44,4 @@ POL_Shortcut "bout.exe" "$SHORTCUT_NAME" "" ""
 
 POL_SetupWindow_Close
 
-exit
+exit 0

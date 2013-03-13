@@ -57,4 +57,4 @@ POL_SetupWindow_message "$(eval_gettext 'It is highly recommended to now install
 
 POL_SetupWindow_Close
 
-exit
+exit 0

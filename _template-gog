@@ -62,7 +62,7 @@ POL_SetupWindow_Init
 POL_Debug_Init
 # ...
 POL_SetupWindow_Close
-exit
+exit 0
 _EOF_
 
 exit 0

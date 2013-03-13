@@ -89,7 +89,7 @@ TITLE="$TITLE"
 
 POL_Debug_Init
 POL_Wine "setup.bat"
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

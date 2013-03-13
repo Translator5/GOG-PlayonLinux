@@ -67,7 +67,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Broken Sword - The Sleeping Dragon/" || exit 
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine BSTSD.exe -safevideomode
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

@@ -72,4 +72,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/Alien Carnage.pdf"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

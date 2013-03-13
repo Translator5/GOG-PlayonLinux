@@ -60,4 +60,4 @@ POL_Shortcut "gcii.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Ground Control II/Manual.pdf"
 
 POL_SetupWindow_Close
-exit
+exit 0

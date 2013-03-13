@@ -56,4 +56,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Freespace 
 
 POL_SetupWindow_Close
 
-exit
+exit 0

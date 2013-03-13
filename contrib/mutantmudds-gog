@@ -25,4 +25,4 @@ POL_System_TmpDelete
 POL_Shortcut "MutantMudds.exe" "Mutant Mudds"
 
 POL_SetupWindow_Close
-exit
+exit 0

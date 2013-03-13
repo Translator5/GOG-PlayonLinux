@@ -67,7 +67,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Far Cry 2 Fortune's Edition/bin" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine farcry2.exe -RenderProfile_ResolutionX 640 -RenderProfile_ResolutionY 480 -RenderProfile_RefreshRate 0
-exit
+exit 0
 _EOF_
 
-exit
+exit 0

@@ -101,4 +101,4 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Sid Meier
 
 POL_SetupWindow_Close
 
-exit
+exit 0

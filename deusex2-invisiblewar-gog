@@ -55,4 +55,4 @@ POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

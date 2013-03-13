@@ -62,4 +62,4 @@ POL_ExtractBiggestIcon "$WINEPREFIX/drive_c/Games/Ski Challenge 12 (FTV)/Game.ex
 
 POL_SetupWindow_Close
 
-exit
+exit 0

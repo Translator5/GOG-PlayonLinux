@@ -61,4 +61,4 @@ POL_Shortcut "SamMax205.exe" "$SHORTCUT_NAME5" "" "" # "$SHORTCUT_NAME5.png"
 
 POL_SetupWindow_Close
 
-exit
+exit 0

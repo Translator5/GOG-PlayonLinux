@@ -84,4 +84,4 @@ POL_SetupWindow_message "$(eval_gettext 'MotoRacer needs a 16bpp (65536 colors) 
 
 POL_SetupWindow_Close
 
-exit
+exit 0

@@ -79,7 +79,7 @@ cd "\$WINEPREFIX/drive_c/GOG Games/One Unit Whole Blood/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine SETUP.EXE
-exit
+exit 0
 _EOF_
 
-exit
+exit 0
