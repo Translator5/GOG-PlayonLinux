@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-13 10:26)
+# Last revision : (2013-03-13 12:15)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -84,6 +84,9 @@ Set_OS "win7"
 if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     # Try to avoid running out of file descriptors, set soft ulimit as high as possible
     ulimit -Sn hard
+
+    # Add Pando Media Booster to control panel
+    ln -sf "$WINEPREFIX/drive_c/$PROGRAMFILES/Pando Networks/Media Booster/PMB.cpl" "$WINEPREFIX/drive_c/windows/system32/"
 
     # Sadly, no guarantees, as nobody but root can increase "hard" ulimits.
     # So be prepared to retry
