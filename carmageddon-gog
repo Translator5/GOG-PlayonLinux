@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-17 21-44)
-# Last revision : (2013-03-17 22-51)
+# Last revision : (2013-03-17 23-28)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -37,12 +37,12 @@ POL_Call POL_GoG_install
 
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
-render_aspect=true
+#render_aspect=true
 dosbox_memsize=63
 cpu_core=dynamic
 cpu_cputype=auto
 cpu_cycles=max
-mixer_rate=44100
+#mixer_rate=44100
 mixer_blocksize=1024
 mixer_prebuffer=240
 sblaster_sbtype=sb16
@@ -53,9 +53,10 @@ sblaster_hdma=5
 sblaster_sbmixer=true
 sblaster_oplmode=auto
 sblaster_oplemu=default
-sblaster_oplrate=44100
+#sblaster_oplrate=44100
+gus_gus=false
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+#[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Carmageddon/CARMA/CARMA.BAT"
 @ECHO OFF
