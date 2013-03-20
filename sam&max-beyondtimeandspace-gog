@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-29 22-49)
-# Last revision : (2012-12-30 15-04)
+# Last revision : (2013-03-20 08-39)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,7 +15,7 @@ GOGID="sam_max_beyond_time_and_space"
 PREFIX="SamAndMaxS2_gog"
 WORKING_WINE_VERSION="1.5.15"
 
-TITLE="GOG.com - GOG.com - Sam and Max: Beyond Time and Space"
+TITLE="GOG.com - Sam and Max: Beyond Time and Space"
 SHORTCUT_NAME1="Sam and Max S2E1: Ice Station Santa"
 SHORTCUT_NAME2="Sam and Max S2E2: Moai Better Blues"
 SHORTCUT_NAME3="Sam and Max S2E3: Night of the Raving Dead"
