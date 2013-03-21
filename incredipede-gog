@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-08 22-54)
-# Last revision : (2013-03-09 23-03)
+# Last revision : (2013-03-21 14-02)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Northway Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "6dcff4cbc4e2f5406d4aada3f36d5e50"
+POL_Call POL_GoG_setup "$GOGID" "2d2f4239dff15882d885cf2f8d5acce0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
