@@ -22,7 +22,8 @@
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-WINEVERSION="1.5.12-LeagueOfLegendsShop"
+WINEVERSIONP2P="1.5.12-LeagueOfLegendsShop"
+WINEVERSION="1.5.24-LeagueOfLegendsShop"
 
 TITLE="League of Legends"
 PREFIX="LeagueOfLegends"
@@ -78,7 +79,11 @@ fi
 
 POL_System_SetArch "x86"
 POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WINEVERSION"
+if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
+    POL_Wine_PrefixCreate "$WINEVERSIONP2P"
+else
+    POL_Wine_PrefixCreate "$WINEVERSION"
+fi
 
 POL_Call POL_Install_vcrun2005
 POL_Call POL_Install_vcrun2008
@@ -107,6 +112,11 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
         fi
         POL_SetupWindow_message "$(eval_gettext 'Downloader crashed, likely because it opened more files than allowed. It will be restarted in the hope it completes its job.')" "$TITLE"
     done
+
+    # LoL is now safely downloaded with a version that doesn't freeze during P2P
+    # Switching to a version that works better during play
+    POL_Wine_InstallVersion "$WINEVERSION"
+    POL_Wine_SetVersionPrefix "$WINEVERSION"
 
     DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
     FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
