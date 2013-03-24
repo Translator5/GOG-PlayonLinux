@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-13 22:23)
+# Last revision : (2013-03-24 14:59)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -100,16 +100,31 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     # Add Pando Media Booster to control panel
     ln -sf "$WINEPREFIX/drive_c/$PROGRAMFILES/Pando Networks/Media Booster/PMB.cpl" "$WINEPREFIX/drive_c/windows/system32/"
 
+
+    FULL_INSTALLER_DIR=""
+
     # Sadly, no guarantees, as nobody but root can increase "hard" ulimits.
     # So be prepared to retry
     while true; do
         POL_Wine_WaitBefore "$TITLE"
-        if GC_DONT_GC=1 POL_Wine --ignore-errors "$DOWNLOADER"; then
-            # The downloader starts the full installer when it's done.
-            # Kill everything including Pando Media Booster in background.
-            wineserver -k
-            break
+        GC_DONT_GC=1 POL_Wine --ignore-errors "$DOWNLOADER"
+        DOWNLOADER_EXITCODE=$?
+        # The downloader starts the full installer when it's done,
+        # OR the p2p download saturated wineserver fds until it crashed.
+        # Either way, kill everything including Pando Media Booster in background.
+        wineserver -k
+
+        if [ -z "$FULL_INSTALLER_DIR" ]; then
+            FULL_INSTALLER_DIR="$(POL_Wine winepath -u "$(iconv --from-code UTF-16 --to-code UTF-8 "$WINEPREFIX/drive_c/users/$USER/Temp/LeagueOfLegends.exe.log"|sed -n 's/^.*:main:D:Saving to \(.*\)\r/\1\/League of Legends/p')")"
+            POL_Debug_Message "P2P download target: $FULL_INSTALLER_DIR"
         fi
+
+        FULL_INSTALLER="$FULL_INSTALLER_DIR/setup.exe"
+
+        # downloader reported success?
+        [ $DOWNLOADER_EXITCODE -eq 0 ] && break
+        # or it didn't but everything seems to be downloaded?
+        [ "$FULL_INSTALLER" -a "$FULL_INSTALLER_DIR"/*.downloading = "$FULL_INSTALLER_DIR/*.downloading" ] && break
         POL_SetupWindow_message "$(eval_gettext 'Downloader crashed, likely because it opened more files than allowed. It will be restarted in the hope it completes its job.')" "$TITLE"
     done
 
@@ -117,19 +132,6 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
     # Switching to a version that works better during play
     POL_Wine_InstallVersion "$WINEVERSION"
     POL_Wine_SetVersionPrefix "$WINEVERSION"
-
-    DESKTOP_PATH="$(winepath -u $(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Desktop"="\(.*\)".*/\1/p'))"
-    FULL_INSTALLER="$DESKTOP_PATH/League of Legends/setup.exe"
-    INSTALLER_FOUND="FALSE"
-    [ -e "$FULL_INSTALLER" ] && INSTALLER_FOUND="TRUE"
-
-    if [ "$INSTALLER_FOUND" != "TRUE" ]; then
-        POL_SetupWindow_message "$(eval_gettext 'The installer could not be found in the default download directory.')" "$TITLE"
-
-        cd "$HOME"
-        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
-        FULL_INSTALLER="$APP_ANSWER"
-    fi
 fi
 
 POL_SetupWindow_message "$(eval_gettext 'Warning: You must not tick the checkbox "Run $TITLE" when setup is done')" "$TITLE"
@@ -140,7 +142,7 @@ GC_DONT_GC=1 POL_Wine "$FULL_INSTALLER"
 Set_OS winxp
 
 
-POL_Shortcut "rads_user_kernel.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe"
+POL_Shortcut "rads_user_kernel.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe" "Game"
 
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'rm "$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/0.0.0.0" 2> /dev/null'
 
@@ -154,7 +156,7 @@ if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
 
     POL_System_TmpDelete
 
-    [ "$INSTALLER_FOUND" = "TRUE" ] && POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory on your desktop containing its installer. You may keep it to speed up reinstallations.')" "$TITLE"
+    POL_SetupWindow_message "$(eval_gettext 'You should now have a League of Legends directory containing its installer. You may keep it to speed up reinstallations.')" "$TITLE"
 fi
 
 POL_SetupWindow_Close
