@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-08 18-17)
-# Last revision : (2012-10-29 02-38)
+# Last revision : (2013-03-24 17-17)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -51,12 +51,12 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 POL_Wine_reboot
 
 # Oh joy, the game and the extension binaries share the same name!
-POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System/Postal2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System/Postal2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/Manual.pdf"
 # C:\Program Files\GOG.com\Postal 2 Share The Pain/Help.htm
 # C:\Program Files\GOG.com\Postal 2 Share The Pain/System/UnrealEd.exe -safe
 
-POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/ApocalypseWeekend/System/postal2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/ApocalypseWeekend/System/postal2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/Apocalypse Weekend Manual.pdf"
 # C:\Program Files\GOG.com\Postal 2 Share The Pain/ApocalypseWeekend/System/UnrealEd.exe
 

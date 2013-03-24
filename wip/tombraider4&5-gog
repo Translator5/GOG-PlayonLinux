@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-14 21-24)
-# Last revision : (2013-02-15 02-00)
+# Last revision : (2013-03-24 18-33)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,19 +54,19 @@ POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be cr
 SHORTCUTS="$APP_ANSWER"
 
 # The editor is also named tomb4.exe :(
-POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/tomb4.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/tomb4.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/manual.pdf"
 
-POL_Shortcut "PCTomb5.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "PCTomb5.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 5/manual.pdf"
 
 if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
-    POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/tomb4.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME1.png" ""
+    POL_Shortcut "$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/tomb4.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME1.png" "" "Game"
     POL_Shortcut_Document "$SHORTCUT_EDITOR" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/Manual.pdf"
 
-    POL_Shortcut "winroomedit.exe" "$SHORTCUT_ROOMEDITOR" "$SHORTCUT_NAME1.png" ""
+    POL_Shortcut "winroomedit.exe" "$SHORTCUT_ROOMEDITOR" "$SHORTCUT_NAME1.png" "" "Game"
 
-    POL_Shortcut "tom2pc.exe" "$SHORTCUT_CONVERTOR" "$SHORTCUT_NAME1.png" ""
+    POL_Shortcut "tom2pc.exe" "$SHORTCUT_CONVERTOR" "$SHORTCUT_NAME1.png" "" "Game"
 fi
 
 POL_SetupWindow_Close

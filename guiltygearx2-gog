@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-29 21-51)
-# Last revision : (2012-10-29 02-20)
+# Last revision : (2013-03-24 16-44)
 # Wine version used : 1.5.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -49,7 +49,7 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "launcher.exe" "$SHORTCUT_NAME" "Guilty Gear X2 Reload.png" ""
+POL_Shortcut "launcher.exe" "$SHORTCUT_NAME" "Guilty Gear X2 Reload.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Guilty Gear X2 Reload/manual.pdf"
 # C:\Program Files\GOG.com\Guilty Gear X2 Reload/README.TXT
 

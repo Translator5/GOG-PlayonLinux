@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
-# Last revision : (2012-11-12 23-29)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -76,11 +76,11 @@ EWJ2.EXE
 exit
 _EOFBAT_
 
-POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "EWJ1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim/readme.txt"
 # C:\GOG Games\Earthworm Jim 1 and 2\Earthworm Jim\WORM0.HLP
 
-POL_Shortcut "EWJ2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "EWJ2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Earthworm Jim 1 and 2/Earthworm Jim 2/readme.txt"
 
 POL_SetupWindow_Close

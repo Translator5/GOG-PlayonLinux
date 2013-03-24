@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-29 03-54)
-# Last revision : (2012-10-29 02-08)
+# Last revision : (2013-03-24 18-03)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ POL_SetupWindow_VMS "2"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Zeus.exe" "$SHORTCUT_NAME" "" "" # "$SHORTCUT_NAME.png"
+POL_Shortcut "Zeus.exe" "$SHORTCUT_NAME" "" "" "Game" # "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Zeus and Poseidon/Zeus - Manual.pdf"
 # C:\Program Files\GOG.com\Zeus and Poseidon\Zeus - Quick Reference Card.pdf
 # C:\Program Files\GOG.com\Zeus and Poseidon\Zeus - Poseidon - Manual.pdf

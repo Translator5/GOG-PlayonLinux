@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-03 18-35)
-# Last revision : (2012-10-29 02-57)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "UFO.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "UFO.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/UFO Afterlight/manual.pdf"
 # C:\Program Files\GOG.com\Afterlight\readme.txt
 

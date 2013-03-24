@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-17 13-41)
-# Last revision : (2012-10-29 02-39)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -59,7 +59,7 @@ cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania 3/realms3.inst" -t iso -fs iso
 _EOFAE_
 
-POL_Shortcut "RIVA.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "RIVA.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania 3/Manual.pdf"
 # C:\Program Files\GOG.com\Realms of Arkania 3\README.TXT
 

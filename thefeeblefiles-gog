@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2012-10-29 02-52)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ gameid=feeble
 language=en
 _EOFCFG_
 
-POL_Shortcut "feeble.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "feeble.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/manual.pdf"
 
 POL_SetupWindow_Close

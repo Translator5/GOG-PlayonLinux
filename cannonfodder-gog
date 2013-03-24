@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-02 17-04)
-# Last revision : (2013-03-03 16-29)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -61,7 +61,7 @@ CF_ENG.EXE /f
 EXIT
 _EOFBAT_
 
-POL_Shortcut "CANNON.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "CANNON.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Cannon Fodder/manual.pdf"
 
 POL_SetupWindow_Close

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-09 13-03)
-# Last revision : (2012-11-13 22-19)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -65,7 +65,7 @@ D:\data\SK.EXE %1
 EXIT
 _EOFBAT_
 
-POL_Shortcut "SK.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "SK.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Stonekeep/manual.pdf"
 # C:\GOG Games\Stonekeep\readme.TXT
 

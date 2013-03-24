@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2012-11-13 20-51)
+# Last revision : (2013-03-24 17-44)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,13 +63,13 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 
-POL_Shortcut "SF1.BAT" "$SHORTCUT1_NAME" "$SHORTCUT1_NAME.png" ""
+POL_Shortcut "SF1.BAT" "$SHORTCUT1_NAME" "$SHORTCUT1_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT1_NAME" "$WINEPREFIX/drive_c/GOG Games/Starflight 1 and 2/$STARFLT1/manual.pdf"
 # C:\GOG Games\Starflight 1 and 2/Starflight 1/map.pdf
 
-POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL"
+POL_Shortcut "Starflight_codes_by_gog.exe" "$SHORTCUT1_CODEWHEEL" "" "" "Game"
 
-POL_Shortcut "SF2.BAT" "$SHORTCUT2_NAME" "$SHORTCUT2_NAME.png" ""
+POL_Shortcut "SF2.BAT" "$SHORTCUT2_NAME" "$SHORTCUT2_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT2_NAME" "$WINEPREFIX/drive_c/GOG Games/Starflight 1 and 2/$STARFLT2/manual.pdf"
 # C:\GOG Games\Starflight 1 and 2\Starflight 2\map.pdf
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-25 18-58)
-# Last revision : (2012-10-29 02-00)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.11
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -54,7 +54,7 @@ POL_Wine_OverrideDLL "builtin" devevum dmcompos dmime dmstyle dmsynth dmusic dmu
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Unreal2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Unreal2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -pc 0 $$'
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal 2 – The Awakening SE/Help/Manual.pdf"
 # C:\Program Files\GOG.com\Unreal 2 – The Awakening SE\Help/Readme.txt

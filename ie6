@@ -100,7 +100,7 @@ POL_Call POL_Install_pngfilt
 
 rm "$WINEPREFIX/drive_c/windows/system32/iexplore.exe"
 
-POL_Shortcut "iexplore.exe" "$TITLE"
+POL_Shortcut "iexplore.exe" "$TITLE" "" "" "Network"
 POL_System_TmpDelete
 
 POL_SetupWindow_Close

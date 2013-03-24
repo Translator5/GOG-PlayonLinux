@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2012-10-29 02-56)
+# Last revision : (2013-03-24 18-28)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -67,8 +67,8 @@ POL_Wine_DirectSound "DefaultSampleRate" "48000"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "TwoWorlds.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
-POL_Shortcut "TwoWorlds_RADEON.exe" "$SHORTCUT_NAME (Radeon)" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "TwoWorlds.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "TwoWorlds_RADEON.exe" "$SHORTCUT_NAME (Radeon)" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
 POL_Shortcut_Document "$SHORTCUT_NAME (Radeon)" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
 
@@ -107,7 +107,7 @@ _EOFINI_
 
     # Create a shortcut, since the CP behaves more like a launcher than a
     # configurator
-    POL_Shortcut "TwoWorldsCP.exe" "$SHORTCUT_NAME - $(eval_gettext 'Control Panel')" "Two Worlds Control Panel.png" ""
+    POL_Shortcut "TwoWorldsCP.exe" "$SHORTCUT_NAME - $(eval_gettext 'Control Panel')" "Two Worlds Control Panel.png" "" "Game"
   fi
 fi
 

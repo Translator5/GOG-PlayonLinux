@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-15 19-03)
-# Last revision : (2012-10-29 02-02)
+# Last revision : (2013-03-24 17-54)
 # Wine version used : 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,12 +53,12 @@ POL_SetupWindow_VMS "2"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "engine.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "--autokill Creatures 3"
+POL_Shortcut "engine.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "--autokill Creatures 3" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME1"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Creatures Exodus/Creature 3/Walkthrough.pdf"
 # C:\Program Files\GOG.com\Creatures Exodus\Creatures 3\ShortcutCard.pdf
 
-#POL_Shortcut "InstallBlast.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+#POL_Shortcut "InstallBlast.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 #POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Creatures Exodus/Docking Station/Manual.pdf"
 # C:\Program Files\GOG.com\Creatures Exodus\Docking Station\QuickStartSmall.pdf
 

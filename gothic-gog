@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-24 10-39)
-# Last revision : (2012-10-29 02-14)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -86,7 +86,7 @@ sync_resolutions () {
 _EOFFUNC_
 
 
-POL_Shortcut "GOTHIC.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "GOTHIC.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 # Using $WINEPREFIX here causes trouble, bug #953
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source "../gothic_funcs" || exit 0'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'sync_resolutions'

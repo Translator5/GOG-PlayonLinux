@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-13 14-14)
-# Last revision : (2013-01-16 21-24)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,15 +63,15 @@ POL_Wine regedit "$POL_USER_ROOT/tmp/mohaa_disabled extenstions.reg"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "MOHAA.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "MOHAA.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" 'export __GL_ExtensionStringVersion=17700'
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme.txt"
 
-POL_Shortcut "moh_spearhead.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "moh_spearhead.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME2" 'export __GL_ExtensionStringVersion=17700'
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Spearhead.txt"
 
-POL_Shortcut "moh_breakthrough.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "moh_breakthrough.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME3" 'export __GL_ExtensionStringVersion=17700'
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/Readme_Breakthrough.txt"
 

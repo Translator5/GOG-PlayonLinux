@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-20 19-45)
-# Last revision : (2012-09-23 19-28)
+# Last revision : (2013-03-24 17-51)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,7 +44,7 @@ POL_Wine_WaitBefore "$TITLE"
 
 POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
-POL_Shortcut "UniExtract.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "UniExtract.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Utility"
 
 POL_SetupWindow_Close
 

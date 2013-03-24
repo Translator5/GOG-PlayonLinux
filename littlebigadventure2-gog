@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-02 15-20)
-# Last revision : (2012-10-29 02-27)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -58,7 +58,7 @@ LBA2.EXE
 EXIT
 _EOFBAT_
 
-POL_Shortcut "LBA2.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "LBA2.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure 2/manual.pdf"
 # C:\Program Files\GOG.com\Little Big Adventure 2\README.TXT
 

@@ -22,7 +22,7 @@ POL_Wine_WaitExit "Mutant Mudds Setup: Completed"
 
 POL_System_TmpDelete
 
-POL_Shortcut "MutantMudds.exe" "Mutant Mudds"
+POL_Shortcut "MutantMudds.exe" "Mutant Mudds" "" "" "Game"
 
 POL_SetupWindow_Close
 exit 0

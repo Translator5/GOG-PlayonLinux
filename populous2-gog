@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-12 21-15)
-# Last revision : (2012-11-26 22-26)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,7 +63,7 @@ Pop2 /ss /h %1 %2
 EXIT
 _EOFBAT_
 
-POL_Shortcut "GO.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "GO.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Populous 2/manual.pdf"
 
 POL_SetupWindow_Close

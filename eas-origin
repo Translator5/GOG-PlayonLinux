@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 21:00)
-# Last revision : (2013-01-07 15:26)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4
 # Distribution used to test : Mint 12 x64
 # Author : GNU_Raziel
@@ -66,7 +66,6 @@ touch "$POL_USER_ROOT/wineprefix/$PREFIX/drive_c/system32/drivers/etc/hosts"
 ## End Fix
 
 # Making shortcut
-POL_Shortcut "Origin.exe" "$TITLE" "" ""
+POL_Shortcut "Origin.exe" "$TITLE" "" "" "Game"
 
 POL_SetupWindow_Close
-exit 0

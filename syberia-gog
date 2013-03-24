@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2012-11-13 19-27)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -55,7 +55,7 @@ Set_Managed Off
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Syberia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Syberia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 
 # Work around "black screen" bug http://bugs.winehq.org/show_bug.cgi?id=21796
 # double quotes around "P"OL_Wine prevent POL getArgs to pickup this line, sorry for the hack

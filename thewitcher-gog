@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2012-11-29 23-48)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.18
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,7 +44,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/The Witcher Enhanced Edition Directors Cut/manual.pdf"
 # C:\GOG Games\The Witcher Enhanced Edition Directors Cut\readme.rtf
 

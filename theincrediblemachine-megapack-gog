@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-13 10-53)
-# Last revision : (2012-10-29 02-52)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -70,10 +70,10 @@ POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "EVEN.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
-POL_Shortcut "TIMWIN.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
-POL_Shortcut "Contraptions.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
-POL_Shortcut "EvenMore.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" ""
+POL_Shortcut "EVEN.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "TIMWIN.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "Contraptions.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
+POL_Shortcut "EvenMore.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME4"
 POL_Shortcut_Document "$SHORTCUT_NAME4" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Incredible Machine Series/The Incredible Machine - Even More Contraptions/readme.txt"
 

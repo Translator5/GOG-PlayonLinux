@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 21-24)
-# Last revision : (2012-10-29 02-14)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -58,7 +58,7 @@ POL_Wine_X11Drv "DXGrab" "Y"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Gothic3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Gothic3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Manual.pdf"
 # C:\Program Files\GOG.com\Gothic 3\readme.txt

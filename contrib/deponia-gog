@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-18 16-24)
-# Last revision : (2012-11-25 12-16)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.10 64-bit
 # Author : Kweepeer (Based on Broken Sword DC script by Pierre Etchemaite)
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "256"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Deponia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Deponia.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Deponia/Manual.pdf"
 
 # Fix missing sound issue in cutscenes.
@@ -63,4 +63,3 @@ POL_SetupWindow_Close
 # VisionaireConfigurationTool.exe doesn't seem to work in GOG version of the game.
 # You can set advanced options by editing $WINEPREFIX/drive_c/GOG Games/Deponia/config.ini.
 
-exit 0

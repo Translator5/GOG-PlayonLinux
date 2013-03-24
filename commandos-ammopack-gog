@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-25 21-49)
-# Last revision : (2013-02-26 22-41)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -87,10 +87,10 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "comandos.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "comandos.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos Ammo Pack/Manual.pdf"
 
-POL_Shortcut "coman_mp.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "coman_mp.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos Ammo Pack/coman_mp/Manual.pdf"
 
 # C:\Program Files\GOG.com\Commandos Ammo Pack\coman_mp\mpserver.exe

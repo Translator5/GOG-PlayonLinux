@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-16 21-06)
-# Last revision : (2012-12-17 00-55
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -75,7 +75,7 @@ ForcePCorrect = TRUE
 D3DOptions = -1073610643
 _EOFCFG_
 
-POL_Shortcut "MDK3DFX.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "MDK3DFX.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/MDK/MANUAL.PDF"
 C:\GOG Games\MDK\readme.TXT
 

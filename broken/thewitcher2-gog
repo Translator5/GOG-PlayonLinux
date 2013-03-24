@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2012-10-29 01-53)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.8
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -83,7 +83,7 @@ MANUAL="manual_en.pdf"
 [ "$POL_LANG" = "hu" ] && MANUAL="manual_hu.pdf"
 [ "$POL_LANG" = "jp" ] && MANUAL="manual_jp.pdf"
 
-POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/$MANUAL"
 
 POL_SetupWindow_Close

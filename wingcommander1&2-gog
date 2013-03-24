@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-30 20-18)
-# Last revision : (2012-12-20 15-27)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -95,17 +95,17 @@ loadfix -32 so2
 EXIT
 _EOFBAT_
 
-POL_Shortcut "WC.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "WC.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Wing Commander 1 and 2/WC/manual.pdf"
 # C:\GOG Games\Wing Commander 1 and 2\WC\Ships Blueprints.pdf
 # C:\GOG Games\Wing Commander 1 and 2\WC\The Secret Missions - Reference Card.pdf
-POL_Shortcut "WCSM2.BAT" "$SHORTCUT_NAME11" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "WCSM2.BAT" "$SHORTCUT_NAME11" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME11" "$WINEPREFIX/drive_c/GOG Games/Wing Commander 1 and 2/WC/The Secret Missions 2 - Reference Card.pdf"
 
-POL_Shortcut "WC2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "WC2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Wing Commander 1 and 2/WC2/manual.pdf"
-POL_Shortcut "WC2SO1.BAT" "$SHORTCUT_NAME21" "$SHORTCUT_NAME2.png" ""
-POL_Shortcut "WC2SO2.BAT" "$SHORTCUT_NAME22" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "WC2SO1.BAT" "$SHORTCUT_NAME21" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "WC2SO2.BAT" "$SHORTCUT_NAME22" "$SHORTCUT_NAME2.png" "" "Game"
 
 POL_SetupWindow_Close
 

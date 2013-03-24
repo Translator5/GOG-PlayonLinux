@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-15 10-34)
-# Last revision : (2012-11-28 21-05)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -90,10 +90,10 @@ UW2.BAT
 EXIT 
 _EOFBAT_
 
-POL_Shortcut "UU1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "UU1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Ultima Underworld 1 and 2/Ultima Underworld 1/Ultima_Underworld-Manual.pdf"
 
-POL_Shortcut "UU2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "UU2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Ultima Underworld 1 and 2/Ultima Underworld 2/Ultima_Underworld_II-Manual.pdf"
 
 POL_SetupWindow_Close

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-01 19-55)
-# Last revision : (2013-02-16 09-37)
+# Last revision : (2013-03-24 17-58)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,15 +47,15 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Geneforge.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "Geneforge.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Geneforge/Geneforge/Geneforge Manual.pdf"
-POL_Shortcut "Geneforge 2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "Geneforge 2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Geneforge/Geneforge 2/Geneforge 2 Manual.pdf"
-POL_Shortcut "Geneforge 3.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "Geneforge 3.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$GOGROOT/Geneforge/Geneforge 3/Geneforge 3 Manual.pdf"
-POL_Shortcut "Geneforge 4.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" ""
+POL_Shortcut "Geneforge 4.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME4" "$GOGROOT/Geneforge/Geneforge 4/Geneforge 4 Manual.pdf"
-POL_Shortcut "Geneforge 5.exe" "$SHORTCUT_NAME5" "$SHORTCUT_NAME5.png" ""
+POL_Shortcut "Geneforge 5.exe" "$SHORTCUT_NAME5" "$SHORTCUT_NAME5.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME5" "$GOGROOT/Geneforge/Geneforge 5/Geneforge 5 Manual.pdf"
 
 POL_SetupWindow_Close

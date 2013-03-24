@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-02 21:00)
-# Last revision : (2013-01-11 00:00)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.20
 # Distribution used to test : Linux Mint 12 x64
 # Author : GNU_Raziel
@@ -73,7 +73,6 @@ if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
 fi
 
 # Making shortcut
-POL_Shortcut "steam.exe" "$TITLE" "" "steam://rungameid/24240"
+POL_Shortcut "steam.exe" "$TITLE" "" "steam://rungameid/24240" "Game"
 
 POL_SetupWindow_Close
-exit 0

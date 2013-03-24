@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 16-10)
-# Last revision : (2012-10-29 01-57)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.0
 # Distribution used to test : Ubuntu 12.04 LTS
 # Author : Jan Nytra jannytra@seznam.cz
@@ -48,7 +48,7 @@ POL_SetupWindow_VMS "8"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "KM_TPR.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "KM_TPR.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 
 POL_SetupWindow_Close
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2012-12-20 23-44)
+# Last revision : (2013-03-24 16-50)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -135,31 +135,31 @@ cd world
 xeen.exe
 _EOFBAT_
 
-POL_Shortcut "MM1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "MM1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC1/Manual.pdf"
 # C:\GOG Games\Might and Magic VI Limited Edition/Might and Magic 1 - Book I\Readme.txt
 
-POL_Shortcut "MM2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "MM2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC2/Manual.pdf"
 
-POL_Shortcut "MM3.BAT" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "MM3.BAT" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC3/Manual.pdf"
 
-POL_Shortcut "MM45.BAT" "$SHORTCUT_NAME45" "$SHORTCUT_NAME45.png" ""
+POL_Shortcut "MM45.BAT" "$SHORTCUT_NAME45" "$SHORTCUT_NAME45.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME45" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC45/Manual_world_of_xeen.pdf"
 
-POL_Shortcut "MM45CD.BAT" "$SHORTCUT_NAME45 (Full Speech)" "$SHORTCUT_NAME45.png" ""
+POL_Shortcut "MM45CD.BAT" "$SHORTCUT_NAME45 (Full Speech)" "$SHORTCUT_NAME45.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME45 (Full Speech)" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC45/Manual_world_of_xeen.pdf"
 
-POL_Shortcut "SWORDS.EXE" "$SHORTCUT_NAME5A" "$SHORTCUT_NAME5A.png" ""
+POL_Shortcut "SWORDS.EXE" "$SHORTCUT_NAME5A" "$SHORTCUT_NAME5A.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME5A" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC5A/Manual_Swords_of_Xeen.PDF"
 
-POL_Shortcut "MM6.exe" "$SHORTCUT_NAME6" "$SHORTCUT_NAME6.png" ""
+POL_Shortcut "MM6.exe" "$SHORTCUT_NAME6" "$SHORTCUT_NAME6.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME6" "$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/Might and Magic 6/Manual.pdf"
 # C:\GOG Games\Might and Magic VI Limited Edition\Might and Magic 6\Readme.txt
 
 # FIXME
-POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME345PW" "" "'$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC3/keys_3_5.pdf'"
+POL_Shortcut "winebrowser.exe" "$SHORTCUT_NAME345PW" "" "'$WINEPREFIX/drive_c/GOG Games/Might and Magic VI Limited Edition/$MIGHTANDMAGIC3/keys_3_5.pdf'" "Game"
 
 POL_SetupWindow_Close
 

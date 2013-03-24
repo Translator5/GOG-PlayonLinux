@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-02 15-45)
-# Last revision : (2013-01-19 09-07)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.9
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,7 +53,7 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "TotalA.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "TotalA.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Total Annihilation - Commander Pack/manual.pdf"
 # C:\GOG Games\Total Annihilation - Commander Pack\readme.txt
 # C:\GOG Games\Total Annihilation - Commander Pack\BTREADME.TXT

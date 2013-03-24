@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-14 20-19)
-# Last revision : (2012-10-29 02-46)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,7 +52,7 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Rangers.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Rangers.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Space Rangers 2 - Reboot/manual.pdf"
 
 POL_SetupWindow_Close

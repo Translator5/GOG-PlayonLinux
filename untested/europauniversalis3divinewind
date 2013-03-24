@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-12 15-29)
-# Last revision : (2012-05-24 20-06)
+# Last revision : (2013-03-24 17-51)
 # Wine version used : 1.3.37
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -58,7 +58,7 @@ Set_Managed "Off"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "eu3.exe" "$SHORTCUT_NAME"
+POL_Shortcut "eu3.exe" "$SHORTCUT_NAME" "" "" "Game"
 
 POL_SetupWindow_Close
 

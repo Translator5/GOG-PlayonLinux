@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 23-07)
-# Last revision : (2013-02-17 06-30)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.7
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,7 +44,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "bs4pc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-language=english"
+POL_Shortcut "bs4pc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-language=english" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Broken Sword - The Angel of Death/manual.pdf"
 
 POL_SetupWindow_Close

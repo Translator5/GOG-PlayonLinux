@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-17 21-44)
-# Last revision : (2013-03-19 22-11)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -73,9 +73,9 @@ VOODO2C.EXE -novoodoo
 EXIT
 _EOFBAT_
 
-POL_Shortcut "CARMA.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "CARMA.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 
-POL_Shortcut "CARSPLAT.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "CARSPLAT.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 
 POL_SetupWindow_Close
 

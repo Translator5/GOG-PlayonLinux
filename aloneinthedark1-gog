@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-05 20-05)
-# Last revision : (2012-11-25 16-40)
+# Last revision : (2013-03-24 16-09)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -59,9 +59,9 @@ cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/GAME.INST" -t iso
 _EOFAE_
 
-POL_Shortcut "INDARK.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "INDARK.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark/manual.pdf"
-POL_Shortcut "INDARK2.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "16 1"
+POL_Shortcut "INDARK2.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "16 1" "Game"
 
 POL_SetupWindow_Close
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-09 16-43)
-# Last revision : (2012-10-29 02-14)
+# Last revision : (2013-03-24 16-43)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -106,19 +106,19 @@ savepath=C:\Program Files\GOG.com\Gobliiins Pack\Goblins3 Floppy\
 _EOFCFG_
 
 
-POL_Shortcut "goblins1.polcfg" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "goblins1.polcfg" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1/Manual.pdf"
-POL_Shortcut "goblins1fdd.polcfg" "$SHORTCUT_NAME1 $FLOPPIES" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "goblins1fdd.polcfg" "$SHORTCUT_NAME1 $FLOPPIES" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1/Manual.pdf"
 
-POL_Shortcut "goblins2.polcfg" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "goblins2.polcfg" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2/Manual.pdf"
-POL_Shortcut "goblins2fdd.polcfg" "$SHORTCUT_NAME2 $FLOPPIES" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "goblins2fdd.polcfg" "$SHORTCUT_NAME2 $FLOPPIES" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2/Manual.pdf"
 
-POL_Shortcut "goblins3.polcfg" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "goblins3.polcfg" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3/Manual.pdf"
-POL_Shortcut "goblins3fdd.polcfg" "$SHORTCUT_NAME3 $FLOPPIES" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "goblins3fdd.polcfg" "$SHORTCUT_NAME3 $FLOPPIES" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME3 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3/Manual.pdf"
 
 POL_SetupWindow_Close

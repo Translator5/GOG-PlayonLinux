@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-18 19-00)
-# Last revision : (2012-11-28 02-18)
+# Last revision : (2013-03-24 16-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -79,10 +79,10 @@ _EOFBAT_
 
 perl -pe 's/^DeviceIRQ=5/DeviceIRQ=7/' "$WINEPREFIX/drive_c/GOG Games/Lands Of Lore 1 and 2/$LOL2/LOLSETUP.INI"
 
-POL_Shortcut "LOL1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "LOL1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Lands Of Lore 1 and 2/$LOL1/manual.pdf"
 
-POL_Shortcut "LOLG.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "-CD ."
+POL_Shortcut "LOLG.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "-CD ." "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Lands Of Lore 1 and 2/$LOL2/manual.pdf"
 
 POL_SetupWindow_Close

@@ -15,7 +15,7 @@
 #   Improving theme
 
 # Date : (2011-06-13 17-29)
-# Last revision : (2012-04-11 15-05)
+# Last revision : (2013-03-24 16-52)
 # Wine version used : 1.4
 # Distribution used to test : Ubuntu 10.04
 # Author : SuperPlumus
@@ -213,10 +213,9 @@ echo "pref(\"dom.ipc.plugins.enabled\", false);" > "$WINEPREFIX/drive_c/$PROGRAM
 
 POL_System_TmpDelete
 
-POL_Shortcut "firefox.exe" "$TITLE"
+POL_Shortcut "firefox.exe" "$TITLE" "" "" "Network"
 
 POL_SetupWindow_message "$(eval_gettext '$TITLE has been successfully installed.')" "$TITLE"
 
 POL_SetupWindow_Close
 
-exit 0

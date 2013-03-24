@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 13-10)
-# Last revision : (2013-02-16 08-00)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -45,13 +45,13 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "blackwell1.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" ""
+POL_Shortcut "blackwell1.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME1"
-POL_Shortcut "Unbound.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" ""
+POL_Shortcut "Unbound.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME2"
-POL_Shortcut "Convergence.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" ""
+POL_Shortcut "Convergence.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME3"
-POL_Shortcut "Deception.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" ""
+POL_Shortcut "Deception.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" "" "Game"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME4"
 
 POL_SetupWindow_Close

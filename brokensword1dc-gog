@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-29 17-31)
-# Last revision : (2012-11-25 14-51)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -43,7 +43,7 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "bs1dc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "bs1dc.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Broken Sword - Director's Cut/manual.pdf"
 
 POL_SetupWindow_Close

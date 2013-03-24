@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-22 15-32)
-# Last revision : (2012-10-29 02-05)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "4"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "BigRaceUSA.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "BigRaceUSA.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Pro Pinball - Big Race USA/Manual.pdf"
 # Game has issues with uncapped FPS (menus too fast...) => enable vblank
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "export __GL_SYNC_TO_VBLANK=1" # nvidia?

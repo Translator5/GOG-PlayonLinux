@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 11-39)
-# Last revision : (2013-02-07 12-39)
+# Last revision : (2013-03-24 18-12)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -59,13 +59,13 @@ LNG_EDITOR="$(eval_gettext 'The level editor')"
 POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_EDITOR}" "~"
 SHORTCUTS="$APP_ANSWER"
 
-POL_Shortcut "FarCry.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "FarCry.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Far Cry/Manual.pdf"
 # C:/GOG Games/Far Cry/Readme.txt
 # C:/GOG Games/Far Cry/Manual_1_4.pdf
 
 if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
-    POL_Shortcut "Editor.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_EDITOR.png" ""
+    POL_Shortcut "Editor.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_EDITOR.png" "" "Game"
     POL_Shortcut_Document "$SHORTCUT_EDITOR" "$GOGROOT/Far Cry/Editor Manual.pdf"
 fi
 

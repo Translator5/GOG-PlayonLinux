@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 20-41)
-# Last revision : (2012-12-06 21-08)
+# Last revision : (2013-03-24 15-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ cd "$WINEPREFIX/drive_c/GOG Games/Planescape Torment" || POL_Debug_Fatal "Game n
 POL_Wine setup-ddrawfix.exe --uninstall
 rm -r setup-ddrawfix.exe ddrawfix
 
-POL_Shortcut "Torment.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" ""
+POL_Shortcut "Torment.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Planescape Torment/manual.pdf"
 # C:\GOG Games\Planescape Torment\Readme.txt
 
