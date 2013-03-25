@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-01 21-35)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -43,10 +43,10 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "game.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "game.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Silent Storm GOLD/Silent Storm/Manual.pdf"
 
-POL_Shortcut "Sentinels.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "Sentinels.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Silent Storm GOLD/Silent Storm Sentinels/UserManual/index.html"
 
 exit 0

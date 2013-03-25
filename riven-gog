@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-25 23-27)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -45,7 +45,7 @@ POL_SetupWindow_VMS "2" # "640x480 16bit"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Riven.exe" "$SHORTCUT_NAME" "" "" "Game"
+POL_Shortcut "Riven.exe" "$SHORTCUT_NAME" "" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Riven/manual.pdf"
 
 POL_SetupWindow_Close

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,7 +48,7 @@ Set_Desktop "On" "800" "600"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "ToEE.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "ToEE.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Temple of Elemental Evil/Manual.pdf"
 # C:\GOG Games\Temple of Elemental Evil\Readme.txt
 

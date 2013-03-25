@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-10 10-53)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,7 +63,7 @@ cp PSOUND.DB PSOUND.DLB
 cp ASOUND.DC ASOUND.DLC
 cp ASOUND.DB ASOUND.DLB
 
-POL_Shortcut "DARKLAND.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "DARKLAND.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Darklands/manual.pdf"
 
 POL_SetupWindow_Close

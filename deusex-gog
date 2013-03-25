@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-14 00-51)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -56,7 +56,7 @@ POL_SetupWindow_VMS "16"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "DeusEx.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "DeusEx.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/manual.pdf"
 # Game has issues with uncapped FPS (dialogs cut before the end...) => enable vblank
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "export __GL_SYNC_TO_VBLANK=1" # nvidia?

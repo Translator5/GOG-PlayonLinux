@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-30 09-59)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,7 +48,7 @@ POL_SetupWindow_VMS "4"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "darkfall.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "darkfall.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Dark Fall - The Journal/manual.pdf"
 
 POL_SetupWindow_Close

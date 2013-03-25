@@ -21,7 +21,7 @@ POL_Wine_WaitBefore "$TITLE"
 POL_Wine DCUO_setup.exe
 wineserver -k
 
-POL_Shortcut "LaunchPad.exe" "$TITLE" "" "" "Game"
+POL_Shortcut "LaunchPad.exe" "$TITLE" "" "" "Game;RolePlaying;"
 
 POL_SetupWindow_Close
 exit 0

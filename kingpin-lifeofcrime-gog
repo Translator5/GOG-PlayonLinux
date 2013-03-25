@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-03 00-19)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ POL_SetupWindow_VMS "4"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "kingpin.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "kingpin.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 # Report a shorter version string http://www.linuxpoweruser.com/?cat=6
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'export __GL_ExtensionStringVersion=17700'
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Kingpin/MANUAL.PDF"

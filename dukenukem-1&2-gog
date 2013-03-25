@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-28 22-02)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -65,17 +65,17 @@ NUKEM2
 EXIT
 _EOFBAT_
 
-POL_Shortcut "DN1.EXE" "$SHORTCUT_NAME11" "$SHORTCUT_NAME11.png" "" "Game"
+POL_Shortcut "DN1.EXE" "$SHORTCUT_NAME11" "$SHORTCUT_NAME11.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME11" "$WINEPREFIX/drive_c/GOG Games/Duke Nukem 1+2/manual.pdf"
 # C:\GOG Games\Duke Nukem 1+2\hintsheet.pdf
 
-POL_Shortcut "DN2.EXE" "$SHORTCUT_NAME12" "$SHORTCUT_NAME12.png" "" "Game"
+POL_Shortcut "DN2.EXE" "$SHORTCUT_NAME12" "$SHORTCUT_NAME12.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME12" "$WINEPREFIX/drive_c/GOG Games/Duke Nukem 1+2/manual.pdf"
 
-POL_Shortcut "DN3.EXE" "$SHORTCUT_NAME13" "$SHORTCUT_NAME13.png" "" "Game"
+POL_Shortcut "DN3.EXE" "$SHORTCUT_NAME13" "$SHORTCUT_NAME13.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME13" "$WINEPREFIX/drive_c/GOG Games/Duke Nukem 1+2/manual.pdf"
 
-POL_Shortcut "NUKEM2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "NUKEM2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Duke Nukem 1+2/manual.pdf"
 
 POL_SetupWindow_Close

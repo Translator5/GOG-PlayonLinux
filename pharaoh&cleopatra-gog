@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-21 16-46)
-# Last revision : (2013-03-24 17-14)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,7 +42,7 @@ POL_SetupWindow_VMS "1"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Pharaoh.exe" "$SHORTCUT_NAME" "" "" "Game" # "$SHORTCUT_NAME.png"
+POL_Shortcut "Pharaoh.exe" "$SHORTCUT_NAME" "" "" "Game;StrategyGame;" # "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Pharaoh Gold/Pharaoh - manual.pdf"
 # C:\GOG Games\Pharaoh Gold\Readme.txt
 # C:\GOG Games\Pharaoh Gold\Cleopatra - manual.pdf

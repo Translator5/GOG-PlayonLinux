@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-01 20-38)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.3.23
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -62,7 +62,7 @@ rm "$POL_USER_ROOT/tmp/cdrom.reg"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "MotoRacer.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "MotoRacer.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;SportsGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Moto Racer/faq_uk.txt"
 # Use Xephyr to emulate 16bpp display
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'TITLE="'"$TITLE"'"'

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2013-03-24 18-19)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,17 +53,17 @@ LNG_DS="$(eval_gettext 'Dedicated server')"
 POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be created?')" "$TITLE" "${LNG_EDITOR}~${LNG_DS}" "~"
 SHORTCUTS="$APP_ANSWER"
 
-POL_Shortcut "Painkiller.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "Painkiller.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/ReadMe.txt
 
 if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
-    POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME.png" "" "Game"
+    POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
     POL_Shortcut_Document "$SHORTCUT_EDITOR" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Pain Engine.pdf"
 fi
 
 if echo "$SHORTCUTS" | grep -q "$LNG_DS"; then
-    POL_Shortcut "Painkiller.exe" "$SHORTCUT_DS" "$SHORTCUT_NAME.png" "-dedicated" "Game"
+    POL_Shortcut "Painkiller.exe" "$SHORTCUT_DS" "$SHORTCUT_NAME.png" "-dedicated" "Game;ActionGame;"
 fi
 
 POL_SetupWindow_Close

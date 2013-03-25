@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-27 00-14)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Slackware 14.0, Debian Sid (Unstable)
 # Author : ... (Based on Gemini Rue script by Pierre Etchemaite)
@@ -43,7 +43,7 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Resonance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "Resonance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Resonance/README.txt"
 

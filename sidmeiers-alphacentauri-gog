@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2013-03-24 17-35)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -89,12 +89,12 @@ done
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "terran.exe" "$SHORTCUT_NAME1" "" "" "Game" # "$SHORTCUT_NAME1.png"
+POL_Shortcut "terran.exe" "$SHORTCUT_NAME1" "" "" "Game;StrategyGame;" # "$SHORTCUT_NAME1.png"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME1"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Sid Meier's Alpha Centauri/Manual.pdf"
 # C:\GOG Games\Sid Meier's Alpha Centauri\readme.txt
 
-POL_Shortcut "terranx.exe" "$SHORTCUT_NAME2" "" "" "Game" # "$SHORTCUT_NAME2.png"
+POL_Shortcut "terranx.exe" "$SHORTCUT_NAME2" "" "" "Game;StrategyGame;" # "$SHORTCUT_NAME2.png"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME2"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Sid Meier's Alpha Centauri/readme_ac.txt"
 # C:\GOG Games\Sid Meier's Alpha Centauri\facedit.exe

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 02-03)
-# Last revision : (2013-03-24 16-20)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.3.34
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -60,7 +60,7 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Empire Earth.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "Empire Earth.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
 #POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "POL_Wine_AutoSetVersionEnv"
 #POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "wineserver -k"
 #POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "nice -19 wineserver"
@@ -71,7 +71,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.c
 # C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/technology_tree.pdf
 # C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/scenario_editor_manual.pdf
 
-POL_Shortcut "EE-AOC.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "EE-AOC.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME2" "POL_Wine_AutoSetVersionEnv"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME2" "wineserver -k"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME2" "nice -19 wineserver"

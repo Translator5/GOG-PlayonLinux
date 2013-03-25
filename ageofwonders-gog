@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-09 15-50)
-# Last revision : (2013-03-24 18-06)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -50,12 +50,12 @@ POL_Call POL_Install_iv50
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "AoWCompat" "Game"
+POL_Shortcut "Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "AoWCompat" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Age of Wonders/QuickStart.pdf"
 # C:\Program Files\GOG.com\Age of Wonders\Readme.txt
 # C:\Program Files\GOG.com\Age of Wonders\AoWEd.exe
 
-#POL_Shortcut "AoWEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" "" "Game"
+#POL_Shortcut "AoWEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" "" "Game;StrategyGame;"
 
 POL_SetupWindow_Close
 

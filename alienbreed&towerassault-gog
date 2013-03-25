@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-18 23-59)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -62,11 +62,11 @@ ipx_connection=1
 ipx_ipx=true
 _EOFCFG_
 
-POL_Shortcut "ALIEN.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "ALIEN.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;ArcadeGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Alien Breed Pack/Alien Breed/manual.pdf"
 # C:\Program Files\GOG.com\Alien Breed Pack\Alien Breed\keybindings.txt
 
-POL_Shortcut "TA.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "TA.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;ArcadeGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Alien Breed Pack/$TOWERASSAULT/manual.pdf"
 
 POL_SetupWindow_Close

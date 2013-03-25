@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.5.10
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -61,7 +61,7 @@ POL_Call POL_Install_ffdshow
 #POL_Wine_reboot
 POL_Wine wineboot -u
 
-POL_Shortcut "rayne.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "rayne.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 # double quotes around "P"OL_Wine prevent POL getArgs to pickup this line, sorry for the hack
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'passvideo () {'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  POL_Debug_Message "waiting for video to start"'

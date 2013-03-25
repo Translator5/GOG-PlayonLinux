@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-06 22-14)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -80,7 +80,7 @@ cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark 2/GAME.INST" -t iso
 _EOFAE_
 
-POL_Shortcut "AITD2.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "AITD2.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Alone in the Dark 2/manual.pdf"
 
 POL_SetupWindow_Close

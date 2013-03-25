@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-19 20-00)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.5.9-raw3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ sed -i.bak -e 's/^VID_PIXELASPECT=-1\.000000/VID_PIXELASPECT=1.000000/' "$WINEPR
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "DarkAthena.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "DarkAthena.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 
 MANUAL="RIDDICK_PC_MANUAL_GB.pdf"
 [ "$POL_LANG" = "fr" ] && MANUAL="RIDDICK_PC_MANUAL_FR.pdf"

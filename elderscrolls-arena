@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2013-03-24 16-37)
+# Last revision : (2013-03-26 00-05)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -84,7 +84,7 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # Icon from KingReverant http://kingreverant.deviantart.com/art/The-Elder-Scrolls-series-icons-161685128
-POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-delay:9 -exit" "Game"
+POL_Shortcut "ARENA.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-delay:9 -exit" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/ARENA/Docs/Arena106 Setup.pdf"
 
 POL_SetupWindow_message "$(eval_gettext 'The codes needed to exit the first dungeon can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual" then check pp 4-5.')" "$TITLE"

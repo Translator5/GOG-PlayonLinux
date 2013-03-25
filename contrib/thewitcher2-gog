@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-14 14:12)
-# Last revision : (2013-03-24 16-25)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.5.8
 # Distribution used to test : Archlinux
 # Author : libgradev
@@ -50,8 +50,8 @@ POL_Call POL_Install_dxfullsetup
 
 POL_Wine_reboot
 
-POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "" "" "Game"
-POL_Shortcut "Configurator.exe" "$SHORTCUT_NAME Config" "" "" "Game"
+POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "" "" "Game;RolePlaying;"
+POL_Shortcut "Configurator.exe" "$SHORTCUT_NAME Config" "" "" "Game;RolePlaying;"
 
 POL_SetupWindow_Close
 

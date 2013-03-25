@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-04 23-09)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -66,7 +66,7 @@ _EOFAE_
 # "VGA 256 colors"
 POL_SetupWindow_VMS "2"
 
-POL_Shortcut "STARTH.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "STARTH.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;SportsGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/manual.pdf"
 # C:\GOG Games\Screamer\README.TXT
 

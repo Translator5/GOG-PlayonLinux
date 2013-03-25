@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-09 22-00)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.3.36
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -48,7 +48,7 @@ POL_SetupWindow_VMS "16"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "ColdWarAssault.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "ColdWarAssault.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arma Cold War Assault/manual.pdf"
 # C:/$PROGRAMFILES/GOG.com/Arma Cold War Assault/readme.txt
 

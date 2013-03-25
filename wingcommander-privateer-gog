@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-13 20-29)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -76,11 +76,11 @@ cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount d "$WINEPREFIX/drive_c/GOG Games/Wing Commander Privateer/GAME.GOG" -t iso -fs iso
 _EOFBAT_
 
-POL_Shortcut "PRIV.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "PRIV.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Wing Commander Privateer/manual.pdf"
 # C:\GOG Games\Wing Commander Privateer\reference_guide.pdf
 
-POL_Shortcut "PRIV.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME1.png" "r" "Game"
+POL_Shortcut "PRIV.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME1.png" "r" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Wing Commander Privateer/manual.pdf"
 
 POL_SetupWindow_Close

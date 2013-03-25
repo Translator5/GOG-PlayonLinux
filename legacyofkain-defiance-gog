@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-08 21-42)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ POL_SetupWindow_VMS "32"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "defiance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "defiance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Legacy of Kain Defiance/manual.pdf"
 
 POL_SetupWindow_Close

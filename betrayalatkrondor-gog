@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-05 21-11)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -80,11 +80,11 @@ fi
 # Betrayal at Krondor's icon comes from BaK desktop theme, could not find any other
 # http://www.sierrahelp.com/Games/KrondorSeries/BaKHelp.html
 
-POL_Shortcut "KRONDOR.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "KRONDOR.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/Manual.pdf"
 # C:\GOG Games\Betrayal Pack\Betrayal at Krondor\readme.txt
 
-POL_Shortcut "ANTARAR.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "ANTARAR.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Betrayal Pack/Betrayal in Antara/Manual.pdf"
 # C:\GOG Games\Betrayal Pack\Betrayal in Antara\readme.txt
 

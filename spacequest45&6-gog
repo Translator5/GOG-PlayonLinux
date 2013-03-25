@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 20-22)
-# Last revision : (2013-03-24 17-43)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -69,15 +69,15 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 
-POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST4/SIERRA.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST4/SIERRA.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Space Quest 4-5-6/manual.pdf"
 # C:\GOG Games\Space Quest 4-5-6\readme.txt
 # C:\GOG Games\Space Quest 4-5-6\Customer_support.htm
 
-POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST5/SIERRA.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST5/SIERRA.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Space Quest 4-5-6/manual.pdf"
 
-POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST6/SIERRA.EXE" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "-o resource.cfg" "Game"
+POL_Shortcut "GOG Games/Space Quest 4-5-6/$SPACEQUEST6/SIERRA.EXE" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "-o resource.cfg" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/GOG Games/Space Quest 4-5-6/manual.pdf"
 
 POL_SetupWindow_Close

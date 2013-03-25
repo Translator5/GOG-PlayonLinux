@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-18 12-48)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-58)
 # Wine version used : 1.4
 # Distribution used to test : Debiann unstable amd64
 # Author : Pierre Etchemaite
@@ -104,7 +104,7 @@ if [ -e "$WINEPREFIX/drive_c/windows/temp/" ]; then
 fi
 
 # Making shortcut
-POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID" "Game"
+POL_Shortcut "Steam.exe" "$TITLE" "$TITLE.png" "steam://rungameid/$VID" "Game;ActionGame;"
 
 POL_SetupWindow_Close
 exit 0

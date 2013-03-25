@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-09-22 22-30)
-# Last revision : (2013-03-24 17-53)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.5.13
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -52,10 +52,10 @@ POL_Call POL_Install_d3dx9_36
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "WallaceGromit101.exe" "$SHORTCUT_NAME1" "" "" "Game" # $SHORTCUT_NAME1.png
-POL_Shortcut "WallaceGromit102.exe" "$SHORTCUT_NAME2" "" "" "Game" # $SHORTCUT_NAME2.png
-POL_Shortcut "WallaceGromit103.exe" "$SHORTCUT_NAME3" "" "" "Game" # $SHORTCUT_NAME3.png
-POL_Shortcut "WallaceGromit104.exe" "$SHORTCUT_NAME4" "" "" "Game" # $SHORTCUT_NAME4.png
+POL_Shortcut "WallaceGromit101.exe" "$SHORTCUT_NAME1" "" "" "Game;AdventureGame;" # $SHORTCUT_NAME1.png
+POL_Shortcut "WallaceGromit102.exe" "$SHORTCUT_NAME2" "" "" "Game;AdventureGame;" # $SHORTCUT_NAME2.png
+POL_Shortcut "WallaceGromit103.exe" "$SHORTCUT_NAME3" "" "" "Game;AdventureGame;" # $SHORTCUT_NAME3.png
+POL_Shortcut "WallaceGromit104.exe" "$SHORTCUT_NAME4" "" "" "Game;AdventureGame;" # $SHORTCUT_NAME4.png
 
 POL_SetupWindow_Close
 

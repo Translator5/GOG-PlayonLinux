@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-11 21-56)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,7 +42,7 @@ POL_SetupWindow_VMS "256"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "TWW.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "TWW.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Whispered World/documents/Manual.pdf"
 # TWWOptions.exe only allows fullscreen/windowed setting, not worth using as configurator
 

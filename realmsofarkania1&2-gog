@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-27 22-51)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -91,12 +91,12 @@ star
 exit
 _EOFBAT_
 
-POL_Shortcut "ROA1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game"
+POL_Shortcut "ROA1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA1/passwords.pdf"
 # C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA1\MANUAL.PDF
 # C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA1\Cluebook.pdf
 
-POL_Shortcut "ROA2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game"
+POL_Shortcut "ROA2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA2/passwords.pdf"
 # C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA2\Manual.pdf
 # C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA2\Cluebook.pdf

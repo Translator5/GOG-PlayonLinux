@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 21-13)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -41,7 +41,7 @@ POL_SetupWindow_VMS "8"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Giants.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "Giants.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Giants - Citizen Kabuto/MANUAL.PDF"
 # C:\GOG Games\Giants - Citizen Kabuto\ReadMe.txt
 # C:\GOG Games\Giants - Citizen Kabuto\dedicated.exe

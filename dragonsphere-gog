@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-16 23-39)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -51,7 +51,7 @@ _EOFAE_
 # VGA 256 colors
 POL_SetupWindow_VMS "1"
 
-POL_Shortcut "MAINMENU.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-p" "Game"
+POL_Shortcut "MAINMENU.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "-p" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Dragonsphere/answers.txt"
 # C:\GOG Games\Dragonsphere\manual.pdf
 

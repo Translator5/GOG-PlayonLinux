@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-09 22-12)
-# Last revision : (2013-03-24 15-47)
+# Last revision : (2013-03-25 23-45)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -42,7 +42,7 @@ POL_SetupWindow_VMS "64"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "Perimeter.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game"
+POL_Shortcut "Perimeter.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Perimeter/MANUAL.pdf"
 # C:\GOG Games\Perimeter\readme.txt
 
