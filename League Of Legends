@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-26 10:01)
+# Last revision : (2013-03-26 10:08)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -142,7 +142,7 @@ GC_DONT_GC=1 POL_Wine "$FULL_INSTALLER"
 Set_OS winxp
 
 
-POL_Shortcut "rads_user_kernel.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe" "Game;ActionGame;"
+POL_Shortcut "rads_user_kernel.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe" "Game;RolePlaying;"
 
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'rm "$WINEPREFIX/drive_c/Riot Games/League of Legends/RADS/projects/lol_launcher/releases/0.0.0.0" 2> /dev/null'
 
