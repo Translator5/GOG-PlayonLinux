@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-27 18-28)
-# Last revision : (2013-03-27 21-55)
+# Last revision : (2013-03-27 22-05)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -23,7 +23,7 @@ SHORTCUT_NAME3="$SHORTCUT_NAME1: Wanton Destruction"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1637
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment / Devolver Digital" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
