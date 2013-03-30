@@ -1,9 +1,10 @@
 #!/bin/bash
 # Date : (2012-05-18 16-10)
-# Last revision : (2013-03-30 02-02)
+# Last revision : (2013-03-30 10-27)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.04 LTS
 # Author : Jan Nytra jannytra@seznam.cz
+#    updated by Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
