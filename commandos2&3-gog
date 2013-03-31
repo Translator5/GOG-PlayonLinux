@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-16 17-38)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.4
+# Last revision : (2013-03-31 16-25)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="commandos_2_3"
 PREFIX="Commandos_2_3_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Commandos 2 and 3"
 SHORTCUT_NAME1="Commandos 2: Men of Courage"
