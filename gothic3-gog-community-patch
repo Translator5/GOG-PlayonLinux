@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-30 23-30)
-# Last revision : (2012-10-29 02-15)
-# Wine version used : 1.5.5
+# Last revision : (2013-03-31 23-03)
+# Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -14,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 # Must match gothic3-gog script values
 TITLE_REQUIRED="Gothic 3 (GoG release)"
 PREFIX="Gothic3_gog"
-WORKING_WINE_VERSION="1.5.5"
+WORKING_WINE_VERSION="1.5.15"
 INSTALLBIN="Gothic_3_EE_Patch_v1.75.14_Int_Full.exe"
 
 DOWNLOAD_URL="http://www.worldofgothic.de/download.php?id=1283"
