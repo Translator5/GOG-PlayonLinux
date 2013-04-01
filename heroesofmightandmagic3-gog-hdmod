@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-23 17-44)
-# Last revision : (2013-04-01 14-13)
+# Last revision : (2013-04-01 14-36)
 # Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -37,7 +37,7 @@ POL_SetupWindow_presentation "$TITLE" "Alexander Barinov" "$URL" "Pierre Etchema
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
     POL_SetupWindow_message "$(eval_gettext 'This is an installer for an update or an addon;\nPlease install $TITLE_REQUIRED first')" "$TITLE"
-    POL_SetupWindow_close
+    POL_SetupWindow_Close
     exit 1
 fi
 
