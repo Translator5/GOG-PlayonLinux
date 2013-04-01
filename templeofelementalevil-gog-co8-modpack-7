@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2013-03-26 00-08)
-# Wine version used : 1.4.1
+# Last revision : (2013-04-01 23-01)
+# Wine version used : 1.5.22
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -9,9 +9,9 @@
 # Depend :
 
 # Tested with install archives:
-# Circle_of_Eight_Modpack_7.5.0_Setup.exe 164818525 "aa09ab4ca3619ed83ced588146d2d948"
+# Circle_of_Eight_Modpack_7.7.0_Setup.exe 167823117 "37ab6f6e2451380a7e126745f43bd65f"
 # and
-# Circle_of_Eight_Modpack_7.5.0_NC_Setup.exe 295527044 "c81f56b578e4be0d53e39d8eb8c2e48d"
+# Circle_of_Eight_Modpack_7.7.0_NC_Setup.exe 379649835 "5cad73cff1d46ef5c108acb6901469f7"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -19,8 +19,8 @@ source "$PLAYONLINUX/lib/sources"
 # Must match templeofelementalevil-gog script values
 TITLE_REQUIRED="The Temple of Elemental Evil (GoG release)"
 PREFIX="TempleElementalEvil_gog"
-WORKING_WINE_VERSION="1.4.1"
-INSTALLBIN="Circle_of_Eight_Modpack_7.5.0_NC_Setup.exe"
+WORKING_WINE_VERSION="1.5.22"
+INSTALLBIN="Circle_of_Eight_Modpack_7.7.0_NC_Setup.exe"
 
 DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack"
 
@@ -34,7 +34,9 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Circle of Eight" "http://www.co8.org/" "Pierre Etchemaite" "$PREFIX"
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_Debug_Fatal "$(eval_gettext 'Please install $TITLE_REQUIRED first')"
+    POL_SetupWindow_message "$(eval_gettext 'This is an installer for an update or an addon;\nPlease install $TITLE_REQUIRED first')" "$TITLE"
+    POL_SetupWindow_Close
+    exit 1
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
@@ -52,7 +54,8 @@ else
     ARCHIVE="$APP_ANSWER"
 fi
 
-POL_Call POL_Install_mono28
+# neither wine-mono 0.0.8 nor mono 2.10 worked...
+POL_Call POL_Install_dotnet20sp2
 
 POL_SetupWindow_message "$(eval_gettext 'Now you must install the modpack in directory:')\nC:\\GOG Games\\Temple of Elemental Evil\\" "$TITLE"
 
