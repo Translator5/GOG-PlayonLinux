@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-21 16-25)
-# Last revision : (2013-04-01 14-40)
-# Wine version used : 1.3.36
+# Last revision : (2013-04-01 15-08)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -14,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 # Must match adventrising-gog script values
 TITLE_REQUIRED="Advent Rising (GoG release)"
 PREFIX="AdventRising_gog"
-WORKING_WINE_VERSION="1.3.36"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Advent Rising: Advent Revising patch"
 DOWNLOAD_URL="http://www.miketyndall.com/setz/Advent%20Revising/"
@@ -41,7 +41,7 @@ else
     POL_SetupWindow_InstallMethod "LOCAL,DOWNLOAD"
     if [ "$INSTALL_METHOD" = "LOCAL" ]; then
         cd "$HOME"
-        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE"
+        POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "RAR archives (*.rar)|*.rar;*.RAR"
         ARCHIVE="$APP_ANSWER"
     fi
 
