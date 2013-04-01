@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.4.1
+# Last revision : (2013-04-01 20-31)
+# Wine version used : 1.5.22
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -10,12 +10,14 @@
 
 # Got a crash with 1.3.37, backoff to 1.3.36; But could be random crashes
 
+# Use Wine 1.5.22 that fixes flickering flames and smokes
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_temple_of_elemental_evil"
 PREFIX="TempleElementalEvil_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.5.22"
 
 TITLE="GOG.com - Temple of Elemental Evil"
 SHORTCUT_NAME="Temple of Elemental Evil"
