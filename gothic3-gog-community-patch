@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 23-30)
-# Last revision : (2013-03-31 23-03)
+# Last revision : (2013-04-01 14-37)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,7 +30,9 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Mad Vulture Games / Nordic Games" "http://www.worldofgothic.de/dl/download_478.htm" "Pierre Etchemaite" "$PREFIX"
 
 if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
-    POL_Debug_Fatal "$(eval_gettext 'Please install $TITLE_REQUIRED first')"
+    POL_SetupWindow_message "$(eval_gettext 'This is an installer for an update or an addon;\nPlease install $TITLE_REQUIRED first')" "$TITLE"
+    POL_SetupWindow_Close
+    exit 1
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
