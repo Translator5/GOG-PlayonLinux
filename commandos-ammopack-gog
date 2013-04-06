@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-25 21-49)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-04-06 11-03)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,11 +24,11 @@ POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jp
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1594
+which ffmpeg || POL_Debug_Fatal "$(eval_gettext 'This install script requires ffmpeg')"
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-which ffmpeg || POL_Debug_Fatal "$(eval_gettext 'This install script requires ffmpeg')"
 
 POL_Call POL_GoG_setup "$GOGID" "25d859e83b0b7e6115da5e36eb469dd7"
 
