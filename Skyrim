@@ -100,5 +100,6 @@ else
 	POL_Wine_WaitExit "$TITLE"
 fi
 
+POL_SetupWindow_message "$(eval_gettext 'If the game crashes at startup, open a terminal and type:\necho 0|sudo tee /proc/sys/kernel/yama/ptrace_scope')"
 POL_SetupWindow_Close
 exit 0
