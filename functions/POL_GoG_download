@@ -91,28 +91,28 @@ download_piece ()
 		fi
 	fi
 
-	if [ ! -e "$2" ]; then
-		local TMPPIECE="$2.part"
-		while true; do
-			POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" -O "$TMPPIECE"
+	[ -e "$2" ] && return
 
-			POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-			if [ ! -e "$TMPPIECE" ]; then
-				GOGDMSG="$(eval_gettext 'Download failed')"
-			elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
-				GOGDMSG="$(eval_gettext 'Download seems to be corrupted')"
-				mv "$TMPPIECE" "$FAILEDPIECE"
-			else
-				# Success
-				mv "$TMPPIECE" "$2"
-				[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
-				break
-			fi
+	local TMPPIECE="$2.part"
+	while true; do
+		POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" --continue -O "$TMPPIECE"
 
-			POL_SetupWindow_question "$GOGDMSG\n$(eval_gettext 'Retry?')" "$TITLE"
-			[ "$APP_ANSWER" = "TRUE" ] || POL_Debug_Fatal "$GOGDMSG"
-		done
-	fi
+		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
+		if [ ! -e "$TMPPIECE" ]; then
+			GOGDMSG="$(eval_gettext 'Download failed')"
+		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
+			GOGDMSG="$(eval_gettext 'Download seems to be corrupted')"
+			mv "$TMPPIECE" "$FAILEDPIECE"
+		else
+			# Success
+			mv "$TMPPIECE" "$2"
+			[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
+			break
+		fi
+
+		POL_SetupWindow_question "$GOGDMSG\n$(eval_gettext 'Retry?')" "$TITLE"
+		[ "$APP_ANSWER" = "TRUE" ] || POL_Debug_Fatal "$GOGDMSG"
+	done
 }
 
 download_piece "$BASEURL/$GAME/${INDEXPREFIX}$INDEX" "setup_$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
