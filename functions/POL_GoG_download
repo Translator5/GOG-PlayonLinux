@@ -74,7 +74,6 @@ done
 [ -d "$GOG_REPO" ] || mkdir -p "$GOG_REPO"
 cd "$GOG_REPO" || cd "$POL_USER_ROOT/tmp/"
 POL_Debug_Message "Will download into $PWD"
-local FAILURE=""
 
 download_piece ()
 {
@@ -94,20 +93,25 @@ download_piece ()
 
 	if [ ! -e "$2" ]; then
 		local TMPPIECE="$2.part"
-		POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" -O "$TMPPIECE"
+		while true; do
+			POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" -O "$TMPPIECE"
 
-		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ ! -e "$TMPPIECE" ]; then
-			POL_Debug_Error "Download seems to have failed"
-			FAILURE=1
-		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
-			POL_Debug_Error "Download seems to be corrupted"
-			FAILURE=1
-			mv "$TMPPIECE" "$FAILEDPIECE"
-		else
-			mv "$TMPPIECE" "$2"
-			[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
-		fi
+			POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
+			if [ ! -e "$TMPPIECE" ]; then
+				GOGDMSG="$(eval_gettext 'Download failed')"
+			elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
+				GOGDMSG="$(eval_gettext 'Download seems to be corrupted')"
+				mv "$TMPPIECE" "$FAILEDPIECE"
+			else
+				# Success
+				mv "$TMPPIECE" "$2"
+				[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
+				break
+			fi
+
+			POL_SetupWindow_question "$GOGDMSG\n$(eval_gettext 'Retry?')" "$TITLE"
+			[ "$APP_ANSWER" = "TRUE" ] || POL_Debug_Fatal "$GOGDMSG"
+		done
 	fi
 }
 
@@ -123,8 +127,6 @@ fi
 
 # Close session
 rm -f "$COOKIES"
-
-[ -n "$FAILURE" ] && POL_Debug_Fatal "One or more downloads failed"
 
 POL_GoG_downloaded="True"
 POL_GoG_location="$PWD/setup_$BASENAME.exe"
