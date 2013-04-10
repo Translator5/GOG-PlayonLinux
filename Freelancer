@@ -1,0 +1,88 @@
+#!/bin/bash
+# Date : (2013-03-1 17:00)
+# Last revision : (2013-03-1 19:13)
+# Wine version used : 1.5.24
+# Distribution used to test : Ubuntu 12.10, Nvidia Geforce 9800 GT 512MB using 
+# nvidia-experimental-310 driver, Intel® Core™2 Duo CPU E4400 @ 2.00GHz×2, Memory 1,9 GiB 
+# Author : lahtis <lahtis@gmail.com>
+# Script licence : GPL v.2
+# Program licence : Retail
+# Freelancer installer and 1.1 offical patching.
+
+[ -z "$PLAYONLINUX" = "" ] && exit
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="Freelancer" 
+WORKING_WINE_VERSION="1.5.24"
+TITLE="Freelancer"
+EDITOR="Microsoft game studios"		 	
+GAME_URL="http://www.microsoft.com/games/freelancer/default.aspx"
+AUTHOR="lahtis"
+GAME_VMS="512"
+
+# Initialization  
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+ 
+# Presentation
+POL_SetupWindow_presentation "$TITLE" "$EDITOR" "$GAME_URL" "$AUTHOR" "$PREFIX"
+
+# Create Prefix 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+Set_OS winxp
+
+# Asking about memory size of graphic card
+POL_SetupWindow_VMS $GAME_VMS
+
+# Fix pulseaudio issue
+which pulseaudio && Set_OS "winxp"
+
+# Select virtual desktop mode on
+Set_Desktop On 800 600
+ 
+# Install dplay.dll,dplayx,dpnet.dll,dpwsockx.dll
+
+# Download and install directplay
+POL_Install_directplay
+
+POL_SetupWindow_browse "Please select the installation SETUP.EXE file to CD-ROM." "$TITLE installation"
+POL_SetupWindow_wait "Installation in progress." "$TITLE installation"
+POL_Wine start /unix "$APP_ANSWER" || POL_Debug_Fatal "$(eval_gettext 'Error while installing game.')"
+POL_Wine_WaitExit "$TITLE"
+
+# Create shortcuts
+POL_Shortcut "Freelancer.exe" "$TITLE" "$TITLE.png"
+  
+# Patching latest 1.1 offical patch 
+PATCHVERSION = "1.1"
+
+# Create tmp directory for downloaded files
+POL_System_TmpCreate "$PREFIX"
+
+  # Moving tmp directory
+  cd "$POL_System_TmpDir"
+
+  # Download patch
+  POL_Download "http://download.microsoft.com/download/5/4/2/542a372f-d540-468d-a653-2cdced8d1d0d/flpatch.exe"
+
+  # Select setup file
+  ARCHIVE="$POL_System_TmpDir/flpatch.exe"
+
+  # Install file && check install errors
+  POL_Wine "$ARCHIVE" || POL_Debug_Fatal "$(eval_gettext 'Error while installing patch.')"
+
+  # Wait is patch is installed
+  POL_Wine_WaitExit "$TITLE"	
+
+POL_Shortcut "FLServer.exe" "$TITLE server" "$TITLE.png"
+
+POL_System_TmpDelete  
+
+POL_SetupWindow_message "$(eval_gettext '$TITLE and $PATCHVERSION patch has been successfully installed.')"
+ 
+POL_SetupWindow_Close
+ 
+exit 0
