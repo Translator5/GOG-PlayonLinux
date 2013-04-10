@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-17 21-03)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.3.35
+# Last revision : (2013-04-11 00-02)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="flatout"
 PREFIX="Flatout_gog"
-WORKING_WINE_VERSION="1.3.35"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Flatout"
 SHORTCUT_NAME="Flatout"
@@ -53,6 +53,10 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 # I'd like to automate it (Savegames/device.cfg, byte #148 set to 0), but
 # config file is only created after the game is started once.
 POL_SetupWindow_message "$(eval_gettext 'Think about disabling triple-buffering in settings,\nas it is not fully supported by Wine yet.')" "$TITLE"
+
+# Crashes upon first run, GOG's Safedisc workaround doesn't seem to work perfectly under Wine
+[ -e "$WINEPREFIX/drive_c/windows/system32/drivers/SECDRV.SYS" ] || \
+  POL_Wine --ignore-errors "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/FlatOut/flatout.exe" "-setup"
 
 POL_SetupWindow_Close
 
