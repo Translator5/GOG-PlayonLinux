@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-06 22-14)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-04-11 22-51)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,25 +29,20 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-# This is getting really ugly
 if [ "$POL_SELECTED_FILE" ]; then
     POL_GoG_location="$POL_SELECTED_FILE"
 else
-    if [ ! -e "$(POL_Config_Read GOG_REPO)/$INSTALLBIN" ]; then
+    POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_2_3' 1056 --bonus "b3be7275c5638c6ddcc2d7bede4bb030"
+    if [ "$POL_GoG_downloaded" = "True" ]; then
         ARCHIVE="$(POL_Config_Read GOG_REPO)/alone_in_the_dark_2_3_pc.zip"
-
-        # download archive
-        if [ ! -e "$ARCHIVE" ]; then
-            POL_Call POL_GoG_setup "$GOGID" --alternate 'alone_in_the_dark_2_3' 1056 --bonus "b3be7275c5638c6ddcc2d7bede4bb030"
-            [ "$POL_GoG_downloaded" = "True" ] && mv "$POL_GoG_location" "$ARCHIVE"
-        fi
+        mv "$POL_GoG_location" "$ARCHIVE"
 
         # unzip archive
         unzip -j "$ARCHIVE" -d "$(POL_Config_Read GOG_REPO)" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
         rm "$ARCHIVE"
-    fi
 
-    POL_GoG_location="$(POL_Config_Read GOG_REPO)/$INSTALLBIN"
+        POL_GoG_location="$(POL_Config_Read GOG_REPO)/$INSTALLBIN"
+    fi
 fi
 
 POL_Wine_SelectPrefix "$PREFIX"
