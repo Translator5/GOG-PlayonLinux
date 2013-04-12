@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-09 22-00)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.3.36
+# Last revision : (2013-04-12 21-09)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -16,7 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="arma_cold_war_assault"
 PREFIX="ColdWarAssault_gog"
-WORKING_WINE_VERSION="1.3.36"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Arma: Cold War Assault"
 SHORTCUT_NAME="Arma: Cold War Assault"
@@ -32,12 +32,7 @@ POL_Call POL_GoG_setup "$GOGID" "299f5cb319d023b502937a10fc21fc83"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
