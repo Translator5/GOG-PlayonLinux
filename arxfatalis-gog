@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-13 19-32)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-04-21 20-31)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -34,12 +34,7 @@ POL_Call POL_GoG_setup "$GOGID" "0dd8ec13c10146db1a741258b624040a"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
