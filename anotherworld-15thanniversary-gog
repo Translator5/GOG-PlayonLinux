@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-17 16-12)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.4
+# Last revision : (2013-04-23 22-05)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="another_world_15th_anniversary_edition"
 PREFIX="AnotherWorld_gog"
-WORKING_WINE_VERSION="1.4"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Another World: 15th Anniversary Edition"
 SHORTCUT_NAME="Another World"
@@ -26,17 +26,20 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Eric Chahi / Digital Lounge" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c9e10dbdd5fb26e92a939f03938192cb"
+# Game no longer available for download, replaced by 20th anniversary version
+if [ "$POL_SELECTED_FILE" ]; then
+	POL_Debug_Message "Using selected file"
+	POL_GoG_location="$POL_SELECTED_FILE"
+else
+	cd "$HOME"
+	POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
+	POL_GoG_location="$APP_ANSWER"
+fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
