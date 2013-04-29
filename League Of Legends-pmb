@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-03-26 10:08)
+# Last revision : (2013-04-29 20:04)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -18,6 +18,8 @@
 #	- Checks for recent version of PoL (InsertBeforeWine is bad supported by 4.0.14)
 # (2013-03-10) 22:51 - Pierre ETCHEMAITE
 #       - Use web downloader
+# (2013-04-13) 20:12 - GNU_Raziel
+#       - Added POL_Wine_SetVideoDriver function
 
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -141,6 +143,8 @@ GC_DONT_GC=1 POL_Wine "$FULL_INSTALLER"
 
 Set_OS winxp
 
+# Set Graphic Card informations keys for wine
+POL_Wine_SetVideoDriver
 
 POL_Shortcut "rads_user_kernel.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "run lol_launcher 0.0.0.0 LoLLauncher.exe" "Game;RolePlaying;"
 
