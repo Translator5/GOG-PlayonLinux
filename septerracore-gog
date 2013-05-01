@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-01-15 00-06)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.5.5
+# Last revision : (2013-05-01 11-30)
+# Wine version used : 1.4.1, 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="septerra_core_legacy_of_the_creator"
 PREFIX="SepterraCore_gog"
-WORKING_WINE_VERSION="1.5.5"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Septerra Core: Legacy of the Creator"
 SHORTCUT_NAME="Septerra Core"
@@ -29,12 +29,7 @@ POL_Call POL_GoG_setup "$GOGID" "22839e19bc5c8db1e557810e01be6e42"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
 
 
 # GoG work!
