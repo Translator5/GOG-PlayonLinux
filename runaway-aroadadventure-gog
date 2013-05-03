@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-01 00-01)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-03 20-39)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -31,13 +31,9 @@ POL_Call POL_GoG_setup "$GOGID" "174444af2422d4375d8ea4f2f8d54cbd"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
-
-POL_Wine_WaitBefore "$TITLE"
-
 # Expect an dialog box about missing WMP 5.2 at the very end of installation
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
+POL_Call POL_GoG_install
+
 
 # GoG work!
 Set_OS winxp
