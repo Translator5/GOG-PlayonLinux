@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-15 10-34)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-03 21-59)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -57,24 +57,21 @@ sblaster_oplmode=auto
 sblaster_oplrate=22050
 render_aspect=true
 _EOFCFG_
-if [ "$POL_OS" = "Linux" ]; then
-	# use pmidi -l or aconnect -o list to check your (emulated) midi device
-	# 128:0 is just default software emulation port (usually Timidity)
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	render_scaler=hq2x
-	midi_mididevice=alsa
-	midi_midiconfig=128:0
-	_EOFCFG_
-fi
-if [ "$POL_OS" = "Mac" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	midi_mididevice=coreaudio
-	_EOFCFG_
-fi
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/GOG Games/Ultima Underworld 1 and 2/game.gog" -fs iso
 _EOFAE_
+
+# Enable SBPro support 
+# http://www.gog.com/forum/ultima_series/sound_in_ultima_underworld_is_playing_music/post8
+if type -t POL_unbase64 > /dev/null; then
+    for dir in UNDEROM1 UNDEROM2; do
+	POL_unbase64 <<-'_EOFCFG_' > "$WINEPREFIX/drive_c/$dir/DATA/UW.CFG"
+	NCAtMSAtMSAtMSBzb3VuZA0NCjIgNyAyMjAgMSBzcGVlY2gNDQowIGN1dHMNDQoNCg==
+	_EOFCFG_
+    done
+fi
 
 cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/UU1.BAT"
 @ECHO OFF
