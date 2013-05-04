@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-25 20-58)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-04 15-59)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Eclipse Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "713abbe91e4df26c5efbe7f656c641d0"
+POL_Call POL_GoG_setup "$GOGID" "247406cb07f4ca839ba6e6a19a958593"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
