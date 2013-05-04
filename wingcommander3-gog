@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-27 21-58)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-04 17-05)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,12 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b74b28ab1fdd5cdb6e5a1af047ddc362" "db90969cf902baaea16b3f5480c7cb40" "f1896d1021f5dd74731c9caa95e45ed0"
+POL_Call POL_GoG_setup "$GOGID" "1d723903aca5fbd555ad407cddf6924d" "07a937795137de0e6c71644671bd8f22" "21955f4041ea3aa43ed1ffea73301f3c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
+
 
 # Game looks for itself in C:\WC3\
 mkdir -p "$WINEPREFIX/drive_c/WC3"
