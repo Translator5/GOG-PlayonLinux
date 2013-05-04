@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-04-08 00:05)
+# Last revision : (2013-05-04 09:59)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -60,9 +60,8 @@ if [ "$INSTALL_METHOD" = "LOCAL" ]; then
     FULL_INSTALLER="$APP_ANSWER"
 else # DOWNLOAD
     POL_System_TmpCreate "$PREFIX"
-    cd "$POL_System_TmpDir"
 
-    POL_Download "http://files.playonlinux.com/LeagueOfLegends.tar" "89b14c74d0b467fa8f78050644d58506"
+    POL_Call POL_Download_retry "http://files.playonlinux.com/LeagueOfLegends.tar" "$POL_System_TmpDir/LeagueOfLegends.tar" "89b14c74d0b467fa8f78050644d58506" "$TITLE tarball"
 
     POL_SetupWindow_wait "$(eval_gettext 'Decompressing archive...')" "$TITLE"
 
