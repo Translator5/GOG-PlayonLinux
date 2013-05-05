@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-24 19-44)
-# Last revision : (2013-02-24 22-00)
+# Last revision : (2013-05-05 13-42)
 # Wine version used : 1.5.12-LeagueOfLegendsShop
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -53,7 +53,8 @@ sed -e 's@^lol_path = .*$@lol_path = '"'$WINEPREFIX/drive_c/Riot Games/League of
 chmod +x lol_linux.py
 
 POL_SetupWindow_wait "$(eval_gettext 'Patching will take several minutes, please be patient...')" "$TITLE"
-SHELL=/bin/bash $POL_TERM -e "./lol_linux.py texture_patch || read -p 'Press enter to continue'"
+# $POL_TERM only exists since PoL 4.1.2
+SHELL=/bin/bash ${POL_TERM:-xterm} -e "./lol_linux.py texture_patch || read -p 'Press enter to continue'"
 
 POL_SetupWindow_Close
 
