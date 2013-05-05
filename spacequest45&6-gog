@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 20-22)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-06 00-14)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -47,7 +47,7 @@ mv "Space Quest 6" "$SPACEQUEST6"
 
 POL_SetupWindow_VMS "1"
 
-cat <<_EOFCFG_ > "$WINEPREFIX/playonlinux_dos.cfg"
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 cpu_core=simple
 cpu_cputype=386_slow
 cpu_cycles=auto

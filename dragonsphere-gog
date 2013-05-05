@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-16 23-39)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-06 00-14)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -34,7 +34,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-cat <<_EOFCFG_ > "$WINEPREFIX/playonlinux_dos.cfg"
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 dosbox_memsize=30
 render_aspect=true
