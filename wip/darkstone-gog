@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-04 18-10)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-08 03-46)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,12 +36,8 @@ POL_Call POL_Install_quartz
 POL_Call POL_Install_amstream
 POL_Call POL_Install_wmp9
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 # GoG work!
 Set_OS winxp
