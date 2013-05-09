@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 20-41)
-# Last revision : (2013-04-22 13-28)
+# Last revision : (2013-05-09 14-06)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,10 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Hasbro Inc." "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "98474820330a1487694c61820c85fa45"
+POL_Call POL_GoG_setup "$GOGID" "6a2441bc9922c1b9e65fcd06c20ce223"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install "/nogui"
 
