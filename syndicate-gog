@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-21 21-20)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-09 20-44)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c89681f2a1266ff768a6727718544be0"
+POL_Call POL_GoG_setup "$GOGID" "b894c6cf9c5a3bd5a9532f43f2ea3bd4"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
