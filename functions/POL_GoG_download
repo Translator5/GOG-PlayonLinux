@@ -101,7 +101,7 @@ download_piece ()
 		if [ ! -e "$TMPPIECE" ]; then
 			GOGDMSG="$(eval_gettext 'Download failed')"
 		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
-			GOGDMSG="$(eval_gettext 'Download seems to be corrupted')"
+			GOGDMSG="$(eval_gettext 'Download seems to be corrupted')\n$(eval_gettext 'The file could also have been updated. If the problem persists, consider reporting the issue so that the script can be adjusted.')"
 			mv "$TMPPIECE" "$FAILEDPIECE"
 		else
 			# Success
