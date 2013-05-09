@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-02 23-22)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-09 20-10)
 # Wine version used : 1.3.36, 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b83c9e539fc68f1e8f3a3e68d3667ecf"
+POL_Call POL_GoG_setup "$GOGID" "0fc0cd177c2084fc4b09bb82ed481478"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
