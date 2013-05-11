@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-13 14-14)
-# Last revision : (2013-04-04 21-41)
+# Last revision : (2013-05-11 19-57)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,12 +28,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "873a6007eb89ac499313e720dea1209d" "b7ab4c7641f90f6543badf24cad8f550" "7e4b5ea530d5096b7c943a2dafe9ba3f"
+POL_Call POL_GoG_setup "$GOGID" "2f5dd640b3994d67fc71995b743cb22c" "3030b7213476b14fe52719083792d6ff" "a5538ad0837208b065cd8b10229ba717"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
