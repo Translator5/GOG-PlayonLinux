@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-24 19-44)
-# Last revision : (2013-05-05 13-42)
+# Last revision : (2013-05-11 11-20)
 # Wine version used : 1.5.12-LeagueOfLegendsShop
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -50,6 +50,9 @@ unzip "$ARCHIVE" || POL_Debug_Fatal "unzip failed with error $?!"
 cd "LoL-Linux-Tools-master" || POL_Debug_Fatal "Could not find patch directory"
 cp config.py config.py.orig
 sed -e 's@^lol_path = .*$@lol_path = '"'$WINEPREFIX/drive_c/Riot Games/League of Legends/'"'@' config.py.orig > config.py
+# http://www.darkwind.it/misc/DATA.tar.gz sometimes disappears
+cp lol_linux.py lol_linux.py.orig
+sed -e "s@^    data_url = 'http://www.darkwind.it/misc/DATA.tar.gz'@    data_url = 'http://files.playonlinux.com/DATA.tar.gz'@" lol_linux.py.orig lol_linux.py
 chmod +x lol_linux.py
 
 POL_SetupWindow_wait "$(eval_gettext 'Patching will take several minutes, please be patient...')" "$TITLE"
