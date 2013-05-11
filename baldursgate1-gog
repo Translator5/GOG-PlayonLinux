@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 17-58)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-11 12-09)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Hasbro Inc." "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "99b455501a9aa211b713ab32b395b18d"
+POL_Call POL_GoG_setup "$GOGID" "4a2ed1b8c06525b8940eb068ad9a890c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
