@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-11 16-50)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-11 16-43)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -33,7 +33,7 @@ fi
 
 POL_Debug_Init
 
-POL_Call POL_GoG_setup "$GOGID" "1043d5cf2aea51538ab5f8373058efaf"
+POL_Call POL_GoG_setup "$GOGID" "6c9bd7e1cf88fdbfa0e75f694bf8b0e5"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
