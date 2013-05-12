@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-30 17-03)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-12 23-04)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,10 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment / Apogee Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "6122a6cdaeb00d75a8f07d7331762e3e"
+POL_Call POL_GoG_setup "$GOGID" "7a91fc6bd86ab14cb33aa6017786b062"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
