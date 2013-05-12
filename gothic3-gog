@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 21-24)
-# Last revision : (2013-03-31 22-54)
+# Last revision : (2013-05-12 14-50)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,13 +26,21 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "5bf43af9551b82f2d6860be364935ca9" "fefdb19e7c71f836cb5ab9c699ebc079" "9b3cd1ab56da71abf6b3b05d6994f459"
+POL_Call POL_GoG_setup "$GOGID" "e3c7cb3d39149e20fceae29cdb647954" "6bb23fa49cc030149a175d36c89d8509" "8e07902445344006466bc18d059e5db3"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
 
+
+# Shaders compilation doesn't seem to work under Wine, use precompiled cache from
+# Community patch 1.75.14
+MYDOCS_PATH="$(winepath -u "$(POL_Wine regedit /E - 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders' | sed -n 's/"Personal"="\(.*\)".*/\1/p')")"
+mkdir -p "$MYDOCS_PATH/Gothic3"
+cd "$MYDOCS_PATH/Gothic3" || POL_Debug_Fatal "Could not find shaders cache directory"
+POL_Download "http://files.playonlinux.com/Shader.Cache.bz2" "7d256885053747b6610a77d8f3782838"
+bunzip2 "Shader.Cache.bz2"
 
 # GoG work!
 Set_OS winxp
@@ -58,8 +66,6 @@ POL_Shortcut "Gothic3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePl
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Manual.pdf"
 # C:\Program Files\GOG.com\Gothic 3\readme.txt
-
-POL_SetupWindow_message "$(eval_gettext 'It is highly recommended that you install the Community patch now, as it contains LOTS of bug fixes and enhancements over the original game.')" "$TITLE"
 
 POL_SetupWindow_Close
 
