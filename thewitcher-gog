@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-12 15-46)
 # Wine version used : 1.5.18
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "94e42a8fb9d5c44e37a0d98eed6babc9" "77f181c95623b3d304bbf1f1ca374a43" "fd00e3930cd203523a2fcd11b3db6d70" "2ea8bdfe6a2904ab8b36e1c7280a6f10" "7257321819069f62b4b2aea7c6185bcb" "29fef08cd064226d202524c01ab2c00d" "13d1655e95bb6831d07a8a0ef6599cc2"
+POL_Call POL_GoG_setup "$GOGID" "517bee649628c9ac7e6df95866ddf962" "776f4f60b03c182bbd99a7e6a250b40a" "90d8d89af1f51ba772aefa8c688d56ec" "6dda80674754ec37d2fb85f253d22731" "9bec98fbd429d085b05bfe73aad966a9" "d5bf259be43de9e7358cc3d5e3fcc2ef" "6df62216833975f1b73590705a6bcd5c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
