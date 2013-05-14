@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-09 13-47)
-# Last revision : (2013-04-13 20-33)
+# Last revision : (2013-05-14 20-39)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f0a210a07427c92b938ae532073a1664"
+POL_Call POL_GoG_setup "$GOGID" "1f0694e57f09c8b45e6c94023203ef0b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -48,7 +48,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.co
 
 # Disable fog option by default
 if type -t POL_unbase64 > /dev/null; then
-	POL_unbase64 <<-_EOF_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Prince of Persia The Sands of Time/Profiles/DefaultProfile.DAT"
+	POL_unbase64 <<-_EOF_ > "$GOGROOT/Prince of Persia The Sands of Time/Profiles/DefaultProfile.DAT"
 	UE9QNEQAZQBmAGEAdQBsAHQAAAAhOFn3sPoCAAAAUgAAAFSwDt0AASADAABYAgAAIAAAAAEAAAAA
 	AAAAAgAAAAIAAAACAAAAAgAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAA
 	AAABAAAABAAAABoAAABSzYhDAAEAAIA/AACAPwAAgD8BAAAAAAAAAAAAAAA=
