@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adeline Software International / Didier Chanfray SARL" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "cb7cd7056cbb8bf7164548185795667f"
+POL_Call POL_GoG_setup "$GOGID" "80ae502334f720295ee3e1b02f5101f0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,19 +44,19 @@ mixer_prebuffer=240
 _EOFCFG_
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure 2/LBA2.DAT" -t iso
+imgmount D "$WINEPREFIX/drive_c/GOG Games/Little Big Adventure 2/LBA2.DAT" -t iso
 _EOFAE_
 
 # LBA2.EXE is detected as Windows executable
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure 2/LBA2.BAT"
+cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/GOG Games/Little Big Adventure 2/LBA2.BAT"
 @ECHO OFF
 LBA2.EXE
 EXIT
 _EOFBAT_
 
 POL_Shortcut "LBA2.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Little Big Adventure 2/manual.pdf"
-# C:\Program Files\GOG.com\Little Big Adventure 2\README.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Little Big Adventure 2/manual.pdf"
+# C:\GOG Games\Little Big Adventure 2\README.TXT
 
 POL_SetupWindow_Close
 
@@ -68,7 +68,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Little Big Adventure 2/" || exit 1
+cd "\$WINEPREFIX/drive_c/\GOG Games/Little Big Adventure 2/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine Language.exe
