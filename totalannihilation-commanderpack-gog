@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-02 15-45)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-16 21-17)
 # Wine version used : 1.5.9
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,7 +30,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Cavedog Entertainment / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7e2894a10c5f0e3a48782003531c1523"
+POL_Call POL_GoG_setup "$GOGID" "0328c16e7bd74dd3cb9229977a11e9d7"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
