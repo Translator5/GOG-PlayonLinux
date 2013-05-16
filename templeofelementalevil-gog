@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 23-29)
-# Last revision : (2013-04-01 20-31)
+# Last revision : (2013-05-16 23-49)
 # Wine version used : 1.5.22
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,12 +30,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Troika Games / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d9adc7b2ce4b8d3a9e1c9767e13f7d14"
+POL_Call POL_GoG_setup "$GOGID" "519c6cb7838b534ab9cc805db24e541e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
