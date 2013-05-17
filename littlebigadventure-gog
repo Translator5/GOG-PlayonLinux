@@ -39,8 +39,19 @@ manual_mount=true
 dosbox_memsize=30
 cpu_core=auto
 cpu_cputype=486_slow
-cpu_cycles='max 95% limit 20000'
-mixer_prebuffer=240
+cpu_cycles='max 95% limit 80000'
+mixer_rate=22050
+mixer_blocksize=2048
+mixer_prebuffer=80
+sblaster_type=sb16
+sblaster_base=220
+sblaster_irq=5
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_mixer=true
+sblaster_oplmode=auto
+sblaster_oplrate=22050
+gus_gus=false
 _EOFCFG_
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
