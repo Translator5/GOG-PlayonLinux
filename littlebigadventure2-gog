@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-02 15-20)
-# Last revision : (2013-05-17 23-16)
+# Last revision : (2013-05-17 23-32)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -40,7 +40,18 @@ dosbox_memsize=30
 cpu_core=auto
 cpu_cputype=auto
 cpu_cycles=max
-mixer_prebuffer=240
+mixer_rate=22050
+mixer_blocksize=2048
+mixer_prebuffer=80
+sblaster_type=sb16
+sblaster_base=220
+sblaster_irq=5
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_mixer=true
+sblaster_oplmode=auto
+sblaster_oplrate=22050
+gus_gus=false
 _EOFCFG_
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
