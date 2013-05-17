@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-02 15-20)
-# Last revision : (2013-04-13 11-01)
+# Last revision : (2013-05-17 23-16)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -44,11 +44,11 @@ mixer_prebuffer=240
 _EOFCFG_
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount D "$WINEPREFIX/drive_c/GOG Games/Little Big Adventure 2/LBA2.DAT" -t iso
+imgmount D "$GOGROOT/Little Big Adventure 2/LBA2.DAT" -t iso
 _EOFAE_
 
 # LBA2.EXE is detected as Windows executable
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/GOG Games/Little Big Adventure 2/LBA2.BAT"
+cat <<_EOFBAT_ > "$GOGROOT/Little Big Adventure 2/LBA2.BAT"
 @ECHO OFF
 LBA2.EXE
 EXIT
@@ -68,7 +68,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\GOG Games/Little Big Adventure 2/" || exit 1
+cd "$GOGROOT/Little Big Adventure 2/" || exit 1
 TITLE="$TITLE"
 POL_Debug_Init
 POL_Wine Language.exe
