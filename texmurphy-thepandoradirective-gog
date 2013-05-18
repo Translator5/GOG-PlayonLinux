@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-21 11-57)
-# Last revision : (2013-05-03 19-03)
+# Last revision : (2013-05-18 23-13)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Access Software / Worldplay LLC" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bd943dac3ecd79d6911b9dd77d7551a5" "5af0cd2331d7a0c8e33093b7043e0215" "8f4fe1610daed1db85e8a536b90ddd70"
+POL_Call POL_GoG_setup "$GOGID" "77de2dd817c5c52d2b566ab28f8ff58b" "6980052fff597b13bbe328b7aaa8cbc7" "6ece7ac061987f7f9148351f908e2275" "5fb53011d66dc237017b1f5817a0a58e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -42,10 +42,11 @@ cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 dosbox_memsize=16
 cpu_core=auto
+cpu_cputype=auto
 cpu_cycles=max
 mixer_rate=22050
 mixer_blocksize=2048
-mixer_prebuffer=10
+mixer_prebuffer=80
 sblaster_sbtype=sb16
 sblaster_sbbase=220
 sblaster_irq=5
@@ -54,21 +55,14 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
+gus_gus=false
 _EOFCFG_
-if [ "$POL_OS" = "Linux" ]; then
-	# use pmidi -l or aconnect -o list to check your (emulated) midi device
-	# 128:0 is just default software emulation port (usually Timidity)
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	render_scaler=hq2x
-	midi_mididevice=alsa
-	midi_midiconfig=128:0
-	_EOFCFG_
-fi
-if [ "$POL_OS" = "Mac" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	midi_mididevice=coreaudio
-	_EOFCFG_
-fi
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+# Switch to SB16 music synthesis
+cd "$GOGROOT/The Pandora Directive" || POL_Debug_Fatal "Could not find game directory"
+cp CONFIG.INI CONFIG.INI.orig
+perl -pe 'if(/^\[(.*)\]/) { $section = $1 } if($section eq "MIDI_CONFIG") { s/^BoardNum=\d+/BoardNum=3/; s/^IoAddr=0x[0-9A-F]+/IoAddr=0x388/i; }' CONFIG.INI.orig > CONFIG.INI
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/empty.iso" -t iso
@@ -76,7 +70,7 @@ set dos4gvm=
 _EOFAE_
 
 POL_Shortcut "TEX4.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Pandora Directive/README.TXT"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Pandora Directive/readme.txt"
 
 POL_SetupWindow_Close
 
