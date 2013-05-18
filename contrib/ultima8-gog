@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-08 21-02)
-# Last revision : (2013-05-17 23-56)
+# Last revision : (2013-05-18 21-21)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Xubuntu 12.10
 # Author : Pascal Reinhard dev@ovocean.com
@@ -17,6 +17,8 @@ WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Ultima 8"
 SHORTCUT_NAME="Ultima 8: Pagan"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
