@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-28 22-02)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-18 19-23)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8d8bb797592df25a46020689d469575e"
+POL_Call POL_GoG_setup "$GOGID" "d45367b2e5a74330f41a1c73b4d96ed0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
