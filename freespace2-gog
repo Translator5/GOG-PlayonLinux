@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-26 20-43)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-18 13-11)
 # Wine version used : 1.3.27
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -31,12 +31,15 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Volition / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4713c27c02d4de4368c2ebde46e46c9f"
+POL_Call POL_GoG_setup "$GOGID" "2870b98722a1e56a360e3a959019e678"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
+
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
