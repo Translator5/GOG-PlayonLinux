@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-16 21-06)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-18 19-38)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Shiny Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "dd00f6569c317becfa4466804bed17d7"
+POL_Call POL_GoG_setup "$GOGID" "d88d12b8e452dca40108fdc8a9e25853"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
