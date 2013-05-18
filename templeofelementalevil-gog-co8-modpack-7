@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2013-04-01 23-01)
+# Last revision : (2013-05-18 18-33)
 # Wine version used : 1.5.22
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -9,9 +9,9 @@
 # Depend :
 
 # Tested with install archives:
-# Circle_of_Eight_Modpack_7.7.0_Setup.exe 167823117 "37ab6f6e2451380a7e126745f43bd65f"
+# Circle_of_Eight_Modpack_7.8.0_Setup.exe 192055661 "5729e38c734ab0e60296bafdebae4e0c"
 # and
-# Circle_of_Eight_Modpack_7.7.0_NC_Setup.exe 379649835 "5cad73cff1d46ef5c108acb6901469f7"
+# Circle_of_Eight_Modpack_7.8.0_NC_Setup.exe 404436762 "c741c1707eb29b22867ced4ff86a4d0e"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
