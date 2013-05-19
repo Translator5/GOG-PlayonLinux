@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-02 20-43)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-19 18-19)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7eefb8eb2662551c4677550c3bf230aa"
+POL_Call POL_GoG_setup "$GOGID" "c2c19dd66914a539950c1df8f8b7902d"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
