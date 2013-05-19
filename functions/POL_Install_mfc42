@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-01-08 21-00)
-# Last revision : (2013-04-03 08-51)
+# Last revision : (2013-05-19 21-28)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
@@ -12,9 +12,11 @@ fi
 
 POL_Debug_LogToPrefix "Installing MFC42.DLL"
 POL_Wine_WaitBefore "MFC42.DLL"
-POL_Call POL_SP2_Extract mfc42.dll
+POL_Call POL_SP2_Extract 'mfc42.dll'
+POL_Call POL_SP2_Extract 'mfc42u.dll'
 
 POL_Wine regsvr32 mfc42.dll
+POL_Wine regsvr32 mfc42u.dll
 
 # Overriding dll
-POL_Call POL_Function_OverrideDLL "native" "mfc42"
+POL_Call POL_Function_OverrideDLL "native" "mfc42" "mfc42u"
