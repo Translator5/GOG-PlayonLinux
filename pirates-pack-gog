@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-19 18-04)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-19 19-46)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "MicroProse / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8220c172f61e78b6b1a706884593676a"
+POL_Call POL_GoG_setup "$GOGID" "7a30f66c33fd786eb8722250e5288ae9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -79,6 +79,8 @@ POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Pirates P
 POL_Shortcut "P2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/flags.pdf"
 # C:\manual.pdf
+
+POL_SetupWindow_message "$(eval_gettext 'The codes needed to start a new game can be found in the\ndocumentation;\nRight-click the game icon, "Read the manual".')" "$TITLE"
 
 POL_SetupWindow_Close
 
