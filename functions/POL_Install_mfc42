@@ -1,0 +1,20 @@
+#!/bin/bash
+# Date : (2011-01-08 21-00)
+# Last revision : (2013-04-03 08-51)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+if [ "$POL_ARCH" = "amd64" ]; then
+    cd "$WINEPREFIX/drive_c/windows/syswow64"
+else
+    cd "$WINEPREFIX/drive_c/windows/system32"
+fi
+
+POL_Debug_LogToPrefix "Installing MFC42.DLL"
+POL_Wine_WaitBefore "MFC42.DLL"
+POL_Call POL_SP2_Extract mfc42.dll
+
+POL_Wine regsvr32 mfc42.dll
+
+# Overriding dll
+POL_Call POL_Function_OverrideDLL "native" "mfc42"
