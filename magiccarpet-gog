@@ -69,7 +69,7 @@ CARPET.EXE
 EXIT
 _EOFBAT_
 
-POL_Shortcut "MagicCarpet.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;Action;"
+POL_Shortcut "MagicCarpet.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Magic Carpet/manual.pdf"
 
 POL_SetupWindow_Close

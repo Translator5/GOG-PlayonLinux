@@ -55,7 +55,7 @@ NETHERW.exe
 EXIT
 _EOFBAT_
 
-POL_Shortcut "MagicCarpet2.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;Action;"
+POL_Shortcut "MagicCarpet2.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Magic Carpet 2/Magic Carpet 2 - Manual.pdf"
 # $WINEPREFIX/drive_c/GOG Games/Magic Carpet 2/Magic Carpet 2 - Quick Reference Card.pdf
 
