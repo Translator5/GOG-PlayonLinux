@@ -21,6 +21,7 @@ SHORTCUT_NAME="Ultima 8: Pagan"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1684
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pascal Reinhard" "$PREFIX"
