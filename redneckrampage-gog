@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-20 21-33)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-19 18-04)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Xatrix Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "cab24f0b67c148fda28d8adb3fd820fa"
+POL_Call POL_GoG_setup "$GOGID" "12b0f7ed3c01850bcdea2b93d9ea57b5"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
