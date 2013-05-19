@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-02 17-04)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-19 17-13)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sensible Software / Codemasters" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bfb0398592e7abe1c0da6619007f65d6"
+POL_Call POL_GoG_setup "$GOGID" "02731242e9bc4f5ef0652beb09708b7e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -37,10 +37,11 @@ POL_Call POL_GoG_install
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 dosbox_memsize=16
 cpu_core=auto
+cpu_cputype=auto
 cpu_cycles=max
 mixer_rate=22050
 mixer_blocksize=2048
-mixer_prebuffer=10
+mixer_prebuffer=80
 sblaster_sbtype=sb16
 sblaster_sbbase=220
 sblaster_irq=5
@@ -54,7 +55,7 @@ ipx_ipx=false
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Cannon Fodder/CANNON.BAT"
+cat <<_EOFBAT_ > "$GOGROOT/Cannon Fodder/CANNON.BAT"
 @ECHO OFF
 INTRO.EXE
 CF_ENG.EXE /f
@@ -62,7 +63,7 @@ EXIT
 _EOFBAT_
 
 POL_Shortcut "CANNON.BAT" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ArcadeGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Cannon Fodder/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Cannon Fodder/manual.pdf"
 
 POL_SetupWindow_Close
 
