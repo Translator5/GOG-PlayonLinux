@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-18 16-24)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-19 13-56)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.10 64-bit
 # Author : Kweepeer (Based on Broken Sword DC script by Pierre Etchemaite)
@@ -10,39 +10,39 @@
 
 # Known issues:
 # - The game freezes sometimes during gameplay. After a few seconds, the game continues.
- 
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
- 
+
 GOGID="deponia"
 PREFIX="Deponia_gog"
 WORKING_WINE_VERSION="1.4.1"
- 
+
 TITLE="GOG.com - Deponia"
 SHORTCUT_NAME="Deponia"
- 
+
 POL_GetSetupImages "" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
- 
+
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1467
 POL_Debug_Init
- 
+
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Kweepeer" "$PREFIX"
 POL_Call POL_GoG_setup "$GOGID" \
-  "cc3a6c5dc69393ab5d138ebb8aa60650" \
-  "94697861a04aaac8ab8b012aecbe66c4" \
-  "6d4cbd688fc7dc9a1eac934cde1dd20c"
- 
+  "a77f5db9ce214b5435a5dbca9a574464" \
+  "88573504e0cab842cb63a57e52423cf1" \
+  "332343a8c3016cec9b0535b3498bee49"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
- 
+
 # GoG work!
 Set_OS winxp
- 
+
 POL_SetupWindow_VMS "256"
- 
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
@@ -62,4 +62,3 @@ POL_SetupWindow_Close
 # Note on configurator:
 # VisionaireConfigurationTool.exe doesn't seem to work in GOG version of the game.
 # You can set advanced options by editing $WINEPREFIX/drive_c/GOG Games/Deponia/config.ini.
-
