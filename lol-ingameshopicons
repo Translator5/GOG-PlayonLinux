@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-02-24 19-44)
-# Last revision : (2013-05-11 11-20)
-# Wine version used : 1.5.12-LeagueOfLegendsShop
+# Last revision : (2013-05-20 18-41)
+# Wine version used : 1.5.24-LeagueOfLegendsShop
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -14,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 # Must match League of Legends script values
 TITLE_REQUIRED="League of Legends"
 PREFIX="LeagueOfLegends"
-WORKING_WINE_VERSION="1.5.12-LeagueOfLegendsShop"
+WORKING_WINE_VERSION="1.5.24-LeagueOfLegendsShop"
 INSTALLBIN="LoL-Linux-Tools-master.zip"
 
 TITLE="League of Legends: ingame shop icons fix"
@@ -52,7 +52,7 @@ cp config.py config.py.orig
 sed -e 's@^lol_path = .*$@lol_path = '"'$WINEPREFIX/drive_c/Riot Games/League of Legends/'"'@' config.py.orig > config.py
 # http://www.darkwind.it/misc/DATA.tar.gz sometimes disappears
 cp lol_linux.py lol_linux.py.orig
-sed -e "s@^    data_url = 'http://www.darkwind.it/misc/DATA.tar.gz'@    data_url = 'http://files.playonlinux.com/DATA.tar.gz'@" lol_linux.py.orig lol_linux.py
+sed -e "s@^    data_url = 'http://www.darkwind.it/misc/DATA.tar.gz'@    data_url = 'http://files.playonlinux.com/DATA.tar.gz'@" lol_linux.py.orig > lol_linux.py
 chmod +x lol_linux.py
 
 POL_SetupWindow_wait "$(eval_gettext 'Patching will take several minutes, please be patient...')" "$TITLE"
