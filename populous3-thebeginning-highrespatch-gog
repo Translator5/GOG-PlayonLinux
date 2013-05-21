@@ -25,7 +25,7 @@ DOWNLOAD_MD5="9fd53c2c5fe9f9b7e6ef55e169b93b88"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-POL_SetupWindow_SetID 1704
+POL_SetupWindow_SetID 1706
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "ALACN" "http://www.popre.net/" "Xodetaetl" "$PREFIX"
