@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-14 23-58)
-# Last revision : (2013-05-05 17-48)
+# Last revision : (2013-05-22 23-28)
 # Wine version used : 1.5.5, 1.5.29
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "e7dc56be50198036c81aa9a8e53b0f75"
+POL_Call POL_GoG_setup "$GOGID" "8599aff06ba1ccd81f74ed16cb98a01f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
