@@ -39,15 +39,13 @@ fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_AutoSetVersionEnv
-POL_LoadVar_PROGRAMFILES
 
 # Download patch
 cd "$POL_USER_ROOT/tmp"
 POL_Download "$DOWNLOAD_URL" "$DOWNLOAD_MD5"
-TMP_FILE_2="$POL_USER_ROOT/tmp/$PATCHFILE"
-cp "$POL_USER_ROOT/tmp/$PATCHFILE" "$WINEPREFIX/drive_c/Program Files/GOG.com/Populous 3/$PATCHFILE"
+cp "$POL_USER_ROOT/tmp/$PATCHFILE" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/$PATCHFILE"
 
-cat <<_EOF_ > "$WINEPREFIX/drive_c/Program Files/GOG.com/Populous 3/popres_readme.txt"
+cat <<_EOF_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/popres_readme.txt"
 Notice:
 -----------------------------------------
 Populous 3 only supports resolutions up to: 
@@ -56,10 +54,10 @@ It doesn't seem to support 16:10 resolutions.
 For color depth, enter "16".
 _EOF_
 
-POL_SetupWindow_message "This patch doesn't work with the 'software rendering' version of Populous 3. Be also aware that it let's you enter any resolution, but the game actually only accepts resolutions up to: 1440x900 (for 16:10) and 1280x1024 (for 4:3). It doesn't seem to support 16:10 resolutions. For color depth, enter '16'." "Important note"
+POL_SetupWindow_message "This patch doesn't work with the 'software rendering' version of Populous 3. Be also aware that it let's you enter any resolution, but the game actually only supports resolutions up to: 1440x900 (for 16:10) and 1280x1024 (for 4:3). It doesn't seem to support 16:10 resolutions. For color depth, enter '16'." "Important note"
 
 POL_Shortcut "$PATCHFILE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/Program Files/GOG.com/Populous 3/popres_readme.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/popres_readme.txt"
 
 POL_SetupWindow_Close
 
