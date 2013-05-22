@@ -1,0 +1,43 @@
+#!/bin/bash
+# Date : (2013-05-21 20-47)
+# Last revision : (2013-05-21 20-47)
+# Wine version used : 1.5.30
+# Distribution used to test : Xubuntu 13.04
+# Author : Pascal Reinhard dev@ovocean.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+PREFIX="Populous3TheBeginning_gog"
+WORKING_WINE_VERSION="1.5.30"
+
+TITLE="GOG.com - Populous 3: The Beginning"
+SHORTCUT_NAME="Populous 3: The Beginning"
+SHORTCUT_NAME_SOFTWARE="Populous 3: The Beginning (software rendering)"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1704
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Xodetaetl" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "98ba20844ac5a7ff2a42d1494420f4bc"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+POL_Shortcut "D3DPopTB.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
+POL_Shortcut "popTB.exe" "$SHORTCUT_NAME_SOFTWARE" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME_SOFTWARE" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/Manual.pdf"
+
+POL_SetupWindow_Close
+
+exit 0
