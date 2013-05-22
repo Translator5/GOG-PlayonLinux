@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-05-21 20-47)
 # Last revision : (2013-05-21 20-47)
-# Wine version used : 1.5.30-1.5.30-1
+# Wine version used : 1.5.30
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
 # Script licence : GPL v.2
@@ -12,7 +12,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 PREFIX="Populous3TheBeginning_gog"
-WORKING_WINE_VERSION="1.5.30-1.5.30-1"
+WORKING_WINE_VERSION="1.5.30"
 
 TITLE="GOG.com - Populous 3: The Beginning"
 SHORTCUT_NAME="Populous 3: The Beginning"
@@ -35,8 +35,8 @@ POL_Call POL_GoG_install
 
 POL_Shortcut "D3DPopTB.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
 POL_Shortcut "popTB.exe" "$SHORTCUT_NAME_SOFTWARE" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/Program Files/GOG.com/Populous 3/Manual.pdf"
-POL_Shortcut_Document "$SHORTCUT_NAME_SOFTWARE" "$WINEPREFIX/drive_c/Program Files/GOG.com/Populous 3/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME_SOFTWARE" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Populous 3/Manual.pdf"
 
 POL_SetupWindow_Close
 
