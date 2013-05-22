@@ -39,6 +39,7 @@ fi
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_AutoSetVersionEnv
+POL_LoadVar_PROGRAMFILES
 
 # Download patch
 cd "$POL_USER_ROOT/tmp"
