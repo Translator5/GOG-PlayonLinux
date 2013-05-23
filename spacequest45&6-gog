@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 20-22)
-# Last revision : (2013-05-06 00-14)
+# Last revision : (2013-05-23 21-04)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8f97c8874cc1f7995d0c2952766cec2d"
+POL_Call POL_GoG_setup "$GOGID" "c128b28c28fc70cd7831016a6aa2a94b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
