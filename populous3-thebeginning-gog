@@ -11,6 +11,7 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
+GOGID="populous_the_beginning"
 PREFIX="Populous3TheBeginning_gog"
 WORKING_WINE_VERSION="1.5.30"
 
