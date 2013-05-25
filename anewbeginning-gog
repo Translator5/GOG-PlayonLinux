@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-21 21-40)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-25 11-36)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f03d80877a015ddbc77cb1c237208d8d" "f1da21026277da854081c2950b6488ae" "a0483e61ed0df41914863e5a077cab62"
+POL_Call POL_GoG_setup "$GOGID" "8c4c17f2de851e8d6dd83af19e70f4db" "cba62670ef8dee498a34134d7ba0c327" "195dea57f6f7afbae9f0c4bcb513fd01"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
