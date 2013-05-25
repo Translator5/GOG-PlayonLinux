@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-30 20-18)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-25 10-37)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,7 +30,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Origin Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c71d4680db3703859a76034a03c2cf21"
+POL_Call POL_GoG_setup "$GOGID" "de1c1c40406a83b7d910e964044208b1"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
