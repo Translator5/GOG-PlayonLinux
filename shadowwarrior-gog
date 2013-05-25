@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-27 18-28)
-# Last revision : (2013-03-27 22-05)
+# Last revision : (2013-05-25 11-22)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,12 +28,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment / Devolver Digital" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "68c6781b7d43db0a2245fe6fc5a9eaf5"
+POL_Call POL_GoG_setup "$GOGID" "f41a6fc4c676eed368c4a2a9f2a940e0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
+
 
 # Fix cue file track paths
 sed -i.bak -e 's@Music\\@MUSIC/@' "$WINEPREFIX/drive_c/GOG Games/Shadow Warrior Complete/GAME.DAT"
