@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-01 22-38)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-26 17-46)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -25,7 +25,7 @@ POL_SetupWindow_SetID 1015
 POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Binary Systems / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "eb8e0f1785709af1bd5d4a6543742edc"
+POL_Call POL_GoG_setup "$GOGID" "d00ac6d5c07bc44a698359e8024568a1"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -58,6 +58,7 @@ cp "$POL_USER_ROOT/tmp/SF1.BAT" "$STARFLT1/STARFLT/PLAY/SF1.BAT"
 cp "$POL_USER_ROOT/tmp/SF2.BAT" "$STARFLT2/SF2.BAT"
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+dosbox_memsize=16
 cpu_cycles='fixed 5000'
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
