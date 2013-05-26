@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-15 21-41)
-# Last revision : (2013-05-06 00-11)
+# Last revision : (2013-05-26 18-32)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Access Software / Wordplay LLC" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b1e8f6362681abb0d9bbed1a325a0f7d"
+POL_Call POL_GoG_setup "$GOGID" "c03e2ccf5120ab1e4b947667e194e1bb"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -34,13 +34,11 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-# "SVGA"
-POL_SetupWindow_VMS "1"
-
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 dosbox_memsize=16
 cpu_core=auto
+cpu_cputype=auto
 cpu_cycles=max
 
 sblaster_sbtype=sb16
@@ -55,16 +53,13 @@ _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
-imgmount F "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Under a Killing Moon/UAKM1.gog" -t iso
-imgmount G "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Under a Killing Moon/UAKM2.gog" -t iso
-imgmount H "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Under a Killing Moon/UAKM3.gog" -t iso
-imgmount I "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Under a Killing Moon/UAKM4.gog" -t iso
+imgmount D "$GOGROOT/Under a Killing Moon/UAKM.gog" -t iso
 _EOFAE_
 
 POL_Shortcut "TEX197.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Under a Killing Moon/manual.pdf"
-# C:\Program Files\GOG.com\Under a Killing Moon\README.TXT
-# C:\Program Files\GOG.com\Under a Killing Moon\Solution.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Under a Killing Moon/manual.pdf"
+# C:\GOG Games\Under a Killing Moon\readme.txt
+# C:\GOG Games\Under a Killing Moon\Solution.pdf
 
 POL_SetupWindow_Close
 
