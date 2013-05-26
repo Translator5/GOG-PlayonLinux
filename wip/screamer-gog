@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-04 23-09)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-26 20-37)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Graffiti / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8bfa373cb34615c52cfbb0495413c252"
+POL_Call POL_GoG_setup "$GOGID" "9fd7e3070d32a0635572a8a119859ed3"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -55,6 +55,7 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
+gus_gus=false
 ipx_ipx=false
 _EOFCFG_
 
