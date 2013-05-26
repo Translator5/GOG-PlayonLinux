@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-12 17-10)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-05-26 11-07)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -32,7 +32,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Spiderweb Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bdf818376890764536ed6696a504c375"
+POL_Call POL_GoG_setup "$GOGID" "5fdda20df7275460eb45ec9a5954b29a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
