@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-27 21-25)
-# Last revision : (2013-05-27 22-11)
+# Last revision : (2013-05-27 23-02)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,13 +15,13 @@ GOGID="quest_for_glory"
 PREFIX="QuestForGlory_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
-TITLE="GOG.com - Quest For Glory 1-5"
-SHORTCUT_NAME1E="Quest For Glory 1 (EGA)"
-SHORTCUT_NAME1V="Quest For Glory 1 (VGA remake)"
-SHORTCUT_NAME2="Quest For Glory 2"
-SHORTCUT_NAME3="Quest For Glory 3"
-SHORTCUT_NAME4="Quest For Glory 4"
-SHORTCUT_NAME5="Quest For Glory 5"
+TITLE="GOG.com - Quest for Glory 1-5"
+SHORTCUT_NAME1E="Quest for Glory 1 (EGA)"
+SHORTCUT_NAME1V="Quest for Glory 1 (VGA remake)"
+SHORTCUT_NAME2="Quest for Glory 2"
+SHORTCUT_NAME3="Quest for Glory 3"
+SHORTCUT_NAME4="Quest for Glory 4"
+SHORTCUT_NAME5="Quest for Glory 5"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -75,7 +75,7 @@ gus_gus=false
 ipx_ipx=false
 _EOFCFG_
 
-POL_Shortcut "GOG Games/Quest for Glory Pack/$QFG1E/SCIV.EXE" "$SHORTCUT_NAME1E" "$SHORTCUT_NAME1V.png" "" "Game;AdventureGame;"
+POL_Shortcut "GOG Games/Quest for Glory Pack/$QFG1E/SCIV.EXE" "$SHORTCUT_NAME1E" "$SHORTCUT_NAME1E.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1E" "$GOGROOT/Quest for Glory Pack/$QFG1E/Quest for Glory 1 - manual.pdf"
 
 POL_Shortcut "SCIDHUV.EXE" "$SHORTCUT_NAME1V" "$SHORTCUT_NAME1V.png" "" "Game;AdventureGame;"
