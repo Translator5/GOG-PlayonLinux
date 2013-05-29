@@ -1,9 +1,9 @@
 #!/bin/bash
 # Date : (2013-05-22 22-00)
-# Last revision : (2013-05-22 22-00)
+# Last revision : (2013-05-29 22-20)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Xubuntu 13.04
-# Author : Pascal Reinhard dev@ovocean.com
+# Authors : Pascal Reinhard <dev@ovocean.com>, TonyFlow <tonyflow@rhcp.net>
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
@@ -33,8 +33,16 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
 
-# The game expects itself at the root directory of C:
-mv "$WINEPREFIX/drive_c/GOG Games/Dungeon Keeper" "$WINEPREFIX/drive_c/DKeeper"
+GOGPATH="$GOGROOT/Dungeon Keeper"
+  
+# Enable the high-resolution mode by default
+if type -t POL_unbase64 > /dev/null; then
+	POL_unbase64 <<-_EOF_ > "$GOGPATH/SAVE/SETTINGS.DAT"
+	AAQDAAEBf1oBAAANAAAAyADQAMsAzQAdACoA0wDRAMcAzwAUACYAJgEZARQEFAEjABEAHwAUAiIAMAAjASIBMAEhAB4AKgBSAA4AGQAyAAEABg==
+	_EOF_
+else
+	POL_SetupWindow_message "$(eval_gettext 'You should enable manually the high-resolution mode\nby pressing alt-r during the game.')" "$TITLE"
+fi
 
 # Dosbox config
 cat <<_EOFCFG_ > "$WINEPREFIX/playonlinux_dos.cfg"
@@ -43,22 +51,24 @@ sdl_output=overlay
 render_aspect=true
 dosbox_memsize=30
 mixer_prebuffer=100
+cpu_cycles=130000
+cpu_cycleup=5000
+cpu_cycledown=5000
 _EOFCFG_
 
-mv "$WINEPREFIX/drive_c/DKeeper/GAME.INST" "$WINEPREFIX/drive_c/DKeeper/game.cue"
-
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/DungeonKeeper.bat"
+# Batch launcher with image disk mount
+cat <<_EOFBAT_ > "$GOGPATH/DK.bat"
 @echo off
-c:
-cd DKeeper
-imgmount d game.cue -t iso -fs iso
-keeper.exe
+cd C:\GOGGAM~1\DUNGEO~1
+imgmount D GAME~1.INS -t iso -fs iso
+KEEPER.EXE
 exit
 _EOFBAT_
 
-POL_Shortcut "DungeonKeeper.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/DKeeper/manual.pdf"
+POL_SetupWindow_message "$(eval_gettext 'Tip: By pressing Alt+R while in game, you can double the resolution. (Requires a good CPU.)')" "Information"
+
+POL_Shortcut "DK.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGPATH/manual.pdf"
 
 POL_SetupWindow_Close
-
 exit 0
