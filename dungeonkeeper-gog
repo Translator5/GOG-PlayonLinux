@@ -40,8 +40,9 @@ if type -t POL_unbase64 > /dev/null; then
 	POL_unbase64 <<-_EOF_ > "$GOGPATH/SAVE/SETTINGS.DAT"
 	AAQDAAEBf1oBAAANAAAAyADQAMsAzQAdACoA0wDRAMcAzwAUACYAJgEZARQEFAEjABEAHwAUAiIAMAAjASIBMAEhAB4AKgBSAA4AGQAyAAEABg==
 	_EOF_
+	POL_SetupWindow_message "$(eval_gettext 'Tip: The high-resolution mode has been activated, if it is too slow, you can disable it by pressing Alt+R while in game.)')" "$TITLE"
 else
-	POL_SetupWindow_message "$(eval_gettext 'You should enable manually the high-resolution mode\nby pressing alt-r during the game.')" "$TITLE"
+	POL_SetupWindow_message "$(eval_gettext 'Tip: You can enable a higher-resolution mode by pressing Alt+R during the game.')" "$TITLE"
 fi
 
 # Dosbox config
@@ -64,8 +65,6 @@ imgmount D GAME~1.INS -t iso -fs iso
 KEEPER.EXE
 exit
 _EOFBAT_
-
-POL_SetupWindow_message "$(eval_gettext 'Tip: By pressing Alt+R while in game, you can double the resolution. (Requires a good CPU.)')" "Information"
 
 POL_Shortcut "DK.bat" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGPATH/manual.pdf"
