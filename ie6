@@ -26,12 +26,12 @@ POL_Download_Resource "http://browsers-fr.mirrors.zensoft.net/ie/win32/6.0/ie60.
 
 #POL_Download_Resource "http://www.oldapps.com/internet_explorer.php?app=f34f7f96e8307a01d51c9cc82abe90c2" "8e483db28ff01a7cabd39147ab6c59753ea1f533"
 
-cd "$POL_System_TmpDir"
-POL_Wine "$POL_USER_ROOT/ressources/ie60.exe"
-
 POL_Wine_SelectPrefix "$PREFIX"
 POL_System_SetArch "x86"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+cd "$POL_System_TmpDir"
+POL_Wine "$POL_USER_ROOT/ressources/ie60.exe"
 
 POL_Wine_InstallFonts
 POL_Call POL_Function_FontsSmoothRGB
