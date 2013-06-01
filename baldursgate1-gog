@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 17-58)
-# Last revision : (2013-05-11 12-09)
+# Last revision : (2013-06-01 09-14)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -31,7 +31,7 @@ POL_Call POL_GoG_setup "$GOGID" "4a2ed1b8c06525b8940eb068ad9a890c"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
