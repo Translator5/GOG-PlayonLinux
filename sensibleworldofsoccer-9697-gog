@@ -15,7 +15,7 @@ GOGID="sensible_world_of_soccer_9697"
 PREFIX="SWoS_9697_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.6"
  
-TITLE="GOG.com - Sensible World of Soccer 96/97"
+TITLE="GOG.com - Sensible World of Soccer 96-97"
 SHORTCUT_NAME="Sensible World of Soccer 96-97"
  
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
