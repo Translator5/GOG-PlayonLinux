@@ -1,0 +1,16 @@
+# JRE Offline installation, see https://www.java.com/en/download/manual.jsp
+
+# http://javadl.sun.com/webapps/download/AutoDL?BundleId=76860
+
+POL_Download_Resource "http://bit.ly/10tLp3y" "0b6e48314406e571ae9e4f09babe94f8" "java"
+cd "$POL_USER_ROOT/ressources/java"
+[ -e "10tLp3y" ] && ln -f "10tLp3y" "jre-7u21-windows-i586.exe"
+
+POL_Wine_WaitBefore "Java Runtime Edition 1.7u21"
+POL_Wine --ignore-errors jre-7u21-windows-i586.exe /s
+case $? in
+  0|67) ;; # 67 = already installed?
+  *) POL_Debug_Fatal "Error $? installing JRE" ;;
+esac
+
+
