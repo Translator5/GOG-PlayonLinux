@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-17 20-12)
-# Last revision : (2013-05-15 18-56)
+# Last revision : (2013-06-15 13-16)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -35,7 +35,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-cd "$WINEPREFIX/drive_c/GOG Games/Master of Orion 1 and 2" || POL_Debug_Fatal "Game not installed in standard path?"
+cd "$GOGROOT/Master of Orion 1 and 2" || POL_Debug_Fatal "Game not installed in standard path?"
 
 # Problem with shortizing "Master of Orion" and "Master of Orion 2" subdirectories side-by-side :(
 ORION1="MOO1"
@@ -70,12 +70,12 @@ _EOFCFG_
 
 
 POL_Shortcut "ORION.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/Master of Orion 1 and 2/$ORION1/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Master of Orion 1 and 2/$ORION1/manual.pdf"
 # C:\GOG Games\Master of Orion 1 and 2\Master of Orion 1\README.TXT
 # C:\GOG Games\Master of Orion 1 and 2\Master of Orion 1\ReferenceCard.pdf
 
 POL_Shortcut "Orion2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/GOG Games/Master of Orion 1 and 2/$ORION2/Manual.PDF"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Master of Orion 1 and 2/$ORION2/Manual.PDF"
 # C:\GOG Games\Master of Orion 1 and 2\Master of Orion 2\README.TXT
 
 POL_SetupWindow_Close
