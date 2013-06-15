@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-31 20-09)
-# Last revision : (2013-04-20 11-24)
+# Last revision : (2013-06-15 13-59)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,6 +30,9 @@ POL_Call POL_GoG_setup "$GOGID" "62ca675dafe649497c03fe52de41433f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe (bug report #2520)
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
