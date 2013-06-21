@@ -1,9 +1,10 @@
 #!/bin/bash
 # Date : (2013-05-27 22-00)
-# Last revision : (2013-06-03 20-00)
+# Last revision : (2013-06-21 18-11)
 # Wine version used : 1.4.1
-# Distribution used to test : Fedora 17
+# Distribution used to test : Fedora 17, Debian Sid
 # Author : TonyFlow
+#   updated petch
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
@@ -26,7 +27,7 @@ POL_Debug_Init
  
 POL_SetupWindow_presentation "$TITLE" "FireFly Studios" "http://www.gog.com/gamecard/$GOGID" "TonyFlow" "$PREFIX"
  
-POL_Call POL_GoG_setup "$GOGID" "feefadb14ccf00c0a95a39add4da5ae9"
+POL_Call POL_GoG_setup "$GOGID" --alternate "stronghold" "1" "feefadb14ccf00c0a95a39add4da5ae9"
  
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
