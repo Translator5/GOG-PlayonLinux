@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-09 16-26)
-# Last revision : (2013-04-13 13-31)
-# Wine version used : 1.3.37
+# Last revision : (2013-06-22 11-38)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="thief_2_the_metal_age"
 PREFIX="Thief2_gog"
-WORKING_WINE_VERSION="1.3.37"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Thief 2"
 SHORTCUT_NAME="Thief 2: The Metal Age"
@@ -22,13 +22,11 @@ POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jp
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1250
-# For POL_LoadVar_ScreenResolution
-POL_RequiredVersion "4.0.15" || POL_Debug_Fatal "$APPLICATION_TITLE 4.0.15 is required to install $TITLE"
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Looking Glass Studios / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "580b15ebec40af636ec8d9ceedf69eb2"
+POL_Call POL_GoG_setup "$GOGID" "c554b94e371ff78bfbe5a8ef3417afe2"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -41,82 +39,13 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "8"
 
-cd "$POL_USER_ROOT/tmp"
-POL_Download "ftp://ftp.us.dell.com/audio/IV5PLAY.EXE" "24e0c7e08fb3e06b431803a896fc8b25"
-cabextract -F IR50_32.DLL -d "$WINEPREFIX/drive_c/windows/system32/" IV5PLAY.EXE
-POL_Wine regsvr32 IR50_32.DLL
-
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/thief2_funcs"
-
-read_t2_settings () {
-  [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_t2_settings: \$WINEPREFIX must be set'
-  perl -ne 'BEGIN { \$width=800; \$height=600; }
-            \$width=\$1, \$height=\$2 if /^game_screen_size (\d+) (\d+)/;
-            END { print "WIDTH=\$width\nHEIGHT=\$height\n" }' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/cam.cfg"
-}
-
-write_t2_settings () {
-  [ -z "\$WINEPREFIX" -o -z "\$WIDTH" -o -z "\$HEIGHT" ] && POL_Debug_Fatal 'write_t2_settings: \$WINEPREFIX, \$WIDTH and \$HEIGHT must be set'
-  perl -i.bak -pe 's/^game_screen_size \d+ \d+/game_screen_size '"\$WIDTH \$HEIGHT"'/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/cam.cfg"
-  perl -i.bak -pe 's/^gWidth=\d+/gWidth='"\$WIDTH"'/;
-                   s/^gHeight=\d+/gHeight='"\$HEIGHT"'/;' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/ddfix.ini"
-}
-
-sync_resolutions () {
-  eval \$(read_t2_settings)
-  write_t2_settings
-  POL_LoadVar_ScreenResolution
-  if [ "\$WIDTH" = "\$ScreenWidth" -a "\$HEIGHT" = "\$ScreenHeight" ]; then
-    Set_Desktop "Off"
-  else
-    Set_Desktop "On" "\$WIDTH" "\$HEIGHT"
-  fi
-}
-
-_EOFFUNC_
-
-POL_Shortcut "thief2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source thief2_funcs || exit 0'
-POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'sync_resolutions'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief 2/Manual.pdf"
-
-#POL_Shortcut "thief2_no_ddfix.exe" "$SHORTCUT_NAME (no DDFix)" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-#POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME (no DDFix)" 'taskset -pc 0 $$'
+POL_Shortcut "Thief2_ND.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Thief 2 - The Metal Age/Manual.pdf"
+# C:\GOG Games\Thief 2 - The Metal Age\DromEd.exe
 
 POL_SetupWindow_Close
-
-cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
-[ -z "\$PLAYONLINUX" ] && exit 0
-source "\$PLAYONLINUX/lib/sources"
-export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
-export WINEDEBUG="-all"
-
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Thief 2/" || exit 1
-
-TITLE="$TITLE"
-
-POL_SetupWindow_Init
-POL_Debug_Init
-
-source thief2_funcs || exit 1
-eval \$(read_t2_settings)
-POL_Debug_Message "Resolution read: \$WIDTH \$HEIGHT"
-
-POL_SetupWindow_menu_list "\$(eval_gettext 'Select game resolution:')" "\$TITLE" "800x600~1024x768~1280x1024" "~" "\${WIDTH}x\${HEIGHT}"
-WIDTH="\$(echo \$APP_ANSWER|cut -dx -f1)"
-HEIGHT="\$(echo \$APP_ANSWER|cut -dx -f2)"
-
-POL_Debug_Message "Resolution written: \$WIDTH \$HEIGHT"
-write_t2_settings
-
-POL_SetupWindow_Close
-exit 0
-_EOF_
 
 exit 0
