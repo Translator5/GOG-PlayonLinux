@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-06-19 00-00)
-# Last revision : (2013-06-19 00-00)
+# Last revision : (2013-06-29 15-09)
 # Wine version used : 1.6-rc2
 # Distribution used to test : Ubuntu 12.04.2 LTS
 # Author : Niriddiki
@@ -27,9 +27,6 @@ POL_Call POL_GoG_setup "$GOGID" "09c7be7cb7723a2e63afcee7bd9bca29"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WINEVERSION"
 
-# fake sdbinst.exe(What for? this is from HoMM3 script made by petch - lets try without it )
-#POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe"
- 
 POL_Call POL_GoG_install
 
 # GoG runs!
@@ -42,14 +39,14 @@ POL_SetupWindow_VMS "2"
 Set_Managed "Off"
 POL_Wine_reboot
 
-POL_Shortcut "Warlords.exe" "Heroes Chronicles [Chapter 1] - Warlords of the Wasteland"
-POL_Shortcut "Underworld.exe" "Heroes Chronicles [Chapter 2] - Conquest of the Underworld"
-POL_Shortcut "Elements.exe" "Heroes Chronicles [Chapter 3] - Masters of the Elements"
-POL_Shortcut "Dragons.exe" "Heroes Chronicles [Chapter 4] - Clash of the Dragons"
-POL_Shortcut "WorldTree.exe" "Heroes Chronicles [Chapter 5] - The World Tree"
-POL_Shortcut "FieryMoon.exe" "Heroes Chronicles [Chapter 6] -The Fiery Moon"
-POL_Shortcut "Beastmaster.exe" "Heroes Chronicles [Chapter 7] - Revolt of the Beastmasters"
-POL_Shortcut "Sword.exe" "Heroes Chronicles [Chapter 8] - The Sword of Frost"
+POL_Shortcut "Warlords.exe" "Heroes Chronicles [Chapter 1] - Warlords of the Wasteland" "" "" "Game;StrategyGame;"
+POL_Shortcut "Underworld.exe" "Heroes Chronicles [Chapter 2] - Conquest of the Underworld" "" "" "Game;StrategyGame;"
+POL_Shortcut "Elements.exe" "Heroes Chronicles [Chapter 3] - Masters of the Elements" "" "" "Game;StrategyGame;"
+POL_Shortcut "Dragons.exe" "Heroes Chronicles [Chapter 4] - Clash of the Dragons" "" "" "Game;StrategyGame;"
+POL_Shortcut "WorldTree.exe" "Heroes Chronicles [Chapter 5] - The World Tree" "" "" "Game;StrategyGame;"
+POL_Shortcut "FieryMoon.exe" "Heroes Chronicles [Chapter 6] -The Fiery Moon" "" "" "Game;StrategyGame;"
+POL_Shortcut "Beastmaster.exe" "Heroes Chronicles [Chapter 7] - Revolt of the Beastmasters" "" "" "Game;StrategyGame;"
+POL_Shortcut "Sword.exe" "Heroes Chronicles [Chapter 8] - The Sword of Frost" "" "" "Game;StrategyGame;"
 
 POL_SetupWindow_Close
 
