@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-06-19 00-00)
-# Last revision : (2013-06-29 15-09)
+# Last revision : (2013-06-29 15-13)
 # Wine version used : 1.6-rc2
 # Distribution used to test : Ubuntu 12.04.2 LTS
 # Author : Niriddiki
@@ -14,6 +14,7 @@ GOGID="heroes_chronicles_all_chapters"
 EDITOR_URL="http://www.gog.com/gamecard/$GOGID" #ссылка не открывается из окна ПОЛ
 
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1743
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Niriddiki" "$PREFIX"
