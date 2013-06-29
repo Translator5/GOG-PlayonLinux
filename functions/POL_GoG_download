@@ -8,7 +8,7 @@ local GAME="$1"
 # Hashes are recommended for large downloads anyway
 shift
 
-local BASENAME="$GAME"
+local BASENAME="setup_$GAME"
 local INDEX=0
 if [ "$1" = "--alternate" ]; then
 	BASENAME="$2"
@@ -115,12 +115,12 @@ download_piece ()
 	done
 }
 
-download_piece "$BASEURL/$GAME/${INDEXPREFIX}$INDEX" "setup_$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
+download_piece "$BASEURL/$GAME/${INDEXPREFIX}$INDEX" "$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
 	local n=2
 	while [ $n -le $PIECES ]; do
-		download_piece "$BASEURL/$GAME/${INDEXPREFIX}$((INDEX+n-1))" "setup_$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
+		download_piece "$BASEURL/$GAME/${INDEXPREFIX}$((INDEX+n-1))" "$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
 		let n=$((n+1))
 	done
 fi
@@ -129,4 +129,4 @@ fi
 rm -f "$COOKIES"
 
 POL_GoG_downloaded="True"
-POL_GoG_location="$PWD/setup_$BASENAME.exe"
+POL_GoG_location="$PWD/$BASENAME.exe"
