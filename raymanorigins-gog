@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-06-08 15-10)
-# Last revision : (2013-06-29 12-40)
+# Last revision : (2013-06-29 14-42)
 # Wine version used : 1.5.1
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Xodetaetl" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "$GOGID" "1" "8bdf6d75eee8cf930b9c41e43d984314"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "8bdf6d75eee8cf930b9c41e43d984314"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

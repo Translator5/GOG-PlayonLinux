@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-23 18-00)
-# Last revision : (2013-05-23 18-00)
+# Last revision : (2013-06-29 14-43)
 # Wine version used : 1.4.1
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sir-Tech Software / Gamepot Inc." "http://www.gog.com/gamecard/wizardry_8" "Xodetaetl" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "$GOGID" "1" "a96bcc5ae3a4c184fd77227f74e4d159"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "a96bcc5ae3a4c184fd77227f74e4d159"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
