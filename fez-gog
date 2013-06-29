@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-19 20-47)
-# Last revision : (2013-05-19 20-47)
+# Last revision : (2013-06-29 14-39)
 # Wine version used : 1.4.1, 1.5.30
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -31,7 +31,6 @@ POL_Call POL_GoG_setup "$GOGID" --alternate "fez" "1" "8bdf6d75eee8cf930b9c41e43
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_Install_gdiplus
 POL_Call POL_Install_mono210
 POL_Call POL_GoG_install
 
