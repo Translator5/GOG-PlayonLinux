@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 13-10)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-10 13-29)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -67,7 +67,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Blackwell Bundle/Episode 1 - The Blackwell Legacy/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine winsetup.exe
 exit 0
 _EOF_
@@ -83,7 +82,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Blackwell Bundle/Episode 2 - Blackwell Unbound/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine winsetup.exe
 exit 0
 _EOF_
@@ -99,7 +97,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Blackwell Bundle/Episode 3 - Blackwell Convergence/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine winsetup.exe
 exit 0
 _EOF_
@@ -115,7 +112,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Blackwell Bundle/Episode 4 - Blackwell Deception/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine winsetup.exe
 exit 0
 _EOF_

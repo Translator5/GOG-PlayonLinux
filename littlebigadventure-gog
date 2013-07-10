@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-30 12-44)
-# Last revision : (2013-05-17 21-39)
+# Last revision : (2013-07-10 13-34)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -75,7 +75,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "$GOGROOT/Little Big Adventure/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine Language.exe
 exit 0
 _EOF_

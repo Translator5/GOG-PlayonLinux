@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-17 16-12)
-# Last revision : (2013-06-29 14-41)
+# Last revision : (2013-07-10 13-27)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -70,8 +70,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Another World/" || exit 1
 
 TITLE="$TITLE"
-
-POL_Debug_Init
 
 POL_Wine Config.exe
 

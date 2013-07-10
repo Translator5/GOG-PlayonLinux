@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-04-07 16-50)
-# Last revision : (2013-04-07 19-17)
+# Last revision : (2013-07-10 13-36)
 # Wine version used : 1.5.27
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -66,7 +66,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Neverwinter Nights 2 Complete/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine SerialTool.exe
 exit 0
 _EOF_

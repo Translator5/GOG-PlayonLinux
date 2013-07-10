@@ -59,7 +59,6 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Game Install Directory/" || exit
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 # ...
 POL_SetupWindow_Close
 exit 0

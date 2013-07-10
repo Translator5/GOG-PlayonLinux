@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-17 19-29)
-# Last revision : (2013-05-24 22-37)
+# Last revision : (2013-07-10 13-31)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -75,7 +75,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Crusader No Remorse/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine INSTALL.EXE
 exit 0
 _EOF_

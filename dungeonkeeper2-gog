@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-18 01-01)
-# Last revision : (2013-05-09 19-08)
+# Last revision : (2013-07-10 13-32)
 # Wine version used : 1.5.1, 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -66,7 +66,6 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Dungeon Keeper 2/" || exit 1
 
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine "DKII_SOFT.EXE"
 
 exit 0

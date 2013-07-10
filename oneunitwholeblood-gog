@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-21 21-14)
-# Last revision : (2013-05-20 00-20)
+# Last revision : (2013-07-10 13-36)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -77,7 +77,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/One Unit Whole Blood/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine SETUP.EXE
 exit 0
 _EOF_

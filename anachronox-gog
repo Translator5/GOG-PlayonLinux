@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-02 11-46)
-# Last revision : (2013-04-20 22-14)
+# Last revision : (2013-07-10 13-26)
 # Wine version used : 1.4.1, 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -62,8 +62,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Anachronox/" || exit 1
 
 TITLE="$TITLE"
-
-POL_Debug_Init
 
 POL_Wine "GCT Setup.exe"
 

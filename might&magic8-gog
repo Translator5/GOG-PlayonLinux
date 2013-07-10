@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-17 14-13)
-# Last revision : (2013-05-25 21-29)
+# Last revision : (2013-07-10 13-35)
 # Wine version used : 1.5.8
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -63,7 +63,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Might and Magic VIII - Day of the Destroyer/" || exit 1
 
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine MM8Setup.Exe
 exit 0
 _EOF_

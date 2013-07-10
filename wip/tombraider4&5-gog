@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-14 21-24)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-10 13-43)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -82,7 +82,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 4/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine tomb4.exe "setup"
 exit 0
 _EOF_
@@ -98,7 +97,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Tomb Raider 5/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine PCTomb5.exe "setup"
 exit 0
 _EOF_
@@ -115,7 +113,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Tomb Raider 4-5/Editor/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine tomb4.exe "-setup"
 exit 0
 _EOF_

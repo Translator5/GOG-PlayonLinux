@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-16 20-31)
-# Last revision : (2013-05-02 21-35)
+# Last revision : (2013-07-10 13-41)
 # Wine version used : 1.4.1, 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -60,8 +60,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/UFO Aftermath/" || exit 1
 
 TITLE="$TITLE"
-
-POL_Debug_Init
 
 POL_Wine launcher.exe
 

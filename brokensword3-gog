@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-02-03 21-27)
-# Last revision : (2013-05-18 17-06)
+# Last revision : (2013-07-10 13-29)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -65,7 +65,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Broken Sword - The Sleeping Dragon/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine BSTSD.exe -safevideomode
 exit 0
 _EOF_
