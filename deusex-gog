@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-14 00-51)
-# Last revision : (2013-07-10 13-31)
+# Last revision : (2013-07-14 19-29)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ion Storm Inc. / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8c6cfa5089c41ca80545e27b99aa3730"
+POL_Call POL_GoG_setup "$GOGID" "01edd092d6547835b398355aeb307e19"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -37,12 +37,12 @@ POL_Call POL_GoG_install
 cd "$POL_USER_ROOT/tmp"
 # Direct3D driver update
 POL_Download "http://files.playonlinux.com/D3DDrv.dll" "8211caf827881d3969e1812fc6341146"
-cp D3DDrv.dll "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/System/D3DDrv.dll"
+cp D3DDrv.dll "$GOGROOT/Deus Ex GOTY/System/D3DDrv.dll"
 
 # Default OpenGL renderer crashes on exit, pick a better one
 # Source http://www.cwdohnal.com/utglr/
 POL_Download "http://files.playonlinux.com/dxglr21.zip" "e25ec9940eff8aa1e3a74e94ffdba706"
-POL_System_ExtractSingleFile "dxglr21.zip" "OpenGLDrv.dll" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/System/OpenGlDrv.dll"
+POL_System_ExtractSingleFile "dxglr21.zip" "OpenGLDrv.dll" "$GOGROOT/Deus Ex GOTY/System/OpenGlDrv.dll"
 
 # GoG work!
 Set_OS winxp
@@ -53,17 +53,17 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "DeusEx.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Deus Ex/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Deus Ex GOTY/manual.pdf"
 # Game has issues with uncapped FPS (dialogs cut before the end...) => enable vblank
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "export __GL_SYNC_TO_VBLANK=1" # nvidia?
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" "export vblank_mode=1"         # others?
-# C:\Program Files\GOG\Deus Ex\Help\ReadMe.htm
-# C:\Program Files\GOG\Deus Ex\Help\MPAdmin.htm
-# C:\Program Files\GOG\Deus Ex\Help\ReadMeMultiplayer.htm
-# C:\Program Files\GOG\Deus Ex\Help\MPMap.htm
-# C:\Program Files\GOG\Deus Ex\Help\ReadMeMPStrategy.htm
-# C:\Program Files\GOG\Deus Ex\Help\ReadMePatch1.htm
-# C:\Program Files\GOG\Deus Ex\Help\PatchFix.htm
+# C:\GOG Games\Deus Ex GOTY\Help\ReadMe.htm
+# C:\GOG Games\Deus Ex GOTY\Help\MPAdmin.htm
+# C:\GOG Games\Deus Ex GOTY\Help\ReadMeMultiplayer.htm
+# C:\GOG Games\Deus Ex GOTY\Help\MPMap.htm
+# C:\GOG Games\Deus Ex GOTY\Help\ReadMeMPStrategy.htm
+# C:\GOG Games\Deus Ex GOTY\Help\ReadMePatch1.htm
+# C:\GOG Games\Deus Ex GOTY\Help\PatchFix.htm
 
 # OpenGL tip
 POL_SetupWindow_message "$(eval_gettext 'On first run the game will autodetect available renderers.\nIt is likely that you will get better performance out of the OpenGL renderer;\nYou can select it after clicking on "Show all devices".')" "$TITLE"
@@ -77,16 +77,14 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
-POL_LoadVar_PROGRAMFILES
-
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Deus Ex/" || exit 1
+cd "$GOGROOT/Deus Ex GOTY/" || exit 1
 
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
 
 POL_SetupWindow_question "$(eval_gettext 'Run $TITLE in safe mode?')" "\$TITLE"
-[ "\$APP_ANSWER" = "TRUE" ] && POL_Wine System/DeusEx.exe -safe
+[ "\$APP_ANSWER" = "TRUE" ] && POL_Wine System/DeusEx.exe -safe || POL_Wine System/nglide_config.exe
 
 POL_Call POL_Configurator_runparts
 
