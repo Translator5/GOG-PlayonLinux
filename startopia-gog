@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-03 20-04)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-15 20-19)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,7 +30,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Mucky Foot Productions / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "0dac024c52e483d4c6472fca33efd109"
+POL_Call POL_GoG_setup "$GOGID" "4fe8d194afc1012e136ed3e82f1de171"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -50,7 +50,7 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot
 
 POL_Shortcut "startopia.exe" "$SHORTCUT_NAME" "" "" "Game;StrategyGame;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/StarTopia/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/StarTopia/Manual.pdf"
 
 POL_SetupWindow_Close
 
