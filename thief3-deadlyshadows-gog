@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-12-03 20-53)
-# Last revision : (2013-07-14 18-57)
-# Wine version used : 1.5.18, 1.6-rc5
+# Last revision : (2013-07-18 19-53)
+# Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="thief_3"
 PREFIX="Thief3_gog"
-WORKING_WINE_VERSION="1.5.18"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Thief 3: Deadly Shadows"
 SHORTCUT_NAME="Thief 3: Deadly Shadows"
