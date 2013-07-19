@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-06-08 21-06)
-# Last revision : (2013-06-09 02-12)
+# Last revision : (2013-07-19 20-58)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Level Up Labs" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8b41439e97b0c5689c3bca1fbe666ce3"
+POL_Call POL_GoG_setup "$GOGID" "21555a253f9fdc0e7de46ac86223e55d"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
