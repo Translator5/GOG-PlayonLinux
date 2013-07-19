@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-10 16-42)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-19 02-33)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Mucky Foot Productions / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "73273183287610c4918eff02d1c64a68"
+POL_Call POL_GoG_setup "$GOGID" "83531e6396084f231b196b661742db78"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -39,7 +39,7 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "4"
 
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Urban Chaos/text" || POL_Debug_Fatal "Unable to change directory"
+cd "$GOGROOT/Urban Chaos/text" || POL_Debug_Fatal "Unable to change directory"
 # At least warn of the issue
 cp lang_english.txt lang_english.txt.orig
 sed -e 's/^Restart Level/Restart Level(crash)/' lang_english.txt.orig > lang_english.txt
@@ -48,7 +48,7 @@ sed -e 's/^Restart Level/Restart Level(crash)/' lang_english.txt.orig > lang_eng
 POL_Wine_reboot
 
 POL_Shortcut "fallen.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Urban Chaos/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Urban Chaos/Manual.pdf"
 
 POL_SetupWindow_Close
 
