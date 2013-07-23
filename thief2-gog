@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-09 16-26)
-# Last revision : (2013-06-22 11-38)
+# Last revision : (2013-07-23 20-21)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -39,11 +39,17 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "8"
 
+# Enable OpenAL by default (#2585)
+cp "$GOGROOT/Thief 2 - The Metal Age/cam.cfg" "$GOGROOT/Thief 2 - The Metal Age/cam.cfg.bak"
+sed -e 's/^sfx_device [0-9]\+/sfx_device 4/' \
+    -e 's/^master_volume -\?[0-9]\+/master_volume -1/' \
+  < "$GOGROOT/Thief 2 - The Metal Age/cam.cfg.bak" > "$GOGROOT/Thief 2 - The Metal Age/cam.cfg"
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "Thief2_ND.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Thief 2 - The Metal Age/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Thief 2 - The Metal Age/Manual.pdf"
 # C:\GOG Games\Thief 2 - The Metal Age\DromEd.exe
 
 POL_SetupWindow_Close
