@@ -1,0 +1,63 @@
+#!/bin/bash
+# Date                        : (2013-03-05 00-39)
+# Last revision                : (2013-03-13 15-24)
+# Wine version used            : 1.5.24
+# Distribution used to test    : Ubuntu 12.04.2 LTS
+# Author                    : ntzrmtthihu777
+# Testers                    : petch, Lightning Dragon
+
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+TITLE="RPG Maker XP"
+PREFIX="RPG_XP"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Enterbrain" "http://www.rpgmakerweb.com/" "ntzrmtthihu777" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "1.5.24"
+POL_System_SetArch "x86"
+
+POL_System_TmpCreate "$PREFIX"
+
+#installs and configures needed libraries
+POL_Call POL_Install_dinput
+POL_Call POL_Install_dinput8
+POL_Call POL_Install_directmusic
+POL_Call POL_Install_directplay
+POL_Call POL_Install_directx9
+POL_Call POL_Install_dotnet20
+POL_Call POL_Install_dxfullsetup
+POL_Call POL_Install_gdiplus
+
+POL_Wine_OverrideDLL "native,builtin" "d3d8" "d3d9"
+
+#downloads the official installer package, unzips it and installs the rtp and actual program.
+cd "$POL_System_TmpDir"
+POL_Download "http://www.fileden.com/files/2012/12/25/3379865/RPGXP-Audio.zip" "f443c89a983dd171c73f2794cc3279b7"
+unzip RPGXP_Setup.zip
+POL_SetupWindow_wait "Installation in progress." "$TITLE RTP installation"
+POL_Wine start /unix "$POL_System_TmpDir/XPRTP/Setup.exe"
+POL_Wine_WaitExit "Setup.exe"
+POL_SetupWindow_wait "Installation in progress." "$TITLE installation"
+POL_Wine start /unix "$POL_System_TmpDir/Program/Setup.exe"
+POL_Wine_reboot
+POL_Wine_WaitExit "Setup.exe"
+
+#installs RTP Audio converted to .ogg from .mid
+cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Common Files/Enterbrain/RGSS/Standard/Audio"
+POL_Download "https://www.dropbox.com/s/citwp55iczz05bb/RPGXP-Audio.zip?dl=1" "c5c6938f63dbd2427cd3137028d42857"
+unzip RPGXP-Audio.zip
+mv BGM.zip ./BGM && unzip ./BGM/BGM.zip
+mv ME.zip ./ME && unzip ./ME/ME.zip
+rm ./*/*.mid ./RPGXP-Audio.zip ./*/*.zip
+
+#creates shortcut
+POL_Shortcut "RPGXP.exe" "$TITLE"
+POL_System_TmpDelete
+POL_SetupWindow_Close
+
+exit
