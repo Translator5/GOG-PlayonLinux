@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-07-28 11-12)
-# Last revision : (2013-08-07 18-02)
+# Last revision : (2013-08-07 18-16)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -72,6 +72,7 @@ CONFIG -set "cpu cycles=max"
 CONFIG -set "sblaster sbtype=sbpro1"
 rem CONFIG -set "sblaster dma=0"
 start.exe
+EXIT
 _EOFBAT_
 
 cat <<_EOFBAT_ > "$GOGROOT/Ishar Compilation/Ishar 3/I3.BAT"
@@ -79,6 +80,7 @@ cat <<_EOFBAT_ > "$GOGROOT/Ishar Compilation/Ishar 3/I3.BAT"
 CONFIG -set "sblaster sbtype=sb16"
 CONFIG -set "sblaster irq=7"
 start.exe start.stp
+EXIT
 _EOFBAT_
 
 POL_Shortcut "I0.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;RolePlaying;"
