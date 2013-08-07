@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-07-28 11-12)
-# Last revision : (2013-08-07 17-25)
+# Last revision : (2013-08-07 18-02)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,7 @@ SHORTCUT_NAME4="Ishar 3 - The Seven Gates of Infinity"
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 1790
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Silmaris / DotEmu" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
