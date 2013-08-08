@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-10 10-53)
-# Last revision : (2013-05-26 00-22)
+# Last revision : (2013-08-08 14-03)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "MPS Labs / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "e5f81838016a1c3512c3249799dc71ba"
+POL_Call POL_GoG_setup "$GOGID" "38c26307369a5e3df17770146cd0459a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
