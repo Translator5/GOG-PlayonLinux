@@ -1,0 +1,41 @@
+#!/bin/bash
+# Date : (2013-07-01 02-18)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Wheezy (Stable) - LXDE
+# Author : 3limin4t0r
+# Program licence : Retail
+# Depend :
+[ -z "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="unreal_tournament_goty"
+WINEVERSION="1.4.1"
+PREFIX="UnrealGOTY_gog"
+
+TITLE="GOG.com - Unreal Tournament GOTY"
+SHORTCUT_NAME="Unreal Tournament GOTY"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Epic Games" "http://www.gog.com/gamecard/$GOGID" "3limin4t0r" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "f67f83483481a08819d2512aab46287a"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WINEVERSION"
+
+POL_Call POL_GoG_install
+
+# GoG work
+Set_OS winxp
+
+POL_SetupWindow_VMS "8"
+
+# Doesn't hurt
+POL_Wine_reboot
+
+POL_Shortcut "UnrealTournament.exe"  "$SHORTCUT_NAME"
+
+POL_SetupWindow_Close
+exit 0
