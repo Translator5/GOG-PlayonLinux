@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-30 21-24)
-# Last revision : (2013-05-12 14-50)
+# Last revision : (2013-08-14 00-03)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "e3c7cb3d39149e20fceae29cdb647954" "6bb23fa49cc030149a175d36c89d8509" "8e07902445344006466bc18d059e5db3"
+POL_Call POL_GoG_setup "$GOGID" "4c94120463dd5230fa405a46305ad3e5" "ff4677a6f65fe23d1dadb151cb4b7304" "016f679b6e5b6fbdc5eafc8ac800bfd2"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # Shaders compilation doesn't seem to work under Wine, use precompiled cache from
@@ -54,7 +54,7 @@ POL_Call POL_Install_d3dx9_40
 POL_Wine_Direct3D "AlwaysOffscreen" "enabled"
 
 # Performance tweak http://appdb.winehq.org/objectManager.php?sClass=version&iId=6012&iTestingId=71819
-perl -i.bak -pe 'print "Timer.ThreadSafe=false\r\n" if /^Timer\.bIsSmooth=/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Ini/ge3.ini"
+perl -i.bak -pe 'print "Timer.ThreadSafe=false\r\n" if /^Timer\.bIsSmooth=/' "$GOGROOT/Gothic 3/Ini/ge3.ini"
 
 POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_X11Drv "DXGrab" "Y"
@@ -64,8 +64,8 @@ POL_Wine_reboot
 
 POL_Shortcut "Gothic3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic 3/Manual.pdf"
-# C:\Program Files\GOG.com\Gothic 3\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Gothic 3/Manual.pdf"
+# C:\GOG Games\Gothic 3\readme.txt
 
 POL_SetupWindow_Close
 
