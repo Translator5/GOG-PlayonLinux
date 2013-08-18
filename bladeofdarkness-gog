@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-08-15 14-11)
-# Last revision : (2013-08-18 03-37)
+# Last revision : (2013-08-18 13-05)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="blade_of_darkness"
 PREFIX="BladeOfDarkness_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.3.27"
 
 TITLE="GOG.com - Blade of Darkness"
 SHORTCUT_NAME="Blade of Darkness"
@@ -39,30 +39,25 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "8"
 
-#POL_Wine_OverrideDLL "" winegstreamer
 POL_Call POL_Install_devenum
 POL_Call POL_Install_quartz
-#POL_Call POL_Install_amstream
 POL_Call POL_Install_wmp9
-#POL_Call POL_Install_ffdshow
 
-cat << _EOFREG_ >> "$POL_USER_ROOT/tmp/ffdshow.reg"
-[HKEY_CURRENT_USER\Software\GNU\ffdshow]
-"mpg1"=dword:00000001
-"mpg2"=dword:00000001
+## Default to rOpenGL renderer - not. Several issues
+#if type -t POL_unbase64 > /dev/null; then
+#	POL_unbase64 <<-'_EOFDAT_' > "$GOGROOT/Blade of Darkness/Config/Blade.config"
+#	BwAAAAUAAAABAAAA
+#	_EOFDAT_
+#fi
 
-[HKEY_CURRENT_USER\Software\GNU\ffdshow_audio]
-"trayIcon"=dword:00000000
+# To use rOpenGL on nVidia
+# and for lack of POL_Wine_OpenGL
+cat << _EOFREG_ >> "$POL_USER_ROOT/tmp/nvidia-opengl.reg"
+[HKEY_CURRENT_USER\Software\Wine\OpenGL]
+"DisabledExtensions"="GL_KTX_buffer_region"
 _EOFREG_
-POL_Wine regedit "$POL_USER_ROOT/tmp/ffdshow.reg"
-rm "$POL_USER_ROOT/tmp/ffdshow.reg"
-
-# cd "$GOGROOT/Blade of Darkness/Data/video/EnglishUS"
-# mkdir -p Mpeg
-# mv main.mpg Mpeg
-# ffmpeg -i Mpeg/main.mpg -c:v mpeg4 -b:v 2000k main.mpg
-
-POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
+POL_Wine regedit "$POL_USER_ROOT/tmp/nvidia-opengl.reg"
+rm "$POL_USER_ROOT/tmp/nvidia-opengl.reg"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
