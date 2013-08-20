@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-05 21-11)
-# Last revision : (2013-05-25 21-49)
+# Last revision : (2013-08-08 13-56)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Dynamix / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "88402865857f7569e8690b25e7ca04fe"
+POL_Call POL_GoG_setup "$GOGID" "b869709f08c29f7b622efd3741716baf"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -50,7 +50,7 @@ cpu_cputype=386_slow
 cpu_cycles=max
 mixer_rate=22050
 mixer_blocksize=2048
-mixer_prebuffer=80
+mixer_prebuffer=120
 sblaster_sbtype=sb16
 sblaster_sbbase=220
 sblaster_irq=7

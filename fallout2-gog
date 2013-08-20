@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-02 23-43)
-# Last revision : (2013-05-09 16-54)
+# Last revision : (2013-08-05 23-56)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "a567c4777ce4cf0f28ffb64211018f1c"
+POL_Call POL_GoG_setup "$GOGID" "0ec3537ca2af41ce11b478f11d4abd20"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -45,8 +45,8 @@ POL_Wine_reboot
 POL_Shortcut "fallout2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 # sometimes exits with an exitcode of 1 for what it seems no good reason
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Fallout 2/MANUAL.PDF"
-# C:\GOG Games\Fallout 2\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Fallout 2/MANUAL.PDF"
+# C:\Program Files\GOG.com\Fallout 2\readme.txt
 
 POL_SetupWindow_Close
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-08 21-42)
-# Last revision : (2013-04-13 17-09)
+# Last revision : (2013-04-18 07-21)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Crystal Dynamics / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "fdf23501856d33a8a58b16bdffa4b87e"
+POL_Call POL_GoG_setup "$GOGID" "3ea952edef8cdaf872bbcb9db3b87728"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,8 +43,22 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "defiance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Legacy of Kain Defiance/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Legacy of Kain Defiance/manual.pdf"
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+cd "$GOGROOT/Legacy of Kain Defiance/" || exit 1
+TITLE="$TITLE"
+
+POL_Wine defiance.exe -setup
+exit 0
+_EOF_
 
 exit 0

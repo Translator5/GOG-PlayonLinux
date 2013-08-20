@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-20 01-46)
-# Last revision : (2013-04-11 23-30)
+# Last revision : (2013-07-10 13-31)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -67,7 +67,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Dark Prophecy and Gallean's Return/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine ConfigEditor.exe
 exit 0
 _EOF_
@@ -82,7 +81,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Disciples 2 Gold/Disciples 2 - Rise of the Elves/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine ConfigEditor.exe
 exit 0
 _EOF_

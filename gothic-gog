@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-24 10-39)
-# Last revision : (2013-04-01 08-04)
+# Last revision : (2013-08-08 14-31)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,10 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f8f06e5c4d79e89e7427fb3ab0085401"
+POL_Call POL_GoG_setup "$GOGID" "bc511065a4d669495d14779c0a431982"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe (bug report #2550)
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe"
 
 POL_Call POL_GoG_install
 
@@ -48,12 +51,12 @@ POL_Wine_reboot
 
 # extendedMenu allows to set resolution ingame
 # tip from http://www.gog.com/forum/gothic_series/notes_on_widescreen_resolution
-cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic/gothic_funcs"
+cat <<_EOFFUNC_ > "$GOGROOT/Gothic/gothic_funcs"
 
 # echo statements to set \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP
 read_g_settings () {
   [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_g_settings: \$WINEPREFIX must be set'
-  perl -ne 'print "\$1\n" if /^((zVidResFullscreenX|zVidResFullscreenY|zVidResFullscreenBPP)=\d+)/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic/system/GOTHIC.INI"
+  perl -ne 'print "\$1\n" if /^((zVidResFullscreenX|zVidResFullscreenY|zVidResFullscreenBPP)=\d+)/' "$GOGROOT/Gothic/system/GOTHIC.INI"
 }
 
 # update GOTHIC.INI with value of \$zVidResFullscreenX, \$zVidResFullscreenY and \$zVidResFullscreenBPP
@@ -62,7 +65,7 @@ write_g_settings () {
   perl -i.bak -pe 's/^zVidResFullscreenX=\d+/zVidResFullscreenX='"\$zVidResFullscreenX"'/;
                    s/^zVidResFullscreenY=\d+/zVidResFullscreenY='"\$zVidResFullscreenY"'/;
                    s/^zVidResFullscreenBPP=\d+/zVidResFullscreenBPP='"\$zVidResFullscreenBPP"'/;
-                   s/^extendedMenu=\d+/extendedMenu=1/;' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic/system/GOTHIC.INI"
+                   s/^extendedMenu=\d+/extendedMenu=1/;' "$GOGROOT/Gothic/system/GOTHIC.INI"
 }
 
 # until POL_LoadVar_ScreenResolution does it?
@@ -86,8 +89,8 @@ POL_Shortcut "GOTHIC.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePla
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'source "../gothic_funcs" || exit 0'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'sync_resolutions'
 
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gothic/manual.pdf"
-# C:\Program Files\GOG.com\Gothic\Readme.htm
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Gothic/manual.pdf"
+# C:\GOG Games\Gothic\Readme.htm
 
 POL_SetupWindow_Close
 

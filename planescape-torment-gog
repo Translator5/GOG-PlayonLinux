@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 20-41)
-# Last revision : (2013-05-09 14-06)
+# Last revision : (2013-07-10 13-37)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -46,12 +46,12 @@ POL_SetupWindow_VMS "4"
 POL_Wine_reboot
 
 # "Fixed" version gives mouse cursor trails under Wine
-cd "$WINEPREFIX/drive_c/GOG Games/Planescape Torment" || POL_Debug_Fatal "Game not installed in standard path?"
+cd "$GOGROOT/Planescape Torment" || POL_Debug_Fatal "Game not installed in standard path?"
 POL_Wine setup-ddrawfix.exe --uninstall
 rm -r setup-ddrawfix.exe ddrawfix
 
 POL_Shortcut "Torment.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Planescape Torment/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Planescape Torment/manual.pdf"
 # C:\GOG Games\Planescape Torment\Readme.txt
 
 POL_SetupWindow_Close
@@ -65,12 +65,11 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/GOG Games/Planescape Torment/" || exit 1
+cd "$GOGROOT/Planescape Torment/" || exit 1
 
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 POL_Call POL_Configurator_runparts
 

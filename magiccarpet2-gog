@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-18 23-00)
-# Last revision : (2013-05-18 23-00)
+# Last revision : (2013-06-29 14-41)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bullfrog Productions / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Xodetaetl" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "magic_carpet_2_the_netherworlds" "1" "27dd1808b633360d56c258104bbcea20"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "27dd1808b633360d56c258104bbcea20"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

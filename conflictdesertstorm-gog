@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-05 22-55)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-14 21-02)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pivotal Games / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b84e9b930a5b3cc733506297d7fec087"
+POL_Call POL_GoG_setup "$GOGID" "dcbc662e7d9b855ba131a82b749f32a1"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "64"
 POL_Wine_reboot
 
 POL_Shortcut "DesertStorm.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Desert Storm/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Conflict - Desert Storm/manual.pdf"
 
 POL_SetupWindow_Close
 

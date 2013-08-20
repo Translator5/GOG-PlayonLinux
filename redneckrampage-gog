@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-20 21-33)
-# Last revision : (2013-05-19 18-04)
+# Last revision : (2013-07-10 13-38)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -124,7 +124,6 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Redneck Rampage Collection/Redneck Rampage/" 
 
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine RRSETUP.BAT
 
 _EOF_
@@ -142,7 +141,6 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Redneck Rampage Collection/Redneck Rampage/" 
 
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine 66SETUP.BAT
 
 _EOF_
@@ -160,7 +158,6 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Redneck Rampage Collection/$REDNECK3/" || exi
 
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine SETUP.EXE
 
 _EOF_

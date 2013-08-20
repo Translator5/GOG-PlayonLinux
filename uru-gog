@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-20 18-43)
-# Last revision : (2013-04-11 23-53)
+# Last revision : (2013-07-10 13-41)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -61,8 +61,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Myst Uru Complete Chronicles/" || exit 1
 
 TITLE="$TITLE"
-
-POL_Debug_Init
 
 POL_Wine UruSetup.exe
 

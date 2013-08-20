@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-10-23 12-18)
-# Last revision : (2013-04-13 02-34)
-# Wine version used : 1.5.10
+# Last revision : (2013-06-22 09-24)
+# Wine version used : 1.4.1, 1.5.10
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="thief_gold"
 PREFIX="Thief_gog"
-WORKING_WINE_VERSION="1.5.10"
+WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Thief Gold"
 SHORTCUT_NAME="Thief: The Dark Project + Gold"
@@ -26,15 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Looking Glass Studios / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "affb0b391cacf02a117aa1b9f22b9d6a"
+POL_Call POL_GoG_setup "$GOGID" "bde1c2a2ffdda552c63c7ca6e3d87310"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_Install_devenum
-POL_Call POL_Install_quartz
-
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install /nogui
 
 
 # GoG work!
@@ -45,11 +42,10 @@ POL_SetupWindow_VMS "4"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "THIEF.EXE" "$SHORTCUT_NAME" "" "" "Game;ActionGame;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Thief Gold/manual.pdf"
-# C:\Program Files\GOG.com\Thief Gold\THIEF_no_ddfix.EXE
-# C:\Program Files\GOG.com\Thief Gold\DROMED.EXE
-# C:\Program Files\GOG.com\Thief Gold\reference card.pdf
+POL_Shortcut "THIEF_ND.EXE" "$SHORTCUT_NAME" "" "" "Game;ActionGame;" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Thief GOLD/manual.pdf"
+# C:\GOG Games\Thief GOLD\DROMED.EXE
+# C:\GOG.Games\Thief GOLD\reference card.pdf
 
 POL_SetupWindow_Close
 

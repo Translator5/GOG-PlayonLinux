@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-10 13-29)
 # Wine version used : 1.5.8
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -98,7 +98,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/bin/" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine Configurator.exe
 exit 0
 _EOF_

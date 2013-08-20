@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-02 11-46)
-# Last revision : (2013-04-20 22-14)
+# Last revision : (2013-07-14 21-38)
 # Wine version used : 1.4.1, 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Ion Storm Inc. / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "dec3da5b1485d9038c37b80b777dd474"
+POL_Call POL_GoG_setup "$GOGID" "c70029e6755d6505bf9818affdf08373"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -46,7 +46,7 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "anox.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Anachronox/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Anachronox/manual.pdf"
 
 POL_SetupWindow_Close
 
@@ -59,11 +59,9 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Anachronox/" || exit 1
+cd "$GOGROOT/Anachronox/" || exit 1
 
 TITLE="$TITLE"
-
-POL_Debug_Init
 
 POL_Wine "GCT Setup.exe"
 

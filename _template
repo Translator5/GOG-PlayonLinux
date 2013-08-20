@@ -77,7 +77,6 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/Game Install Directory/" || exit 1
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 # ...
 

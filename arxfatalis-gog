@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-13 19-32)
-# Last revision : (2013-04-21 20-31)
+# Last revision : (2013-07-10 13-27)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -90,7 +90,6 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arx Fatalis/" || exit 1
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 source arx_funcs
 eval \$(read_arx_settings)

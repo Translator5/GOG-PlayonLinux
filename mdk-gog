@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-16 21-06)
-# Last revision : (2013-05-18 19-38)
+# Last revision : (2013-07-10 13-35)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -92,7 +92,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/MDK/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine nglide_config.exe
 exit 0
 _EOF_

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-19 12-38)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-07-10 13-34)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Black Isle Studios / Hasbro Inc." "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "9f6587dfc8779d9c541194bae7c6a0db"
+POL_Call POL_GoG_setup "$GOGID" "7349e710bb4aa54fba6b5aeb15305b35"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -59,7 +59,6 @@ cd "\$WINEPREFIX/drive_c/GOG Games/Icewind Dale II/" || exit 1
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 POL_Wine Config.exe
 

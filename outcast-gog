@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-11-27 19-47)
-# Last revision : (2013-04-17 23-48)
+# Last revision : (2013-07-10 13-37)
 # Wine version used : 1.5.18
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -68,7 +68,6 @@ CURRENT_LANG="$(eval_gettext 'English')"
 [ -f pol_configuration ] && source pol_configuration
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 POL_SetupWindow_menu_list "$(eval_gettext 'Choose the game language you want')" "\$TITLE" "$(eval_gettext 'English')~$(eval_gettext 'French')~$(eval_gettext 'German')~$(eval_gettext 'Brasilian (text only)')~$(eval_gettext 'Dutch (text only)')~$(eval_gettext 'Italian (text only)')~$(eval_gettext 'Spanish (text only)')" "~" "\$CURRENT_LANG"
 if [ "\$CURRENT_LANG" != "\$APP_ANSWER" ]; then

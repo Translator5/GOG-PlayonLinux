@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-08 18-17)
-# Last revision : (2013-04-03 01-58)
+# Last revision : (2013-07-10 13-37)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -67,7 +67,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine Postal2.exe -safe
 exit 0
 _EOF_
@@ -82,7 +81,6 @@ export WINEDEBUG="-all"
 POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/ApocalypseWeekend/System" || exit 1
 TITLE="$TITLE"
-POL_Debug_Init
 POL_Wine postal2.exe -safe
 exit 0
 _EOF_

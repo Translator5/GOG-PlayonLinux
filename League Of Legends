@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-12)
-# Last revision : (2013-05-07 22:05)
+# Last revision : (2013-07-10 23:05)
 # Distribution used to test : ArchLinux, Debian Sid
 # Author : Quentin PÂRIS, Valentin PERRUSSEL, Pierre ETCHEMAITE
 # Licence : GPLv3
@@ -54,7 +54,7 @@ if [ "$INSTALL_METHOD" = "LOCAL" ]; then
     cd "$HOME"
     POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run.')" "$TITLE" "" "Windows Executables (*.exe)|*.exe;*.EXE"
 
-    if strings "$APP_ANSWER"|grep -q 'name="Pando Media Booster Downloader"'; then
+    if strings "$APP_ANSWER"|grep -q '\(name="Pando Media Booster Downloader"\|Advanced Installer\)'; then
         NOBUGREPORT="TRUE"
         POL_Debug_Fatal "$(eval_gettext 'Cant install using the official downloader, sorry')"
     fi

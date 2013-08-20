@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-27 21-58)
-# Last revision : (2013-05-04 17-05)
+# Last revision : (2013-07-10 13-42)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -86,7 +86,6 @@ POL_LoadVar_PROGRAMFILES
 cd "\$WINEPREFIX/drive_c/GOG Games/Wing Commander III - Heart of the Tiger/" || exit 1
 TITLE="$TITLE"
 
-POL_Debug_Init
 POL_Wine "WC3.BAT" "-install"
 exit 0
 _EOF_

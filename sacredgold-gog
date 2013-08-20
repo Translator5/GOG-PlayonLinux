@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 12-39)
-# Last revision : (2013-04-04 21-03)
+# Last revision : (2013-07-10 13-39)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -71,7 +71,6 @@ cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Sacred Gold/" || exit 1
 TITLE="$TITLE"
 
 POL_SetupWindow_Init
-POL_Debug_Init
 
 POL_Wine --ignore-errors Config.exe
 

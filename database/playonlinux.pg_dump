@@ -97,6 +97,19 @@ CREATE TABLE odcategories (
 ALTER TABLE public.odcategories OWNER TO petchema;
 
 --
+-- Name: scripters; Type: TABLE; Schema: public; Owner: petchema; Tablespace: 
+--
+
+CREATE TABLE scripters (
+    name character varying(100) NOT NULL,
+    login character varying(100),
+    email character varying(100)
+);
+
+
+ALTER TABLE public.scripters OWNER TO petchema;
+
+--
 -- Name: scripts; Type: TABLE; Schema: public; Owner: petchema; Tablespace: 
 --
 
@@ -107,7 +120,8 @@ CREATE TABLE scripts (
     gogversion character varying(100),
     status character varying(100) DEFAULT 'new'::character varying NOT NULL,
     wikipage character varying(100),
-    wineversion character varying(100)
+    wineversion character varying(100),
+    scripter character varying(100)
 );
 
 
@@ -133,7 +147,7 @@ ALTER TABLE public.status OWNER TO petchema;
 COPY gog (gogid, name, current_installer, notes, categories, odcategories) FROM stdin;
 age_of_wonders	Age of Wonders	1.0.0	\N	strategy;turn-based;fantasy	Game;StrategyGame;
 age_of_wonders_shadow_magic	Age of Wonders: Shadow Magic	1.0.0	\N	strategy;turn-based;fantasy	Game;StrategyGame;
-alien_breed_tower_assault	Alien Breed + Tower Assault	1.0.0	\N	action;arcade;sci-fi	Game;ArcadeGame;
+kingpin_life_of_crime	Kingpin: Life of Crime	2.0.0.6	\N	shooter;fpp;modern	Game;ActionGame;
 alone_in_the_dark	Alone in the Dark 1+2+3	2.0.0.11	\N	action;adventure;horror	Game;ActionGame;
 anachronox	Anachronox	1.0.0	\N	rpg;action;sci-fi	Game;RolePlaying;
 arx_fatalis	Arx Fatalis	1.0.0	\N	rpg;adventure;fantasy	Game;RolePlaying;
@@ -163,12 +177,10 @@ wallace_gromits_grand_adventures	Wallace & Gromit's Grand Adventures	1.0.1.12	Ac
 arma_cold_war_assault	ArmA: Cold War Assault	1.0.0	\N	shooter;fpp;modern	Game;ActionGame;
 beyond_good_and_evil	Beyond Good and Evil™	2.0.0.5	\N	action;tpp;sci-fi	Game;ActionGame;
 bloodrayne	BloodRayne	1.0.0	\N	shooter;action;horror	Game;ActionGame;
-fez	FEZ	2	\N	action;adventure;platformer	Game;ArcadeGame;
 carmageddon_max_pack	Carmageddon Max Pack	1.0.0.61	\N	action;combat;rally	Game;ActionGame;
 conflict_desert_storm	Conflict: Desert Storm	1.0.0	\N	shooter;simulation;modern	Game;ActionGame;
 crusader_no_regret	Crusader: No Regret™	2.0.0.8	\N	action;combat;sci-fi	Game;ActionGame;
 crusader_no_remorse	Crusader: No Remorse™	2.0.0.15	\N	action;combat;sci-fi	Game;ActionGame;
-kingpin_life_of_crime	Kingpin: Life of Crime	1.0.0	\N	shooter;fpp;modern	Game;ActionGame;
 one_unit_whole_blood	Blood (One Unit Whole Blood)	2.0.0.21	\N	shooter;fpp;horror	Game;ActionGame;
 tomb_raider_the_last_revelation_chronicles	Tomb Raider: The Last Revelation + Chronicles	1.0.0.5	\N	action;adventure;platformer	Game;ActionGame;
 chessmaster_9000	Chessmaster® 9000	1.0.0	no longer available?	strategy;turn-based;chess	Game;BoardGame;
@@ -188,10 +200,10 @@ master_of_magic	Master of Magic	2.0.0.20	\N	strategy;turn-based;fantasy	Game;Str
 little_big_adventure_2	Little Big Adventure 2 (Twinsen's Odyssey)	2.0.0.6	\N	adventure;action;puzzle	Game;AdventureGame;
 ultima_8_gold_edition	Ultima™ 8: Gold Edition	2	\N	rpg;action;fantasy	Game;RolePlaying;
 cannon_fodder	Cannon Fodder	2.0.0.3	\N	action;arcade;tactical	Game;ArcadeGame;
+alien_breed_tower_assault	Alien Breed + Tower Assault	2.0.0.32	\N	action;arcade;sci-fi	Game;ArcadeGame;
 1nsane	1nsane	1.0.0	\N	racing;arcade;off-road	Game;SportsGame;
 freespace_2	Freespace 2	2.0.0.8	\N	simulation;combat;sci-fi	Game;ActionGame;
 unmechanical	Unmechanical	1.0.2.18	Actually 1.0.2.18 + update 1.0.3.19	action;adventure;puzzle	Game;LogicGame;
-two_worlds_2_epic_edition	wo Worlds 2: Epic Edition	2.0.0.8	\N	action;rpg;fantasy	Game;RolePlaying;
 avadon_the_black_fortress	Avadon: The Black Fortress	2.0.0.2	\N	rpg;turn-based;fantasy	Game;RolePlaying;
 eschalon_book_i	Eschalon: Book I	2.0.0.4	\N	rpg;turn-based;fantasy	Game;RolePlaying;
 eschalon_book_ii	Eschalon: Book II	2.0.0.2	\N	rpg;turn-based;fantasy	Game;RolePlaying;
@@ -204,6 +216,7 @@ wizardry_8	Wizardry 8	2	\N	rpg;turn-based;fantasy	Game;RolePlaying;
 dungeon_keeper	Dungeon Keeper™	2	\N	strategy;action;fantasy	Game;StrategyGame;
 populous_the_beginning	Populous™:The Beginning	2	\N	strategy;rpg;fantasy	Game;StrategyGame;
 catacombs_pack	Catacombs Pack	2.0.0.3	\N	shooter;fpp;fantasy	Game;ActionGame;
+two_worlds_2_epic_edition	Two Worlds 2: Epic Edition	2.0.0.8	\N	action;rpg;fantasy	Game;RolePlaying;
 advent_rising	Advent Rising	1.0.0	\N	action;adventure;sci-fi	Game;ActionGame;
 alien_shooter_expansions	Alien Shooter + Expansions	1.0.0	\N	shooter;action;sci-fi	Game;ArcadeGame;
 a_new_beginning	A New Beginning - Final Cut	2.0.0.5	\N	adventure;point-and-click;modern	Game;AdventureGame;
@@ -217,6 +230,21 @@ unreal_tournament_2004_ece	Unreal Tournament 2004 ECE	1.0.0	\N	shooter;fpp;sci-f
 creatures_exodus	Creatures Exodus	1.0.0	\N	simulation;educational;virtual life	Game;Simulation;
 beyond_divinity	Beyond Divinity	1.0.1.6	\N	rpg;action;fantasy	Game;RolePlaying;
 another_world_15th_anniversary_edition	Another World: 15th Anniversary Edition	1.0.0	\N	adventure;action;platformer	Game;ActionGame;
+the_book_of_unwritten_tales_critter_chronicles	Book Of Unwritten Tales: The Critter Chronicles, The	2.0.0.6	\N	adventure;point-and-click;fantasy	Game;AdventureGame;
+imperialism_2_the_age_of_exploration	Imperialism 2: The Age of Exploration	2	\N	strategy;turn-based;historical	Game;StrategyGame;
+caesar_3	Caesar™ 3	2	\N	simulation;strategy;managerial	Game;StrategyGame;
+vampire_the_masquerade_redemption	Vampire The Masquerade - Redemption	1.0.0	\N	rpg;action;horror	Game;RolePlaying;
+the_dark_eye_chains_of_satinav	The Dark Eye: Chains of Satinav	2	\N	adventure;point-and-click;fantasy	Game;AdventureGame;
+blade_of_darkness	Blade of Darkness	2.0.0.5	\N	action;combat;fantasy	Game;ActionGame;
+sensible_world_of_soccer_9697	Sensible World of Soccer 96/97	2	\N	sports;simulation;soccer	Game;SportsGame;
+jade_empire_special_edition	Jade Empire: Special Edition	2.0.0.4	\N	action;rpg;fantasy	Game;RolePlaying;
+system_shock_2	System Shock™ 2	2.1.0.19	Actually 2.1.0.19 + update 2.1.1.20	rpg;fpp;sci-fi	Game.RolePlaying;
+omikron_the_nomad_soul	Omikron: The Nomad Soul	2.0.0.7	Actually 2.0.0.7 + update 2.0.1.8	rpg;action;fantasy	Game;RolePlaying;
+fez	FEZ	2.0.0.2	\N	action;adventure;platformer	Game;ArcadeGame;
+heroes_chronicles_all_chapters	Heroes Chronicles: All chapters	1.0.0	I really have no idea about version	strategy;turn-based;fantasy	Game;StrategyGame;
+the_bards_tale	Bard's Tale, The	2.0.0.7	\N	action;rpg;fantasy	Game;RolePlaying;
+sword_of_the_stars_the_pit	Sword of the Stars: The Pit	2.0.0.4	\N	rpg;turn-based;sci-fi	Game;RolePlaying;
+clive_barkers_undying	Clive Barker's Undying	2.0.0.5	\N	shooter;action;horror	Game;ActionGame;
 age_of_wonders_2_the_wizards_throne	Age of Wonders 2: The Wizard's Throne	1.0.0	\N	strategy;turn-based;fantasy	Game;StrategyGame;
 arcanum_of_steamworks_and_magick_obscura	Arcanum: Of Steamworks and Magick Obscura	2.0.0.15	\N	rpg;turn-based;fantasy	Game;RolePlaying;
 darkstone	Darkstone	1.0.0.7	\N	rpg;action;fantasy	Game;RolePlaying;
@@ -285,9 +313,8 @@ theme_hospital	Theme Hospital	2.0.0.5	\N	strategy;building;managerial	Game;Strat
 ufo_afterlight	UFO: Afterlight	1.0.0	\N	strategy;real-time;sci-fi	Game;StrategyGame;
 gabriel_knight_2_the_beast_within	Gabriel Knight 2: The Beast Within	2.0.0.12	\N	adventure;tpp;detective-mystery	Game;AdventureGame;
 journeyman_project_2	Journeyman Project 2, The 	1.0.0	\N	adventure;fpp;puzzle	Game;AdventureGame;
-last_express_the	Last Express, The 	1.0.0	\N	adventure;point-and-click;detective-mystery	Game;AdventureGame;
+normality	Normality	2.0.0.5	\N	adventure;fpp;sci-fi	Game;AdventureGame;
 lure_of_the_temptress	Lure of the Temptress	2.0.0.2	\N	adventure;point-and-click;fantasy	Game;AdventureGame;
-normality	Normality	1.0.0	\N	adventure;fpp;sci-fi	Game;AdventureGame;
 outcast	Outcast	1.0.0	\N	action;adventure;sci-fi	Game;AdventureGame;
 realms_of_the_haunting	Realms of the Haunting	1.0.0	\N	adventure;fpp;horror	Game;AdventureGame;
 runaway_3_a_twist_of_fate	Runaway 3: A Twist of Fate	1.0.0.4	\N	adventure;action;detective-mystery	Game;AdventureGame;
@@ -319,6 +346,7 @@ moto_racer	Moto Racer	1.0.0	\N	racing;action;rally	Game;SportsGame;
 moto_racer_2	Moto Racer 2	1.0.0	\N	racing;action;rally	Game;SportsGame;
 puddle	Puddle	1.0.0.4	\N	strategy;simulation;puzzle	Game;Simulation;
 riven_the_sequel_to_myst	Riven: The Sequel to Myst	1.0.0	\N	adventure;fpp;puzzle	Game;AdventureGame;
+last_express_the	Last Express, The 	2.0.0.9	\N	adventure;point-and-click;detective-mystery	Game;AdventureGame;
 screamer_2	Screamer 2	2.0.0.1	\N	racing;action;rally	Game;SportsGame;
 space_rangers_2_reboot	Space Rangers 2: Reboot	1.0.0.6	no longer available	action;rpg;managerial	Game;RolePlaying;
 prince_of_persia_the_sands_of_time	Prince of Persia®: The Sands of Time	2.0.0.4	\N	action;adventure;fantasy	Game;ActionGame;
@@ -349,6 +377,7 @@ deponia	Deponia	2.0.0.6	\N	adventure;point-and-click;modern	Game;AdventureGame;
 dreamfall_the_longest_journey	Dreamfall: The Longest Journey	1.0.0.10	\N	action;adventure;fantasy	Game;AdventureGame;
 gabriel_knight_3_blood_of_the_sacred_blood_of_the_damned	Gabriel Knight 3: Blood of the Sacred, Blood of the Damned	1.0.0	\N	adventure;tpp;detective-mystery	Game;AdventureGame;
 jack_orlando_a_cinematic_adventure_dc	Jack Orlando: A Cinematic Adventure (DC)	1.0.0	\N	adventure;point-and-click;detective-mystery	Game;AdventureGame;
+defenders_quest	Defender's Quest	2.2.0.6	\N	adventure;rpg;tactical	Game;AdventureGame;
 quest_for_glory	Quest for Glory 1-5	2.0.0.32	\N	adventure;point-and-click;fantasy	Game;AdventureGame;
 runaway_a_road_adventure	Runaway: A Road Adventure	1.0.0	\N	adventure;action;detective-mystery	Game;AdventureGame;
 sam_max_save_the_world	Sam & Max Save the World	1.0.0.22	Actually 1.0.0 + update 1.0.1	adventure;point-and-click;detective-mystery	Game;AdventureGame;
@@ -365,9 +394,8 @@ postal_2_complete	POSTAL 2 Complete	1.0.0	\N	shooter;action;modern	Game;ActionGa
 pid	Pid	2.0.0.4	Actually 2.0.0.4 + update 2.0.2.6	action;arcade;platformer	Game;ArcadeGame;
 redneck_rampage_collection	Redneck Rampage Collection	2.0.0.11	\N	shooter;fpp;sci-fi	Game;ActionGame;
 shadow_warrior_complete	Shadow Warrior Complete	2.0.0.7	\N	action;fpp;sci-fi	Game;ActionGame;
-thief_2_the_metal_age	THIEF™ 2: THE METAL AGE	1.0.0	\N	action;simulation;stealth	Game;ActionGame;
 thief_3	Thief™ 3: Deadly Shadows	1.0.0.5	\N	action;simulation;stealth	Game;ActionGame;
-thief_gold	THIEF™ GOLD	1.0.0	\N	action;simulation;stealth	Game;ActionGame;
+thief_2_the_metal_age	THIEF™ 2: THE METAL AGE	2.0.0.18	\N	action;simulation;stealth	Game;ActionGame;
 tom_clancys_ghost_recon	Tom Clancy's Ghost Recon®	2.0.0.6	\N	shooter;action;modern	Game;ActionGame;
 tyrian_2000	Tyrian 2000	2.0.0.11	\N	shooter;action;sci-fi	Game;ActionGame;
 urban_chaos	Urban Chaos	1.0.0.3	\N	action;tpp;modern	Game;ActionGame;
@@ -378,7 +406,7 @@ xiii	XIII	2.0.0.11	\N	shooter;fpp;espionage	Game;ActionGame;
 descent_3_expansion	Descent 3 + Expansion	1.0.0	\N	simulation;combat;sci-fi	Game;ActionGame;
 guilty_gear_x2_reload	Guilty Gear X2 #Reload	1.0.0	\N	action;combat;fighting	Game;ActionGame;
 incredipede	Incredipede	2.2.0.6	\N	adventure;building;puzzle	Game;LogicGame;
-defenders_quest	Defender's Quest	2.1.0.4	Actually 2.1.0.4 + update 2.1.1.5	adventure;rpg;tactical	Game;AdventureGame;
+thief_gold	THIEF™ GOLD	2.0.0.46	\N	action;simulation;stealth	Game;ActionGame;
 heroes_of_might_and_magic_3_complete_edition	Heroes of Might and Magic® 3: Complete Edition	2.0.0.16	\N	strategy;turn-based;fantasy	Game;StrategyGame;
 silver	Silver	1.0.0.9	Actually 1.0.0 + update 1.0.1	rpg;adventure;fantasy	Game;RolePlaying;
 ultima_worlds_of_adventure_2_martian_dreams	Ultima Worlds of Adventure 2: Martian Dreams	2.0.0.17	\N	rpg;adventure;sci-fi	Game;RolePlaying;
@@ -481,7 +509,6 @@ dragonsphere	1.0.0	0	3406746bdca0b37d467d8eb8409f5b92	83690477
 dragonsphere	2.0.0.13	0	8382a8040b795d950c70bd7d747885b3	89367152
 another_world_15th_anniversary_edition	1.0.0	0	c9e10dbdd5fb26e92a939f03938192cb	140593336
 one_unit_whole_blood	1.0.0	0	a72a31def93390c794fc80a906328536	303086210
-one_unit_whole_blood	2.0.0.21	0	e34a8c33bc0d5e34a24bed43ad6a763a	300866848
 blackwell_bundle	1.0.0.8	0	79c6f4dbd7fb8acff940652d0ecf18c1	925925192
 chessmaster_9000	1.0.0	0	9440bc2ff4b160af6685ae37268c1ffb	1170484489
 disciples_2_gold	1.0.0	0	3740b5d7abc3af4eaa8647462085ed98	1779113399
@@ -521,6 +548,7 @@ crusader_no_remorse	2.0.0.15	0	b106e8ba0e398dbed4963d7ceb701c13	366421392
 betrayal_at_krondor	2.0.0.16	0	88402865857f7569e8690b25e7ca04fe	1035565200
 crusader_no_regret	2.0.0.8	0	6a3f012028691764ede594c07884609a	355081544
 darklands	2.0.0.6	0	e5f81838016a1c3512c3249799dc71ba	85795904
+one_unit_whole_blood	2.0.0.21	0	eaa902df6a2dc84e24e208c6c002c4e3	301486440
 gothic_3	1.0.0	0	5bf43af9551b82f2d6860be364935ca9	2336628
 gothic_3	1.0.0	1	fefdb19e7c71f836cb5ab9c699ebc079	2097663232
 far_cry	1.0.0	0	964f27d319571bd614db5d1df08e1912	2607407
@@ -547,7 +575,6 @@ in_cold_blood	1.0.0	0	c81d68b88fd044a7064a14eb4370a2cc	1280511758
 gabriel_knight_2_the_beast_within	1.0.0	0	2d83cb2af5ca7faad6565b73fcf1deec	2381853
 gabriel_knight_2_the_beast_within	1.0.0	2	2b3b64b886486ddb25417d51d3b366dd	511336726
 icewind_dale_2	1.0.0	0	7174cb05f8fbd8458ab60c2db8177359	1362503595
-icewind_dale_2	2.0.0.11	0	9f6587dfc8779d9c541194bae7c6a0db	1365872952
 evil_genius	1.0.0	0	5577cb8cf2fda362ecc80d44c3e5b90c	1394559416
 duke_nukem_manhattan_project	1.0.0	0	5b7cfb6e669ee067f2226900fbeec546	212465575
 gothic	1.0.0	0	f8f06e5c4d79e89e7427fb3ab0085401	852567460
@@ -572,7 +599,6 @@ heroes_of_might_and_magic_3_complete_edition	1.0.1.14	0	7a39cfc99b1d41a45ea18474
 original_war	1.0.0	0	d110b305c36e4f5fd2db7465c06d1303	1027148321
 legend_of_grimrock	1.0.0.12	0	900f5d84a47118961a8d86ff156cea51	\N
 legend_of_grimrock	1.0.0.14	0	51039a7a2e3870e45a6114642bd9b450	\N
-quest_for_glory	2.0.0.32	0	e871d90f3360f7fe199c8c00018d4687	1116260408
 puddle	1.0.0.4	0	79c6bc147dc0711c0f689cdd679a0d11	633037751
 outcast	1.0.0	0	a8bf2336a580527f0eb99f8b90009c33	1409323648
 neverwinter_nights_diamond_edition	1.0.0	2	ba9ed46b94eb84870e9e41eeab653859	267609647
@@ -594,8 +620,10 @@ duke_nukem_12	2.0.0.5	0	d45367b2e5a74330f41a1c73b4d96ed0	19406424
 giants_citizen_kabuto	2.0.0.3	0	3b45e431472dc7a91d9cc1ab8b149246	970888
 giants_citizen_kabuto	2.0.0.3	1	b34907a93089d396d6ccfe55037cba3d	809030491
 forgotten_realms_demon_stone	2.0.0.9	0	0c0862a26cdddc8f9f113381bf67e4b8	1780973288
+icewind_dale_2	2.0.0.11	0	7349e710bb4aa54fba6b5aeb15305b35	1366084104
 gabriel_knight_2_the_beast_within	2.0.0.12	1	b2aa3c5a29c9d8a7caec86503abf3bb2	1565171072
 gabriel_knight_2_the_beast_within	2.0.0.12	2	f7688417fd537ca02c925a827d1b78d1	1071053089
+quest_for_glory	2.0.0.32	0	a089b132649576c086aa2c6b3f201cce	1116260816
 little_big_adventure	1.0.0	0	8ec70c0d61802e04dab4406962a4f7e3	437026245
 moto_racer	1.0.0	0	39ffda45ac7504064cb9bd8ca193861e	343243943
 jagged_alliance_2	1.0.0	0	bc51594c5f2b095f922dbe57725ae34a	591878120
@@ -633,9 +661,6 @@ master_of_magic	2.0.0.19	0	2788b07243ba90624036aefc86769933	25365168
 pharaoh_cleopatra	1.0.0.11	0	4ec5d555409a2bffd61ba438bd741186	549979560
 legacy_of_kain_soul_reaver_2	1.0.0.10	0	96d9e5be529284d3caa95bacb6034da7	695952931
 might_and_magic_7_for_blood_and_honor	2.0.0.14	0	965bafb770c620d07bad350e53198aab	699571552
-lands_of_lore_3	2.0.0.8	0	6d283a252fd05c23eafc8bb57b1d3beb	796840
-lands_of_lore_3	2.0.0.8	1	fc97f3f2aa662f1255d9365926821375	1565211008
-lands_of_lore_3	2.0.0.8	2	c69cf62442cadf1c9e88bec801702853	593964226
 journeyman_project_3	1.0.0	0	73a27239135c239f9ed1ba1abcbe335a	2425583
 journeyman_project_3	1.0.0	1	011528843105a10cad553d01d1d87ed7	2097574144
 journeyman_project_3	1.0.0	2	70422bd9ef33016bf4bc07480120ac0c	1342283268
@@ -670,6 +695,9 @@ nox	2.0.0.20	0	c1cc844fb0f17bd8e7406354eef1616e	486800944
 lands_of_lore_1_2	2.0.0.17	0	28b6a318053ef756a88f4ef65c5bf67a	1591188176
 populous_2	2.0.0.1	0	5ca6fc7afc9193a42d789bf2eddcfaaf	19972152
 perimeter	2.0.0.10	0	88aceecea4125baeced1d0618483f88c	1079968
+lands_of_lore_3	2.0.0.8	0	72dac1f2c79ce6fc7d22009a0b710e19	797904
+lands_of_lore_3	2.0.0.8	1	0c70565af982e57aa5a34c39b768b8c5	1565209984
+lands_of_lore_3	2.0.0.8	2	aa2537f53fad859c9862950871497c12	591843498
 sacrifice	1.0.0	0	5a3d41bcf0f6af1ff87cc7ad654f3d79	591161642
 septerra_core_legacy_of_the_creator	1.0.0	0	22839e19bc5c8db1e557810e01be6e42	600263467
 spellforce_platinum	1.0.0	1	66a082e216b2a58155293088f2d599ba	2097665280
@@ -746,7 +774,6 @@ screamer_2	2.0.0.1	0	ebaec28d87f3eade27a5124c1f038799	651076192
 the_feeble_files	1.0.0	1	df8a0031ac21f2efe93da1440d0fb024	2097523968
 the_feeble_files	1.0.0	2	27197e9622d4ee349a8f4766f949426b	289111409
 the_feeble_files	1.0.0	0	16f0ec3760c68d646abc6671f657361a	2476028
-tom_clancys_ghost_recon	2.0.0.6	0	696ef1eec3785de54a304edbb7b7fb79	475442456
 the_nations_gold_edition	1.0.0	0	d4ae4d4fd94a11f8730fb8d34f161967	349944329
 the_longest_journey	1.0.0	0	7b97808b8a282af566a9bac4ee5aa790	1155181894
 thief_2_the_metal_age	1.0.0	0	580b15ebec40af636ec8d9ceedf69eb2	788627788
@@ -817,6 +844,7 @@ lure_of_the_temptress	2.0.0.2	0	bc2df19e3ddeacf4528a5ee0f2b32d8d	20080408
 total_annihilation_kingdoms	2.0.0.22	0	206f4b8e9159414ee38ec609831907bb	959342944
 ultima_underworld_1_2	2.0.0.19	0	257b0a9eff8dba323f7d2be3b1bbf51b	29653840
 torins_passage	2.0.0.7	0	0e62327ebefbd2480d2ac1a7347fd3e8	252343664
+tom_clancys_ghost_recon	2.0.0.6	0	3806bd4b410dacaf811c22bd0a77ea6b	475443256
 the_witcher	1.0.0	1	f992a98576b3d561c8070a38c214ea91	2097460480
 tom_clancys_ghost_recon	1.0.0	0	bddd199ea8827323e0630b2c0d6078e5	489907292
 legend_of_grimrock	1.0.0.15	0	c2a6caaddd4eb1463f0f6382c0acd037	478580513
@@ -857,7 +885,6 @@ heroes_of_might_and_magic_3_complete_edition	2.0.0.15	0	0ecd5974b7939eb3f1a4bf16
 alien_shooter_expansions	1.0.0	0	04c04923df2b3f1103198a3d1a9c9079	61456102
 bioforge	2.0.0.13	0	e66a6cc107020a8296e4560167a4a333	103420032
 beneath_a_steel_sky	2.0.0.9	0	9a7937e0a4ea30255ed4c1f5c9c975eb	81920336
-stronghold	2.1.0.4	0	41490a418362c14334706ac3496e413b	645301936
 defenders_quest	2.1.0.4	0	1922fd7923142b42d43f9b3094446078	121423712
 pid	2.0.0.4	0	8a1d458c2d3cb2823572b1ed9275adad	448066536
 kings_bounty_crossworlds_goty	2.0.0.2	0	afd26ffc01c432698c98736e279b638c	1087464
@@ -887,6 +914,7 @@ a_new_beginning	2.0.0.5	0	8c4c17f2de851e8d6dd83af19e70f4db	807696
 a_new_beginning	2.0.0.5	1	cba62670ef8dee498a34134d7ba0c327	1565200256
 a_new_beginning	2.0.0.5	2	195dea57f6f7afbae9f0c4bcb513fd01	974515840
 avernum_the_complete_saga	2.0.0.3	0	5fdda20df7275460eb45ec9a5954b29a	115990552
+stronghold	2.1.0.4	0	feefadb14ccf00c0a95a39add4da5ae9	761498120
 stronghold_crusader	2.0.0.6	0	24d626d0fcc5033dc8120c05615843be	841669840
 zork_grand_inquisitor	2.0.0.15	0	18d64128f01643c76833b77bb9b633b4	993669072
 knights_and_merchants_the_peasants_rebellion	1.0.0	0	6f7212f523a94aa606f39eaf2f3116b8	148513377
@@ -949,7 +977,6 @@ the_chronicles_of_riddick_assault_on_dark_athena	2.0.0.10	0	a43c0b4d07c955b3b781
 ultima_8_gold_edition	2	0	379e4ad340f878d2288080191231e9c9	\N
 magic_carpet	2	0	ebeee30afad4c1c56a7102253c3aa4e4	\N
 magic_carpet_2_the_netherworlds	2	0	27dd1808b633360d56c258104bbcea20	\N
-fez	2	0	8bdf6d75eee8cf930b9c41e43d984314	\N
 rayman_3_hoodlum_havoc	2.0.0.9	0	d2aa24a04352888fe4c76b85ad84cfb0	1278828248
 prince_of_persia	2.0.0.17	2	91ee94e48a9d7b9f67f462a402cf9005	1566000000
 prince_of_persia	2.0.0.17	3	fdab956c7dc46341db4b497e755af420	1566000000
@@ -967,6 +994,40 @@ starflight_1_2	2.0.0.19	0	d00ac6d5c07bc44a698359e8024568a1	50561320
 tex_murphy_under_a_killing_moon	2.0.0.10	0	c03e2ccf5120ab1e4b947667e194e1bb	1188923136
 perimeter	2.0.0.10	1	396910fa797e782f1307e6efc0dba591	1346703802
 screamer	2.0.0.12	0	9fd7e3070d32a0635572a8a119859ed3	207201912
+the_book_of_unwritten_tales_critter_chronicles	2.0.0.6	0	e4cfb3634ece936c291ef86d506ecb91	1817557440
+imperialism_2_the_age_of_exploration	2	0	49c71a331613c1476ffa00a8bd982029	\N
+caesar_3	2	0	2ee16fab54493e1c2a69122fd2e56635	\N
+vampire_the_masquerade_redemption	1.0.0	0	6d800712f61ccace739b01c22eba092e	847545634
+the_dark_eye_chains_of_satinav	2	0	43cf1d1cc74e3087f016f5a05a393598	\N
+the_dark_eye_chains_of_satinav	2	1	fcef6232dd11388d09a56b32231f63e5	\N
+the_dark_eye_chains_of_satinav	2	2	9d666731082fb981b0682e049af83980	\N
+the_dark_eye_chains_of_satinav	2	3	6cff6ce263dab6bf67d9d78c3524afda	\N
+the_dark_eye_chains_of_satinav	2	4	5d044e334a7b3ffb05982ba3957c5ed0	\N
+blade_of_darkness	2.0.0.5	0	7faa6812f14e6c3f8ceb63244f322fdb	497754576
+sensible_world_of_soccer_9697	2	0	906834ea1f8f9d811d91588bf7917d8f	\N
+defenders_quest	2.2.0.6	0	8b41439e97b0c5689c3bca1fbe666ce3	131514824
+jade_empire_special_edition	2.0.0.4	0	17cf81cdfe41450766e633a01dbf8228	3575112
+jade_empire_special_edition	2.0.0.4	1	4ad700cbf53d4dc3d7b16dc0d9ae8776	1562432896
+jade_empire_special_edition	2.0.0.4	2	28ffe96e39fd6b55783d726a47451316	1566000000
+jade_empire_special_edition	2.0.0.4	3	0b34ca571949c3469601f539e8e4debe	1566000000
+jade_empire_special_edition	2.0.0.4	4	39d1c7d284187cd276aba04eee69aaa7	1566000000
+jade_empire_special_edition	2.0.0.4	5	64b1074e7ff7eb9779ee974b2f6e47e1	435081201
+system_shock_2	2.1.0.19	1	d2aeff3075e5b099d353bd4610d9da3d	374279264
+thief_gold	2.0.0.46	0	bde1c2a2ffdda552c63c7ca6e3d87310	752199848
+thief_2_the_metal_age	2.0.0.18	0	c554b94e371ff78bfbe5a8ef3417afe2	801836368
+omikron_the_nomad_soul	2.0.0.7	0	b1dc7b912b2fdd604d434c1d73fda9dd	1239353936
+fez	2.0.0.2	0	8bdf6d75eee8cf930b9c41e43d984314	569672208
+alien_breed_tower_assault	2.0.0.32	0	5ed1a228c99ab0e06885cc083b716b4f	140097384
+heroes_chronicles_all_chapters	1.0.0	0	09c7be7cb7723a2e63afcee7bd9bca29	\N
+kingpin_life_of_crime	2.0.0.6	0	b2084430278605d5b2670a5a3293096a	338075176
+last_express_the	2.0.0.9	0	a18d951a5b720cf0366b3d9e373543d4	1175798064
+normality	2.0.0.5	0	54c2f59917e5f23e683b7d02604ab0a3	338451424
+the_bards_tale	2.0.0.7	0	03044aa4490d79341662e7b9fe40fb6b	863224
+the_bards_tale	2.0.0.7	1	8433a861ac5829ad8296e1b6eea40baa	1565144448
+the_bards_tale	2.0.0.7	2	ef8288ccf7104bf09b33c6b9df08d850	1566000000
+the_bards_tale	2.0.0.7	3	5a621c553e6ffbe43fc77e2e90aae20a	343192951
+sword_of_the_stars_the_pit	2.0.0.4	0	68adad852aacf81b9680718e7f80ef99	561379232
+clive_barkers_undying	2.0.0.5	0	70531606d4aa51d20d628f6af50cb38c	468343552
 \.
 
 
@@ -1334,7 +1395,6 @@ tex_murphy_the_pandora_directive	2.0.0.12	4
 might_and_magic_7_for_blood_and_honor	2.0.0.15	1
 ultima_8_gold_edition	2	1
 cannon_fodder	2.0.0.3	1
-fez	2	1
 magic_carpet	2	1
 magic_carpet_2_the_netherworlds	2	1
 rayman_3_hoodlum_havoc	2.0.0.9	1
@@ -1347,6 +1407,28 @@ catacombs_pack	2.0.0.3	1
 starflight_1_2	2.0.0.19	1
 tex_murphy_under_a_killing_moon	2.0.0.10	1
 screamer	2.0.0.12	1
+the_book_of_unwritten_tales_critter_chronicles	2.0.0.6	1
+imperialism_2_the_age_of_exploration	2	1
+caesar_3	2	1
+vampire_the_masquerade_redemption	1.0.0	1
+the_dark_eye_chains_of_satinav	2	5
+blade_of_darkness	2.0.0.5	1
+sensible_world_of_soccer_9697	2	1
+defenders_quest	2.2.0.6	1
+jade_empire_special_edition	2.0.0.4	6
+system_shock_2	2.1.0.19	1
+thief_gold	2.0.0.46	1
+thief_2_the_metal_age	2.0.0.18	1
+omikron_the_nomad_soul	2.0.0.7	1
+fez	2.0.0.2	1
+alien_breed_tower_assault	2.0.0.32	1
+heroes_chronicles_all_chapters	1.0.0	1
+kingpin_life_of_crime	2.0.0.6	1
+last_express_the	2.0.0.9	1
+normality	2.0.0.5	1
+the_bards_tale	2.0.0.7	4
+sword_of_the_stars_the_pit	2.0.0.4	1
+clive_barkers_undying	2.0.0.5	1
 \.
 
 
@@ -1371,280 +1453,308 @@ StrategyGame	\N
 
 
 --
+-- Data for Name: scripters; Type: TABLE DATA; Schema: public; Owner: petchema
+--
+
+COPY scripters (name, login, email) FROM stdin;
+petch	petch	pe-pol@concept-micro.com
+VisitntX	visitndx	visitntx@gmail.com
+Kweepeer	Kweepeer	\N
+Xodetaetl	Xodetaetl	dev@ovocean.com
+TonyFlow	TonyFlow	tonyflow@rhcp.net
+Jan Nytra	\N	jannytra@seznam.cz
+hmdai	hmdai	\N
+Niriddiki	niriddiki	\N
+\.
+
+
+--
 -- Data for Name: scripts; Type: TABLE DATA; Schema: public; Owner: petchema
 --
 
-COPY scripts (scriptname, scriptid, gogid, gogversion, status, wikipage, wineversion) FROM stdin;
-battleisle-platinum-gog	\N	battle_isle_platinum	\N	broken	Battle-Isle-Platinum	\N
-beneathasteelsky-gog	\N	beneath_a_steel_sky	\N	wontdo	\N	\N
-spellforce-platinum-gog	\N	spellforce_platinum	\N	wip	Spellforce-Platinum-Edition	\N
-motoracer2-gog	\N	moto_racer_2	\N	broken	Moto-Racer-2	\N
-chessmaster9000-gog	\N	chessmaster_9000	\N	broken	Chessmaster-9000	\N
-dreampinball3d-gog	\N	dream_pinball_3d	\N	broken	Dream-Pinball-3D	\N
-thejourneymanproject2-gog	\N	journeyman_project_2	\N	broken	The-Journeyman-Project-2	\N
-thejourneymanproject3-gog	\N	journeyman_project_3	\N	broken	The-Journeyman-Project-3-Legacy-Of-Time	\N
-returntokrondor-gog	\N	return_to_krondor	\N	broken	Return-to-Krondor	\N
-robinhood-gog	\N	robin_hood	\N	broken	Robin-Hood-The-Legend-of-Sherwood	\N
-soulbringer-gog	\N	soulbringer	\N	broken	Soulbringer	\N
-treasureadventuregame-gog	\N	treasure_adventure_game	\N	broken	Treasure-Adventure-Game	\N
-unrealtournament2004ece-gog	\N	unreal_tournament_2004_ece	\N	wontdo	Unreal-Tournament-2004-ECE	\N
-thewitcher2-gog	\N	the_witcher_2	3.0.1.17	broken	The-Witcher-2	1.5.8
-gothic3-gog	1291	gothic_3	1.0.0.14	done	Gothic-3	1.5.15
-incoming&incomingforces-gog	1080	incoming_incoming_forces	1.0.0	done	Incoming-Incoming-Forces	1.4.1
-legacyofkain-defiance-gog	1462	legacy_of_kain_defiance	1.0.0.6	done	Legacy-of-Kain-Defiance	1.4.1
-littlebigadventure-gog	1155	little_big_adventure	2.0.0.20	done	Little-Big-Adventure	1.4-dos_support_0.6
-masteroforion1&2-gog	1207	master_of_orion_1_2	2.0.0.16	done	Master-Of-Orion-1-2	1.4-dos_support_0.6
-alienbreed&towerassault-gog	1368	alien_breed_tower_assault	1.0.0	done	Alien-Breed-Tower-Assault	1.4-dos_support_0.6
-ageofwonders3-shadowmagic-gog	1020	age_of_wonders_shadow_magic	1.0.0	done	Age-of-Wonders-3-Shadow-Magic	1.4.1
-medalofhonor-alliedassaultwarchest-gog	1540	medal_of_honor_allied_assault_war_chest	2.0.0.21	done	Medal-Of-Honor-Allied-Assault-War-Chest	1.4.1
-might&magic6pack-gog	1175	might_and_magic_6_limited_edition	2.0.0.41	done	Might-And-Magic-6-Pack	1.4-dos_support_0.6
-might&magic8-gog	1463	might_and_magic_8_day_of_the_destroyer	2.0.0.13	done	Might-and-Magic-8-Day-of-the-Destroyer	1.5.8
-neverwinternights-gog	1099	neverwinter_nights_diamond_edition	2.0.0.15	done	Neverwinter-Nights-Diamond-Edition	1.3.27
-wingcommander4-gog	\N	wing_commander_4_the_price_of_freedom	2.0.0.17	broken	Wing-Commander-4	1.5.29
-originalwar-gog	1531	original_war	1.0.0	done	Original-War	1.4.1
-outcast-gog	1013	outcast	1.0.0	done	Outcast	1.5.18
-perimeter-gog	1510	perimeter	2.0.0.10	done	Perimeter	1.4.1
-pharaoh&cleopatra-gog	1517	pharaoh_cleopatra	2.0.0.12	done	Pharaoh-plus-Cleopatra	1.4.1
-pirates-pack-gog	1441	pirates_gold_plus	2.0.0.27	done	Pirates-Gold-Plus	1.4-dos_support_0.6
-redneckrampage-gog	1136	redneck_rampage_collection	2.0.0.11	done	Redneck-Rampage	1.4-dos_support_0.6
-runaway-aroadadventure-gog	1435	runaway_a_road_adventure	1.0.0	done	Runaway-A-Road-Adventure	1.4.1
-runaway3-atwistoffate-gog	1586	runaway_3_a_twist_of_fate	1.0.0.4	done	Runaway-3-A-Twist-Of-Fate	1.4.1
-sam&max-beyondtimeandspace-gog	1523	sam_max_beyond_time_and_space	1.0.0	done	Sam-and-Max-Beyond-Time-and-Space	1.4.1
-shadowwarrior-gog	1637	shadow_warrior_complete	2.0.0.7	done	Shadow-Warrior	1.4-dos_support_0.6
-sherlockholmes-secretofthesilverearring-gog	1471	sherlock_holmes_secret_of_the_silver_earring	1.0.0	done	Sherlock-Holmes-Secret-Of-The-Silver-Earring	1.4.1
-spacerangers2-gog	1313	space_rangers_2_reboot	1.0.0.6	done	Space-Rangers-2-Reboot	1.4.1
-syberia2-gog	1232	syberia_2	1.0.0	done	Syberia-2	1.5.15
-templeofelementalevil-gog	1063	the_temple_of_elemental_evil	2.0.0.13	done	The-Temple-of-Elemental-Evil	1.5.22
-thedarkeye-chainofsatinav-gog	1478	\N	\N	contributed	\N	1.5.5
-ufo-afterlight-gog	1243	ufo_afterlight	1.0.0	done	UFO-Afterlight	1.4.1
-alienshooter-gog	\N	alien_shooter_expansions	1.0.0	wip	Alien-Shooter-plus-Expansions	1.4.1
-divinity2-developerscut-gog	\N	divinity_2_developers_cut	1.1.0.9	wip	Divinity-2-Developers-Cut	1.5.21
-gothic2-gog	1239	gothic_2_gold_edition	1.0.0	wip	Gothic-2-Gold-Edition	1.4.1
-warlordsbattlecry3-gog	\N	warlords_battlecry_3	1.0.0	wip	Warlords-Battlecry-3	1.4.1
-ageofwonders-gog	1397	age_of_wonders	1.0.0	done	Age-of-Wonders	1.4.1
-mdk2-gog	1240	mdk_2	2.0.0.2	done	MDK-2	1.4.1
-aloneinthedark1-gog	1246	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-1	1.4-dos_support_0.6
-anotherworld-15thanniversary-gog	1230	another_world_15th_anniversary_edition	1.0.0	done	Another-World-15th-Anniversary-Edition	1.4.1
-empireearth-gog	\N	empire_earth_gold_edition	1.0.0	broken	Empire-Earth-Gold-Edition	1.3.34
-swat3-tgoty-gog	\N	swat_3_tactical_game_of_the_year_edition	1.0.0	broken	Swat-3-tgoty	1.4.1
-gabrielknight2-gog	1215	gabriel_knight_2_the_beast_within	2.0.0.12	done	Gabriel-Knight-2-The-Beast-Within	1.4-dos_support_0.6
-oneunitwholeblood-gog	1269	one_unit_whole_blood	2.0.0.21	done	One-Unit-Whole-Blood	1.4-dos_support_0.6
-aloneinthedark2-gog	1247	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-2	1.4-dos_support_0.6
-dukenukem-manhattanproject-gog	1231	duke_nukem_manhattan_project	1.0.0	done	Duke-Nukem-Manhattan-Project	1.4.1
-wallace&gromit-grandadventures-gog	1410	wallace_gromits_grand_adventures	1.0.1.12	done	Wallace-and-Gromits-Grand-Adventures	1.4.1
-dreamfall-thelongestjourney-gog	1348	dreamfall_the_longest_journey	1.0.0.10	done	Dreamfall-The-Longest-Journey	1.5.5
-thebookofunwrittentales-critterchronicles-gog	1503	\N	\N	contributed	\N	1.5.5
-evilgenius-gog	1228	evil_genius	1.0.0	done	Evil-Genius	1.4.1
-farcry-gog	1024	far_cry	2.0.0.9	done	Far-Cry	1.4.1
-freedomforce-vsthe3rdreich-gog	1384	freedom_force_vs_the_3rd_reich	1.0.0	done	Freedom-Force-Vs-The-3rd-Reich	1.4.1
-deponia-gog	1467	deponia	2.0.0.6	contributed	Deponia	1.4.1
-thebookofunwrittentales-gog	1488	the_book_of_unwritten_tales	1.0.0.2	contributed	The-Book-Of-Unwritten-Tales	1.5.5
-spacecolonyhd-gog	\N	space_colony_hd	\N	new	\N	\N
-tombraider1&2&3-gog	\N	tomb_raider_123	\N	wip	Tomb-Raider-1-2-3	\N
-questforglory-gog	\N	quest_for_glory	\N	new	\N	\N
-ishar1&2-gog	\N	ishar_1_2	\N	new	\N	\N
-talesofmonkeyisland-gog	1555	tales_of_monkey_island	1.0.0.10	done	Tales-of-Monkey-Island	1.4.1
-darkfall-lightsout-gog	1161	dark_fall_lights_out	1.0.0	done	Dark-Fall-2	1.5.3
-darkfall-thejournal-gog	1154	dark_fall_the_journal	1.0.0	done	Dark-Fall	1.4.1
-darklands-gog	1512	darklands	2.0.0.6	done	Darklands	1.4-dos_support_0.6
-darkreign&expansion-gog	1553	dark_reign_expansion	1.0.0	done	Dark-Reign-plus-Expansion	1.4.1
-demonstone-gog	1037	forgotten_realms_demon_stone	2.0.0.9	done	Forgotten-Realms-Demon-Stone	1.4.1
-descent3-gog	1245	descent_3_expansion	1.0.0	done	Descent-3	1.4.1
-deusex2-invisiblewar-gog	1419	deus_ex_invisible_war	1.0.0.6	done	Deus-Ex-2-Invisible-War	1.4.1
-disciples2gold-gog	1326	disciples_2_gold	1.0.0	done	Disciples-2-Gold	1.4.1
-divinedivinity-gog	1025	divine_divinity	1.0.2.13	done	Divine-Divinity	1.4.1
-dragonshard-gog	1103	dungeons_dragons_dragonshard	2.0.0.10	done	Dungeons-Dragons-Dragonshard	1.4.1
-dragonsphere-gog	1203	dragonsphere	2.0.0.14	done	Dragonsphere	1.4-dos_support_0.6
-dukenukem-1&2-gog	1601	duke_nukem_12	2.0.0.5	done	Duke-Nukem-1-2	1.4-dos_support_0.6
-flatout-gog	1010	flatout	1.0.0	done	Flatout	1.4.1
-freespace2-gog	1107	freespace_2	2.0.0.8	done	Freespace-2	1.3.27
-gabrielknight1-gog	1147	gabriel_knight_sins_of_the_fathers	2.0.0.16	done	Gabriel-Knight-1	1.4-dos_support_0.6
-guiltygearx2-gog	1153	guilty_gear_x2_reload	1.0.0	done	Guilty-Gear-X2	1.4.1
-hitman-codename47-gog	1506	hitman	1.0.0	done	Hitman-Codename-47	1.4.1
-icewinddale-gog	1189	icewind_dale_complete	2.0.0.11	done	Icewind-Dale-Complete	1.5.5
-icewinddale2-gog	1213	icewind_dale_2	2.0.0.11	done	Icewind-Dale-2-Complete	1.4.1
-incoldblood-gog	1251	in_cold_blood	1.0.0	done	In-Cold-Blood	1.4.1
-incredipede-gog	1613	incredipede	2.2.0.6	done	Incredipede	1.5.5
-ironstorm-gog	1038	iron_storm	1.0.0	done	Iron-Storm	1.4.1
-jaggedalliance2-gog	1249	jagged_alliance_2	1.0.0	wip	Jagged-Alliance-2	1.4.1
-landsoflore1&2-gog	1262	lands_of_lore_1_2	2.0.0.17	done	Lands-Of-Lore-1-2	1.4-dos_support_0.6
-legacyofkain-soulreaver-gog	1426	legacy_of_kain_soul_reaver	1.0.0.10	done	Legacy-Of-Kain-Soul-Reaver	1.4.1
-legacyofkain-soulreaver2-gog	1434	legacy_of_kain_soul_reaver_2	1.0.0.10	done	Legacy-Of-Kain-Soul-Reaver-2	1.4.1
-legendofgrimrock-gog	1193	legend_of_grimrock	2.0.0.17	done	Legend-Of-Grimrock	1.4.1
-littlebigadventure2-gog	1342	little_big_adventure_2	2.0.0.6	done	Little-Big-Adventure-2	1.4-dos_support_0.6
-populous2-gog	1312	populous_2	2.0.0.1	done	Populous-2	1.4-dos_support_0.6
-might&magic7-gog	1448	might_and_magic_7_for_blood_and_honor	2.0.0.15	done	Might-and-Magic-7-For-Blood-and-Honor	1.5.8
-masterofmagic-gog	1389	master_of_magic	2.0.0.20	done	Master-Of-Magic	1.4-dos_support_0.6
-commandos-ammopack-gog	1594	commandos_ammo_pack	1.0.0	done	Commandos-Ammo-Pack	1.4.1
-princeofpersia-sandsoftime-gog	1119	prince_of_persia_the_sands_of_time	2.0.0.4	done	Prince-Of-Persia-The-Sands-Of-Time	1.4.1
-propinball-timeshock-gog	1589	pro_pinball_timeshock	1.0.0	done	Pro-Pinball-Timeshock	1.4-dos_support_0.6
-planescape-torment-gog	1253	planescape_torment	2.0.0.8	done	Planescape-Torment	1.4.1
-simcity2000se-gog	1151	simcity_2000_special_edition	2.0.0.14	done	Simcity-2000-Se	1.4-dos_support_0.6
-resonance-gog	1487	resonance	1.0.0.5	done	Resonance	1.4.1
-totalannihilation-commanderpack-gog	1498	total_anihilation_commander_pack	2.0.0.21	done	Total-Annihilation-Commander-Pack	1.5.9
-tombraider4&5-gog	\N	tomb_raider_the_last_revelation_chronicles	1.0.0.5	wip	Tomb-Raider-The-Last-Revelation-plus-Chronicles	1.4.1
-anachronox-gog	1159	anachronox	1.0.0	done	Anachronox	1.4.1
-thief3-deadlyshadows-gog	1501	thief_3	1.0.0.5	done	Thief-3-Deadly-Shadows	1.4.1
-arxfatalis-gog	1256	arx_fatalis	1.0.0	done	Arx-Fatalis	1.5.0
-avernum-gog	1568	avernum_the_complete_saga	2.0.0.3	done	Avernum-the-Complete-Saga	1.4.1
-baldursgate1-gog	1179	baldurs_gate_the_original_saga	2.0.0.20	done	Baldurs-Gate	1.4.1
-lureofthetemptress-gog	1096	lure_of_the_temptress	2.0.0.2	done	Lure-Of-The-Temptress	1.4-scummvm_support
-betrayalatkrondor-gog	1167	betrayal_at_krondor	2.0.0.16	done	Betrayal-At-Krondor-Pack	1.4-dos_support_0.6
-beyonddivinity-gog	1505	beyond_divinity	1.0.1.6	done	Beyond-Divinity	1.4.1
-bioforge-gog	1551	bioforge	2.0.0.13	done	Bioforge	1.4-dos_support_0.6
-blackwellbundle-gog	1288	blackwell_bundle	2.0.0.9	done	Blackwell-Bundle	1.4.1
-crusader-noremorse-gog	1465	crusader_no_remorse	2.0.0.15	done	Crusader-No-Remorse	1.4-dos_support_0.6
-brokensword1dc-gog	970	broken_sword_directors_cut	2.0.0.10	done	Broken-Sword-1-Directors-Cut	1.4.1
-deusex-gog	1190	deus_ex	1.0.0	done	Deus-Ex-Goty-Edition	1.4.1
-carmageddon-maxpack-gog	1627	carmageddon_max_pack	1.0.0.61	done	Carmageddon	1.4-dos_support_0.6
-armacoldwarassault-gog	1040	arma_cold_war_assault	1.0.0	done	Arma-Cold-War-Assault	1.4.1
-commandos2&3-gog	1258	commandos_2_3	1.0.0	done	Commandos-2-3	1.4.1
-crusader-noregret-gog	1535	crusader_no_regret	2.0.0.8	done	Crusader-No-Regret	1.4-dos_support_0.6
-wingcommander-privateer-gog	1620	wing_commander_privateer	2.0.0.9	done	Wing-Commander-Privateer	1.4-dos_support_0.6
-bloodrayne1-gog	1364	bloodrayne	1.0.0	done	BloodRayne	1.5.15
-baldursgate2-gog	1182	baldurs_gate_2_complete	2.0.0.12	done	Baldurs-Gate-2	1.4.1
-brokensword3-gog	1102	broken_sword_3__the_sleeping_dragon	2.0.0.1	done	Broken-Sword-3	1.4.1
-cannonfodder-gog	1604	cannon_fodder	2.0.0.3	done	Cannon-Fodder	1.4-dos_support_0.6
-snapshot-gog	\N	snapshot	\N	broken	Snapshot	\N
-creaturesexodus-gog	\N	creatures_exodus	1.0.0	wip	Creatures-Exodus	\N
-normality-gog	1280	normality	1.0.0	done	Normality	1.4-dos_support_0.6
-nox-gog	1022	nox	2.0.0.20	done	Nox	1.4.1
-painkillerblack-gog	1035	painkiller	1.0.1	done	Painkiller-Black-Edition	1.4.1
-postal2-complete-gog	1305	postal_2_complete	1.0.0	done	Postal-2-Complete	1.4.1
-psychonauts-gog	1340	psychonauts	1.0.0	done	Psychonauts	1.4.1
-puddle-gog	1528	puddle	1.0.0.4	done	Puddle	1.4.1
-realmsofarkania1&2-gog	1455	realms_of_arkania_1_2	1.0.0	done	Realms-of-Arkania-1-2	1.4-dos_support_0.6
-realmsofarkania3-gog	1206	realms_of_arkania_3	1.0.0	done	Realms-Of-Arkania-3	1.4-dos_support_0.6
-realmsofthehaunting-gog	1144	realms_of_the_haunting	1.0.0	done	Realms-Of-The-Haunting	1.4-dos_support_0.6
-returntomysteriousisland-gog	1524	return_to_mysterious_island	1.0.0.7	done	Return-to-Mysterious-Island	1.4.1
-riven-gog	1074	riven_the_sequel_to_myst	1.0.0	done	Riven	1.4.1
-rollercoastertycoon2-gog	1481	rollercoaster_tycoon_2	2.0.0.6	done	Rollercoaster-Tycoon-2-Triple-Thrill-Pack	1.4.1
-s2-silentstorm-gog	1560	silent_storm_gold	1.0.0.4	done	S2-Silent-Storm-Gold-Edition	1.4.1
-sacredgold-gog	1177	sacred_gold	1.0.0	done	Sacred-Gold	1.5.15
-sacrifice-gog	1353	sacrifice	2.0.0.3	done	Sacrifice	1.4.1
-sam&max-devilsplayhouse-gog	1443	sam_max_the_devils_playhouse	1.0.0.2	done	Sam-and-Max-The-Devils-Playhouse	1.4.1
-sam&max-savetheworld-gog	1509	sam_max_save_the_world	1.0.0.22	done	Sam-and-Max-Save-the-World	1.4.1
-sanitarium-gog	1026	sanitarium	1.0.0	done	Sanitarium	1.5.20
-screamer2-gog	1522	screamer_2	2.0.0.1	done	Screamer-2	1.4-dos_support_0.6
-septerracore-gog	1041	septerra_core_legacy_of_the_creator	1.0.0	done	Septerra-Core	1.4.1
-sidmeiers-alphacentauri-gog	1361	sid_meiers_alpha_centauri	2.0.2.23	done	Sid-Meiers-Alpha-Centauri	1.4.1
-silver-gog	1439	silver	1.0.0.9	done	Silver	1.4.1
-simonthesorcerer-gog	1105	simon_the_sorcerer	1.0.0	done	Simon-The-Sorcerer	1.4-scummvm_support
-simonthesorcerer2-gog	1225	simon_the_sorcerer_2	1.0.0	done	Simon-The-Sorcerer-2	1.4-scummvm_support
-spacequest45&6-gog	1212	space_quest_4_5_6	2.0.0.13	done	Space-Quest-4-5-6	1.4-dos_support_0.6
-splintercell-gog	1272	splinter_cell	2.0.0.12	done	Tom-Clancys-Splinter-Cell	1.4.1
-spycraftthegreatgame-gog	1525	spycraft_the_great_game	1.0.0.5	done	Spycraft-the-Great-Game	1.4-dos_support_0.6
-starflight1&2-gog	1015	starflight_1_2	2.0.0.12	done	Starflight-1-2	1.4-dos_support_0.6
-startopia-gog	1527	startopia	1.0.0.8	done	Startopia	1.5.15
-stilllife-gog	1259	still_life	1.0.0	done	Still-Life	1.4.1
-thefeeblefiles-gog	1034	the_feeble_files	1.0.0	done	The-Feeble-Files	1.4-scummvm_support
-theincrediblemachine-megapack-gog	1186	the_incredible_machine_mega_pack	1.0.0	done	The-Incredible-Machine-Mega-Pack	1.4-dos_support_0.6
-theinterstate76arsenal-gog	1550	interstate76	1.0.0	done	The-Interstate-76-Arsenal	1.5.8
-thelastexpress-gog	1125	last_express_the	1.0.0	done	The-Last-Express	1.4-dos_support_0.6
-themehospital-gog	1162	theme_hospital	2.0.0.5	done	Theme-Hospital	1.4-dos_support_0.6
-thewhisperedworld-gog	1309	the_whispered_world	2.0.0.15	done	The-Whispered-World	1.4.1
-beyond-good&evil-gog	1263	beyond_good_and_evil	2.0.0.5	wip	Beyond-Good-and-Evil	1.5.29
-desperados-gog	\N	desperados_wanted_dead_or_alive	1.0.0	wip	Desperados-Wanted-Dead-Or-Alive	1.5.5
-geneforge-gog	\N	geneforge_15	2.0.0.6	wip	Geneforge-1-5	1.5.5
-lionheart-gog	\N	lionheart_legacy_of_the_crusader	2.0.0.11	wip	Lionheart-Legacy-Of-The-Crusader	1.5.24
-propinball-bigraceusa-gog	\N	pro_pinball_big_race_usa	1.0.0	wip	Pro-Pinball-Big-Race-USA	1.5.5
-thief-gold-gog	1445	thief_gold	1.0.0	wip	Thief-Gold	1.5.10
-xiii-gog	1112	xiii	2.0.0.11	wip	XIII	1.5.18
-zeus&poseidon-gog	1418	zeus_poseidon	1.0.0.6	done	Zeus-and-Poseidon-Acropolis	1.4.1
-adventrising-gog	1027	advent_rising	1.0.0	done	Advent-Rising	1.4.1
-arcanum-gog	1298	arcanum_of_steamworks_and_magick_obscura	2.0.0.15	done	Arcanum	1.4.1
-brokensword2dc-gog	1101	broken_sword_2__the_smoking_mirror	2.0.0.8	done	Broken-Sword-2-Directors-Cut	1.4.1
-brokensword4-gog	1287	broken_sword_4	2.0.0.8	done	Broken-Sword-4	1.5.7
-dukenukem3d-atomicedition-gog	1338	duke_nukem_3d_atomic_edition	2.0.0.84	done	Duke-Nukem-3D-Atomic-Edition	1.4-dos_support_0.6
-dungeonkeeper2-gog	1023	dungeon_keeper_2	2.0.0.32	done	Dungeon-Keeper-2	1.4.1
-earthwormjim-gog	1146	earthworm_jim_1_2	2.0.0.7	done	Earthwork-Jim-1-2	1.4-dos_support_0.6
-fallout-gog	1032	fallout	2.0.0.14	done	Fallout	1.4.1
-fallout2-gog	1033	fallout_2	2.0.0.12	done	Fallout-2	1.4.1
-fallouttactics-gog	1139	fallout_tactics	2.0.0.8	done	Fallout-Tactics	1.4.1
-farcry2-gog	1382	far_cry_2_fortunes_edition	2.0.0.8	done	Far-Cry-2-Fortunes-Edition	1.5.23
-geminirue-gog	1329	gemini_rue	2.0.0.5	done	Gemini-Rue	1.4.1
-ghostrecon-gog	1158	tom_clancys_ghost_recon	2.0.0.6	done	Tom-Clancys-Ghost-Recon	1.4.1
-giantscitizenkabuto-gog	1061	giants_citizen_kabuto	2.0.0.3	done	Giants-Citizen-Kabuto	1.4.1
-gothic-gog	1275	gothic	1.0.0	done	Gothic	1.4.1
-groundcontrol2-gog	1016	ground_control_2_operation_exodus	1.0.0	done	Ground-Control-2	1.4.1
-motoracer-gog	\N	moto_racer	1.0.0	done	Moto-Racer	1.3.23
-nexusthejupiterincident-gog	1513	nexus_the_jupiter_incident	1.0.0.9	done	Nexus-the-Jupiter-Incident	1.4.1
-shadowgrounds-gog	1473	shadowgrounds	1.0.0	wip	Shadowgrounds	1.5.17
-enclave-gog	1042	enclave	1.0.0	done	Enclave	1.4.1
-zork-grandinquisitor-gog	\N	zork_grand_inquisitor	\N	wip	Zork-Grand-Inquisitor	\N
-texmurphy-thepandoradirective-gog	1328	tex_murphy_the_pandora_directive	2.0.0.12	done	Tex-Murphy-The-Pandora-Directive	1.4-dos_support_0.6
-unrealgold-gog	1335	unreal_gold	1.0.0	done	Unreal-Gold	1.4.1
-hitman2-silentassassin-gog	1516	hitman_2_silent_assassin	1.0.0	wip	Hitman-2-Silent-Assassin	1.4.1
-primordia-gog	\N	primordia	2.0.0.2	new	Primordia	\N
-scratches-directorscut-gog	\N	scratches_directors_cut	1.0.0	new	Scratches-Directors-Cut	\N
-landsoflore3-gog	1497	lands_of_lore_3	2.0.0.8	done	Lands-of-Lore-3	1.4.1
-thenations-gog	1233	the_nations_gold_edition	1.0.0	done	The-Nations-Gold-Edition	1.5.15
-syberia-gog	1172	syberia	1.0.0	done	Syberia	1.5.15
-thewitcher-gog	1065	the_witcher	2.0.0.12	done	The-Witcher-Enhanced-Edition-Directors-Cut	1.5.18
-torchlight-gog	1386	torchlight	1.0.2.10	done	Torchlight	1.4.1
-tyrian2000-gog	1282	tyrian_2000	2.0.0.11	done	Tyrian-2000	1.4-dos_support_0.6
-uru-gog	1218	uru_complete_chronicles	1.0.0	done	Uru-Complete-Chronicles	1.4.1
-worldsofultima-savageempire-gog	1320	worlds_of_ultima_the_savage_empire	2.0.0.26	done	Worlds-Of-Ultima-The-Savage-Empire	1.4-dos_support_0.6
-texmurphy-underakillingmoon-gog	1199	tex_murphy_under_a_killing_moon	2.0.0.10	done	Tex-Murphy-Under-A-Killing-Moon	1.4-dos_support_0.6
-kingpin-lifeofcrime-gog	1241	kingpin_life_of_crime	1.0.0	done	Kingpin-Life-Of-Crime	1.4.1
-twoworlds2-gog	\N	two_worlds_2_epic_edition	2.0.0.8	new	Two-Worlds-2	\N
-unmechanical-gog	\N	unmechanical	1.0.2.18	new	Unmechanical	\N
-thelongestjourney-gog	1359	the_longest_journey	1.0.0	wip	The-Longest-Journey	1.3.32-tlj
-aloneinthedark3-gog	1248	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-3	1.4-dos_support_0.6
-backtothefuture-thegame-gog	1392	back_to_the_future_the_game	1.0.0.8	done	Back-To-The-Future-The-Game	1.4.1
-ballsofsteel-gog	1640	balls_of_steel	1.0.0	contributed	\N	1.5.10
-gobliiins-pack-gog	1354	gobliiins_pack	1.0.0	done	Gobliiins-Pack	1.4-scummvm_support
-conflictdesertstorm-gog	1529	conflict_desert_storm	1.0.0	done	Conflict-Desert-Storm	1.4.1
-magiccarpet-gog	1695	magic_carpet	2	contributed	\N	1.4-dos_support_0.6
-stronghold-hd-gog	\N	stronghold	2.1.0.4	new	Stronghold-Hd	\N
-defendersquest-gog	\N	defenders_quest	\N	new	Defenders-Quest	\N
-pid-gog	\N	pid	\N	new	Pid	\N
-knightsandmerchants-thepeasantsrebellion-gog	1271	knights_and_merchants_the_peasants_rebellion	1.0.0	contributed	Knights-And-Merchants-The-Peasants-Rebellion	1.4.1
-neverwinternights2-gog	\N	neverwinter_nights_2_complete	2.1.0.6	new	Neverwinter-Nights-2-Complete	1.5.27
-stonekeep-gog	1174	stonekeep	2.0.0.10	done	Stonekeep	1.4-dos_support_0.6
-syndicate-gog	1219	syndicate	2.0.0.11	done	Syndicate	1.4-dos_support_0.6
-teenagent-gog	1214	teenagent	2.0.0.12	done	Teenagent	1.4-scummvm_support
-screamer-gog	1165	screamer	2.0.0.12	wip	Screamer	1.4-dos_support_0.6
-earth-2160-gog	\N	earth_2160	1.0.0	new	Earth-2160	\N
-totalannihilation-kingdoms-gog	1391	total_annihilation_kingdoms	2.0.0.22	done	Total-Annihilation-Kingdoms-Plus-Expansion	1.4.1
-twoworlds-gog	1019	two_worlds	1.0.0	done	Two-Worlds	1.5.29
-ultima8-gog	1684	ultima_8_gold_edition	2	contributed	\N	1.4-dos_support_0.6
-urbanchaos-gog	1567	urban_chaos	1.0.0.3	done	Urban-Chaos	1.4.1
-stronghold-crusader-hd-gog	\N	stronghold_crusader	2.0.0.6	new	Stronghold-Crusader-Hd	\N
-wingcommander3-gog	1554	wing_commander_3_heart_of_the_tiger	2.0.0.5	done	Wing-Commander-3-Heart-of-the-Tiger	1.4-dos_support_0.6
-chroniclesofriddick-assaultondarkathena-gog	1323	the_chronicles_of_riddick_assault_on_dark_athena	2.0.0.10	done	Chronicles-Of-Riddick-Assault-On-Dark-Athena	1.5.13
-thief2-gog	1250	thief_2_the_metal_age	1.0.0	done	Thief-2-The-Metal-Age	1.3.37
-kingsbounty-crossworlds-gog	\N	kings_bounty_crossworlds_goty	\N	new	Kings-Bounty-Crossworlds-Goty	\N
-torinspassage-gog	1436	torins_passage	2.0.0.7	done	Torins-Passage	1.4-dos_support_0.6
-ufo-aftermath-gog	1201	ufo_aftermath	1.0.0	done	Ufo-Aftermath	1.4.1
-ultima4-gog	1242	ultima_4	2.0.0.19	done	Ultima-4-Quest-Of-The-Avatar	1.4-dos_support_0.6
-wingcommander1&2-gog	1493	wing_commander_1_2	2.0.0.18	done	Wing-Commander-1-2	1.4-dos_support_0.6
-anotherworld-20thanniversary-gog	\N	another_world_20th_anniversary_edition	2.0.0.6	wip	Another-World-20th-Anniversary-Edition	1.5.13
-anewbeginning-gog	1632	a_new_beginning	2.0.0.5	done	A-New-Beginning	1.4.1
-gabrielknight3-gog	1220	gabriel_knight_3_blood_of_the_sacred_blood_of_the_damned	1.0.0	done	Gabriel-Knight-3-Blood-Of-The-Sacred-Blood-Of-The-Damned	1.4.1
-fez-gog	1697	fez	2	contributed	\N	1.4.1
-heroesofmightandmagic3-gog	1518	heroes_of_might_and_magic_3_complete_edition	2.0.0.16	done	Heroes-of-Might-and-Magic-3-Complete-Edition	1.5.16
-jackorlandodc-gog	1062	jack_orlando_a_cinematic_adventure_dc	1.0.0	done	Jack-Orlando-Directors-Cut	1.4.1
-unreal2-gog	1381	unreal_2_the_awakening_se	1.0.0	done	Unreal-2-The-Awakening-SE	1.4.1
-darkstone-gog	1346	darkstone	1.0.0.7	wip	Darkstone	1.5.5
-mdk-gog	1514	mdk	2.0.0.25	done	MDK	1.4.1
-avadon-theblackfortress-gog	\N	avadon_the_black_fortress	2.0.0.2	new	Avadon-The-Black-Fortress	\N
-eschalon-book1-gog	\N	eschalon_book_i	2.0.0.4	new	Eschalon-Book-1	\N
-eschalon-book2-gog	\N	eschalon_book_ii	2.0.0.2	new	Eschalon-Book-2	\N
-abesoddysee-gog	1114	oddworld_abes_oddysee	1.0.0	done	Oddworld-Abes-Oddysee	1.5.15
-starwolves-gog	1278	star_wolves	1.0.0	done	Star-Wolves	1.5.5
-abesexoddus-gog	1115	oddworld_abes_exoddus	1.0.0	done	Oddworld-Abes-Exoddus	1.4.1
-ultimaworldsofadventure2-martiandreams-gog	1336	ultima_worlds_of_adventure_2_martian_dreams	2.0.0.17	done	Ultima-Worlds-Of-Adventure-2-Martian-Dreams	1.4-dos_support_0.6
-ultimaunderworld1&2-gog	1315	ultima_underworld_1_2	2.0.0.19	done	Ultima-Underworld-1-2	1.4-dos_support_0.6
-1nsane-gog	1611	1nsane	1.0.0	done	1nsane	1.4.1
-ageofwonders2-thewizardsthrone-gog	1402	age_of_wonders_2_the_wizards_throne	1.0.0	done	Age-of-Wonders-2-The-Wizards-Throne	1.4.1
-magiccarpet2-gog	1696	magic_carpet_2_the_netherworlds	2	contributed	\N	1.4-dos_support_0.6
-princeofpersia2008-gog	\N	prince_of_persia	2.0.0.17	new	Prince-Of-Persia-2008	\N
-settlers2-10thanniversary-gog	1703	the_settlers_2_10th_anniversary	2	contributed	\N	1.4.1
-wizardry8-gog	1710	wizardry_8	2	contributed	\N	1.4.1
-dungeonkeeper-gog	1712	dungeon_keeper	2	contributed	\N	1.4-dos_support_0.6
-populous3-thebeginning-gog	1704	populous_the_beginning	2	contributed	\N	1.5.30
-catacombs-gog	\N	catacombs_pack	2.0.0.3	new	Catacombs-Pack	\N
+COPY scripts (scriptname, scriptid, gogid, gogversion, status, wikipage, wineversion, scripter) FROM stdin;
+thebookofunwrittentales-gog	1488	the_book_of_unwritten_tales	1.0.0.2	done	The-Book-Of-Unwritten-Tales	1.5.5	hmdai
+beneathasteelsky-gog	\N	beneath_a_steel_sky	\N	wontdo	\N	\N	\N
+thebookofunwrittentales-critterchronicles-gog	1503	the_book_of_unwritten_tales_critter_chronicles	2.0.0.6	done	\N	1.5.5	hmdai
+omikronthenomadsoul-gog	\N	omikron_the_nomad_soul	2.0.0.7	new	Omikron-The-Nomad-Soul	\N	\N
+heroeschronicles-allchapters-gog	1743	heroes_chronicles_all_chapters	1.0.0	done	\N	1.6-rc2	Niriddiki
+thebardstale-gog	\N	the_bards_tale	2.0.0.7	new	\N	\N	\N
+swordofthestars-thepit-gog	\N	sword_of_the_stars_the_pit	2.0.0.4	new	\N	\N	\N
+clivebarkersundying-gog	\N	clive_barkers_undying	2.0.0.5	new	\N	\N	\N
+ageofwonders-gog	1397	age_of_wonders	1.0.0	done	Age-of-Wonders	1.4.1	petch
+anotherworld-15thanniversary-gog	1230	another_world_15th_anniversary_edition	1.0.0	done	Another-World-15th-Anniversary-Edition	1.4.1	petch
+betrayalatkrondor-gog	1167	betrayal_at_krondor	2.0.0.16	done	Betrayal-At-Krondor-Pack	1.4-dos_support_0.6	petch
+chroniclesofriddick-assaultondarkathena-gog	1323	the_chronicles_of_riddick_assault_on_dark_athena	2.0.0.10	done	Chronicles-Of-Riddick-Assault-On-Dark-Athena	1.5.13	petch
+unrealtournament2004ece-gog	\N	unreal_tournament_2004_ece	\N	wontdo	Unreal-Tournament-2004-ECE	\N	\N
+deponia-gog	1467	deponia	2.0.0.6	done	Deponia	1.4.1	Kweepeer
+landsoflore1&2-gog	1262	lands_of_lore_1_2	2.0.0.17	done	Lands-Of-Lore-1-2	1.4-dos_support_0.6	petch
+simonthesorcerer2-gog	1225	simon_the_sorcerer_2	1.0.0	done	Simon-The-Sorcerer-2	1.4-scummvm_support	petch
+thedarkeye-chainofsatinav-gog	1478	the_dark_eye_chains_of_satinav	2	done	\N	1.5.5	hmdai
+battleisle-platinum-gog	\N	battle_isle_platinum	\N	broken	Battle-Isle-Platinum	\N	petch
+motoracer2-gog	\N	moto_racer_2	\N	broken	Moto-Racer-2	\N	petch
+bladeofdarkness-gog	\N	blade_of_darkness	2.0.0.5	new	\N	\N	\N
+darklands-gog	1512	darklands	2.0.0.6	done	Darklands	1.4-dos_support_0.6	petch
+sensibleworldofsoccer-9697-gog	1734	sensible_world_of_soccer_9697	2	done	\N	1.4-dos_support_0.6	TonyFlow
+spacecolonyhd-gog	\N	space_colony_hd	\N	new	\N	\N	\N
+ishar1&2-gog	\N	ishar_1_2	\N	new	\N	\N	\N
+tombraider1&2&3-gog	\N	tomb_raider_123	\N	wip	Tomb-Raider-1-2-3	\N	petch
+gabrielknight3-gog	1220	gabriel_knight_3_blood_of_the_sacred_blood_of_the_damned	1.0.0	done	Gabriel-Knight-3-Blood-Of-The-Sacred-Blood-Of-The-Damned	1.4.1	petch
+nox-gog	1022	nox	2.0.0.20	done	Nox	1.4.1	petch
+snapshot-gog	\N	snapshot	\N	broken	Snapshot	\N	petch
+creaturesexodus-gog	\N	creatures_exodus	1.0.0	wip	Creatures-Exodus	\N	petch
+knightsandmerchants-thepeasantsrebellion-gog	1271	knights_and_merchants_the_peasants_rebellion	1.0.0	done	Knights-And-Merchants-The-Peasants-Rebellion	1.4.1	Jan Nytra
+magiccarpet-gog	1695	magic_carpet	2	done	\N	1.4-dos_support_0.6	Xodetaetl
+neverwinternights2-gog	\N	neverwinter_nights_2_complete	2.1.0.6	new	Neverwinter-Nights-2-Complete	1.5.27	\N
+stronghold-hd-gog	1721	stronghold	2.1.0.4	done	\N	1.4.1	TonyFlow
+texmurphy-underakillingmoon-gog	1199	tex_murphy_under_a_killing_moon	2.0.0.10	done	Tex-Murphy-Under-A-Killing-Moon	1.4-dos_support_0.6	petch
+ultima8-gog	1684	ultima_8_gold_edition	2	done	\N	1.4-dos_support_0.6	Xodetaetl
+jadeempire-specialedition-gog	\N	jade_empire_special_edition	2.0.0.4	new	\N	\N	\N
+systemshock2-gog	\N	system_shock_2	2.1.0.19	new	\N	\N	\N
+1nsane-gog	1611	1nsane	1.0.0	done	1nsane	1.4.1	petch
+ballsofsteel-gog	1640	balls_of_steel	1.0.0	done	\N	1.5.10	VisitntX
+defendersquest-gog	\N	defenders_quest	2.2.0.6	done	Defenders-Quest	1.4.1	petch
+eschalon-book1-gog	\N	eschalon_book_i	2.0.0.4	done	Eschalon-Book-1	1.4.1	petch
+fez-gog	1697	fez	2.0.0.2	done	\N	1.4.1	Xodetaetl
+primordia-gog	\N	primordia	2.0.0.2	new	Primordia	\N	\N
+scratches-directorscut-gog	\N	scratches_directors_cut	1.0.0	new	Scratches-Directors-Cut	\N	\N
+twoworlds2-gog	\N	two_worlds_2_epic_edition	2.0.0.8	new	Two-Worlds-2	\N	\N
+unmechanical-gog	\N	unmechanical	1.0.2.18	new	Unmechanical	\N	\N
+pid-gog	\N	pid	\N	new	Pid	\N	\N
+earth-2160-gog	\N	earth_2160	1.0.0	new	Earth-2160	\N	\N
+stronghold-crusader-hd-gog	\N	stronghold_crusader	2.0.0.6	new	Stronghold-Crusader-Hd	\N	\N
+kingsbounty-crossworlds-gog	\N	kings_bounty_crossworlds_goty	\N	new	Kings-Bounty-Crossworlds-Goty	\N	\N
+avadon-theblackfortress-gog	\N	avadon_the_black_fortress	2.0.0.2	new	Avadon-The-Black-Fortress	\N	\N
+eschalon-book2-gog	\N	eschalon_book_ii	2.0.0.2	new	Eschalon-Book-2	\N	\N
+aloneinthedark1-gog	1246	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-1	1.4-dos_support_0.6	petch
+princeofpersia2008-gog	\N	prince_of_persia	2.0.0.17	new	Prince-Of-Persia-2008	\N	\N
+catacombs-gog	\N	catacombs_pack	2.0.0.3	new	Catacombs-Pack	\N	\N
+legacyofkain-defiance-gog	1462	legacy_of_kain_defiance	1.0.0.6	done	Legacy-of-Kain-Defiance	1.4.1	petch
+littlebigadventure-gog	1155	little_big_adventure	2.0.0.20	done	Little-Big-Adventure	1.4-dos_support_0.6	petch
+runaway3-atwistoffate-gog	1586	runaway_3_a_twist_of_fate	1.0.0.4	done	Runaway-3-A-Twist-Of-Fate	1.4.1	petch
+spacerangers2-gog	1313	space_rangers_2_reboot	1.0.0.6	done	Space-Rangers-2-Reboot	1.4.1	petch
+ageofwonders3-shadowmagic-gog	1020	age_of_wonders_shadow_magic	1.0.0	done	Age-of-Wonders-3-Shadow-Magic	1.4.1	petch
+alienbreed&towerassault-gog	1368	alien_breed_tower_assault	2.0.0.32	done	Alien-Breed-Tower-Assault	1.4-dos_support_0.6	petch
+vampirethemasquerade-redemption-gog	\N	vampire_the_masquerade_redemption	1.0.0	new	\N	\N	\N
+spellforce-platinum-gog	\N	spellforce_platinum	\N	wip	Spellforce-Platinum-Edition	\N	petch
+chessmaster9000-gog	\N	chessmaster_9000	\N	broken	Chessmaster-9000	\N	petch
+dreampinball3d-gog	\N	dream_pinball_3d	\N	broken	Dream-Pinball-3D	\N	petch
+thejourneymanproject2-gog	\N	journeyman_project_2	\N	broken	The-Journeyman-Project-2	\N	petch
+thejourneymanproject3-gog	\N	journeyman_project_3	\N	broken	The-Journeyman-Project-3-Legacy-Of-Time	\N	petch
+returntokrondor-gog	\N	return_to_krondor	\N	broken	Return-to-Krondor	\N	petch
+robinhood-gog	\N	robin_hood	\N	broken	Robin-Hood-The-Legend-of-Sherwood	\N	petch
+soulbringer-gog	\N	soulbringer	\N	broken	Soulbringer	\N	petch
+treasureadventuregame-gog	\N	treasure_adventure_game	\N	broken	Treasure-Adventure-Game	\N	petch
+incoming&incomingforces-gog	1080	incoming_incoming_forces	1.0.0	done	Incoming-Incoming-Forces	1.4.1	petch
+medalofhonor-alliedassaultwarchest-gog	1540	medal_of_honor_allied_assault_war_chest	2.0.0.21	done	Medal-Of-Honor-Allied-Assault-War-Chest	1.4.1	petch
+aloneinthedark2-gog	1247	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-2	1.4-dos_support_0.6	petch
+empireearth-gog	\N	empire_earth_gold_edition	1.0.0	broken	Empire-Earth-Gold-Edition	1.3.34	petch
+swat3-tgoty-gog	\N	swat_3_tactical_game_of_the_year_edition	1.0.0	broken	Swat-3-tgoty	1.4.1	petch
+wingcommander4-gog	\N	wing_commander_4_the_price_of_freedom	2.0.0.17	broken	Wing-Commander-4	1.5.29	petch
+caesar3-gog	1726	caesar_3	2	done	\N	1.4.1	TonyFlow
+dungeonkeeper-gog	1712	dungeon_keeper	2	done	\N	1.4-dos_support_0.6	Xodetaetl
+imperialism2-gog	1714	imperialism_2_the_age_of_exploration	2	done	\N	1.4.1	TonyFlow
+magiccarpet2-gog	1696	magic_carpet_2_the_netherworlds	2	done	\N	1.4-dos_support_0.6	Xodetaetl
+masteroforion1&2-gog	1207	master_of_orion_1_2	2.0.0.16	done	Master-Of-Orion-1-2	1.4-dos_support_0.6	petch
+mdk2-gog	1240	mdk_2	2.0.0.2	done	MDK-2	1.4.1	petch
+might&magic6pack-gog	1175	might_and_magic_6_limited_edition	2.0.0.41	done	Might-And-Magic-6-Pack	1.4-dos_support_0.6	petch
+might&magic8-gog	1463	might_and_magic_8_day_of_the_destroyer	2.0.0.13	done	Might-and-Magic-8-Day-of-the-Destroyer	1.5.8	petch
+neverwinternights-gog	1099	neverwinter_nights_diamond_edition	2.0.0.15	done	Neverwinter-Nights-Diamond-Edition	1.3.27	petch
+oneunitwholeblood-gog	1269	one_unit_whole_blood	2.0.0.21	done	One-Unit-Whole-Blood	1.4-dos_support_0.6	petch
+outcast-gog	1013	outcast	1.0.0	done	Outcast	1.5.18	petch
+perimeter-gog	1510	perimeter	2.0.0.10	done	Perimeter	1.4.1	petch
+pharaoh&cleopatra-gog	1517	pharaoh_cleopatra	2.0.0.12	done	Pharaoh-plus-Cleopatra	1.4.1	petch
+pirates-pack-gog	1441	pirates_gold_plus	2.0.0.27	done	Pirates-Gold-Plus	1.4-dos_support_0.6	petch
+populous3-thebeginning-gog	1704	populous_the_beginning	2	done	\N	1.5.30	Xodetaetl
+redneckrampage-gog	1136	redneck_rampage_collection	2.0.0.11	done	Redneck-Rampage	1.4-dos_support_0.6	petch
+runaway-aroadadventure-gog	1435	runaway_a_road_adventure	1.0.0	done	Runaway-A-Road-Adventure	1.4.1	petch
+sam&max-beyondtimeandspace-gog	1523	sam_max_beyond_time_and_space	1.0.0	done	Sam-and-Max-Beyond-Time-and-Space	1.4.1	petch
+settlers2-10thanniversary-gog	1703	the_settlers_2_10th_anniversary	2	done	\N	1.4.1	TonyFlow
+shadowwarrior-gog	1637	shadow_warrior_complete	2.0.0.7	done	Shadow-Warrior	1.4-dos_support_0.6	petch
+sherlockholmes-secretofthesilverearring-gog	1471	sherlock_holmes_secret_of_the_silver_earring	1.0.0	done	Sherlock-Holmes-Secret-Of-The-Silver-Earring	1.4.1	petch
+syberia2-gog	1232	syberia_2	1.0.0	done	Syberia-2	1.5.15	petch
+templeofelementalevil-gog	1063	the_temple_of_elemental_evil	2.0.0.13	done	The-Temple-of-Elemental-Evil	1.5.22	petch
+ufo-afterlight-gog	1243	ufo_afterlight	1.0.0	done	UFO-Afterlight	1.4.1	petch
+wallace&gromit-grandadventures-gog	1410	wallace_gromits_grand_adventures	1.0.1.12	done	Wallace-and-Gromits-Grand-Adventures	1.4.1	petch
+divinity2-developerscut-gog	\N	divinity_2_developers_cut	1.1.0.9	wip	Divinity-2-Developers-Cut	1.5.21	petch
+gothic2-gog	1239	gothic_2_gold_edition	1.0.0	wip	Gothic-2-Gold-Edition	1.4.1	petch
+warlordsbattlecry3-gog	\N	warlords_battlecry_3	1.0.0	wip	Warlords-Battlecry-3	1.4.1	petch
+wizardry8-gog	1710	wizardry_8	2	done	\N	1.4.1	Xodetaetl
+ageofwonders2-thewizardsthrone-gog	1402	age_of_wonders_2_the_wizards_throne	1.0.0	done	Age-of-Wonders-2-The-Wizards-Throne	1.4.1	petch
+avernum-gog	1568	avernum_the_complete_saga	2.0.0.3	done	Avernum-the-Complete-Saga	1.4.1	petch
+baldursgate1-gog	1179	baldurs_gate_the_original_saga	2.0.0.20	done	Baldurs-Gate	1.4.1	petch
+baldursgate2-gog	1182	baldurs_gate_2_complete	2.0.0.12	done	Baldurs-Gate-2	1.4.1	petch
+beyonddivinity-gog	1505	beyond_divinity	1.0.1.6	done	Beyond-Divinity	1.4.1	petch
+bioforge-gog	1551	bioforge	2.0.0.13	done	Bioforge	1.4-dos_support_0.6	petch
+blackwellbundle-gog	1288	blackwell_bundle	2.0.0.9	done	Blackwell-Bundle	1.4.1	petch
+bloodrayne1-gog	1364	bloodrayne	1.0.0	done	BloodRayne	1.5.15	petch
+thewitcher2-gog	\N	the_witcher_2	3.0.1.17	broken	The-Witcher-2	1.5.8	petch
+commandos2&3-gog	1258	commandos_2_3	1.0.0	done	Commandos-2-3	1.4.1	petch
+darkfall-lightsout-gog	1161	dark_fall_lights_out	1.0.0	done	Dark-Fall-2	1.5.3	petch
+darkfall-thejournal-gog	1154	dark_fall_the_journal	1.0.0	done	Dark-Fall	1.4.1	petch
+darkreign&expansion-gog	1553	dark_reign_expansion	1.0.0	done	Dark-Reign-plus-Expansion	1.4.1	petch
+demonstone-gog	1037	forgotten_realms_demon_stone	2.0.0.9	done	Forgotten-Realms-Demon-Stone	1.4.1	petch
+descent3-gog	1245	descent_3_expansion	1.0.0	done	Descent-3	1.4.1	petch
+deusex-gog	1190	deus_ex	1.0.0	done	Deus-Ex-Goty-Edition	1.4.1	petch
+disciples2gold-gog	1326	disciples_2_gold	1.0.0	done	Disciples-2-Gold	1.4.1	petch
+divinedivinity-gog	1025	divine_divinity	1.0.2.13	done	Divine-Divinity	1.4.1	petch
+dragonshard-gog	1103	dungeons_dragons_dragonshard	2.0.0.10	done	Dungeons-Dragons-Dragonshard	1.4.1	petch
+dragonsphere-gog	1203	dragonsphere	2.0.0.14	done	Dragonsphere	1.4-dos_support_0.6	petch
+dreamfall-thelongestjourney-gog	1348	dreamfall_the_longest_journey	1.0.0.10	done	Dreamfall-The-Longest-Journey	1.5.5	petch
+dukenukem-1&2-gog	1601	duke_nukem_12	2.0.0.5	done	Duke-Nukem-1-2	1.4-dos_support_0.6	petch
+dukenukem-manhattanproject-gog	1231	duke_nukem_manhattan_project	1.0.0	done	Duke-Nukem-Manhattan-Project	1.4.1	petch
+evilgenius-gog	1228	evil_genius	1.0.0	done	Evil-Genius	1.4.1	petch
+farcry-gog	1024	far_cry	2.0.0.9	done	Far-Cry	1.4.1	petch
+flatout-gog	1010	flatout	1.0.0	done	Flatout	1.4.1	petch
+freedomforce-vsthe3rdreich-gog	1384	freedom_force_vs_the_3rd_reich	1.0.0	done	Freedom-Force-Vs-The-3rd-Reich	1.4.1	petch
+freespace2-gog	1107	freespace_2	2.0.0.8	done	Freespace-2	1.3.27	petch
+gabrielknight1-gog	1147	gabriel_knight_sins_of_the_fathers	2.0.0.16	done	Gabriel-Knight-1	1.4-dos_support_0.6	petch
+gabrielknight2-gog	1215	gabriel_knight_2_the_beast_within	2.0.0.12	done	Gabriel-Knight-2-The-Beast-Within	1.4-dos_support_0.6	petch
+gothic3-gog	1291	gothic_3	1.0.0.14	done	Gothic-3	1.5.15	petch
+guiltygearx2-gog	1153	guilty_gear_x2_reload	1.0.0	done	Guilty-Gear-X2	1.4.1	petch
+hitman-codename47-gog	1506	hitman	1.0.0	done	Hitman-Codename-47	1.4.1	petch
+icewinddale-gog	1189	icewind_dale_complete	2.0.0.11	done	Icewind-Dale-Complete	1.5.5	petch
+icewinddale2-gog	1213	icewind_dale_2	2.0.0.11	done	Icewind-Dale-2-Complete	1.4.1	petch
+incoldblood-gog	1251	in_cold_blood	1.0.0	done	In-Cold-Blood	1.4.1	petch
+incredipede-gog	1613	incredipede	2.2.0.6	done	Incredipede	1.5.5	petch
+ironstorm-gog	1038	iron_storm	1.0.0	done	Iron-Storm	1.4.1	petch
+jaggedalliance2-gog	1249	jagged_alliance_2	1.0.0	wip	Jagged-Alliance-2	1.4.1	petch
+legacyofkain-soulreaver-gog	1426	legacy_of_kain_soul_reaver	1.0.0.10	done	Legacy-Of-Kain-Soul-Reaver	1.4.1	petch
+legacyofkain-soulreaver2-gog	1434	legacy_of_kain_soul_reaver_2	1.0.0.10	done	Legacy-Of-Kain-Soul-Reaver-2	1.4.1	petch
+legendofgrimrock-gog	1193	legend_of_grimrock	2.0.0.17	done	Legend-Of-Grimrock	1.4.1	petch
+littlebigadventure2-gog	1342	little_big_adventure_2	2.0.0.6	done	Little-Big-Adventure-2	1.4-dos_support_0.6	petch
+lureofthetemptress-gog	1096	lure_of_the_temptress	2.0.0.2	done	Lure-Of-The-Temptress	1.4-scummvm_support	petch
+masterofmagic-gog	1389	master_of_magic	2.0.0.20	done	Master-Of-Magic	1.4-dos_support_0.6	petch
+might&magic7-gog	1448	might_and_magic_7_for_blood_and_honor	2.0.0.15	done	Might-and-Magic-7-For-Blood-and-Honor	1.5.8	petch
+originalwar-gog	1531	original_war	1.0.0	done	Original-War	1.4.1	petch
+planescape-torment-gog	1253	planescape_torment	2.0.0.8	done	Planescape-Torment	1.4.1	petch
+populous2-gog	1312	populous_2	2.0.0.1	done	Populous-2	1.4-dos_support_0.6	petch
+princeofpersia-sandsoftime-gog	1119	prince_of_persia_the_sands_of_time	2.0.0.4	done	Prince-Of-Persia-The-Sands-Of-Time	1.4.1	petch
+propinball-timeshock-gog	1589	pro_pinball_timeshock	1.0.0	done	Pro-Pinball-Timeshock	1.4-dos_support_0.6	petch
+resonance-gog	1487	resonance	1.0.0.5	done	Resonance	1.4.1	petch
+simcity2000se-gog	1151	simcity_2000_special_edition	2.0.0.14	done	Simcity-2000-Se	1.4-dos_support_0.6	petch
+talesofmonkeyisland-gog	1555	tales_of_monkey_island	1.0.0.10	done	Tales-of-Monkey-Island	1.4.1	petch
+thief3-deadlyshadows-gog	1501	thief_3	1.0.0.5	done	Thief-3-Deadly-Shadows	1.4.1	petch
+totalannihilation-commanderpack-gog	1498	total_anihilation_commander_pack	2.0.0.21	done	Total-Annihilation-Commander-Pack	1.5.9	petch
+wingcommander-privateer-gog	1620	wing_commander_privateer	2.0.0.9	done	Wing-Commander-Privateer	1.4-dos_support_0.6	petch
+alienshooter-gog	\N	alien_shooter_expansions	1.0.0	wip	Alien-Shooter-plus-Expansions	1.4.1	petch
+anachronox-gog	1159	anachronox	1.0.0	done	Anachronox	1.4.1	petch
+armacoldwarassault-gog	1040	arma_cold_war_assault	1.0.0	done	Arma-Cold-War-Assault	1.4.1	petch
+brokensword1dc-gog	970	broken_sword_directors_cut	2.0.0.10	done	Broken-Sword-1-Directors-Cut	1.4.1	petch
+brokensword2dc-gog	1101	broken_sword_2__the_smoking_mirror	2.0.0.8	done	Broken-Sword-2-Directors-Cut	1.4.1	petch
+brokensword3-gog	1102	broken_sword_3__the_sleeping_dragon	2.0.0.1	done	Broken-Sword-3	1.4.1	petch
+brokensword4-gog	1287	broken_sword_4	2.0.0.8	done	Broken-Sword-4	1.5.7	petch
+cannonfodder-gog	1604	cannon_fodder	2.0.0.3	done	Cannon-Fodder	1.4-dos_support_0.6	petch
+carmageddon-maxpack-gog	1627	carmageddon_max_pack	1.0.0.61	done	Carmageddon	1.4-dos_support_0.6	petch
+commandos-ammopack-gog	1594	commandos_ammo_pack	1.0.0	done	Commandos-Ammo-Pack	1.4.1	petch
+crusader-noregret-gog	1535	crusader_no_regret	2.0.0.8	done	Crusader-No-Regret	1.4-dos_support_0.6	petch
+crusader-noremorse-gog	1465	crusader_no_remorse	2.0.0.15	done	Crusader-No-Remorse	1.4-dos_support_0.6	petch
+deusex2-invisiblewar-gog	1419	deus_ex_invisible_war	1.0.0.6	done	Deus-Ex-2-Invisible-War	1.4.1	petch
+dukenukem3d-atomicedition-gog	1338	duke_nukem_3d_atomic_edition	2.0.0.84	done	Duke-Nukem-3D-Atomic-Edition	1.4-dos_support_0.6	petch
+dungeonkeeper2-gog	1023	dungeon_keeper_2	2.0.0.32	done	Dungeon-Keeper-2	1.4.1	petch
+painkillerblack-gog	1035	painkiller	1.0.1	done	Painkiller-Black-Edition	1.4.1	petch
+postal2-complete-gog	1305	postal_2_complete	1.0.0	done	Postal-2-Complete	1.4.1	petch
+psychonauts-gog	1340	psychonauts	1.0.0	done	Psychonauts	1.4.1	petch
+puddle-gog	1528	puddle	1.0.0.4	done	Puddle	1.5.13	petch
+questforglory-gog	1725	quest_for_glory	2.0.0.32	done	Quest-For-Glory	1.4-dos_support_0.6	petch
+realmsofarkania1&2-gog	1455	realms_of_arkania_1_2	1.0.0	done	Realms-of-Arkania-1-2	1.4-dos_support_0.6	petch
+realmsofarkania3-gog	1206	realms_of_arkania_3	1.0.0	done	Realms-Of-Arkania-3	1.4-dos_support_0.6	petch
+realmsofthehaunting-gog	1144	realms_of_the_haunting	1.0.0	done	Realms-Of-The-Haunting	1.4-dos_support_0.6	petch
+returntomysteriousisland-gog	1524	return_to_mysterious_island	1.0.0.7	done	Return-to-Mysterious-Island	1.4.1	petch
+riven-gog	1074	riven_the_sequel_to_myst	1.0.0	done	Riven	1.4.1	petch
+rollercoastertycoon2-gog	1481	rollercoaster_tycoon_2	2.0.0.6	done	Rollercoaster-Tycoon-2-Triple-Thrill-Pack	1.4.1	petch
+s2-silentstorm-gog	1560	silent_storm_gold	1.0.0.4	done	S2-Silent-Storm-Gold-Edition	1.4.1	petch
+sacredgold-gog	1177	sacred_gold	1.0.0	done	Sacred-Gold	1.5.15	petch
+sacrifice-gog	1353	sacrifice	2.0.0.3	done	Sacrifice	1.4.1	petch
+sam&max-devilsplayhouse-gog	1443	sam_max_the_devils_playhouse	1.0.0.2	done	Sam-and-Max-The-Devils-Playhouse	1.4.1	petch
+sam&max-savetheworld-gog	1509	sam_max_save_the_world	1.0.0.22	done	Sam-and-Max-Save-the-World	1.4.1	petch
+sanitarium-gog	1026	sanitarium	1.0.0	done	Sanitarium	1.5.20	petch
+screamer2-gog	1522	screamer_2	2.0.0.1	done	Screamer-2	1.4-dos_support_0.6	petch
+septerracore-gog	1041	septerra_core_legacy_of_the_creator	1.0.0	done	Septerra-Core	1.4.1	petch
+sidmeiers-alphacentauri-gog	1361	sid_meiers_alpha_centauri	2.0.2.23	done	Sid-Meiers-Alpha-Centauri	1.4.1	petch
+silver-gog	1439	silver	1.0.0.9	done	Silver	1.4.1	petch
+simonthesorcerer-gog	1105	simon_the_sorcerer	1.0.0	done	Simon-The-Sorcerer	1.4-scummvm_support	petch
+spacequest45&6-gog	1212	space_quest_4_5_6	2.0.0.13	done	Space-Quest-4-5-6	1.4-dos_support_0.6	petch
+splintercell-gog	1272	splinter_cell	2.0.0.12	done	Tom-Clancys-Splinter-Cell	1.4.1	petch
+spycraftthegreatgame-gog	1525	spycraft_the_great_game	1.0.0.5	done	Spycraft-the-Great-Game	1.4-dos_support_0.6	petch
+starflight1&2-gog	1015	starflight_1_2	2.0.0.19	done	Starflight-1-2	1.4-dos_support_0.6	petch
+startopia-gog	1527	startopia	1.0.0.8	done	Startopia	1.5.15	petch
+stilllife-gog	1259	still_life	1.0.0	done	Still-Life	1.4.1	petch
+thefeeblefiles-gog	1034	the_feeble_files	1.0.0	done	The-Feeble-Files	1.4-scummvm_support	petch
+theincrediblemachine-megapack-gog	1186	the_incredible_machine_mega_pack	1.0.0	done	The-Incredible-Machine-Mega-Pack	1.4-dos_support_0.6	petch
+theinterstate76arsenal-gog	1550	interstate76	1.0.0	done	The-Interstate-76-Arsenal	1.5.8	petch
+thelastexpress-gog	1125	last_express_the	2.0.0.9	done	The-Last-Express	1.4-dos_support_0.6	petch
+arcanum-gog	1298	arcanum_of_steamworks_and_magick_obscura	2.0.0.15	done	Arcanum	1.4.1	petch
+thewhisperedworld-gog	1309	the_whispered_world	2.0.0.15	done	The-Whispered-World	1.4.1	petch
+beyond-good&evil-gog	1263	beyond_good_and_evil	2.0.0.5	wip	Beyond-Good-and-Evil	1.5.29	petch
+desperados-gog	\N	desperados_wanted_dead_or_alive	1.0.0	wip	Desperados-Wanted-Dead-Or-Alive	1.5.5	petch
+geneforge-gog	\N	geneforge_15	2.0.0.6	wip	Geneforge-1-5	1.5.5	petch
+lionheart-gog	\N	lionheart_legacy_of_the_crusader	2.0.0.11	wip	Lionheart-Legacy-Of-The-Crusader	1.5.24	petch
+propinball-bigraceusa-gog	\N	pro_pinball_big_race_usa	1.0.0	wip	Pro-Pinball-Big-Race-USA	1.5.5	petch
+shadowgrounds-gog	1473	shadowgrounds	1.0.0	wip	Shadowgrounds	1.5.17	petch
+tombraider4&5-gog	\N	tomb_raider_the_last_revelation_chronicles	1.0.0.5	wip	Tomb-Raider-The-Last-Revelation-plus-Chronicles	1.4.1	petch
+xiii-gog	1112	xiii	2.0.0.11	wip	XIII	1.5.18	petch
+zeus&poseidon-gog	1418	zeus_poseidon	1.0.0.6	done	Zeus-and-Poseidon-Acropolis	1.4.1	petch
+zork-grandinquisitor-gog	1717	zork_grand_inquisitor	2.0.0.15	done	Zork-Grand-Inquisitor	1.4.1	petch
+themehospital-gog	1162	theme_hospital	2.0.0.5	done	Theme-Hospital	1.4-dos_support_0.6	petch
+arxfatalis-gog	1256	arx_fatalis	1.0.0	done	Arx-Fatalis	1.5.0	petch
+adventrising-gog	1027	advent_rising	1.0.0	done	Advent-Rising	1.4.1	petch
+aloneinthedark3-gog	1248	alone_in_the_dark	2.0.0.11	done	Alone-In-The-Dark-3	1.4-dos_support_0.6	petch
+anewbeginning-gog	1632	a_new_beginning	2.0.0.5	done	A-New-Beginning	1.4.1	petch
+backtothefuture-thegame-gog	1392	back_to_the_future_the_game	1.0.0.8	done	Back-To-The-Future-The-Game	1.4.1	petch
+conflictdesertstorm-gog	1529	conflict_desert_storm	1.0.0	done	Conflict-Desert-Storm	1.4.1	petch
+earthwormjim-gog	1146	earthworm_jim_1_2	2.0.0.7	done	Earthwork-Jim-1-2	1.4-dos_support_0.6	petch
+enclave-gog	1042	enclave	1.0.0	done	Enclave	1.4.1	petch
+fallout-gog	1032	fallout	2.0.0.14	done	Fallout	1.4.1	petch
+fallout2-gog	1033	fallout_2	2.0.0.12	done	Fallout-2	1.4.1	petch
+fallouttactics-gog	1139	fallout_tactics	2.0.0.8	done	Fallout-Tactics	1.4.1	petch
+farcry2-gog	1382	far_cry_2_fortunes_edition	2.0.0.8	done	Far-Cry-2-Fortunes-Edition	1.5.23	petch
+geminirue-gog	1329	gemini_rue	2.0.0.5	done	Gemini-Rue	1.4.1	petch
+ghostrecon-gog	1158	tom_clancys_ghost_recon	2.0.0.6	done	Tom-Clancys-Ghost-Recon	1.4.1	petch
+giantscitizenkabuto-gog	1061	giants_citizen_kabuto	2.0.0.3	done	Giants-Citizen-Kabuto	1.4.1	petch
+gobliiins-pack-gog	1354	gobliiins_pack	1.0.0	done	Gobliiins-Pack	1.4-scummvm_support	petch
+gothic-gog	1275	gothic	1.0.0	done	Gothic	1.4.1	petch
+groundcontrol2-gog	1016	ground_control_2_operation_exodus	1.0.0	done	Ground-Control-2	1.4.1	petch
+heroesofmightandmagic3-gog	1518	heroes_of_might_and_magic_3_complete_edition	2.0.0.16	done	Heroes-of-Might-and-Magic-3-Complete-Edition	1.5.16	petch
+jackorlandodc-gog	1062	jack_orlando_a_cinematic_adventure_dc	1.0.0	done	Jack-Orlando-Directors-Cut	1.4.1	petch
+kingpin-lifeofcrime-gog	1241	kingpin_life_of_crime	2.0.0.6	done	Kingpin-Life-Of-Crime	1.4.1	petch
+landsoflore3-gog	1497	lands_of_lore_3	2.0.0.8	done	Lands-of-Lore-3	1.4.1	petch
+mdk-gog	1514	mdk	2.0.0.25	done	MDK	1.4.1	petch
+motoracer-gog	\N	moto_racer	1.0.0	done	Moto-Racer	1.3.23	petch
+nexusthejupiterincident-gog	1513	nexus_the_jupiter_incident	1.0.0.9	done	Nexus-the-Jupiter-Incident	1.4.1	petch
+normality-gog	1280	normality	2.0.0.5	done	Normality	1.4-dos_support_0.6	petch
+abesexoddus-gog	1115	oddworld_abes_exoddus	1.0.0	done	Oddworld-Abes-Exoddus	1.4.1	petch
+stonekeep-gog	1174	stonekeep	2.0.0.10	done	Stonekeep	1.4-dos_support_0.6	petch
+syberia-gog	1172	syberia	1.0.0	done	Syberia	1.5.15	petch
+syndicate-gog	1219	syndicate	2.0.0.11	done	Syndicate	1.4-dos_support_0.6	petch
+teenagent-gog	1214	teenagent	2.0.0.12	done	Teenagent	1.4-scummvm_support	petch
+texmurphy-thepandoradirective-gog	1328	tex_murphy_the_pandora_directive	2.0.0.12	done	Tex-Murphy-The-Pandora-Directive	1.4-dos_support_0.6	petch
+thenations-gog	1233	the_nations_gold_edition	1.0.0	done	The-Nations-Gold-Edition	1.5.15	petch
+thewitcher-gog	1065	the_witcher	2.0.0.12	done	The-Witcher-Enhanced-Edition-Directors-Cut	1.6-rc4	petch
+thief-gold-gog	1445	thief_gold	2.0.0.46	done	Thief-Gold	1.4.1	petch
+torchlight-gog	1386	torchlight	1.0.2.10	done	Torchlight	1.4.1	petch
+torinspassage-gog	1436	torins_passage	2.0.0.7	done	Torins-Passage	1.4-dos_support_0.6	petch
+totalannihilation-kingdoms-gog	1391	total_annihilation_kingdoms	2.0.0.22	done	Total-Annihilation-Kingdoms-Plus-Expansion	1.4.1	petch
+twoworlds-gog	1019	two_worlds	1.0.0	done	Two-Worlds	1.5.29	petch
+tyrian2000-gog	1282	tyrian_2000	2.0.0.11	done	Tyrian-2000	1.4-dos_support_0.6	petch
+ufo-aftermath-gog	1201	ufo_aftermath	1.0.0	done	Ufo-Aftermath	1.4.1	petch
+ultima4-gog	1242	ultima_4	2.0.0.19	done	Ultima-4-Quest-Of-The-Avatar	1.4-dos_support_0.6	petch
+ultimaunderworld1&2-gog	1315	ultima_underworld_1_2	2.0.0.19	done	Ultima-Underworld-1-2	1.4-dos_support_0.6	petch
+ultimaworldsofadventure2-martiandreams-gog	1336	ultima_worlds_of_adventure_2_martian_dreams	2.0.0.17	done	Ultima-Worlds-Of-Adventure-2-Martian-Dreams	1.4-dos_support_0.6	petch
+unreal2-gog	1381	unreal_2_the_awakening_se	1.0.0	done	Unreal-2-The-Awakening-SE	1.4.1	petch
+unrealgold-gog	1335	unreal_gold	1.0.0	done	Unreal-Gold	1.4.1	petch
+urbanchaos-gog	1567	urban_chaos	1.0.0.3	done	Urban-Chaos	1.4.1	petch
+uru-gog	1218	uru_complete_chronicles	1.0.0	done	Uru-Complete-Chronicles	1.4.1	petch
+wingcommander1&2-gog	1493	wing_commander_1_2	2.0.0.18	done	Wing-Commander-1-2	1.4-dos_support_0.6	petch
+wingcommander3-gog	1554	wing_commander_3_heart_of_the_tiger	2.0.0.5	done	Wing-Commander-3-Heart-of-the-Tiger	1.4-dos_support_0.6	petch
+anotherworld-20thanniversary-gog	\N	another_world_20th_anniversary_edition	2.0.0.6	wip	Another-World-20th-Anniversary-Edition	1.5.13	petch
+darkstone-gog	1346	darkstone	1.0.0.7	wip	Darkstone	1.5.5	petch
+hitman2-silentassassin-gog	1516	hitman_2_silent_assassin	1.0.0	wip	Hitman-2-Silent-Assassin	1.4.1	petch
+screamer-gog	1165	screamer	2.0.0.12	wip	Screamer	1.4-dos_support_0.6	petch
+thelongestjourney-gog	1359	the_longest_journey	1.0.0	wip	The-Longest-Journey	1.3.32-tlj	petch
+worldsofultima-savageempire-gog	1320	worlds_of_ultima_the_savage_empire	2.0.0.26	done	Worlds-Of-Ultima-The-Savage-Empire	1.4-dos_support_0.6	petch
+thief2-gog	1250	thief_2_the_metal_age	2.0.0.18	done	Thief-2-The-Metal-Age	1.4.1	petch
+starwolves-gog	1278	star_wolves	1.0.0	done	Star-Wolves	1.5.5	petch
+abesoddysee-gog	1114	oddworld_abes_oddysee	1.0.0	done	Oddworld-Abes-Oddysee	1.5.15	petch
 \.
 
 
@@ -1658,7 +1768,6 @@ wip	script has been written, game can be enjoyed, but they are known remaining i
 wontdo	game already exists natively, or other reasons	6
 broken	game has some important issues that prevents from releasing a script. (a script may not even exist)	5
 done	install script has been written	4
-contributed	I did not write the install script myself (I probably don't own the game, too)	3
 \.
 
 
@@ -1708,6 +1817,14 @@ ALTER TABLE ONLY gogversions
 
 ALTER TABLE ONLY odcategories
     ADD CONSTRAINT odcategories_pkey PRIMARY KEY (category);
+
+
+--
+-- Name: scripters_pkey; Type: CONSTRAINT; Schema: public; Owner: petchema; Tablespace: 
+--
+
+ALTER TABLE ONLY scripters
+    ADD CONSTRAINT scripters_pkey PRIMARY KEY (name);
 
 
 --
@@ -1772,6 +1889,14 @@ ALTER TABLE ONLY scripts
 
 ALTER TABLE ONLY scripts
     ADD CONSTRAINT scripts_gogid_fkey1 FOREIGN KEY (gogid, gogversion) REFERENCES gogversions(gogid, installer_version);
+
+
+--
+-- Name: scripts_scripter_fkey; Type: FK CONSTRAINT; Schema: public; Owner: petchema
+--
+
+ALTER TABLE ONLY scripts
+    ADD CONSTRAINT scripts_scripter_fkey FOREIGN KEY (scripter) REFERENCES scripters(name);
 
 
 --

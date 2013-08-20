@@ -1,0 +1,43 @@
+#!/bin/bash
+# Date : (2013-06-29 13-44)
+# Last revision : (2013-08-12 17-38)
+# Wine version used : 1.4.1
+# Distribution used to test : Xubuntu 13.04
+# Author : Pascal Reinhard dev@ovocean.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TITLE_REQUIRED="GOG.com - Fez"
+GOGID="fez"
+PREFIX="Fez_gog"
+
+TITLE="GOG.com - Fez Patch"
+
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1757
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Polytron Corporation" "http://www.gog.com/gamecard/$GOGID" "Xodetaetl" "$PREFIX"
+
+# Verify base game existence
+if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
+    POL_SetupWindow_message "$(eval_gettext 'This is an installer for an update;\nPlease install $TITLE_REQUIRED first')" "$TITLE"
+    POL_SetupWindow_Close
+    exit 1
+fi
+
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}_patch" "5" --patch "2f1cb83247499282c8a2a71c286a0e94"
+
+POL_Wine_SelectPrefix "$PREFIX"
+
+POL_Call POL_GoG_install
+
+POL_SetupWindow_Close
+
+exit 0
