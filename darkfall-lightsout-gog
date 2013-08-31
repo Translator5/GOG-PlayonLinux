@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-03 18-24)
-# Last revision : (2013-05-08 10-23)
+# Last revision : (2013-08-31 21-54)
 # Wine version used : 1.5.3
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "XXv Productions / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "1c3084ab5532a50bf1a49094610f613e"
+POL_Call POL_GoG_setup "$GOGID" "319ba4ee4fabf94a5fac97e8f76fdbd1"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,9 +44,9 @@ POL_SetupWindow_VMS "128"
 # Doesn't hurt ;)
 POL_Wine_reboot
 
-POL_Shortcut "lightsout.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Dark Fall - Lights Out/manual.pdf"
-# C:\Program Files\GOG.com\Dark Fall - Lights Out\Readme.txt
+POL_Shortcut "DarkFall2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Dark Fall - Lights Out/manual.pdf"
+# C:\GOG Games\Dark Fall - Lights Out\Readme.txt
 
 POL_SetupWindow_Close
 
