@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-23 18-00)
-# Last revision : (2013-06-29 14-43)
+# Last revision : (2013-08-26 23-14)
 # Wine version used : 1.4.1
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -17,7 +17,6 @@ WORKING_WINE_VERSION="1.4.1"
 
 TITLE="GOG.com - Wizardry 8"
 SHORTCUT_NAME="Wizardry 8"
-SHORTCUT_NAME_2="Wizardry 8 - Display settings"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -27,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sir-Tech Software / Gamepot Inc." "http://www.gog.com/gamecard/wizardry_8" "Xodetaetl" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "a96bcc5ae3a4c184fd77227f74e4d159"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "7bd41e977ef65bfddb278e8d8ff2d60e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -61,10 +60,23 @@ POL_Wine regedit "$POL_System_TmpDir/settings.reg"
 POL_System_TmpDelete
 
 POL_Shortcut "Wiz8.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut "nglide_config.exe" "$SHORTCUT_NAME_2" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Wizardry 8/Wizardry 8 - Manual.pdf"
-POL_Shortcut_Document "$SHORTCUT_NAME_2" "$WINEPREFIX/drive_c/GOG Games/Wizardry 8/Wizardry 8 - Manual.pdf"
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+POL_LoadVar_PROGRAMFILES
+cd "\$WINEPREFIX/drive_c/GOG Games/Wizardry 8/" || exit 1
+TITLE="$TITLE"
+
+POL_Wine nglide_config.exe
+exit 0
+_EOF_
 
 exit 0
