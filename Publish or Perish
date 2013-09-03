@@ -5,6 +5,8 @@
 #   Clean code
 # [petch] (2013-07-13 08-00)
 #   Update hash
+# [petch] (2013-09-03 19-22)
+#   Update hash
 
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -40,7 +42,7 @@ if [ "$POL_SELECTED_FILE" ]; then
 else
     POL_SetupWindow_InstallMethod "LOCAL,DOWNLOAD"
     if [ "$INSTALL_METHOD" = "DOWNLOAD" ]; then
-        POL_Download "$POP_URL" "1dee7016c3fe6260e8df5f5e638ed0ed"
+        POL_Download "$POP_URL" "404aaf61cb7798a91931f6ca14f2c466"
         SetupFile="$POL_System_TmpDir/PoPSetup.exe"
     elif [ "$INSTALL_METHOD" = "LOCAL" ]; then
         POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run')" "$TITLE"
