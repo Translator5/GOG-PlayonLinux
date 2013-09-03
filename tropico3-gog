@@ -1,0 +1,128 @@
+#!/bin/bash
+# Date : (2013-08-22 23-00)
+# Last revision : (2013-09-01 21-00)
+# Wine version used : 1.4.1
+# Distribution used to test : Fedora 19
+# Author : TonyFlow
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+ 
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="tropico_3_gold_edition"
+PREFIX="Tropico3GE_gog"
+WORKING_WINE_VERSION="1.4.1"
+ 
+TITLE="GOG.com - Tropico 3 Gold Edition"
+SHORTCUT_NAME="Tropico 3 - Gold Edition"
+ 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+ 
+POL_SetupWindow_Init
+POL_SetupWindow_SetID 1805
+POL_Debug_Init
+ 
+POL_SetupWindow_presentation "$TITLE" "Kalypso / Haemimont Games" "http://www.gog.com/gamecard/$GOGID" "TonyFlow" "$PREFIX"
+ 
+POL_Call POL_GoG_setup "$GOGID" "1b04a69dbcc27102b49e11f32df3df64" "e8338935181d9e008ac1f9304e6402b4" "87df8073671e233aace5d4d52df95ea3"
+ 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+ 
+POL_Call POL_GoG_install
+ 
+# GoG work!
+Set_OS winxp
+ 
+# Install DirectX9c
+POL_Call POL_Install_d3dx9
+ 
+POL_SetupWindow_VMS "256"
+ 
+# Doesn't hurt ;)
+POL_Wine_reboot
+ 
+# Language selection for the manual shortcut
+POL_SetupWindow_menu "$(eval_gettext 'What is your preferred language?')" "$(eval_gettext 'Language')" "en: English~fr: French~de: German~it: Italian~sp: Spanish" "~"
+MAN_LANG=${APP_ANSWER%:*}
+ 
+# Configure the shortcut
+GOGPATH="$GOGROOT/Tropico 3 GOLD"
+#POL_Shortcut "Language.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
+POL_Shortcut "tropico3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
+if [ "$MAN_LANG" = "en" ]; then
+	POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGPATH/Manual.pdf"
+else
+	POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGPATH/manual_$MAN_LANG.pdf"
+fi
+ 
+ 
+# Tropico 3 was preset in full screen mode with a resolution that can be too high...
+# Furthermore full screen mode can only be enabled or disabled in the config file...
+# And unfortunately default config file is encrypted, so overwrite it with a clear one !
+# http://forum.kalypsomedia.com/showthread.php?tid=4484&pid=149693#pid149693
+mv "$GOGPATH/config.lua" "$GOGPATH/config_orig.lua"
+cat <<_EOF_ > "$GOGPATH/config.lua"
+config.IsFullscreen = 0
+config.RunUnfocused = 0
+
+config.WriteToRegistry = 1
+config.AutoOptions = 1
+config.ColorBits = 32
+config.DepthBits = 24
+config.VSync = 0
+config.RefRast = 0
+config.MeshVertexBufferChunkSizeKb = 1280
+config.MeshIndexBufferChunkSizeKb = 512
+config.MapSlotReserveSize = 12
+
+config.SoundListenerMinUpdatePeriod = 50
+config.FmodMemory = 10485760
+
+config.XInput = 0
+
+config.MaxGameObjectCount = 200000
+config.MaxGameObjectExCount = 10000
+config.MaxGameRenderObjCount = 20000
+
+config.MainMenu = 1
+
+hr.UpdateLights = 0
+_EOF_
+ 
+ 
+# Configurator script (full screen mode ; language selection)
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+ 
+cd "\$WINEPREFIX/drive_c/Program Files/GOG.com/Tropico 3 GOLD/" || exit 1
+TITLE="$TITLE"
+ 
+# Ask for full screen mode
+POL_SetupWindow_Init
+POL_SetupWindow_menu_list "\$(eval_gettext 'Full screen:')" "$TITLE" "on~off" "~"
+if [ "\$APP_ANSWER" = "on" ]; then
+	sed -i .old -e 's/^config.IsFullscreen =.*$/config.IsFullscreen = 1/' config.lua
+else
+	sed -i .old -e 's/^config.IsFullscreen =.*$/config.IsFullscreen = 0/' config.lua
+fi
+POL_SetupWindow_Close
+ 
+# Launch the language setup
+POL_Wine Language.exe
+exit 0
+_EOF_
+ 
+ 
+POL_SetupWindow_Close
+ 
+# Launch the language setup
+POL_Wine "$GOGPATH/Language.exe"
+ 
+exit 0
