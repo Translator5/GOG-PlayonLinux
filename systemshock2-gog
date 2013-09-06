@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-31)
-# Last Revision : (2013-09-06 21:31)
+# Last Revision : (2013-09-06 21:41)
 # Wine version used : 1.6
 # Distribution used to test : Debian Wheezy (Testing repositories)
 # Author : VisitntX visitntx@gmail.com
@@ -40,7 +40,7 @@ Set_OS win98
 POL_Wine_reboot
 
 POL_Shortcut "Shock2.exe" "$SHORTCUT_NAME" "" "" "Game;RolePlaying;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/System Shock 2/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/System Shock 2/Manual.pdf"
 
 POL_SetupWindow_Close
 
