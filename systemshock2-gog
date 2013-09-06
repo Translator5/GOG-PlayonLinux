@@ -1,0 +1,46 @@
+#!/bin/bash
+# Date : (2013-03-31)
+# Last Revision : (2013-03-31)
+# Wine version used : 1.6
+# Distribution used to test : Debian Wheezy (Testing repositories)
+# Author : VisitntX visitntx@gmail.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="system_shock_2"
+PREFIX="SystemShock2_gog"
+WORKING_WINE_VERSION="1.6"
+
+TITLE="GOG.com - System Shock 2"
+SHORTCUT_NAME="System Shock 2"
+
+POL_GetSetupImages "http://s20.postimg.org/3lcvm5di1/top.jpg" "http://s20.postimg.org/bctlkphnh/left.jpg" "$TITLE"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Irrational Games and Looking Glass / Night Dive Studios" "http://www.gog.com/en/gamecard/$GOGID" "VisitntX" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "d2aeff3075e5b099d353bd4610d9da3d"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+# Setting the Windows Version
+Set_OS win98
+
+# Cleaning Wine by rebooting
+POL_Wine_reboot
+
+POL_Shortcut "Shock2.exe" "$SHORTCUT_NAME" "" "" "Game;RolePlaying" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/System Shock 2/manual.pdf"
+
+POL_SetupWindow_Close
+
+exit
