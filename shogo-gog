@@ -1,0 +1,46 @@
+#!/bin/bash
+# Date : (2013-04-01)
+# Last Revision : (2013-09-07 11:09)
+# Wine version used : 1.4.1
+# Distribution used to test : Debian Wheezy (Testing repositories)
+# Author : VisitntX visitntx@gmail.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+ 
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="shogo_mobile_armor_division"
+PREFIX="ShogoMobileArmorDivision_gog"
+WORKING_WINE_VERSION="1.4.1"
+ 
+TITLE="GOG.com - Shogo: Mobile Armor Division"
+SHORTCUT_NAME="Shogo: Mobile Armor Division"
+ 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+ 
+POL_SetupWindow_Init
+POL_Debug_Init
+ 
+POL_SetupWindow_presentation "$TITLE" "Monolith Productions / Interplay" "http://www.gog.com/en/gamecard/$GOGID" "VisitntX" "$PREFIX"
+ 
+POL_Call POL_GoG_setup "$GOGID" "0197e83ae76b3a043377bcd8827073e1"
+ 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+ 
+POL_Call POL_GoG_install
+ 
+# Setting Windows Version 
+Set_OS winxp
+ 
+# Cleaning Wine by rebooting 
+POL_Wine_reboot
+ 
+POL_Shortcut "Shogo.exe" "$SHORTCUT_NAME" "" "" "Game;ActionGame;" # "$SHORTCUT_NAME.png"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Shogo - Mobile Armor Division/manual.pdf"
+ 
+POL_SetupWindow_Close
+ 
+exit
