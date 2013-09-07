@@ -1,46 +1,46 @@
 #!/bin/bash
 # Date : (2013-09-07)
-# Last Revision : (2013-09-07 09:15)
+# Last Revision : (2013-09-07 09:20)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Jessie (Testing repositories)
 # Author : VisitntX visitntx@gmail.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
- 
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
- 
+
 GOGID="clive_barkers_undying"
 PREFIX="CliveBarkersUndying_gog"
 WORKING_WINE_VERSION="1.4.1"
- 
+
 TITLE="GOG.com - Clive Barker's Undying"
 SHORTCUT_NAME="Clive Barker's Undying"
- 
+
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
- 
+
 POL_SetupWindow_Init
 POL_Debug_Init
- 
+
 POL_SetupWindow_presentation "$TITLE" "Dreamworks Interective / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "VisitntX" "$PREFIX"
- 
+
 POL_Call POL_GoG_setup "$GOGID" "70531606d4aa51d20d628f6af50cb38c"
- 
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
- 
+
 POL_Call POL_GoG_install
- 
-# Setting Windows Version 
+
+# Setting Windows Version
 Set_OS winxp
- 
-# Cleaning Wine by rebooting 
+
+# Cleaning Wine by rebooting
 POL_Wine_reboot
- 
+
 POL_Shortcut "Undying.exe" "$SHORTCUT_NAME" "" "" "Game;Action;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG.com/Clive Barker's Undying/Clive Barkers Undying - Manual.pdf"
- 
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Clive Barker's Undying/Clive Barkers Undying - Manual.pdf"
+
 POL_SetupWindow_Close
- 
+
 exit
