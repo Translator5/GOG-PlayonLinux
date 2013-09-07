@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-09-07)
-# Last Revision : (2013-09-07 09:20)
+# Last Revision : (2013-09-07 11:07)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Jessie (Testing repositories)
 # Author : VisitntX visitntx@gmail.com
@@ -38,7 +38,7 @@ Set_OS winxp
 # Cleaning Wine by rebooting
 POL_Wine_reboot
 
-POL_Shortcut "Undying.exe" "$SHORTCUT_NAME" "" "" "Game;Action;" # "$SHORTCUT_NAME.png"
+POL_Shortcut "Undying.exe" "$SHORTCUT_NAME" "" "" "Game;ActionGame;" # "$SHORTCUT_NAME.png"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Clive Barker's Undying/Clive Barkers Undying - Manual.pdf"
 
 POL_SetupWindow_Close
