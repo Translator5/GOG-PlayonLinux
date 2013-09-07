@@ -1,0 +1,67 @@
+#!/bin/bash
+# Date : (2013-09-07)
+# Last revision : (2013-09-07 23:51)
+# Wine version used : 1.4-dos_support_0.6
+# Distribution used to test : Debian Sid (Unstable)
+# Author : VisitntX
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+ 
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="i_have_no_mouth_and_i_must_scream"
+PREFIX="IHaveNoMouth_gog"
+WORKING_WINE_VERSION="1.4-dos_support_0.6"
+ 
+TITLE="GOG.com - I Have No Mouth and I Must Scream"
+SHORTCUT_NAME1="I Have No Mouth and I Must Scream"
+ 
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+ 
+POL_SetupWindow_Init
+POL_Debug_Init
+ 
+POL_SetupWindow_presentation "$TITLE" "The Dreamers Guild / Night Dive Studios" "http://www.gog.com/gamecard/$GOGID" "VisitntX" "$PREFIX"
+ 
+POL_Call POL_GoG_setup "$GOGID" "34579fdea230298f0083f714295e1efc"
+ 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+ 
+POL_Call POL_GoG_install
+ 
+ 
+cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
+manual_mount=true
+dosbox_memsize=30
+fullsresolution=original
+output=surface
+cpu_core=dynamic
+cpu_cputype=pentium_slow
+cpu_cycles=max
+mixer_rate=44100
+mixer_blocksize=1024
+mixer_prebuffer=240
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=7
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_mixer=true
+sblaster_oplmode=auto
+sblaster_oplrate=22050
+_EOFCFG_
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=normal2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+ 
+cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
+mount D "$WINEPREFIX/drive_c/GOG Games/I Have No Mouth, and I Must Scream/SCREAM" -t cdrom
+_EOFAE_
+ 
+POL_Shortcut "S.EXE" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;ActionGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/GOG Games/I Have No Mouth, and I Must Scream/I Have No Mouth and I Must Scream - Manual.pdf"
+ 
+POL_SetupWindow_Close
+ 
+exit 0 
