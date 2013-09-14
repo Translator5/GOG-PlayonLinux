@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-17 23-07)
-# Last revision : (2013-05-09 00-57)
-# Wine version used : 1.5.18
+# Last revision : (2013-09-14 09-20)
+# Wine version used : 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -9,13 +9,14 @@
 # Depend :
 
 # 1.5.18 fixes lots of issues with fog and smoke, that could otherwise only be improved by disabling GLSL
+# 1.6 fixes some maps that were rendered all black
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="xiii"
 PREFIX="XIII_gog"
-WORKING_WINE_VERSION="1.5.18"
+WORKING_WINE_VERSION="1.6"
 [ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.2.3"
 
 TITLE="GOG.com - XIII"
