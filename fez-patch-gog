@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-06-29 13-44)
-# Last revision : (2013-09-10 19-35)
+# Last revision : (2013-09-16 23-26)
 # Wine version used : 1.4.1
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
@@ -32,7 +32,7 @@ if [ "$(POL_Wine_PrefixExists $PREFIX)" != "True" ]; then
     exit 1
 fi
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}_patch" "6" --patch "2dba22de52f559b61d271713b2741b10"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}_patch" "1" --patch "5eb8e95d748efd0c61664a9daf64d3ef"
 
 POL_Wine_SelectPrefix "$PREFIX"
 
