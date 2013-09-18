@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-27 21-25)
-# Last revision : (2013-05-31 21-51)
+# Last revision : (2013-09-18 07-37)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -36,7 +36,7 @@ POL_Call POL_GoG_setup "$GOGID" "a089b132649576c086aa2c6b3f201cce"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install /nogui
 
 
 # Problem with shortizing subdirectories side-by-side :(
