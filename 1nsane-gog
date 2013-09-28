@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-03-07 20-17)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.4.1
+# Last revision : (2013-09-28 19-23)
+# Wine version used : 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="1nsane"
 PREFIX="1nsane_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6"
 
 TITLE="GOG.com - 1nsane"
 SHORTCUT_NAME="1nsane"
