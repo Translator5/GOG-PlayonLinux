@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-13 17-24)
-# Last revision : (2013-07-10 13-34)
-# Wine version used : 1.5.5
+# Last revision : (2013-10-08 21-31)
+# Wine version used : 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -16,7 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="icewind_dale_complete"
 PREFIX="IcewindDale_gog"
-WORKING_WINE_VERSION="1.5.5"
+WORKING_WINE_VERSION="1.6"
 
 TITLE="GOG.com - Icewind Dale Complete"
 SHORTCUT_NAME="Icewind Dale"
@@ -34,7 +34,7 @@ POL_Call POL_GoG_setup "$GOGID" "7a3b351fc2b48df3b4308d7d1a73a382"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
