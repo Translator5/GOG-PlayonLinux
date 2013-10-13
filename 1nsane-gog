@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-07 20-17)
-# Last revision : (2013-09-28 19-23)
+# Last revision : (2013-10-06 10-30)
 # Wine version used : 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -33,6 +33,12 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_GoG_install
 
+
+# Intro video, not really necessary
+POL_Call POL_Install_devenum
+POL_Call POL_Install_quartz
+POL_Call POL_Install_amstream
+POL_Call POL_Install_iv50
 
 # GoG work!
 Set_OS winxp
