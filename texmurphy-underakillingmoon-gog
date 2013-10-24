@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-15 21-41)
-# Last revision : (2013-05-26 18-32)
+# Last revision : (2013-10-25 00-33)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -41,6 +41,9 @@ cpu_core=auto
 cpu_cputype=auto
 cpu_cycles=max
 
+mixer_rate=22050
+mixer_blocksize=2048
+mixer_prebuffer=80
 sblaster_sbtype=sb16
 sblaster_sbbase=220
 sblaster_irq=5
@@ -49,12 +52,31 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
+gus_gus=false
+render_frameskip=1
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$GOGROOT/Under a Killing Moon/UAKM.gog" -t iso
 _EOFAE_
+
+# Select SoundBlaster MIDI by default
+if type -t POL_unbase64 > /dev/null; then
+    POL_unbase64 <<-_EOF_ > "$GOGROOT/Under a Killing Moon/CONFIG.INI"
+	W0RJR0lfQ09ORklHXQ0KQm9hcmROdW09Mw0KSW9BZGRyPTB4MjIwDQpETUE9NQ0KSW50PTUNClZv
+	bHVtZT0xMDANCg0KW01JRElfQ09ORklHXQ0KQm9hcmROdW09Mg0KSW9BZGRyPTB4Mzg4DQpEaWdp
+	RHJ1bXM9WWVzDQpWb2x1bWU9MTAwDQoNCltTWVNURU1dDQpMYXN0UGxheWVyPUVBU1kNClBhc3M9
+	MQ0KQ2hhaW5JbnQ4PVllcw0KQ2hhaW5JbnQxQz1ZZXMNCg0KW1BSRUZdDQpIaW50cz1Pbg0KQ2Fw
+	dGlvbmluZz1Pbg0KV2Fsa2luZ1NwZWVkPUZhc3QNCk1vdXNlU2Vucz1NZWQNClRpbHRDbnRybD1O
+	b3JtDQpXaW5kb3dTaXplPTcNClJlbmRlcmluZz1IaWdoDQpBdXRvNDMyeDMyND1PZmYNCkN5YmVy
+	TW91c2U9T2ZmDQpNUEVHPU9mZg0KRm9yY2VTY2FsaW5nPU9mZg0KDQpbVklERU9dDQpUcmFuc2Zl
+	clJhdGU9MjA5OTE4DQpEaXJlY3REcml2ZT0wDQpWR0FMZXR0ZXJCb3g9T2ZmDQpCcmlnaHRuZXNz
+	PTANCg0KW0RFQlVHXQ0KTG9nZmlsZT1kZWJ1Zy5sb2cNCk1vbm89T2ZmDQpEaXNwbGF5PU9mZg0K
+	UHJpbnRlcj1PZmYNClNlY3Rpb25GbGFnPU9mZg0KDQpbQ0RfTUFQXQ0KRGlzazE9RA0KRGlzazI9
+	RA0KRGlzazM9RA0KRGlzazQ9RA0KDQo=
+	_EOF_
+fi
 
 POL_Shortcut "TEX197.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Under a Killing Moon/manual.pdf"
