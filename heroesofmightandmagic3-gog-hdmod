@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-23 17-44)
-# Last revision : (2013-05-09 13-50)
+# Last revision : (2013-10-25 22-58)
 # Wine version used : 1.5.16
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -15,6 +15,7 @@
 # HoMM3 HD 3.28f.exe 7876526 "eeea22c7e7ea9488c925b6eef01bc4dc"
 # HoMM3 HD 3.43f.exe 7946385 "65c5275893c6badfd21589758cc7d46b"
 # HoMM3 HD 3.45f.exe 7947810 "e5175cc3f5936d111b5dbfcfd9f97f7c"
+# HoMM3 HD 3.57f.exe 7976623 "c529fc34f6c1bb0934f50f854ba205db"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
