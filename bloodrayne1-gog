@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-12 23-44)
-# Last revision : (2013-04-20 15-36)
+# Last revision : (2013-10-27 22-58)
 # Wine version used : 1.5.10, 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Terminal Reality / Majesco" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b9925ca60f016cf67cdfafceeb5623e7"
+POL_Call POL_GoG_setup "$GOGID" "a0004009663cad8eefafc5964b3f1c4b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -51,7 +51,6 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_OverrideDLL "" winegstreamer
 POL_Call POL_Install_devenum
 POL_Call POL_Install_quartz
-POL_Call POL_Install_ffdshow
 
 # Doesn't hurt ;)
 #POL_Wine_reboot
@@ -66,8 +65,8 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  POL_Debug_Message "waiting for
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '  "P"OL_Wine nircmd.exe waitprocess cutscene.exe'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '}'
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" '(passvideo; passvideo; "P"OL_Wine nircmd.exe win hideshow title BloodRayne; POL_Debug_Message "done with repaint")&'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/BloodRayne 1/manual.pdf"
-# C:\Program Files\GOG.com\BloodRayne 1\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/BloodRayne/manual.pdf"
+# C:\GOG Games\BloodRayne\readme.txt
 
 POL_SetupWindow_Close
 
