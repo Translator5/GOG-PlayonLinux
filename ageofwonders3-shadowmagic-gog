@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-11 20-52)
-# Last revision : (2013-04-13 03-22)
+# Last revision : (2013-10-27 16-07)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Triumph Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "85786a3a6872896adc1720536a626f05"
+POL_Call POL_GoG_setup "$GOGID" "bf8bb46a311c729feabf09602600ae97"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -57,9 +57,10 @@ rm "$POL_USER_ROOT/tmp/aow3_video.reg"
 POL_Wine_reboot
 
 POL_Shortcut "Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "AoWSMCompat" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/QuickStart.pdf"
-# C:/$PROGRAMFILES/GOG.com/Age of Wonders Shadow Magic/Readme.html
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Age of Wonders - Shadow Magic/QuickStart.pdf"
+# C:\GOG Games\Age of Wonders - Shadow Magic\Readme.html
 
+# C:\GOG Games\Age of Wonders - Shadow Magic\AoWSMSetup.exe
 #POL_Shortcut "AoWSMEd.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME - Editor.png" "" "Game;StrategyGame;"
 
 POL_Shortcut "AoWSM.exe" "$SHORTCUT_NAME (alternate)" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
