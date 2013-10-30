@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-16 20-04)
-# Last revision : (2013-05-18 18-33)
+# Last revision : (2013-10-28 22-04)
 # Wine version used : 1.5.22
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -9,9 +9,9 @@
 # Depend :
 
 # Tested with install archives:
-# Circle_of_Eight_Modpack_7.8.0_Setup.exe 192055661 "5729e38c734ab0e60296bafdebae4e0c"
+# Circle_of_Eight_Modpack_8.0.0_Standard_Edition_Setup.exe 519127559 "60ac6b4de3dcb51591646e92b3120aa7"
 # and
-# Circle_of_Eight_Modpack_7.8.0_NC_Setup.exe 404436762 "c741c1707eb29b22867ced4ff86a4d0e"
+# Circle_of_Eight_Modpack_8.0.0_New_Content_Edition_Setup.exe 519135238 "30d6a7abf3b3dc68f9e9ab9ad1480117"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -20,12 +20,12 @@ source "$PLAYONLINUX/lib/sources"
 TITLE_REQUIRED="The Temple of Elemental Evil (GoG release)"
 PREFIX="TempleElementalEvil_gog"
 WORKING_WINE_VERSION="1.5.22"
-INSTALLBIN="Circle_of_Eight_Modpack_7.7.0_NC_Setup.exe"
+INSTALLBIN="Circle_of_Eight_Modpack_8.0.0_New_Content_Edition_Setup.exe"
 
 DOWNLOAD_URL="http://www.moddb.com/mods/circle-of-eight-modpack"
 
-TITLE="GOG.com - Temple of Elemental Evil patch CO8 Modpack 7"
-SHORTCUT_NAME="Temple of Elemental Evil - Circle of Eight Modpack 7"
+TITLE="GOG.com - Temple of Elemental Evil patch CO8 Modpack"
+SHORTCUT_NAME="Temple of Elemental Evil - Circle of Eight Modpack"
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1064
