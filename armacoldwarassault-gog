@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-09 22-00)
-# Last revision : (2013-04-12 21-09)
+# Last revision : (2013-10-30 19-57)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bohemia Interactive Studio" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "299f5cb319d023b502937a10fc21fc83"
+POL_Call POL_GoG_setup "$GOGID" "0c4aceb672ef1a11b85853c2752e159b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,8 +44,8 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "ColdWarAssault.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arma Cold War Assault/manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Arma Cold War Assault/readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Arma Cold War Assault/manual.pdf"
+# C:\GOG Games\Arma Cold War Assault\readme.txt
 
 POL_SetupWindow_Close
 
@@ -58,7 +58,7 @@ export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arma Cold War Assault/" || exit 1
+cd "$GOGROOT/Arma Cold War Assault/" || exit 1
 
 POL_Wine ColdWarAssaultPreferences.exe
 
