@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-01-07 23-32)
-# Last revision : (2013-03-25 23-45)
+# Last revision : (2013-11-01 17-33)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Altar Interactive / Bohemia Interactive Studio" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d110b305c36e4f5fd2db7465c06d1303"
+POL_Call POL_GoG_setup "$GOGID" "f211bbd7c645620317cd7ecac9e73a3c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -46,21 +46,21 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot
 
 POL_Shortcut "Owar.exe" "$SHORTCUT_NAME" "" "" "Game;StrategyGame;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Original War/Manual.pdf"
-# C:\Program Files\GOG.com\Original War\readme.txt
-# C:\Program Files\GOG.com\Original War\Help\English\Index.htm
-# C:\Program Files\GOG.com\Original War\OwarDedicated.exe
-# C:\Program Files\GOG.com\Original War\GM_Editor.exe
-# C:\Program Files\GOG.com\Original War\gm_view.exe
-# C:\Program Files\GOG.com\Original War\grndsec.exe
-# C:\Program Files\GOG.com\Original War\PRCiX.exe
-# C:\Program Files\GOG.com\Original War\PakView.exe
-# C:\Program Files\GOG.com\Original War\OWP_Validator.exe
-# C:\Program Files\GOG.com\Original War\XichtEd.exe
-# C:\Program Files\GOG.com\Original War\ow_editor.exe
-# C:\Program Files\GOG.com\Original War\Utils\TitleCreator\Titulky.exe
-# C:\Program Files\GOG.com\Original War\ModLauncher.exe
-# C:\Program Files\GOG.com\Original War\Utils\MMSC\Meaaov_ModSetupCompiler.exe
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Original War/Manual.pdf"
+# C:\GOG Games\Original War\readme.txt
+# C:\GOG Games\Original War\Help\English\Index.htm
+# C:\GOG Games\Original War\OwarDedicated.exe
+# C:\GOG Games\Original War\GM_Editor.exe
+# C:\GOG Games\Original War\gm_view.exe
+# C:\GOG Games\Original War\grndsec.exe
+# C:\GOG Games\Original War\PRCiX.exe
+# C:\GOG Games\Original War\PakView.exe
+# C:\GOG Games\Original War\OWP_Validator.exe
+# C:\GOG Games\Original War\XichtEd.exe
+# C:\GOG Games\Original War\ow_editor.exe
+# C:\GOG Games\Original War\Utils\TitleCreator\Titulky.exe
+# C:\GOG Games\Original War\ModLauncher.exe
+# C:\GOG Games\Original War\Utils\MMSC\Meaaov_ModSetupCompiler.exe
 
 POL_SetupWindow_Close
 
