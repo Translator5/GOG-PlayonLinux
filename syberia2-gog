@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-27 21-44)
-# Last revision : (2013-11-01 15-55)
-# Wine version used : 1.5.15
+# Last revision : (2013-11-01 16-13)
+# Wine version used : 1.5.15, 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -15,7 +15,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="syberia_2"
 PREFIX="Syberia2_gog"
-WORKING_WINE_VERSION="1.5.15"
+WORKING_WINE_VERSION="1.6"
 
 TITLE="GOG.com - Syberia 2"
 SHORTCUT_NAME="Syberia 2"
