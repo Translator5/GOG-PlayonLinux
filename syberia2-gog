@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-27 21-44)
-# Last revision : (2013-04-05 23-31)
+# Last revision : (2013-11-01 15-55)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "648155959d414865e123c9e8d1c5f516"
+POL_Call POL_GoG_setup "$GOGID" "e69338ed64515199cf54721faea816e2"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -48,9 +48,9 @@ POL_Wine_reboot
 
 POL_Shortcut "Syberia2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Syberia2/Manual.pdf"
-# C:\Program Files\GOG.com\Syberia 2\ReadMe.txt
-# C:\Program Files\GOG.com\Syberia 2\Walkthrough.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Syberia 2/Manual.pdf"
+# C:\GOG Games\Syberia 2\ReadMe.txt
+# C:\GOG Games\Syberia 2\Walkthrough.pdf
 
 POL_SetupWindow_Close
 
