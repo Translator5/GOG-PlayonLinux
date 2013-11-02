@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-09 16-43)
-# Last revision : (2013-05-01 01-25)
+# Last revision : (2013-11-02 12-25)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -19,7 +19,6 @@ TITLE="GOG.com - Gobliiins pack"
 SHORTCUT_NAME1="Gobliiins 1"
 SHORTCUT_NAME2="Gobliins 2 - Prince Buffoon"
 SHORTCUT_NAME3="Goblins Quest 3"
-FLOPPIES="(floppies version)"
 
 POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
@@ -29,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Coktel Vision / DotEmu" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7a03488043d5c2e8a9c0c99222bd8b1f"
+POL_Call POL_GoG_setup "$GOGID" "037e5c01eb517a001d2766a33ab593d5"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -37,85 +36,47 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1/goblins1.polcfg"
+cat <<'_EOFCFG_' > "$GOGROOT/Gobliiins Pack/Gobliiins/goblins1.polcfg"
 [Gobliiins1]
 description=Gobliiins CD (v1.02/DOS/English (US))
 platform=pc
 gameid=gob
 language=us
-path=C:\Program Files\GOG.com\Gobliiins Pack\Gobliiins1\
+path=C:\GOG Games\Gobliiins Pack\Gobliiins1\
 guioptions=sndNoSubs sndNoSpeech launchNoLoad
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Gobliiins1\
+savepath=C:\GOG Games\Gobliiins Pack\Gobliiins1\
 _EOFCFG_
 
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1 Floppy/goblins1fdd.polcfg"
-[Gobliiins1fdd]
-description=Gobliiins (VGA/DOS)
-platform=pc
-gameid=gob
-language=us
-path=C:\Program Files\GOG.com\Gobliiins Pack\Gobliiins1 Floppy\
-guioptions=sndNoSubs sndNoSpeech launchNoLoad
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Gobliiins1 Floppy\
-_EOFCFG_
-
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2/goblins2.polcfg"
+cat <<'_EOFCFG_' > "$GOGROOT/Gobliiins Pack/Gobliins 2/goblins2.polcfg"
 [gobliins2]
 description=Gobliins 2 CD (v1.02/DOS/English)
 platform=pc
 gameid=gob
 language=en
-path=C:\Program Files\GOG.com\Gobliiins Pack\Gobliins2\
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Gobliins2\
+path=C:\GOG Games\Gobliiins Pack\Gobliins2\
+savepath=C:\GOG Games\Gobliiins Pack\Gobliins2\
 _EOFCFG_
 
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2 Floppy/goblins2fdd.polcfg"
-[gobliins2fdd]
-description=Gobliins 2 (DOS/English (GB))
-platform=pc
-gameid=gob
-language=gb
-path=C:\Program Files\GOG.com\Gobliiins Pack\Gobliins2 Floppy\
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Gobliins2 Floppy\
-_EOFCFG_
-
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3/goblins3.polcfg"
+cat <<'_EOFCFG_' > "$GOGROOT/Gobliiins Pack/Goblins 3/goblins3.polcfg"
 [Goblins3]
 description=Goblins Quest 3 CD (v1.02/DOS/English)
 platform=pc
 gameid=gob
 language=en
-path=C:\Program Files\GOG.com\Gobliiins Pack\Goblins3\
+path=C:\GOG Games\Gobliiins Pack\Goblins3\
 guioptions=sndNoSubs sndNoSpeech launchNoLoad
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Goblins3\
-_EOFCFG_
-
-cat <<'_EOFCFG_' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3 Floppy/goblins3fdd.polcfg"
-[Goblins3fdd]
-description=Goblins Quest 3 (DOS/English (GB))
-platform=pc
-gameid=gob
-language=gb
-path=C:\Program Files\GOG.com\Gobliiins Pack\Goblins3 Floppy\
-guioptions=sndNoSubs sndNoSpeech launchNoLoad
-savepath=C:\Program Files\GOG.com\Gobliiins Pack\Goblins3 Floppy\
+savepath=C:\GOG Games\Gobliiins Pack\Goblins3\
 _EOFCFG_
 
 
 POL_Shortcut "goblins1.polcfg" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1/Manual.pdf"
-POL_Shortcut "goblins1fdd.polcfg" "$SHORTCUT_NAME1 $FLOPPIES" "$SHORTCUT_NAME1.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliiins1/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Gobliiins Pack/Gobliiins/Manual.pdf"
 
 POL_Shortcut "goblins2.polcfg" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2/Manual.pdf"
-POL_Shortcut "goblins2fdd.polcfg" "$SHORTCUT_NAME2 $FLOPPIES" "$SHORTCUT_NAME2.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Gobliins2/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Gobliiins Pack/Gobliins 2/Manual.pdf"
 
 POL_Shortcut "goblins3.polcfg" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME3" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3/Manual.pdf"
-POL_Shortcut "goblins3fdd.polcfg" "$SHORTCUT_NAME3 $FLOPPIES" "$SHORTCUT_NAME3.png" "" "Game;LogicGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME3 $FLOPPIES" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gobliiins Pack/Goblins3/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME3" "$GOGROOT/Gobliiins Pack/Goblins 3/Manual.pdf"
 
 POL_SetupWindow_Close
 
