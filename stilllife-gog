@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-17 10-47)
-# Last revision : (2013-05-05 18-34)
+# Last revision : (2013-11-03 09-30)
 # Wine version used : 1.4.1, 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4abd4141e245b0bfc232a402a06f2876" "d630b945e2096248dba02b7c9af038e5" "6d414021e211c0cd047f211f548c445c"
+POL_Call POL_GoG_setup "$GOGID" "bee4d6e749af24c412565eb36d680d90"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,9 +43,9 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "StillLife.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Still Life/MANUAL.pdf"
-# C:\Program Files\GOG.com\Still Life\ReadMe.txt
-# C:\Program Files\GOG.com\Still Life\walkthrough.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Still Life/MANUAL.pdf"
+# C:\GOG Games\Still Life\ReadMe.txt
+# C:\GOG Games\Still Life\walkthrough.pdf
 
 POL_SetupWindow_Close
 
