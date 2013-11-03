@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-16 20-31)
-# Last revision : (2013-07-10 13-41)
+# Last revision : (2013-11-03 11-03)
 # Wine version used : 1.4.1, 1.5.4
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Altar Interactive / 1C Publishing" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c3be0ee13c14a6c2369678ed74fc5e29"
+POL_Call POL_GoG_setup "$GOGID" "6cfb5c1eb7c6e5e1882d9d31a2f9bf78"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,8 +43,8 @@ POL_SetupWindow_VMS "64"
 POL_Wine_reboot
 
 POL_Shortcut "UFO.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/UFO Aftermath/manual.pdf"
-# C:\Program Files\GOG.com\UFO Aftermath\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/UFO Aftermath/manual.pdf"
+# C:\GOG Games\UFO Aftermath\readme.txt
 
 POL_SetupWindow_Close
 
@@ -57,7 +57,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/UFO Aftermath/" || exit 1
+cd "$GOGROOT/UFO Aftermath/" || exit 1
 
 TITLE="$TITLE"
 
