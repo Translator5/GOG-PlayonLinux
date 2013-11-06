@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-08 14-46)
-# Last revision : (2013-04-01 11-34)
-# Wine version used : 1.5.15
+# Last revision : (2013-11-06 21-15)
+# Wine version used : 1.5.15, 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="oddworld_abes_oddysee"
 PREFIX="AbesOddysee_gog"
-WORKING_WINE_VERSION="1.5.15"
+WORKING_WINE_VERSION="1.6"
 
 TITLE="GOG.com - Oddworld: Abe's Oddysee"
 SHORTCUT_NAME="Oddworld: Abe's Oddysee"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Oddworld Inhabitants" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "fe35941247a04086d254640fb0140cb2"
+POL_Call POL_GoG_setup "$GOGID" "c22a44d208e524dc2760ea6ce57829d5"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -49,8 +49,8 @@ POL_SetupWindow_VMS "2"
 POL_Wine_reboot
 
 POL_Shortcut "AbeWin.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Abe's Oddysee/manual.pdf"
-# C:\Program Files\GOG.com\Abe's Oddysee\README.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Abe's Oddysee/manual.pdf"
+# C:\GOG Games\Abe's Oddysee\README.TXT
 
 POL_SetupWindow_Close
 
