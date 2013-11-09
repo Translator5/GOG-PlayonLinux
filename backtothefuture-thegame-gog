@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-09-08 18-30)
-# Last revision : (2013-04-14 18-45)
-# Wine version used : 1.4.1
+# Last revision : (2013-11-09 21-37)
+# Wine version used : 1.4.1, 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="back_to_the_future_the_game"
 PREFIX="BackToTheFutureTG_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6"
 
 TITLE="GOG.com - Back To The Future The Game"
 SHORTCUT_NAME1="Back To The Future E1: It's About Time!"
@@ -30,14 +30,14 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "71def52be8380f71f38407d1e27f811f"
+POL_Call POL_GoG_setup "$GOGID" "cefb15d152cc958c0475bbfea6166a93"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_Install_d3dx9_36
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
