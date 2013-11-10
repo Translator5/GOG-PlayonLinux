@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 19-15)
-# Last revision : (2013-05-01 22-25)
+# Last revision : (2013-11-10 15-30)
 # Wine version used : 1.4, 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sierra / Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "cb050eca9a1bb075eef84be60ac01316"
+POL_Call POL_GoG_setup "$GOGID" "25c84b10725243822c81650124a0f303"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
@@ -52,15 +52,21 @@ rm "$POL_USER_ROOT/tmp/cdrom.reg"
 
 # There's lot of issues with GK3's Direct3D, http://bugs.winehq.org/show_bug.cgi?id=26566
 # Force DirectDraw + software rendering
-POL_Wine_Direct3D "DirectDrawRenderer" "gdi"
+cat <<_EOFINI_ > "$POL_USER_ROOT/tmp/gk3software.reg"
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Sierra On-Line\Gabriel Knight 3\Engine]
+"Rasterizer"="software"
+_EOFINI_
+POL_Wine regedit.exe "$POL_USER_ROOT/tmp/gk3software.reg"
+rm "$POL_USER_ROOT/tmp/gk3software.reg"
 
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "GK3.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Gabriel Knight 3/Manual.pdf"
-# C:\Program Files\GOG.com\Gabriel Knight 3\Readme.txt
-# C:\Program Files\GOG.com\Gabriel Knight 3\Customer_support.htm
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Gabriel Knight 3/Manual.pdf"
+# C:\GOG Games\Gabriel Knight 3\readme.txt
 
 POL_SetupWindow_Close
 
