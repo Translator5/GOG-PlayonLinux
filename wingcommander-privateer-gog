@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-13 20-29)
-# Last revision : (2013-05-09 08-02)
+# Last revision : (2013-11-14 19-50)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -32,7 +32,7 @@ POL_Call POL_GoG_setup "$GOGID" "53c77040cba69a642ec1302b5cf231b5"
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
