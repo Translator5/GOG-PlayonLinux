@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-09 11-21)
-# Last revision : (2013-04-25 22-07)
+# Last revision : (2013-11-16 19-12)
 # Wine version used : 1.4.1, 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -31,7 +31,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/en/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "56b98da8555dbd7cb4d71bac32596553"
+POL_Call POL_GoG_setup "$GOGID" "f709bc972d3caff2a83d9f61dc0f6271"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
