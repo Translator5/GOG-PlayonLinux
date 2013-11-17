@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-22 21-59)
-# Last revision : (2013-05-02 23-33)
+# Last revision : (2013-11-17 05-11)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,26 +26,37 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Gremlin Interactive Ltd. / Funbox Media" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "46ca37445be06ce05812795be922451f"
+POL_Call POL_GoG_setup "$GOGID" "756846a19ce823193867bd943382303a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 render_aspect=true
 dosbox_memsize=16
+mixer_rate=22050
+mixer_blocksize=2048
+mixer_prebuffer=80
+sblaster_sbtype=sb16
+sblaster_sbbase=220
+sblaster_irq=7
+sblaster_dma=1
+sblaster_hdma=5
+sblaster_mixer=true
+sblaster_oplmode=auto
+sblaster_oplrate=22050
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 # The game expects itself in C:\ROTH and CDROM in C:\DATA
-mv "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/"{ROTH,DATA,mapper.txt} "$WINEPREFIX/drive_c/"
+mv "$GOGROOT/Realms of the Haunting/"{ROTH,DATA,mapper.txt} "$WINEPREFIX/drive_c/"
 
 POL_Shortcut "ROTH/ROTH.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "@roth.res" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of the Haunting/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Realms of the Haunting/Manual.pdf"
 
 POL_SetupWindow_Close
 
