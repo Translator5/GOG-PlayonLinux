@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2013-05-08 04-48)
+# Last revision : (2013-11-17 22-04)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "16f0ec3760c68d646abc6671f657361a" "df8a0031ac21f2efe93da1440d0fb024" "27197e9622d4ee349a8f4766f949426b"
+POL_Call POL_GoG_setup "$GOGID" "5d687266db960a09886c76ff34388288" "2cfdbdbaf61663967d6748530d648337" "b622b451b73e4a8ed899253d575668dc"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -32,10 +32,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-# "SVGA videocard" (?)
-POL_SetupWindow_VMS "2"
-
-cat <<_EOFCFG_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/feeble.polcfg"
+cat <<_EOFCFG_ > "$GOGROOT/The Feeble Files/feeble.polcfg"
 [feeble]
 description=The Feeble Files
 platform=windows
@@ -44,7 +41,7 @@ language=en
 _EOFCFG_
 
 POL_Shortcut "feeble.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Feeble Files/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Feeble Files/manual.pdf"
 
 POL_SetupWindow_Close
 
