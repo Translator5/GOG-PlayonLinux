@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-24 21:30)
-# Last revision : (2013-03-26 00-03)
+# Last revision : (2013-11-17 11-39)
 # Wine version used : 1.5.5
 # Distribution used to test : OpenSuSE 12.2 64-bit
 # Author : hmdai (Based on Deponia DC script by Kweepeer)
@@ -25,12 +25,12 @@ POL_SetupWindow_SetID 1478
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "hmdai" "$PREFIX"
-POL_Call POL_GoG_setup "$GOGID" "43cf1d1cc74e3087f016f5a05a393598" "fcef6232dd11388d09a56b32231f63e5" "9d666731082fb981b0682e049af83980" "6cff6ce263dab6bf67d9d78c3524afda" "5d044e334a7b3ffb05982ba3957c5ed0"
+POL_Call POL_GoG_setup "$GOGID" "d1c375ba007b7ed6574a16cca823258a" "0c9ea69bdb3e2c66d13f2d27812279b6" "d87f0693751554c1d382f770202e8c45" "ef662b59635829ed4505f6d7272e4bb7" "555d8af3bb598ed4c481e3e3d63b0221"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 # GoG work!
 Set_OS winxp
@@ -44,8 +44,7 @@ POL_Shortcut "satinav.exe" "$SHORTCUT_NAME" "" "" "Game;AdventureGame;"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'unset SDL_AUDIODRIVER'
 
 # Create a tmp directory for the game to create thumbnail image for save game
-cd "$WINEPREFIX/drive_c/"
-mkdir "tmp"
+mkdir "$WINEPREFIX/drive_c/tmp"
 
 POL_SetupWindow_Close
 
