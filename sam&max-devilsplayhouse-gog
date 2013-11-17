@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-21 18-24)
-# Last revision : (2013-05-08 05-07)
+# Last revision : (2013-11-17 19-34)
 # Wine version used : 1.4.1, 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,13 +30,14 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "05790571367c127748613d99468bc037"
+POL_Call POL_GoG_setup "$GOGID" "cb4ecc2a12d1bd426c909318b2228f0f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
 POL_Call POL_Install_d3dx9_36
 
+# "/nogui" doesn't look required, did they fix something?
 POL_Call POL_GoG_install
 
 
