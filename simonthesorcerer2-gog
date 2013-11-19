@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 22-47)
-# Last revision : (2013-05-01 14-53)
+# Last revision : (2013-11-19 21-45)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b600e7eeff2f68b8f9d151b92af99a97"
+POL_Call POL_GoG_setup "$GOGID" "f7a5f3a620d951d0d4f9c9bdd0e388a9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -36,7 +36,7 @@ POL_Call POL_GoG_install
 
 POL_SetupWindow_VMS "2"
 
-cat <<_EOFCFG_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Simon the Sorcerer 2/simon2.polcfg"
+cat <<_EOFCFG_ > "$GOGROOT/Simon the Sorcerer 2/simon2.polcfg"
 [simon2]
 description=Simon the Sorcerer 2
 mute=false
@@ -47,7 +47,7 @@ guioptions=launchNoLoad
 _EOFCFG_
 
 POL_Shortcut "simon2.polcfg" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Simon the Sorcerer 2/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Simon the Sorcerer 2/manual.pdf"
 
 POL_SetupWindow_Close
 
