@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-24 16-52)
-# Last revision : (2013-05-05 20-46)
+# Last revision : (2013-11-20 21-37)
 # Wine version used : 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "X-bow Software / 1C Publishing" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bf212e844f791538696e8518bad5b7c8"
+POL_Call POL_GoG_setup "$GOGID" "2363cf6ef0591fdba43b3a3fb8ec324f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -40,13 +40,13 @@ Set_OS winxp
 POL_SetupWindow_VMS "32"
 
 # Only d3dx9_36 matters since 1.5.5
-POL_Call POL_Install_d3dx9
+POL_Call POL_Install_d3dx9_36
 
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "StarWolves.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Star Wolves/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Star Wolves/manual.pdf"
 
 POL_SetupWindow_Close
 
