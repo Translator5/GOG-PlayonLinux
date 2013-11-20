@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-13 19-32)
-# Last revision : (2013-07-10 13-27)
+# Last revision : (2013-11-20 19-06)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Arkane Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "0dd8ec13c10146db1a741258b624040a"
+POL_Call POL_GoG_setup "$GOGID" "c41bd10c25c0e87f07666f359ef01c17"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -45,23 +45,23 @@ POL_SetupWindow_VMS "32"
 POL_Wine_DirectInput "MouseWarpOverride" "force"
 
 # Disable forcegdi, remove keyboard settings to revert to defaults
-cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+cat <<'_EOFCFG_' | perl -pe 's/\n/\r\n/' > "$GOGROOT/Arx Fatalis/cfg_default.ini"
 [VIDEO]
 resolution=800x600
 full_screen=1
 bump=1
 _EOFCFG_
 
-cat <<_EOFFUNC_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/arx_funcs"
+cat <<_EOFFUNC_ > "$GOGROOT/Arx Fatalis/arx_funcs"
 
 read_arx_settings () {
   [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_arx_settings: \$WINEPREFIX must be set'
-  perl -ne 'print "RESOLUTION=\$1\n" if /^resolution=(\d+x\d+)/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+  perl -ne 'print "RESOLUTION=\$1\n" if /^resolution=(\d+x\d+)/' "$GOGROOT/Arx Fatalis/cfg_default.ini"
 }
 
 write_arx_settings () {
   [ -z "\$WINEPREFIX" ] && POL_Debug_Fatal 'read_arx_settings: \$WINEPREFIX must be set'
-  perl -i.bak -pe 's/^resolution=\d+x\d+/resolution='"\$RESOLUTION"'/' "\$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/cfg_default.ini"
+  perl -i.bak -pe 's/^resolution=\d+x\d+/resolution='"\$RESOLUTION"'/' "$GOGROOT/Arx Fatalis/cfg_default.ini"
 }
 
 _EOFFUNC_
@@ -70,9 +70,9 @@ _EOFFUNC_
 POL_Wine_reboot
 
 POL_Shortcut "ARX.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Arx Fatalis/manual.pdf"
-# C:\Program Files\GOG.com\Arx Fatalis\readme.txt
-# C:\Program Files\GOG.com\Arx Fatalis\map.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Arx Fatalis/manual.pdf"
+# C:\GOG Games\Arx Fatalis\readme.txt
+# C:\GOG Games\Arx Fatalis\map.pdf
 
 POL_SetupWindow_Close
 
@@ -85,7 +85,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Arx Fatalis/" || exit 1
+cd "$GOGROOT/Arx Fatalis/" || exit 1
 
 TITLE="$TITLE"
 
