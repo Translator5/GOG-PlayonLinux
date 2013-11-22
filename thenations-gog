@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-28 00-58)
-# Last revision : (2013-05-04 19-11)
+# Last revision : (2013-11-18 00-38)
 # Wine version used : 1.5.5, 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,10 +26,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "JoWooD Productions Software / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d4ae4d4fd94a11f8730fb8d34f161967"
+POL_Call POL_GoG_setup "$GOGID" "c5a025eab7d9516d32a2a3ac4dd3e96b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -43,8 +46,8 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "game.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Nations Gold/manual.pdf"
-# C:\Program Files\GOG.com\The Nations Gold\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Nations Gold/manual.pdf"
+# C:\GOG Games\The Nations Gold\readme.txt
 
 POL_SetupWindow_Close
 
