@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-08 18-17)
-# Last revision : (2013-07-10 13-37)
+# Last revision : (2013-11-24 20-59)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Running With Scissors" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "16882025e2654e0e4aa141b10c8fe91d"
+POL_Call POL_GoG_setup "$GOGID" "df254b8b64283c0365f68612d9fbb519"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -46,14 +46,14 @@ POL_Wine_DirectInput "MouseWarpOverride" "force"
 POL_Wine_reboot
 
 # Oh joy, the game and the extension binaries share the same name!
-POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System/Postal2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/Manual.pdf"
-# C:\Program Files\GOG.com\Postal 2 Share The Pain/Help.htm
-# C:\Program Files\GOG.com\Postal 2 Share The Pain/System/UnrealEd.exe -safe
+POL_Shortcut "GOG Games/Postal 2 Share The Pain/System/Postal2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;ActionGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Postal 2 Share The Pain/Manual.pdf"
+# C:\GOG Games\Postal 2 Share The Pain\Help.htm
+# C:\GOG Games\Postal 2 Share The Pain\System\UnrealEd.exe
 
-POL_Shortcut "$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/ApocalypseWeekend/System/postal2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/Apocalypse Weekend Manual.pdf"
-# C:\Program Files\GOG.com\Postal 2 Share The Pain/ApocalypseWeekend/System/UnrealEd.exe
+POL_Shortcut "GOG Games/Postal 2 Share The Pain/ApocalypseWeekend/System/postal2.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;ActionGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Postal 2 Share The Pain/Apocalypse Weekend Manual.pdf"
+# C:\GOG Games\Postal 2 Share The Pain\ApocalypseWeekend\System\UnrealEd.exe
 
 POL_SetupWindow_Close
 
@@ -65,7 +65,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/System" || exit 1
+cd "$GOGROOT/Postal 2 Share The Pain/System" || exit 1
 TITLE="$TITLE"
 POL_Wine Postal2.exe -safe
 exit 0
@@ -79,7 +79,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Postal 2 Share The Pain/ApocalypseWeekend/System" || exit 1
+cd "$GOGROOT/Postal 2 Share The Pain/ApocalypseWeekend/System" || exit 1
 TITLE="$TITLE"
 POL_Wine postal2.exe -safe
 exit 0
