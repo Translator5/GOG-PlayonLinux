@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-10 12-39)
-# Last revision : (2013-07-10 13-39)
+# Last revision : (2013-11-24 10-48)
 # Wine version used : 1.5.15
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "ASCARON Entertainment / Strategy First" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f8392a03dd78739ede7169ca77ddfd8d"
+POL_Call POL_GoG_setup "$GOGID" "bd6a129a2c7ac6db45057e2db84318de"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # Required for videos http://bugs.winehq.org/show_bug.cgi?id=16250
@@ -48,12 +48,12 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "Sacred.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Sacred Gold/Manual.pdf"
-# C:\Program Files\GOG.com\Sacred Gold\Readme.html
-# C:\Program Files\GOG.com\Sacred Gold\Map.pdf
-# C:\Program Files\GOG.com\Sacred Gold\Quickstart.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Sacred Gold/Manual.pdf"
+# C:\GOG Games\Sacred Gold\Readme.html
+# C:\GOG Games\Sacred Gold\Map.pdf
+# C:\GOG Games\Sacred Gold\Quickstart.pdf
 
-# C:\Program Files\GOG.com\Sacred Gold\GameServer.exe
+# C:\GOG Games\Sacred Gold\GameServer.exe
 
 POL_SetupWindow_Close
 
@@ -66,7 +66,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Sacred Gold/" || exit 1
+cd "$GOGROOT/Sacred Gold/" || exit 1
 
 TITLE="$TITLE"
 
