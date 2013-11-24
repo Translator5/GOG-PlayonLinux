@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-02-25 21-49)
-# Last revision : (2013-04-06 11-03)
+# Last revision : (2013-11-24 22-50)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -30,7 +30,7 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
 
-POL_Call POL_GoG_setup "$GOGID" "25d859e83b0b7e6115da5e36eb469dd7"
+POL_Call POL_GoG_setup "$GOGID" "7f3c464722c4d14a48b2580b69e9523c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -59,7 +59,7 @@ convert_videos () {
     local DIR="$1"
     shift
 
-    cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos Ammo Pack/$DIR" || POL_Debug_Fatal "Could not find game directory"
+    cd "$GOGROOT/Commandos Ammo Pack/$DIR" || POL_Debug_Fatal "Could not find game directory"
     [ -d Cinepak ] || mkdir Cinepak
     mv *.avi Cinepak/
 
@@ -75,8 +75,8 @@ POL_SetupWindow_pulsebar "$(eval_gettext 'Converting videos...')" "$TITLE"
 FILES=0
 TOTAL=18
 
-convert_videos VIDEO/  H_Afri.avi H_Intro.avi H_Norm.avi H_Noru.avi H_Rhin.avi H_Vict.avi Tut_1.avi Tut_2.avi Tut_3.avi Tut_4.avi Tut_5.avi Tut_6.avi Tut_7.avi
-convert_videos coman_mp/VIDEO/ 1_v.avi 2_v.avi 3_v.avi 4_v.avi h_intro.avi
+convert_videos 'Commandos 1/VIDEO/'  H_Afri.avi H_Intro.avi H_Norm.avi H_Noru.avi H_Rhin.avi H_Vict.avi Tut_1.avi Tut_2.avi Tut_3.avi Tut_4.avi Tut_5.avi Tut_6.avi Tut_7.avi
+convert_videos 'Commandos 1 Beyond The Call Of Duty/VIDEO/' 1_v.avi 2_v.avi 3_v.avi 4_v.avi h_intro.avi
 
 # "3D DirectX7"?
 POL_SetupWindow_VMS "4"
@@ -88,12 +88,12 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot
 
 POL_Shortcut "comandos.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos Ammo Pack/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Commandos Ammo Pack/Commandos 1/Manual.pdf"
 
 POL_Shortcut "coman_mp.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos Ammo Pack/coman_mp/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Commandos Ammo Pack/Commandos 1 Beyond The Call Of Duty/Manual.pdf"
 
-# C:\Program Files\GOG.com\Commandos Ammo Pack\coman_mp\mpserver.exe
+# C:\GOG Games\Commandos Ammo Pack\Commandos 1 Beyond The Call Of Duty\mpserver.exe
 
 POL_SetupWindow_Close
 
