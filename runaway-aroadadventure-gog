@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-01 00-01)
-# Last revision : (2013-07-10 13-39)
+# Last revision : (2013-11-25 22-00)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pendulo Studio / Focus Home Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "174444af2422d4375d8ea4f2f8d54cbd"
+POL_Call POL_GoG_setup "$GOGID" "7c753c1f393dc8f556677eaef91a6999"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,12 +44,18 @@ POL_SetupWindow_VMS "2"
 # Without this, some sounds (car trunk slam for example) are missing
 POL_Call POL_Install_dsound
 
+# Avoid a crash on first run
+cat <<_EOFINI_ > "$WINEPREFIX/drive_c/windows/RUNAWAY.INI"
+[GUIDS]
+VIDEO={0,0,0,0,0,0,0,0,0,0,0}
+_EOFINI_
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "Runaway.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Runaway - A Road Adventure/manual.pdf"
-# C:\Program Files\GOG.com\Runaway - A Road Adventure\README.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Runaway - A Road Adventure/manual.pdf"
+# C:\GOG Games\Runaway - A Road Adventure\README.TXT
 
 POL_SetupWindow_Close
 
@@ -62,7 +68,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Runaway - A Road Adventure/" || exit 1
+cd "$GOGROOT/Runaway - A Road Adventure/" || exit 1
 
 TITLE="$TITLE"
 
@@ -70,9 +76,5 @@ POL_Wine "Video Card Setup.exe"
 
 exit 0
 _EOF_
-
-# If the configurator was never launched, the game will call it... then crash
-# Second time around will be ok, but better call it ourselves :p
-bash "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
 
 exit 0
