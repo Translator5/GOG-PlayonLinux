@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-18 16-10)
-# Last revision : (2013-03-30 10-27)
+# Last revision : (2013-11-26 20-44)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.04 LTS
 # Author : Jan Nytra jannytra@seznam.cz
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Joymania Development / TopWare Interactive " "http://www.gog.com/gamecard/$GOGID" "Jan Nytra" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "6f7212f523a94aa606f39eaf2f3116b8"
+POL_Call POL_GoG_setup "$GOGID" "b8c40001f25a429f2e35d8a216e74ced"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,8 +44,8 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "KM_TPR.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Knights and Merchants TPR/manual.pdf"
-# C:\Program Files\GOG.com\Knights and Merchants TPR/readme.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Knights and Merchants - The Peasants Rebellion/manual.pdf"
+# C:\GOG Games\Knights and Merchants - The Peasants Rebellion/readme.pdf
 
 POL_SetupWindow_Close
 
