@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-07 21-26)
-# Last revision : (2013-04-21 20-37)
+# Last revision : (2013-11-26 18-51)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "People Can Fly / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "04779d4d56e828daff8f82ba239d96a3" "7db45f6fb84caa50f4b4679a63f30418" "23f6f6b2078b5b909eaacff0a8238586"
+POL_Call POL_GoG_setup "$GOGID" "c433bc586d932316d15a66d9735fba15" "d726f29f968a85f148d8109b8aac46e2" "d246d7b52caf147adbfb9df5550e87b2" "c2d78223714c48899e9812d93f4648db"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -49,12 +49,12 @@ POL_SetupWindow_checkbox_list "$(eval_gettext 'What extra shortcuts should be cr
 SHORTCUTS="$APP_ANSWER"
 
 POL_Shortcut "Painkiller.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/ReadMe.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Painkiller Black/Docs/Manual.pdf"
+# C:\GOG Games\Painkiller Black\Docs\ReadMe.txt
 
 if echo "$SHORTCUTS" | grep -q "$LNG_EDITOR"; then
     POL_Shortcut "PainEditor.exe" "$SHORTCUT_EDITOR" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-    POL_Shortcut_Document "$SHORTCUT_EDITOR" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Painkiller Black/Docs/Pain Engine.pdf"
+    POL_Shortcut_Document "$SHORTCUT_EDITOR" "$GOGROOT/Painkiller Black/Docs/Pain Engine.pdf"
 fi
 
 if echo "$SHORTCUTS" | grep -q "$LNG_DS"; then
