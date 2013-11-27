@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-08-25 18-58)
-# Last revision : (2013-04-15 22-03)
+# Last revision : (2013-11-27 23-32)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -28,10 +28,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Epic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c3533fb12a6ddbbd213c2a5ca2a13f65"
+POL_Call POL_GoG_setup "$GOGID" "3b157d88da108e4cea15b1d35ff06c5a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -52,8 +55,8 @@ POL_Wine_reboot
 
 POL_Shortcut "Unreal2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME" 'taskset -pc 0 $$'
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal 2 – The Awakening SE/Help/Manual.pdf"
-# C:\Program Files\GOG.com\Unreal 2 – The Awakening SE\Help/Readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Unreal 2 – The Awakening Special Edition/Help/Manual.pdf"
+# C:\GOG Games\Unreal 2 – The Awakening Special EditionE\Help\Readme.txt
 
 POL_SetupWindow_Close
 
