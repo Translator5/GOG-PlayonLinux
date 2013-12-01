@@ -1,19 +1,23 @@
 #!/bin/bash
 # Date : (2012-02-19 00-28)
-# Last revision : (2013-05-12 15-46)
-# Wine version used : 1.5.18
+# Last revision : (2013-11-30 20-48)
+# Wine version used : 1.5.18, 1.6.1, 1.7.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# 1.6.x better performance
+# 1.7.x health gauge
+# 1.7.0-1.7.5 no music
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_witcher"
 PREFIX="TheWitcher_gog"
-WORKING_WINE_VERSION="1.5.18"
+WORKING_WINE_VERSION="1.7.6"
 
 TITLE="GOG.com - The Witcher Enhanced Edition Directors Cut"
 SHORTCUT_NAME="The Witcher Enhanced Edition DC"
@@ -36,7 +40,9 @@ POL_Call POL_GoG_install "/nogui"
 # GoG work!
 Set_OS winxp
 
+# Fix black screen
 POL_Call POL_install_d3dx9_36
+# Fix large dark polygons, (in rain and more)
 POL_Call POL_install_d3dx9_43
 
 POL_SetupWindow_VMS "128"
@@ -45,8 +51,8 @@ POL_SetupWindow_VMS "128"
 POL_Wine_reboot
 
 POL_Shortcut "launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/The Witcher Enhanced Edition Directors Cut/manual.pdf"
-# C:\GOG Games\The Witcher Enhanced Edition Directors Cut\readme.rtf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/The Witcher Enhanced Edition Director's Cut/manual.pdf"
+# C:\GOG Games\The Witcher Enhanced Edition Director's Cut\readme.rtf
 
 POL_SetupWindow_Close
 
