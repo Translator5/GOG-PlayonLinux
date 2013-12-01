@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-03-17 21-44)
-# Last revision : (2013-03-25 23-59)
+# Last revision : (2013-12-01 20-47)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Stainless Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "30a437fa468553e16d3fd5e5a6716193"
+POL_Call POL_GoG_setup "$GOGID" "4335ffd9d9d9bcdcfa995540e8731028"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -59,14 +59,14 @@ gus_gus=false
 _EOFCFG_
 #[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Carmageddon/CARMA/CARMA.BAT"
+cat <<_EOFBAT_ > "$GOGROOT/Carmageddon/CARMA/CARMA.BAT"
 @ECHO OFF
 imgmount D "GAME.DAT" -t cdrom -fs iso
 VOODO2C.EXE -novoodoo
 EXIT
 _EOFBAT_
 
-cat <<_EOFBAT_ > "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Carmageddon/CARSPLAT/CARSPLAT.BAT"
+cat <<_EOFBAT_ > "$GOGROOT/Carmageddon/CARSPLAT/CARSPLAT.BAT"
 @ECHO OFF
 imgmount D "SPLAT.DAT" -t cdrom -fs iso
 VOODO2C.EXE -novoodoo
