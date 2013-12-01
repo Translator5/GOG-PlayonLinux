@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-16 17-38)
-# Last revision : (2013-03-31 17-09)
+# Last revision : (2013-12-01 19-40)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,12 +27,15 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "9499377e9b329067218f8164ab5b455e" "cfd007eb9a27eea5aad3dbb72909aea9" "360d4b8dcc7b08874d7e92dc6596a496"
+POL_Call POL_GoG_setup "$GOGID" "d6a7a1edbfbd67c299bd6a06ad12213d" "1edd8f72249d94e1990ec578ac49b1d1" "de6ec7365d8044bad1f6325d60103e66"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
+
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
@@ -44,12 +47,12 @@ POL_SetupWindow_VMS "32"
 POL_Wine_reboot
 
 POL_Shortcut "comm2.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos 2 and 3/Commandos 2 - Men of Courage/Manual.PDF"
-# C:\Program Files\GOG.com\Commandos 2 and 3\Commandos 2 - Men of Courage\Readme.rtf
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Commandos 2 and 3/Commandos 2/Manual.PDF"
+# C:\GOG Games\Commandos 2 and 3\Commandos 2\Readme.rtf
 
 POL_Shortcut "Commandos3.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Commandos 2 and 3/Commandos 3 - Destination Berlin/manual.pdf"
-# C:\Program Files\GOG.com\Commandos 2 and 3\Commandos 3 - Destination Berlin\Readme.rtf
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Commandos 2 and 3/Commandos 3/manual.pdf"
+# C:\GOG Games\Commandos 2 and 3\Commandos 3\Readme.rtf
 
 POL_SetupWindow_Close
 
