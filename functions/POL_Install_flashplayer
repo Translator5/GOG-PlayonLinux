@@ -1,0 +1,20 @@
+#!/bin/bash
+# Date : (2010-14-11 21-00)
+# Last revision : (2012-05-18 06-42)
+# Only For : http://www.playonlinux.com
+# RealName: Flash Player 
+
+# CHANGELOG
+# [Quentin PÂRIS] (2012-11-21 18-19)
+#   Update script (link broken)
+
+# [SuperPlumus] (2012-05-18 06-42)
+#   Update script (broken)
+ 
+cd "$POL_USER_ROOT/ressources"
+POL_Download_Resource "http://fpdownload.macromedia.com/get/flashplayer/pdc/11.5.502.110/install_flash_player.exe" "fb771847e6a9a05bbd0da6fada33d946"
+
+POL_Wine_WaitBefore "Flash Player"
+POL_Wine "install_flash_player.exe"
+POL_Wine_WaitExit "Flash Player"
+
