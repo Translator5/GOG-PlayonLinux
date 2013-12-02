@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-07-29 16-18)
-# Last revision : (2013-04-13 12-06)
+# Last revision : (2013-12-02 23-13)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,10 +27,13 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Epic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7a270229d28a44089030150bd9f3a1e1"
+POL_Call POL_GoG_setup "$GOGID" "e19566e9bbda7029efcc179b8dd39d61"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -41,11 +44,11 @@ cd "$POL_USER_ROOT/tmp" || POL_Debug_Fatal "Can't find temp directory!"
 # Taken from http://www.oldunreal.com/specialpatches.html
 POL_Download "http://files.playonlinux.com/$PATCH_ARCHIVE" "455dc59d939cff53cf3c28b9d7dbc87d"
 
-POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGLDrv.dll" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/OpenGlDrv.dll"
-POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGlDrv.int" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/OpenGlDrv.int"
-POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "Unreal.exe" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/Unreal.exe"
-POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "UCC.exe" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/UCC.exe"
-POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "Setup.exe" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/Setup.exe"
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGLDrv.dll" "$GOGROOT/Unreal Gold/System/OpenGlDrv.dll"
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGlDrv.int" "$GOGROOT/Unreal Gold/System/OpenGlDrv.int"
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "Unreal.exe" "$GOGROOT/Unreal Gold/System/Unreal.exe"
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "UCC.exe" "$GOGROOT/Unreal Gold/System/UCC.exe"
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "Setup.exe" "$GOGROOT/Unreal Gold/System/Setup.exe"
 #perl -i.bak -pe 's/^GameRenderDevice=[0-9A-Za-z.]*/GameRenderDevice=OpenGLDrv.OpenGLRenderDevice/' "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/System/Unreal.ini"
 
 # GoG work!
@@ -57,8 +60,10 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "Unreal.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Unreal Gold/Manual/Manual.pdf"
-# C:\Program Files\GOG.com\Unreal Gold\Help\ReadMe.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Unreal Gold/Manual/Manual.pdf"
+# C:\GOG Games\Unreal Gold\Help\ReadMe.txt
+
+# C:\GOG Games\Unread Gold\System\UnrealEd.exe
 
 POL_SetupWindow_message "$(eval_gettext 'On first run the game will autodetect available renderers.\nIt is likely that you will get better performance out of the OpenGL renderer.')" "$TITLE"
 
