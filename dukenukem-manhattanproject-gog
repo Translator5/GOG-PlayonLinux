@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-22 21-29)
-# Last revision : (2013-07-10 13-32)
+# Last revision : (2013-12-03 22-56)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment / Apogee Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "5b7cfb6e669ee067f2226900fbeec546"
+POL_Call POL_GoG_setup "$GOGID" "8558b2058ba51fc08fa39ea2dbbe5f0e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,8 +43,8 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "DukeNukemMP.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Duke Nukem - Manhattan Project/manual.pdf"
-# C:\Program Files\GOG.com\Duke Nukem - Manhattan Project/Readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Duke Nukem - Manhattan Project/manual.pdf"
+# C:\GOG Games\Duke Nukem - Manhattan Project/Readme.txt
 
 POL_SetupWindow_Close
 
@@ -57,7 +57,7 @@ export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Duke Nukem - Manhattan Project/" || exit 1
+cd "$GOGROOT/Duke Nukem - Manhattan Project/" || exit 1
 
 TITLE="$TITLE"
 
