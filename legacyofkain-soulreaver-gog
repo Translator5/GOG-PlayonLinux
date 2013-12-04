@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-09 19-57)
-# Last revision : (2013-04-16 22-35)
+# Last revision : (2013-12-04 19-29)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Crystal Dynamics / Square Enix" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "df2403bb221d564370dc280354e1b805"
+POL_Call POL_GoG_setup "$GOGID" "bd1929ad6235846e221aefe931f80863"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -44,8 +44,23 @@ POL_SetupWindow_VMS "2"
 POL_Wine_reboot
 
 POL_Shortcut "kain2.exe" "$SHORTCUT_NAME" "" "" "Game;ActionGame;" # "$SHORTCUT_NAME.png"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Legacy of Kain Soul Reaver/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Legacy of Kain Soul Reaver/Manual.pdf"
+# C:\GOG Games\Legacy of Kain Soul Reaver\Patchv12_Readme.txt
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+cd "$GOGROOT/Legacy of Kain Soul Reaver/" || exit 1
+TITLE="$TITLE"
+
+POL_Wine kain2.exe -setup
+exit 0
+_EOF_
 
 exit 0
