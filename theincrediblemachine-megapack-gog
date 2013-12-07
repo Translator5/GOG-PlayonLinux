@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-05-13 10-53)
-# Last revision : (2013-05-06 00-15)
+# Last revision : (2013-12-06 02-02)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Dynamix / Playdom" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "021e9371ce23f438315eb26c079c1c95"
+POL_Call POL_GoG_setup "$GOGID" "7f842be0463cc33f58e3a0898798cdc6"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -61,10 +61,13 @@ POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" "POL_SetupWindow_message \"$(eva
 POL_Shortcut_InsertBeforeWine "$SHORTCUT_NAME1" 'POL_SetupWindow_Close'
 
 POL_Shortcut "TIMWIN.EXE" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;LogicGame;"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME2"
+
 POL_Shortcut "Contraptions.exe" "$SHORTCUT_NAME3" "$SHORTCUT_NAME3.png" "" "Game;LogicGame;"
+
 POL_Shortcut "EvenMore.exe" "$SHORTCUT_NAME4" "$SHORTCUT_NAME4.png" "" "Game;LogicGame;"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME4"
-POL_Shortcut_Document "$SHORTCUT_NAME4" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Incredible Machine Series/The Incredible Machine - Even More Contraptions/readme.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME4" "$GOGROOT/The Incredible Machine Series/The Incredible Machine - Even More Contraptions/readme.txt"
 
 POL_SetupWindow_Close
 
