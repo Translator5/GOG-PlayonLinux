@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.4.1
+# Last revision : (2013-12-08 07-01)
+# Wine version used : 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="divine_divinity"
 PREFIX="DivineDivinity_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Divine Divinity"
 SHORTCUT_NAME="Divine Divinity"
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d9cfa77cb5f2da6be9c6c2a7a90da653"
+POL_Call POL_GoG_setup "$GOGID" "5250371a4e2ced4501bfadf9a234ec42"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -41,8 +41,9 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "div.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Divine Divinity/manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Divine Divinity/ReadMe.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Divine Divinity/manual.pdf"
+# C:\GOG Games\Divine Divinity\ReadMe.txt
+# C:\GOG Games\Divine Divinity\story.pdf
 
 POL_SetupWindow_Close
 
@@ -55,7 +56,7 @@ export WINEDEBUG=""
 
 POL_LoadVar_PROGRAMFILES
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Divine Divinity/" || exit 1
+cd "$GOGROOT/Divine Divinity/" || exit 1
 
 POL_Wine configtool.exe
 
