@@ -1,12 +1,14 @@
 #!/bin/bash
 # Date : (2012-02-25 23-27)
-# Last revision : (2013-04-21 18-44)
+# Last revision : (2013-12-08 21-47)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
+
+# Seems to work ok with and without QT Lite - your choice
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -24,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Cyan Worlds / Cyan Inc" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "e261a0e2ffceddc04ff6917c94a64e57"
+POL_Call POL_GoG_setup "$GOGID" "0798cd969e13ab0c8bf7919d0d7f8baa"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
@@ -41,7 +43,7 @@ POL_SetupWindow_VMS "2" # "640x480 16bit"
 POL_Wine_reboot
 
 POL_Shortcut "Riven.exe" "$SHORTCUT_NAME" "" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Riven/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Riven - The Sequel to Myst/manual.pdf"
 
 POL_SetupWindow_Close
 
