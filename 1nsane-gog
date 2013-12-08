@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-03-07 20-17)
-# Last revision : (2013-10-06 10-30)
-# Wine version used : 1.6
+# Last revision : (2013-12-08 04-37)
+# Wine version used : 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="1nsane"
 PREFIX="1nsane_gog"
-WORKING_WINE_VERSION="1.6"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - 1nsane"
 SHORTCUT_NAME="1nsane"
@@ -30,6 +30,9 @@ POL_Call POL_GoG_setup "$GOGID" "1542bb9e38099eb5080bf123b9103d6b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -49,9 +52,23 @@ POL_SetupWindow_VMS "8"
 POL_Wine_reboot
 
 POL_Shortcut "Game.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;SportsGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/1NSANE/manual.pdf"
-# C:\Program Files\GOG.com\1NSANE\Readme.chm
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/1nsane/MANUAL.PDF"
+# C:\GOG Games\1nsane\Readme.chm
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+cd "$GOGROOT/1nsane/" || exit 1
+TITLE="$TITLE"
+
+POL_Wine "Language Setup.exe"
+exit 0
+_EOF_
 
 exit 0
