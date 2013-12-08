@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-24 10-39)
-# Last revision : (2013-08-08 14-31)
+# Last revision : (2013-12-08 11-46)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bc511065a4d669495d14779c0a431982"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}" "1" "bc511065a4d669495d14779c0a431982"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
