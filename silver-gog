@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-19 13-04)
-# Last revision : (2013-04-13 19-16)
+# Last revision : (2013-12-12 20-39)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infogrames Europe SA / Atapi" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "2955709fd31d04680a07d1212d23b190"
+POL_Call POL_GoG_setup "$GOGID" "c6092b0fbc5f6bedd3ca71cb37f9d1a1"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -48,7 +48,7 @@ POL_SetupWindow_VMS "2"
 POL_Wine_reboot
 
 POL_Shortcut "silver.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Silver/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Silver/manual.pdf"
 
 POL_SetupWindow_Close
 
