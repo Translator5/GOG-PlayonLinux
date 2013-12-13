@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-16 17-38)
-# Last revision : (2013-12-01 19-40)
+# Last revision : (2013-12-13 01-17)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pyro Studios / Digital Game Factory" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "d6a7a1edbfbd67c299bd6a06ad12213d" "1edd8f72249d94e1990ec578ac49b1d1" "de6ec7365d8044bad1f6325d60103e66"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 3 "d6a7a1edbfbd67c299bd6a06ad12213d" "1edd8f72249d94e1990ec578ac49b1d1" "de6ec7365d8044bad1f6325d60103e66"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
