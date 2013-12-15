@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2013-12-11 00-03)
+# Last revision : (2013-12-15 10-22)
 # Wine version used : 1.5.20, 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -45,7 +45,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "DreamForge Intertainment / XS Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "db098bb49f9e8b7f3eefe04667cae316"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "db098bb49f9e8b7f3eefe04667cae316"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
