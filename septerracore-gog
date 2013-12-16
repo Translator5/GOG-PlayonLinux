@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-15 00-06)
-# Last revision : (2013-05-01 11-30)
+# Last revision : (2013-12-16 20-01)
 # Wine version used : 1.4.1, 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Valkyrie Studios / Topware Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "22839e19bc5c8db1e557810e01be6e42"
+POL_Call POL_GoG_setup "$GOGID" "6757dc95d9ab744af17603e217ef10ef"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -47,8 +47,8 @@ POL_Shortcut "septerra.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RoleP
 # sometimes exits with an exitcode of 1 for what it seems no good reason
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
 
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Septerra Core/Manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Septerra Core/README.TXT
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Septerra Core/Manual.pdf"
+# C:\GOG Games\Septerra Core\README.TXT
 
 POL_SetupWindow_Close
 
