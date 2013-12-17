@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-09 20-31)
-# Last revision : (2013-04-28 18-31)
-# Wine version used : 1.3.36, 1.5.29
+# Last revision : (2013-12-17 01-11)
+# Wine version used : 1.3.36, 1.5.29, 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="two_worlds"
 PREFIX="2Worlds_gog"
-WORKING_WINE_VERSION="1.5.29"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Two Worlds: Epic Edition"
 SHORTCUT_NAME="Two Worlds"
@@ -24,12 +24,15 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Reality Pump Studios / Topware Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f59283baad1d482806a4302c6a105c66" "d0eab18be86037476a7cd4e47f1afc0a" "eb19df7336379a5b1355354ed69f124e"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 3 "cfff8aad16e2486defa17dea93dcde8c" "57c4c9ce6ec296a59fcbcea2efbf3a58" "488a1f02f86b9e20b5b080d250b4b5af" "d3ebede3724ec5b67128a8d79df11b7b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
+
+POL_Call POL_GoG_install /nogui
 
 
 POL_Call POL_Install_xact
@@ -66,9 +69,12 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot
 
 POL_Shortcut "TwoWorlds.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Two Worlds/Manual.pdf"
+
 POL_Shortcut "TwoWorlds_RADEON.exe" "$SHORTCUT_NAME (Radeon)" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
-POL_Shortcut_Document "$SHORTCUT_NAME (Radeon)" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Two Worlds/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME (Radeon)" "$GOGROOT/Two Worlds/Manual.pdf"
+
+# C:\GOG Games\Two Worlds\TwoWorlds.exe -network
 
 POL_SetupWindow_question "$(eval_gettext 'Two Worlds Control Panel is a tool from InsideTwoWorlds community,\nthat allows you to tweak parameters and manage mods\nfor this game. See\nhttp://www.insidetwoworlds.com/local_links.php?linkid=21&catid=13 for details.\nInstall it?')" "$TITLE"
 if [ "$APP_ANSWER" = "TRUE" ]; then
@@ -87,8 +93,8 @@ if [ "$APP_ANSWER" = "TRUE" ]; then
 REGEDIT4
 
 [HKEY_LOCAL_MACHINE\Software\Reality Pump\TwoWorlds\FileSystem]
-"DataPath"="C:\\Program Files\\GOG.com\\Two Worlds/>"
-"OutputDir"="C:\\Program Files\\GOG.com\\Two Worlds"
+"DataPath"="C:\\GOG Games\\Two Worlds/>"
+"OutputDir"="C:\\GOG Games\\Two Worlds"
 _EOFINI_
     POL_Wine regedit "$POL_USER_ROOT/tmp/fixtw1path.reg"
     rm "$POL_USER_ROOT/tmp/fixtw1path.reg"
@@ -100,5 +106,18 @@ _EOFINI_
 fi
 
 POL_SetupWindow_Close
+
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+cd "$GOGROOT\Two Worlds/" || exit 1
+
+POL_Wine TwoWorlds.exe -safemode
+exit 0
+_EOF_
 
 exit 0
