@@ -1,9 +1,10 @@
 #!/bin/bash
 # Date : (2012-11-24 21:30)
-# Last revision : (2013-11-17 11-39)
-# Wine version used : 1.5.5
+# Last revision : (2013-12-20 23-29)
+# Wine version used : 1.5.5, 1.6.1, 1.7.8
 # Distribution used to test : OpenSuSE 12.2 64-bit
 # Author : hmdai (Based on Deponia DC script by Kweepeer)
+#   Update: petch
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
@@ -13,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_dark_eye_chains_of_satinav"
 PREFIX="TheDarkEyeChainofSatinav_gog"
-WORKING_WINE_VERSION="1.5.5"
+WORKING_WINE_VERSION="1.7.8"
 
 TITLE="GOG.com - The Dark Eye: Chain of Satinav"
 SHORTCUT_NAME="The Dark Eye: Chain of Satinav"
@@ -48,3 +49,17 @@ mkdir "$WINEPREFIX/drive_c/tmp"
 
 POL_SetupWindow_Close
 
+cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
+#!/bin/bash
+[ -z "\$PLAYONLINUX" ] && exit 0
+source "\$PLAYONLINUX/lib/sources"
+export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
+export WINEDEBUG="-all"
+
+cd "$GOGROOT/The Dark Eye - Chains of Satinav/" || exit 1
+
+POL_Wine "VisionaireConfigurationTool.exe"
+exit 0
+_EOF_
+
+exit 0
