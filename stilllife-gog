@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-17 10-47)
-# Last revision : (2013-11-03 09-30)
+# Last revision : (2013-12-21 00-47)
 # Wine version used : 1.4.1, 1.5.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bee4d6e749af24c412565eb36d680d90"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "bee4d6e749af24c412565eb36d680d90"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
