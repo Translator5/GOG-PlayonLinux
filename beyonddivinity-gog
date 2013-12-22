@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-07 16-07)
-# Last revision : (2013-07-10 21-03)
+# Last revision : (2013-12-22 16-33)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8c53b4c6fb97d32f3f455658b90a2463"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "42b313e36efcf44b76cefa94177c53ad"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,8 +43,8 @@ POL_SetupWindow_VMS "64"
 POL_Wine_reboot
 
 POL_Shortcut "div.exe" "$SHORTCUT_NAME" "" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Beyond Divinity/manual.pdf"
-# C:\Program Files\GOG.com\Beyond Divinity\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Beyond Divinity/manual.pdf"
+# C:\GOG Games\Beyond Divinity\readme.txt
 
 POL_SetupWindow_Close
 
@@ -55,8 +55,7 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
-POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Beyond Divinity/" || exit 1
+cd "$GOGROOT/Beyond Divinity/" || exit 1
 TITLE="$TITLE"
 
 POL_Wine configtool.exe
