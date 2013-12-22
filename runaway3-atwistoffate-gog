@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-02-19 21-20)
-# Last revision : (2013-07-10 13-39)
-# Wine version used : 1.4.1
+# Last revision : (2013-12-22 09-47)
+# Wine version used : 1.4.1, 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="runaway_3_a_twist_of_fate"
 PREFIX="Runaway3_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Runaway 3: A Twist of Fate"
 SHORTCUT_NAME="Runaway 3: A Twist of Fate"
@@ -26,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pendulo Studios / Focus Home Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "b26ead02ea1fe6a9fc46b4df949724c6" "c04025ca91431288949757bf0ddbe38a" "744566b0ea14fb4118d7308591fa78bf" "37b22d868c324886cba929bc0a4fe3e3"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 4 "787b978f339660e011b9880c23271b7a" "e3bf11359c116ad556167176ed6409ae" "6bef8aef010f35c6e239919b14db1daa" "b3cecbd2aa79d8d967081a47b5465344" "0dbe0511da0c1087f5172b3a3452257f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install /nogui
 
 
 # GoG work!
@@ -41,13 +41,22 @@ POL_SetupWindow_VMS "128"
 
 POL_Call POL_Install_d3dx9_36
 
+POL_LoadVar_ScreenResolution
+cat <<_EOFCONF_ > "$GOGROOT/Runaway - A Twist Of Fate/ratof.config"
+Adapter = 0
+Width = $ScreenWidth
+Height = $ScreenHeight
+Format = 0
+RefreshRate = 0
+_EOFCONF_
+
 # Doesn't hurt ;)
 POL_Wine_reboot
 
 POL_Shortcut "RATOF.exe" "$SHORTCUT_NAME" "" "" "Game;AdventureGame;" # "$SHORTCUT_NAME.png"
 #echo "xrandr -s 0" >> "$POL_USER_ROOT/shortcuts/$SHORTCUT_NAME"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Runaway - A Twist Of Fate/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Runaway - A Twist Of Fate/manual.pdf"
 
 POL_SetupWindow_Close
 
@@ -58,8 +67,7 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
-POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Runaway - A Twist Of Fate/" || exit 1
+cd "$GOGROOT/Runaway - A Twist Of Fate/" || exit 1
 TITLE="$TITLE"
 
 POL_Wine "RATOF-Config.exe"
