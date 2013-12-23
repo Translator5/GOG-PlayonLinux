@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-03-21 21-40)
-# Last revision : (2013-07-10 13-26)
-# Wine version used : 1.4.1
+# Last revision : (2013-12-23 12-06)
+# Wine version used : 1.4.1, 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -26,12 +26,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8c4c17f2de851e8d6dd83af19e70f4db" "cba62670ef8dee498a34134d7ba0c327" "195dea57f6f7afbae9f0c4bcb513fd01"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 3 "b9633cac4f7d6acfc950a45a86c78483" "e886c99679507122c613023ee76e387f" "afebbdb9ae9bed618f79e7b7ab8b2397" "97ae1edf303d06275da33dd034f44ab8"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install /nogui
 
 
 # GoG work!
@@ -46,7 +46,7 @@ POL_Call POL_Install_dotnet40
 POL_Wine_rebootHi
 
 POL_Shortcut "ANB.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/A New Beginning/Manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/A New Beginning - Final Cut/A New Beginning - Manual.pdf"
 
 # Fix missing sound issue in cutscenes.
 # See: http://wiki.winehq.org/Sound ("SDL applications").
@@ -61,8 +61,7 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
-POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/GOG Games/A New Beginning/" || exit 1
+cd "$GOGROOT/A New Beginning - Final Cut/" || exit 1
 TITLE="$TITLE"
 
 POL_Wine VisionaireConfigurationTool.exe
