@@ -20,6 +20,7 @@ GAME_VMS="256"
 # Starting the script
 #POL_GetSetupImages "http://img11.hostingpics.net/pics/758727orcsMustDie264.jpg/top.jpg" "http://img11.hostingpics.net/pics/797096orcs.jpg/left.jpg" "$TITLE"
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1588
 
 # Starting debugging API
 POL_Debug_Init
