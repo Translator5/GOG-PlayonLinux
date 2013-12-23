@@ -1,0 +1,67 @@
+#!/bin/bash
+# Date : (2012-09-01)
+# Last revision : (2013-03-04)
+# Wine version used : 1.5.19
+# Distribution used to test : Linux Mint 13 x32
+# Author : Ruzven
+# Licence : Steam
+
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+TITLE="Orcs Must Die! 2"
+PREFIX="Orcs_Must_Die!_2"
+WINEVERSION="1.5.19"
+EDITOR="Robot Entertainment"
+GAME_URL="http://www.robotentertainment.com/games/omd2"
+AUTHOR="Ruzven"
+GAME_VMS="256"
+
+# Starting the script
+#POL_GetSetupImages "http://img11.hostingpics.net/pics/758727orcsMustDie264.jpg/top.jpg" "http://img11.hostingpics.net/pics/797096orcs.jpg/left.jpg" "$TITLE"
+POL_SetupWindow_Init
+
+# Starting debugging API
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "$EDITOR" "$GAME_URL" "$AUTHOR" "$PREFIX"
+
+# Setting prefix path
+POL_Wine_SelectPrefix "$PREFIX"
+
+# Downloading wine if necessary and creating prefix
+POL_System_SetArch "auto"
+POL_Wine_PrefixCreate "$WINEVERSION"
+
+POL_SetupWindow_message "$(eval_gettext 'When $TITLE download by Steam is finished,\nDo NOT click on Play.\n\nClose COMPLETELY the Steam interface, \nso that the installation script can continue')" "$TITLE"
+
+# Installing mandatory dependencies
+        POL_Call POL_Install_steam
+ 
+# Begin game installation
+        cd "$WINEPREFIX/drive_c/$PROGRAMFILES/Steam"
+        POL_SetupWindow_menu "$(eval_gettext 'Please select version.')" "$TITLE" "$(eval_gettext 'Normal version')~$(eval_gettext 'Demo version')" "~"
+if   [ "$APP_ANSWER" == "$(eval_gettext 'Normal version')" ]; then
+
+# Steam install Normal version
+        POL_Wine "steam.exe" steam://install/201790
+        POL_Wine_WaitExit "$TITLE"
+        
+else
+
+# Steam install Demo version
+        POL_Wine "steam.exe" steam://install/215020
+        POL_Wine_WaitExit "$TITLE"
+fi
+
+# Asking about memory size of graphic card
+        POL_SetupWindow_VMS $GAME_VMS
+
+
+# Making shortcut
+        POL_Shortcut "OrcsMustDie2.exe" "$TITLE" "" "$TITLE.png "
+ 
+POL_SetupWindow_message "Installation is finished" "$TITLE"
+
+POL_SetupWindow_Close
+exit 0
