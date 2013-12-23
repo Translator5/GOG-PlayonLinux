@@ -10,7 +10,7 @@
 source "$PLAYONLINUX/lib/sources"
 
 TITLE="Orcs Must Die! 2"
-PREFIX="Orcs_Must_Die!_2"
+PREFIX="Orcs_Must_Die_2"
 WINEVERSION="1.7.8"
 EDITOR="Robot Entertainment"
 GAME_URL="http://www.robotentertainment.com/games/omd2"
@@ -18,7 +18,8 @@ AUTHOR="Ruzven"
 GAME_VMS="256"
 
 # Starting the script
-#POL_GetSetupImages "http://img11.hostingpics.net/pics/758727orcsMustDie264.jpg/top.jpg" "http://img11.hostingpics.net/pics/797096orcs.jpg/left.jpg" "$TITLE"
+POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1588
 
