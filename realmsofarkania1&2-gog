@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-10-27 22-51)
-# Last revision : (2013-05-04 14-14)
+# Last revision : (2013-12-23 23-59)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Attic Entertainment / Fantasy Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "56021238f76fe4e2dd7014fa8adc40c5"
+POL_Call POL_GoG_setup "$GOGID" "debf7fe8bb885298230c59836f35469f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -35,7 +35,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install
 
 
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack" || POL_Debug_Fatal "Game not installed in standard path?"
+cd "$GOGROOT/Realms of Arkania Pack" || POL_Debug_Fatal "Game not installed in standard path?"
 
 # Problem with shortizing "Realms of Arkania 1" and "Realms of Arkania 2" subdirectories side-by-side :(
 ROA1="ROA1"
@@ -49,7 +49,11 @@ manual_mount=true
 dosbox_memsize=16
 render_frameskip=1
 cpu_core=auto
-cpu_cycles=max
+cpu_cputype=auto
+cpu_cycles='fixed 12000'
+mixer_rate=44100
+mixer_blocksize=1024
+mixer_prebuffer=80
 sblaster_sbtype=sb16
 sblaster_sbbase=220
 sblaster_irq=5
@@ -57,11 +61,13 @@ sblaster_dma=1
 sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
-sblaster_oplrate=22050
+sblaster_oplrate=44100
+gus_gus=false
+ipx_ipx=false
 _EOFCFG_
 [ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA1" || POL_Debug_Fatal "Game not installed in standard path?"
+cd "$GOGROOT/Realms of Arkania Pack/$ROA1" || POL_Debug_Fatal "Game not installed in standard path?"
 
 # Select Sound Blaster Pro
 if type -t POL_unbase64 > /dev/null; then
@@ -80,7 +86,7 @@ bladem
 exit
 _EOFBAT_
 
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA2" || POL_Debug_Fatal "Game not installed in standard path?"
+cd "$GOGROOT/Realms of Arkania Pack/$ROA2" || POL_Debug_Fatal "Game not installed in standard path?"
 
 if type -t POL_unbase64 > /dev/null; then
 	POL_unbase64 <<-'_EOFCFG_' > "DATA/SOUND.CFG"
@@ -98,14 +104,14 @@ exit
 _EOFBAT_
 
 POL_Shortcut "ROA1.BAT" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA1/passwords.pdf"
-# C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA1\MANUAL.PDF
-# C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA1\Cluebook.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGROOT/Realms of Arkania Pack/$ROA1/passwords.pdf"
+# C:\GOG Games\Realms of Arkania Pack\$ROA1\MANUAL.PDF
+# C:\GOG Games\Realms of Arkania Pack\$ROA1\Cluebook.pdf
 
 POL_Shortcut "ROA2.BAT" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Realms of Arkania Pack/$ROA2/passwords.pdf"
-# C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA2\Manual.pdf
-# C:\Program Files\GOG.com\Realms of Arkania Pack\$ROA2\Cluebook.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Realms of Arkania Pack/$ROA2/passwords.pdf"
+# C:\GOG Games\Realms of Arkania Pack\$ROA2\Manual.pdf
+# C:\GOG Games\Realms of Arkania Pack\$ROA2\Cluebook.pdf
 
 POL_SetupWindow_Close
 
