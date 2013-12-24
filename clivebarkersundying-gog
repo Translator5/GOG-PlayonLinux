@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-09-07)
-# Last Revision : (2013-09-07 11:07)
+# Last Revision : (2013-12-24 11:31)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Jessie (Testing repositories)
 # Author : VisitntX visitntx@gmail.com
@@ -25,7 +25,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Dreamworks Interective / Electronic Arts" "http://www.gog.com/en/gamecard/$GOGID" "VisitntX" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "70531606d4aa51d20d628f6af50cb38c"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "70531606d4aa51d20d628f6af50cb38c"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
