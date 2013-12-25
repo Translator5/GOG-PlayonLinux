@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-25 17:56)
-# Last revision : (2013-11-10 22-07)
+# Last revision : (2013-12-25 06-52)
 # Wine version used : 1.4.1, 1.5.5
 # Distribution used to test : OpenSuSE 12.2 64-bit
 # Author : hmdai (Based on Deponia DC script by Kweepeer)
@@ -25,12 +25,12 @@ POL_SetupWindow_SetID 1488
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "King Art/Nordic Games" "http://www.gog.com/gamecard/$GOGID" "hmdai" "$PREFIX"
-POL_Call POL_GoG_setup "$GOGID" "ae8210bf659d372ed4b26e447d78aab3" "4ea0eccb7ca2f77c301e79412ff1e214" "95e52d38b6c1548ac311284c539a4c52" "badc51c03e52268d8e94fbe6aadbbbac"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 4 "ae8210bf659d372ed4b26e447d78aab3" "4ea0eccb7ca2f77c301e79412ff1e214" "95e52d38b6c1548ac311284c539a4c52" "badc51c03e52268d8e94fbe6aadbbbac"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install "/nogui"
+POL_Call POL_GoG_install /nogui
 
 
 # GoG work!
