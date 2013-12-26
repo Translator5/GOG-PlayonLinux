@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-10 11-37)
-# Last revision : (2013-05-04 16-31)
+# Last revision : (2013-12-26 18-22)
 # Wine version used : 1.4, 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c81d68b88fd044a7064a14eb4370a2cc"
+POL_Call POL_GoG_setup "$GOGID" "bd8106a6a15107924d341b7de6181292"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,8 +43,8 @@ POL_SetupWindow_VMS "16"
 POL_Wine_reboot
 
 POL_Shortcut "engine.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/In Cold Blood/manual.pdf"
-# C:\Program Files\GOG.com\In Cold Blood\readme.txt
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/In Cold Blood/manual.pdf"
+# C:\GOG Games\In Cold Blood\readme.txt
 
 POL_SetupWindow_Close
 
