@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-05-27 22-00)
-# Last revision : (2013-06-29 14-43)
+# Last revision : (2013-12-29 11-28)
 # Wine version used : 1.4.1
 # Distribution used to test : Fedora 17, Debian Sid
 # Author : TonyFlow
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "FireFly Studios" "http://www.gog.com/gamecard/$GOGID" "TonyFlow" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "feefadb14ccf00c0a95a39add4da5ae9"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "2" "a26178ebca7865949d2458818464cd4e"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -50,15 +50,6 @@ MAN_LANG=$(echo "${APP_ANSWER}" | cut -d ':' -f 1)
 GOGPATH="$GOGROOT/Stronghold HD"
 POL_Shortcut "Stronghold.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGPATH/manual/manual_$MAN_LANG.pdf"
-
-# Language pack installation
-POL_SetupWindow_menu "$(eval_gettext 'Do you have a language pack to install?')" "$(eval_gettext 'Language')" "$(eval_gettext 'Yes')~$(eval_gettext 'No')~$(eval_gettext 'Later')" "~"
-if [ "$APP_ANSWER" = "$(eval_gettext 'Yes')" ]; then
-	POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run')" "$(eval_gettext 'Language')"
-	[ -z "$APP_ANSWER" ] || POL_Wine "$APP_ANSWER"
-elif [ "$APP_ANSWER" = "$(eval_gettext 'Later')" ]; then
-	POL_SetupWindow_message "$(eval_gettext 'To install a language pack later, open the configuration panel for the game in order to execute the installer into the virtual disk (Misc tab)')" "$(eval_gettext 'Language')"
-fi
 
 POL_SetupWindow_Close
 exit 0
