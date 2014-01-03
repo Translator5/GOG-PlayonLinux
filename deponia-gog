@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-18 16-24)
-# Last revision : (2013-05-19 13-56)
+# Last revision : (2014-01-02 22-02)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.10 64-bit
 # Author : Kweepeer (Based on Broken Sword DC script by Pierre Etchemaite)
@@ -29,14 +29,16 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Kweepeer" "$PREFIX"
 POL_Call POL_GoG_setup "$GOGID" \
-  "a77f5db9ce214b5435a5dbca9a574464" \
-  "88573504e0cab842cb63a57e52423cf1" \
-  "332343a8c3016cec9b0535b3498bee49"
+  "26bde90d86e69769f15eca3f400f52e0" \
+  "e2a1cd82f67a7ec2e5de54055099435b" \
+  "7e736a807a0eea00c8c4e59ac2b6cb8e" \
+  "f5fa644b6ed68413d3e3541f82d57365"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install /nogui
+
 
 # GoG work!
 Set_OS winxp
@@ -60,5 +62,6 @@ mkdir "$WINEPREFIX/drive_c/tmp"
 POL_SetupWindow_Close
 
 # Note on configurator:
-# VisionaireConfigurationTool.exe doesn't seem to work in GOG version of the game.
+# VisionaireConfigurationTool.exe requires .NET 4.0
 # You can set advanced options by editing $WINEPREFIX/drive_c/GOG Games/Deponia/config.ini.
+exit 0
