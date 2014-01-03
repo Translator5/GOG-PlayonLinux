@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-18 16-24)
-# Last revision : (2014-01-02 22-02)
+# Last revision : (2014-01-03 22-40)
 # Wine version used : 1.4.1
 # Distribution used to test : Ubuntu 12.10 64-bit
 # Author : Kweepeer (Based on Broken Sword DC script by Pierre Etchemaite)
@@ -28,7 +28,7 @@ POL_SetupWindow_SetID 1467
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "Kweepeer" "$PREFIX"
-POL_Call POL_GoG_setup "$GOGID" \
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 \
   "26bde90d86e69769f15eca3f400f52e0" \
   "e2a1cd82f67a7ec2e5de54055099435b" \
   "7e736a807a0eea00c8c4e59ac2b6cb8e" \
