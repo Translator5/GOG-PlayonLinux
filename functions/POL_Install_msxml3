@@ -1,7 +1,7 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2009-11-19 21-50)
-# Last revision : (2013-01-22 16:00)
+# Last revision : (2014-01-11 00:38)
 # Author : Berillions, Tinou
 # Updated by : GNU_Raziel
 # Only For : http://www.playonlinux.com
@@ -10,6 +10,8 @@
 #   Fixing bug #820
 # [petch] (2013-01-22 16:00)
 #   Fixing bug #1787
+# [petch] (2014-01-11 00:38)
+#   Fixing 0 byte msxml3.dll bug
 
 FORCE_MODE=$1
 
@@ -25,10 +27,11 @@ if [ "$CHECK_MSXML3" = "" -o "$FORCE_MODE" = "--force" ]; then
 	else
 		rm "$WINEPREFIX/drive_c/windows/system32/msxml3.dll"
 	fi
-        cd "$POL_USER_ROOT/ressources/msxml3/"
-	POL_Wine msiexec /i msxml3.msi /q
-	POL_Wine_WaitExit "msxml3"
 
 	# Overriding dll
-	POL_Wine_OverrideDLL "native,builtin" "msxml3"
+	POL_Wine_OverrideDLL "native" "msxml3"
+
+	cd "$POL_USER_ROOT/ressources/msxml3/"
+	POL_Wine msiexec /i msxml3.msi /q
+	POL_Wine_WaitExit "msxml3"
 fi
