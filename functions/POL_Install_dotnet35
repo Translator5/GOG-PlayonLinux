@@ -4,11 +4,9 @@
 # Last revision : (2013-04-12 21:00)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
+# [xplicit] (2014-01-11 00:45)
+#   fix for versions >= 1.5.21
 
-# Check wine version before install
-if ! (VersionLower $(POL_Config_PrefixRead VERSION) 1.5.21); then
-	POL_Debug_Fatal "$(eval_gettext 'This package fail to install with wine 1.5.21 or better')"
-fi
 
 # Checking wine arch
 if [ "$POL_ARCH" == "amd64" ]; then
@@ -21,6 +19,11 @@ POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}' || true
 # Install dotnet30sp1 if needed
 if [ ! -e "$WINEPREFIX/drive_c/windows/system32/XpsFilt.dll" ]; then
 	POL_Call POL_Install_dotnet30sp1
+fi
+
+# Workaround the bug http://code.google.com/p/winetricks/issues/detail?id=311
+if ! (VersionLower $(POL_Config_PrefixRead VERSION) 1.5.21); then
+	POL_Call POL_Install_msxml3
 fi
 
 # Ignore errors message
