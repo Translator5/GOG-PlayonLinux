@@ -1,12 +1,17 @@
 #!/bin/bash
 # PlayOnLinux Function
 # Date : (2011-03-17 21:00)
-# Last revision : (2012-09-09 14:14)
+# Last revision : (2013-04-12 21:00)
 # Author : GNU_Raziel
 # Only For : http://www.playonlinux.com
 
+# Check wine version before install
+if ! (VersionLower $(POL_Config_PrefixRead VERSION) 1.5.21); then
+	POL_Debug_Fatal "$(eval_gettext 'This package fail to install with wine 1.5.21 or better')"
+fi
+
 # Checking wine arch
-if [ "$POL_ARCH" = "amd64" ]; then
+if [ "$POL_ARCH" == "amd64" ]; then
 	POL_Debug_Fatal "$(eval_gettext 'This package does not work on a 64-bit installation')"
 fi
 
@@ -16,6 +21,11 @@ POL_Wine uninstaller --remove '{E45D8920-A758-4088-B6C6-31DBB276992E}' || true
 # Install dotnet30sp1 if needed
 if [ ! -e "$WINEPREFIX/drive_c/windows/system32/XpsFilt.dll" ]; then
 	POL_Call POL_Install_dotnet30sp1
+fi
+
+# Ignore errors message
+if VersionLower $(POL_Config_PrefixRead VERSION) 1.4.2; then
+	POL_SetupWindow_message "$(eval_gettext 'If you see error messages during DotNet 3.5 installation, you can ignore them without issues')" "$TITLE"
 fi
 
 # Setting OS check Fix
@@ -38,7 +48,7 @@ POL_Download_Resource "http://download.microsoft.com/download/6/0/f/60fc5854-3cb
 
 # Setting Fix 1
 POL_Wine --ignore-errors reg delete "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5"
-WINEDLLOVERRIDES=ngen.exe,regsvcs.exe,mscorsvw.exe=b
+WINEDLLOVERRIDES="ngen.exe,regsvcs.exe,mscorsvw.exe=b"
 export WINEDLLOVERRIDES
 wineserver -k
 
@@ -51,3 +61,4 @@ POL_Wine --ignore-errors msiexec /i vs_setup.msi ADDEPLOY=1
 POL_Wine_WaitExit ".NET Framework 3.5"
 unset WINEDLLOVERRIDES
 wineserver -k
+rm -rf "$WINEPREFIX"/drive_c/windows/temp/*
