@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-07-28 11-12)
-# Last revision : (2013-08-07 18-50)
+# Last revision : (2014-01-26 02-54)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -11,8 +11,8 @@
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-GOGID="ishar_1_2"
-PREFIX="Ishar_1_2_gog"
+GOGID="ishar_compilation"
+PREFIX="IsharCompilation_gog"
 WORKING_WINE_VERSION="1.4-dos_support_0.6"
 
 TITLE="GOG.com - Ishar Compilation"
