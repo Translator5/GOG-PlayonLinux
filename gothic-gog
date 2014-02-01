@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}" "1" "bc511065a4d669495d14779c0a431982"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_${GOGID}" "1" "84956950be0a34838fc1d992691c15bc"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
