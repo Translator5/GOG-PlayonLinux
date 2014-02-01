@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-12 14-11)
-# Last revision : (2013-07-10 13-27)
-# Wine version used : 1.4.1
+# Last revision : (2014-01-31 23-06)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="baldurs_gate_2_complete"
 PREFIX="BaldursGate2_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Baldur's Gate II Complete"
 SHORTCUT_NAME="Baldur's Gate II"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Hasbro Inc." "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "3ccf5d1b5bd46a87498937003d4ee817" "a9e9ffd435900f6248ace8b0897281b4" "73bd27481aa7fd012a1ff1a055bf5e34"
+POL_Call POL_GoG_setup "$GOGID" "e6e71dc71a4dd15571bf1995e3427377" "609d4020f2acfd2a3195c70608fdea54" "ddb6e622e1254b5e9fd18137910ccaed"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
