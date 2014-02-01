@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-30 21-24)
-# Last revision : (2013-08-14 00-03)
-# Wine version used : 1.5.15
+# Last revision : (2014-02-01 16-28)
+# Wine version used : 1.5.15, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="gothic_3"
 PREFIX="Gothic3_gog"
-WORKING_WINE_VERSION="1.5.15"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Gothic 3"
 SHORTCUT_NAME="Gothic 3"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4c94120463dd5230fa405a46305ad3e5" "ff4677a6f65fe23d1dadb151cb4b7304" "016f679b6e5b6fbdc5eafc8ac800bfd2"
+POL_Call POL_GoG_setup "$GOGID" "1aadb3d847fc6bd346b583fe0621d85c" "76fba2e801e2e45efa780ae1598abaf8" "78ba49e01c07bf6c97c14145931525b7"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
