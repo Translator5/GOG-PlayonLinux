@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-31 20-09)
-# Last revision : (2013-10-08 20-51)
-# Wine version used : 1.4.1
+# Last revision : (2014-02-02 21-18)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="gothic_2_gold_edition"
 PREFIX="Gothic2_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Gothic 2 Gold"
 SHORTCUT_NAME="Gothic 2 Gold"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Piranha Bytes / Nordic Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "f41e8cffeecaf9feb8fdc31a846b31ba" "160f69aac5271cb3d37d4e507635aac2" "4b221e30a9b5c5376dd6d3c884c85edc"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "b8daf54cf2c80a8e0c80ffb6beadf4b3" "3a27b5b17c14d574b6f78432626d688e" "786c2428c4338bddfdd6e805660ad443"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
