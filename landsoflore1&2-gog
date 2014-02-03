@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-18 19-00)
-# Last revision : (2013-05-20 23-26)
+# Last revision : (2014-02-03 23-11)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Westwood Studios / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "28b6a318053ef756a88f4ef65c5bf67a"
+POL_Call POL_GoG_setup "$GOGID" "ca368d819015b2508be877a53eb4dd51"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
