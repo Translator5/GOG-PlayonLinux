@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-17 10-47)
-# Last revision : (2013-07-10 13-36)
-# Wine version used : 1.3.27
+# Last revision : (2014-02-07 22-22)
+# Wine version used : 1.3.27, 1.7.12
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -17,7 +17,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="neverwinter_nights_diamond_edition"
 PREFIX="NeverwinterNights_gog"
-WORKING_WINE_VERSION="1.3.27"
+WORKING_WINE_VERSION="1.7.12"
 
 TITLE="GOG.com - Neverwinter Nights Diamond Edition"
 SHORTCUT_NAME="Neverwinter Nights Diamond Edition"
@@ -30,7 +30,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Bioware / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f951e13536f8ad0e424f719ba88bd39c" "7e434f93b72fe3e75f58db9c725d5478" "0036284492df9f3430b1b00a17757718"
+POL_Call POL_GoG_setup "$GOGID" "e7d063a2c892519dc431fc84c3611a65" "2b6bec0df8d2f1755876407069f6ae43" "db2c1e75b087e43fa5895bcc70fca8b9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
