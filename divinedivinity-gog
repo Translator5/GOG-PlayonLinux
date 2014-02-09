@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-23 23-13)
-# Last revision : (2013-12-13 21-18)
-# Wine version used : 1.6.1
+# Last revision : (2014-02-08 18-22)
+# Wine version used : 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="divine_divinity"
 PREFIX="DivineDivinity_gog"
-WORKING_WINE_VERSION="1.6.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Divine Divinity"
 SHORTCUT_NAME="Divine Divinity"
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "5250371a4e2ced4501bfadf9a234ec42"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "3798d48f04a7a8444fd9f4c32b75b41d"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
