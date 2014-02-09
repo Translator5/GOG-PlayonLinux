@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-06-13 19-32)
-# Last revision : (2013-11-20 19-06)
+# Last revision : (2014-02-09 14:20)
 # Wine version used : 1.5.0
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Arkane Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c41bd10c25c0e87f07666f359ef01c17"
+POL_Call POL_GoG_setup "$GOGID" "5be0898e71632e46ca430d7a32d0179a"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
