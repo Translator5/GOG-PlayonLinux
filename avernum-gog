@@ -1,12 +1,14 @@
 #!/bin/bash
 # Date : (2013-02-12 17-10)
-# Last revision : (2013-05-26 11-07)
+# Last revision : (2014-02-15 17-48)
 # Wine version used : 1.4.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
+
+# Pictures in title screen/menu/introduction appear with a delay starting with Wine 1.5.5
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -32,7 +34,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Spiderweb Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "5fdda20df7275460eb45ec9a5954b29a"
+POL_Call POL_GoG_setup "$GOGID" "97caacf820a97bc73fd95fb757971afa"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
