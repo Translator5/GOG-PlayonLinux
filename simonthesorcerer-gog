@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-20 20-55)
-# Last revision : (2013-11-10 21-28)
+# Last revision : (2014-02-16 16-55)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "118e7cadd5c67f8cf95f9a46f8e98595"
+POL_Call POL_GoG_setup "$GOGID" "cf6a001535597291a86409446be133bd"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
