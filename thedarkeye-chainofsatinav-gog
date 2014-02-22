@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-24 21:30)
-# Last revision : (2013-12-20 23-29)
+# Last revision : (2014-02-22 03-02)
 # Wine version used : 1.5.5, 1.6.1, 1.7.8
 # Distribution used to test : OpenSuSE 12.2 64-bit
 # Author : hmdai (Based on Deponia DC script by Kweepeer)
@@ -26,7 +26,7 @@ POL_SetupWindow_SetID 1478
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Daedalic Entertainment" "http://www.gog.com/gamecard/$GOGID" "hmdai" "$PREFIX"
-POL_Call POL_GoG_setup "$GOGID" "d1c375ba007b7ed6574a16cca823258a" "0c9ea69bdb3e2c66d13f2d27812279b6" "d87f0693751554c1d382f770202e8c45" "ef662b59635829ed4505f6d7272e4bb7" "555d8af3bb598ed4c481e3e3d63b0221"
+POL_Call POL_GoG_setup "$GOGID" "022a59739b9d7b16f036fb2fecd5bca2" "aa50ac1bf998b7d945f58b6104f58298" "6748d3208d3c59f91cce0de4e6e56af7" "4c1208642ea83d7dde6e90ac3ce885fb" "284a6c2e37897e44a69fac6f8c0971e0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
