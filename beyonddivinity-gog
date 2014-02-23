@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-12-07 16-07)
-# Last revision : (2013-12-22 16-33)
-# Wine version used : 1.4.1
+# Last revision : (2014-02-23 20-10)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="beyond_divinity"
 PREFIX="BeyondDivinity_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Beyond Divinity"
 SHORTCUT_NAME="Beyond Divinity"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "42b313e36efcf44b76cefa94177c53ad"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "855921665ea5357a7f445d550c0cbe84"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
