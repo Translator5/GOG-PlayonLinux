@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-03-17 23-07)
-# Last revision : (2013-09-14 09-20)
+# Last revision : (2014-02-24 22-07)
 # Wine version used : 1.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -17,7 +17,7 @@ source "$PLAYONLINUX/lib/sources"
 GOGID="xiii"
 PREFIX="XIII_gog"
 WORKING_WINE_VERSION="1.6"
-[ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.2.3"
+[ "$POL_OS" = "Mac" ] && WORKING_WINE_VERSION="1.7.13"
 
 TITLE="GOG.com - XIII"
 SHORTCUT_NAME="XIII"
