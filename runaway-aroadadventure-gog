@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-01 00-01)
-# Last revision : (2013-11-25 22-00)
-# Wine version used : 1.4.1
+# Last revision : (2014-02-25 21-26)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="runaway_a_road_adventure"
 PREFIX="Runaway_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Runaway: A Road Adventure"
 SHORTCUT_NAME="Runaway: A Road Adventure"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Pendulo Studio / Focus Home Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7c753c1f393dc8f556677eaef91a6999"
+POL_Call POL_GoG_setup "$GOGID" "2faf90aedca00fc744ddf84d63d0ea5b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
