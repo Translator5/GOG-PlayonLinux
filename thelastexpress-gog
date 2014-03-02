@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-04 23-55)
-# Last revision : (2013-06-29 22-08)
+# Last revision : (2014-03-02 16-54)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,7 +24,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Smoking Car Productions / Phoenix Licensing" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "a18d951a5b720cf0366b3d9e373543d4"
+POL_Call POL_GoG_setup "$GOGID" "46632a6a17f6e7fffe6dc4abc82cd4e7"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
