@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-01-06 21-20)
-# Last revision : (2013-11-17 22-04)
+# Last revision : (2014-03-09 11-49)
 # Wine version used : 1.4-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -24,12 +24,12 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "5d687266db960a09886c76ff34388288" "2cfdbdbaf61663967d6748530d648337" "b622b451b73e4a8ed899253d575668dc"
+POL_Call POL_GoG_setup "$GOGID" "37173b8fc33148f087b919221ad7dc05" "2cfdbdbaf61663967d6748530d648337" "e44ace05f37979415565ebfeb19fc8a6"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 cat <<_EOFCFG_ > "$GOGROOT/The Feeble Files/feeble.polcfg"
