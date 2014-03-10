@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-07-28 11-12)
-# Last revision : (2014-01-26 02-54)
+# Last revision : (2014-03-10 21-37)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -29,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Silmaris / DotEmu" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "a82b8dcaea38614400bb26f20ef1814a"
+POL_Call POL_GoG_setup "$GOGID" "cbec7f58ac1b7699196f1b458a1e03fe"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
