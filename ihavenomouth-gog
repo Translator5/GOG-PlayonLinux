@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2013-09-07)
-# Last revision : (2013-12-27 16:21)
+# Last revision : (2014-03-10 23:58)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : VisitntX
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "The Dreamers Guild / Night Dive Studios" "http://www.gog.com/gamecard/$GOGID" "VisitntX" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "34579fdea230298f0083f714295e1efc"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "3881dcba2e804cbe28c294a839c334cc"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
