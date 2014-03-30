@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-29 17-36)
-# Last revision : (2013-05-11 21-21)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-03-30 21-37)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="simcity_2000_special_edition"
 PREFIX="Simcity2000SE_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Simcity 2000 Special Edition"
 SHORTCUT_NAME1="Simcity 2000 SE"
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Maxis Software Inc. / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "aed3df569a97a77fda2a8e57a46b48f5"
+POL_Call POL_GoG_setup "$GOGID" "df14bff3caa6fac2cfb54c1e16399e21"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
