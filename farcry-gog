@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-18 11-39)
-# Last revision : (2013-07-10 13-32)
-# Wine version used : 1.3.36, 1.4.1
+# Last revision : (2014-04-01 19-02)
+# Wine version used : 1.3.36, 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -16,7 +16,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="far_cry"
 PREFIX="FarCry_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Far Cry"
 SHORTCUT_NAME="Far Cry"
