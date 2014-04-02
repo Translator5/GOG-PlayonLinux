@@ -1,19 +1,23 @@
 #!/bin/bash
 # Date : (2013-02-25 21-49)
-# Last revision : (2013-11-24 22-50)
-# Wine version used : 1.4.1
+# Last revision : (2014-04-02 23-13)
+# Wine version used : 1.4.1, 1.5.18
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# Wine 1.4.1, 1.5.15, 1.5.17, 1.5.18: ok
+# Wine 1.5.19, 1.5.22, 1.6, 1.6.2, 1.7.13: crashes in quartz when trying to play tutorials 
+#   (intro videos are fine)
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="commandos_ammo_pack"
 PREFIX="CommandosAP_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.5.18"
 
 TITLE="GOG.com - Commandos Ammo Pack"
 SHORTCUT_NAME1="Commandos: Behind Enemy Lines"
