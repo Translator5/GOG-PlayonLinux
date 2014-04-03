@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-05-22 22-00)
-# Last revision : (2014-01-02 21-10)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-04-03 20-22)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Xubuntu 13.04
 # Authors : Pascal Reinhard <dev@ovocean.com>, TonyFlow <tonyflow@rhcp.net>
 #   Updated by petch
@@ -14,7 +14,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="dungeon_keeper"
 PREFIX="DungeonKeeper_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Dungeon Keeper"
 SHORTCUT_NAME1="Dungeon Keeper: Dungeon Keeper Gold"
