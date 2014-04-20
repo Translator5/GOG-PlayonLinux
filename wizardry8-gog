@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-05-23 18-00)
-# Last revision : (2013-08-26 23-14)
-# Wine version used : 1.4.1
+# Last revision : (2014-04-03 21-23)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Xubuntu 13.04
 # Author : Pascal Reinhard dev@ovocean.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="wizardry_8"
 PREFIX="Wizardry8_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Wizardry 8"
 SHORTCUT_NAME="Wizardry 8"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Sir-Tech Software / Gamepot Inc." "http://www.gog.com/gamecard/wizardry_8" "Xodetaetl" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "7bd41e977ef65bfddb278e8d8ff2d60e"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" "1" "10deb68474ef67ecd8bd414407ffbdf3"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -61,6 +61,7 @@ POL_System_TmpDelete
 
 POL_Shortcut "Wiz8.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Wizardry 8/Wizardry 8 - Manual.pdf"
+# C:\GOG Games\Wizardry 8\3DSetup.exe
 
 POL_SetupWindow_Close
 
