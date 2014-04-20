@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-17 20-12)
-# Last revision : (2013-06-15 13-16)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-04-20 15-43)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="master_of_orion_1_2"
 PREFIX="MasterOfOrion12_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Master of Orion 1 and 2"
 SHORTCUT_NAME1="Master of Orion I"
