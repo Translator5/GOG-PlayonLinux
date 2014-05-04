@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-10 00-04)
-# Last revision : (2013-05-19 16-39)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-05-04 21-53)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="might_and_magic_6_limited_edition"
 PREFIX="MightAndMagic6Pack_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Might and Magic 6-Pack"
 SHORTCUT_NAME1="Might and Magic 1 - Book I"
@@ -35,7 +35,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing Inc. / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "93f73352b1c073ef52ed9470367bfc3b"
+POL_Call POL_GoG_setup "$GOGID" "d4790b62542d3b35d8511d7bab09af89"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
