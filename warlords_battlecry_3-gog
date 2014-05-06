@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-12-29 19-40)
-# Last revision : (2014-05-05 11-45)
+# Last revision : (2014-05-06 16-06)
 # Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -21,7 +21,7 @@ SHORTCUT_NAME="Warlords Battlecry 3"
 #POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
 
 POL_SetupWindow_Init
-#POL_SetupWindow_SetID ScriptIDNumber
+POL_SetupWindow_SetID 2027
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Infinite Interactive / Enlight Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
