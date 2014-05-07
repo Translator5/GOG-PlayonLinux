@@ -1,29 +1,36 @@
 #!/bin/bash
-# Date : (2013-07-01 02-18)
-# Wine version used : 1.4.1
+# Date : (2014-05-07 09-29)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Wheezy (Stable) - LXDE
 # Author : 3limin4t0r
 # Program licence : Retail
 # Depend :
-[ -z "$PLAYONLINUX" = "" ] && exit 0
+[ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="unreal_tournament_goty"
-WINEVERSION="1.4.1"
 PREFIX="UnrealGOTY_gog"
+WORKING_WINE_VERSION="1.6.2"
+PATCH_ARCHIVE="utglr36.zip"
 
 TITLE="GOG.com - Unreal Tournament GOTY"
 SHORTCUT_NAME="Unreal Tournament GOTY"
 
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/$PREFIX/top.jpg" "http://files.playonlinux.com/resources/setups/$PREFIX/left.jpg" "$TITLE"
+
 POL_SetupWindow_Init
+POL_SetupWindow_SetID 1759
 POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Epic Games" "http://www.gog.com/gamecard/$GOGID" "3limin4t0r" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f67f83483481a08819d2512aab46287a"
+POL_Call POL_GoG_setup "$GOGID" "0d25ec835648710a098aff7106187f38"
 
 POL_Wine_SelectPrefix "$PREFIX"
-POL_Wine_PrefixCreate "$WINEVERSION"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+# fake sdbinst.exe
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
 
 POL_Call POL_GoG_install
 
@@ -32,10 +39,18 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "8"
 
+# Update OpenGL driver
+# Taken from http://www.cwdohnal.com/utglr/
+POL_Download "http://files.playonlinux.com/$PATCH_ARCHIVE" "72f83fa389f7ba26f67103df7f4e255f"
+
+POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGLDrv.dll" "$GOGROOT/Unreal Tournament GOTY/System/OpenGlDrv.dll"
+
 # Doesn't hurt
 POL_Wine_reboot
 
-POL_Shortcut "UnrealTournament.exe"  "$SHORTCUT_NAME"
+POL_Shortcut "UnrealTournament.exe" "$SHORTCUT_NAME" "" "" "Game;ActionGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Unreal Tournament GOTY/Manual/Manual.pdf"
+# C:\GOG Games\Unreal Tournament GOTY\Help\ReadMe.htm
 
 POL_SetupWindow_Close
 exit 0
