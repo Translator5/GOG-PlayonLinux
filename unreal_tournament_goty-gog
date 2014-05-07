@@ -1,5 +1,5 @@
 #!/bin/bash
-# Date : (2014-05-07 09-29)
+# Date : (2014-05-07 09-32)
 # Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Wheezy (Stable) - LXDE
 # Author : 3limin4t0r
@@ -39,8 +39,8 @@ Set_OS winxp
 
 POL_SetupWindow_VMS "8"
 
-# Update OpenGL driver
-# Taken from http://www.cwdohnal.com/utglr/
+# Default OpenGL renderer crashes on exit, pick a better one
+# Source http://www.cwdohnal.com/utglr/
 POL_Download "http://files.playonlinux.com/$PATCH_ARCHIVE" "72f83fa389f7ba26f67103df7f4e255f"
 
 POL_System_ExtractSingleFile "$PATCH_ARCHIVE" "OpenGLDrv.dll" "$GOGROOT/Unreal Tournament GOTY/System/OpenGlDrv.dll"
@@ -51,6 +51,9 @@ POL_Wine_reboot
 POL_Shortcut "UnrealTournament.exe" "$SHORTCUT_NAME" "" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Unreal Tournament GOTY/Manual/Manual.pdf"
 # C:\GOG Games\Unreal Tournament GOTY\Help\ReadMe.htm
+
+# OpenGL tip
+POL_SetupWindow_message "$(eval_gettext 'On first run the game will autodetect available renderers.\nIt is likely that you will get better performance out of the OpenGL renderer;\nYou can select it after clicking on "Show all devices".')" "$TITLE"
 
 POL_SetupWindow_Close
 exit 0
