@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-06-25 20-58)
-# Last revision : (2013-07-10 13-41)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-05-10 11-09)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="tyrian_2000"
 PREFIX="Tyrian2000_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Tyrian 2000"
 SHORTCUT_NAME="Tyrian 2000"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Eclipse Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "247406cb07f4ca839ba6e6a19a958593"
+POL_Call POL_GoG_setup "$GOGID" "9dc73fdfbc8222b6864faff7093cad33"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
