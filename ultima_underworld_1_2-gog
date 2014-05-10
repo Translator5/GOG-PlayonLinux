@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-15 10-34)
-# Last revision : (2013-05-23 21-36)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-05-10 09-54)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="ultima_underworld_1_2"
 PREFIX="UltimaUnderworld_1_2_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Ultima Underworld 1 and 2"
 SHORTCUT_NAME1="Ultima Underworld 1"
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Blue Sky Productions / Electronic Arts" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "257b0a9eff8dba323f7d2be3b1bbf51b"
+POL_Call POL_GoG_setup "$GOGID" "6946e7042e4994e07c9a6ab2c84068ee"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
