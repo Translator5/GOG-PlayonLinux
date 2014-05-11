@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2013-07-10 13-29)
-# Wine version used : 1.5.8
+# Last revision : (2014-05-11 09-20)
+# Wine version used : 1.7.18
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_witcher_2"
 PREFIX="TheWitcher2_gog"
-WORKING_WINE_VERSION="1.5.8"
+WORKING_WINE_VERSION="1.7.18"
 
 TITLE="GOG.com - The Witcher 2 Enhanced Edition"
 SHORTCUT_NAME="The Witcher 2: Assassins of Kings EE"
@@ -28,21 +28,21 @@ POL_SetupWindow_presentation "$TITLE" "CD Projekt RED" "http://www.gog.com/gamec
 # This is getting really ugly
 if [ "$POL_SELECTED_FILE" ]; then
     POL_GoG_location="$POL_SELECTED_FILE"
-elif [ -e "$(POL_Config_Read GOG_REPO)/setup_the_witcher_2_ee_3.0.1.17.bin" ]; then
+elif [ -e "$(POL_Config_Read GOG_REPO)/setup_the_witcher2_ee_3.4.0.25.bin" ]; then
     # Already downloaded and renamed
-    POL_GoG_location="$(POL_Config_Read GOG_REPO)/setup_the_witcher_2_ee_3.0.1.17.exe"
+    POL_GoG_location="$(POL_Config_Read GOG_REPO)/setup_the_witcher2_ee_3.4.0.25.exe"
 else
-    POL_Call POL_GoG_setup "$GOGID" "b8c84b47644b53c5d3c9e1a2c9bb3a2e" "bc207a9ee725ccce2fad933861ffa299" "740dc01dfa936ea4755049d0fd8a3fe4" "b96ba44d1f33f4e73941f490f2828982" "b56b54012f218d887863ce778ef77e5a" "5d06e0b2bd1aa47697578cacbc8c1ed4" "8698adebaafab3ff9aa0303934bac1e3" "7efb39400446f2609ad11eeb7a7e2a14" "01a8b34c6a115cc16da61a8510072351" "ce4a8cb2360a358c35dc72d959652725"
+    POL_Call POL_GoG_setup "$GOGID" "e84aac0223834c5769a0fda3aa223947" "180c0c2645e91f827e78a220a934183c" "a782a5605a9bc18bf52587d1bca59601" "30377077791d9fbfa2ce950e97828c7e" "d6f6d7131b07c612aca58e252ac49bc7" "fe9aecfcad0a39a47cdeab80950fdb2d" "bcca8cf38e87bf9cdb22630853c994ff" "08d327c75fdbe95f820daaad28ebab01" "bac411bdb7d52c4e5a97bbb3b75b574f" "55cd0eaa3331c7b6502ca5b86d31ee1d" "0445d535688070f6288bbf01c22ef7d9" "0b0e08f0ac106f5e4af70903dce63714" "1ffa67383248c9ec37ef6fb42f05f8f7"
     
     if [ "$POL_GoG_downloaded" = "True" ]; then
         cd "$(POL_Config_Read GOG_REPO)"
         # silly rename, or InnoSetup won't find all its pieces
-        mv setup_the_witcher_2.exe setup_the_witcher_2_ee_3.0.1.17.exe
-        mv setup_the_witcher_2-1.bin setup_the_witcher_2_ee_3.0.1.17.bin
-        for i in 2 3 4 5 6 7 8 9; do
-            mv setup_the_witcher_2-$i.bin setup_the_witcher_2_ee_3.0.1.17-$((i-1)).bin
+        mv setup_the_witcher_2.exe setup_the_witcher2_ee_3.4.0.25.exe
+        for i in 1 2 3 4 5 6 7 8 9 10 11; do
+            mv setup_the_witcher_2-$i.bin setup_the_witcher2_ee_3.4.0.25-$i.bin
         done
-	POL_GoG_location="$PWD/setup_the_witcher_2_ee_3.0.1.17.exe"
+        mv setup_the_witcher_2-12.bin setup_the_witcher2_ee_3.4.0.25.bin
+	POL_GoG_location="$PWD/setup_the_witcher2_ee_3.4.0.25.exe"
     fi
 fi
 
@@ -51,16 +51,12 @@ fi
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 
-# Prevent GoG installer from installing Acrobat Reader or Foxit in each prefix
-POL_Call POL_Function_SetNativeExtension "pdf"
+POL_Call POL_GoG_install /nogui
 
-POL_Wine_WaitBefore "$TITLE"
-
-POL_Wine "$POL_GoG_location" || POL_Debug_Fatal "$(eval_gettext 'Error while installing archive')"
 
 POL_Call POL_Install_d3dcompiler_43
 # POL_Call POL_Install_xact
-# POL_Call POL_Install_dotnet40
+POL_Call POL_Install_dotnet40
 
 # GoG work!
 Set_OS winxp
@@ -82,9 +78,24 @@ MANUAL="manual_en.pdf"
 [ "$POL_LANG" = "cz" ] && MANUAL="manual_cz.pdf"
 [ "$POL_LANG" = "hu" ] && MANUAL="manual_hu.pdf"
 [ "$POL_LANG" = "jp" ] && MANUAL="manual_jp.pdf"
+[ "$POL_LANG" = "ru" ] && MANUAL="manual_ru.pdf"
+[ "$POL_LANG" = "zh" ] && MANUAL="manual_zh.pdf"
+[ "$POL_LANG" = "tr" ] && MANUAL="manual_tr.pdf"
 
 POL_Shortcut "witcher2.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;RolePlaying;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/$MANUAL"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/The Witcher 2 Enhanced Edition/$MANUAL"
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_EN.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_ES.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_IT.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_DE.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_FR.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_PL.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_CZ.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_HU.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_JP.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_RU.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_ZH.rtf
+# C:\GOG Games\The Witcher 2 Enhanced Edition\readme_TR.rtf
 
 POL_SetupWindow_Close
 
@@ -96,7 +107,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/The Witcher 2 Enhanced Edition/bin/" || exit 1
+cd "$GOGROOT/The Witcher 2 Enhanced Edition/bin/" || exit 1
 TITLE="$TITLE"
 POL_Wine Configurator.exe
 exit 0
