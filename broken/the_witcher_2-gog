@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-23 19-46)
-# Last revision : (2014-05-11 09-20)
-# Wine version used : 1.7.18
+# Last revision : (2014-05-11 09-51)
+# Wine version used : 1.7.18, 1.7.15-CS-0.6-7173c38
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="the_witcher_2"
 PREFIX="TheWitcher2_gog"
-WORKING_WINE_VERSION="1.7.18"
+WORKING_WINE_VERSION="1.7.15-CS-0.6-7173c38"
 
 TITLE="GOG.com - The Witcher 2 Enhanced Edition"
 SHORTCUT_NAME="The Witcher 2: Assassins of Kings EE"
@@ -54,6 +54,7 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_Call POL_GoG_install /nogui
 
 
+POL_Call POL_Install_d3dx9_36
 POL_Call POL_Install_d3dcompiler_43
 # POL_Call POL_Install_xact
 POL_Call POL_Install_dotnet40
@@ -64,6 +65,7 @@ Set_OS winxp
 POL_SetupWindow_VMS "512"
 
 POL_Wine_Direct3D "UseGLSL" "disabled"
+POL_Wine_Direct3D "CSMT" "enabled"
 POL_Wine_SetVideoDriver
 
 # Doesn't hurt ;)
