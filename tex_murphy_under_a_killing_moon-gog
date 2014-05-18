@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-15 21-41)
-# Last revision : (2013-10-25 00-33)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-05-18 23-24)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="tex_murphy_under_a_killing_moon"
 PREFIX="TexMurphyUAKM_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Tex Murphy: Under a Killing Moon"
 SHORTCUT_NAME="Tex Murphy: Under a Killing Moon"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Access Software / Wordplay LLC" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c03e2ccf5120ab1e4b947667e194e1bb"
+POL_Call POL_GoG_setup "$GOGID" "6b61a36ec81339e0d7bc456e4f211ab3"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
