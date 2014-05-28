@@ -1,0 +1,36 @@
+#!/bin/bash
+# Date: (7/8/2012)
+# Wine version used: 1.4.1
+# Distribution used to test : Linux Ubuntu 12.04 x64
+# Author: Tory Gaurnier
+# Licence: OpenSource
+ 
+ 
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+TITLE="Slender"
+PREFIX="Slender"
+ 
+# Starting the script
+POL_SetupWindow_Init
+POL_Debug_Init
+POL_SetupWindow_presentation "$TITLE" "Parsec Productions" "www.parsecproductions.com" "Tory Gaurnier" "$PREFIX"
+
+POL_SetupWindow_message "$(eval_gettext 'If you have not already downloaded the game, you will need to. You should be able to find it via a Google search, you will need Slender_v0_9_1.zip for this script to complete.')" "$TITLE"
+
+# Setting prefix path
+POL_Wine_SelectPrefix "$PREFIX"
+
+# Create and setup wine prefix
+POL_System_SetArch "x86"
+POL_Wine_PrefixCreate "1.4.1"
+
+# Install game
+POL_SetupWindow_browse "$(eval_gettext 'Select downloaded ZIP file here')" "$TITLE"
+POL_SetupWindow_wait_next_signal "$(eval_gettext 'Extracting Slender...')" "$TITLE"
+unzip -o "$APP_ANSWER" -d "$WINEPREFIX/drive_c/Program Files" || POL_Debug_Fatal "$(eval_gettext 'Sorry, but that was not a valid .zip file')"
+
+POL_Shortcut "Slender.exe" "$TITLE"
+POL_SetupWindow_Close
+exit 0

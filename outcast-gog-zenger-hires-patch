@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-11-28 22-00)
-# Last revision : (2013-04-01 18-19)
-# Wine version used : 1.3.27-rawinput2
+# Last revision : (2013-12-08 01-15)
+# Wine version used : 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -10,6 +10,7 @@
 
 # Tested with install archive:
 # OUTCASTP_V3.7z 89313352 "6b544b9c1c88d511744a268467bcc41f"
+# OUTCAST_V3_PARCHE-HD_Y_FARO_GOG_ByZenger.7z 89121337 "c3cf9ad528acedb9da9b7af787295f7b"
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
@@ -21,7 +22,7 @@ SHORTCUT_NAME="Outcast"
 
 TITLE="GOG.com - Outcast: High-resolution patch"
 URL="http://www.gog.com/forum/outcast/experimental_outcast_hi_res_patch_up_to_1280x768_cyana_lighthouse_problem_fixed/"
-INSTALLBIN="OUTCASTP_V3.7z"
+INSTALLBIN="OUTCAST_V3_PARCHE-HD_Y_FARO_GOG_ByZenger.7z"
 
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 1014
@@ -44,13 +45,16 @@ else
     [ "$APP_ANSWER" = "TRUE" ] && POL_Browser "$URL"
 
     cd "$POL_USER_ROOT/tmp"
-    POL_Download "http://files.playonlinux.com/$INSTALLBIN" "6b544b9c1c88d511744a268467bcc41f"
+    POL_Download "http://files.playonlinux.com/$INSTALLBIN" "c3cf9ad528acedb9da9b7af787295f7b"
     ARCHIVE="$POL_USER_ROOT/tmp/$INSTALLBIN"
 fi
 
 POL_SetupWindow_wait "$(eval_gettext 'Please wait while $TITLE is installed.')" "$TITLE"
 
-cd "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/" || POL_Debug_Fatal "$(eval_gettext 'Error while uncompressing the archive')"
+GOGROOT="$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com"
+[ -d "$GOGROOT" ] || GOGROOT="$WINEPREFIX/drive_c/GOG Games"
+
+cd "$GOGROOT/Outcast/" || POL_Debug_Fatal "$(eval_gettext 'Error while uncompressing the archive')"
 POL_System_ExtractSingleFile "$ARCHIVE" "APPLYMEGAPATCH.exe" "APPLYMEGAPATCH.exe"
 POL_System_ExtractSingleFile "$ARCHIVE" "zdata.zpl" "zdata.zpl"
 POL_System_ExtractSingleFile "$ARCHIVE" "zdata.zpd" "zdata.zpd"
@@ -63,7 +67,7 @@ POL_SetupWindow_Close
 
 cat <<_EOF_ > $POL_USER_ROOT/configurations/configurators/"$SHORTCUT_NAME".zenger-hires
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || return
+cd "$GOGROOT/Outcast/" || return
 [ -e APPLYMEGAPATCH.exe ] || return
 
 POL_SetupWindow_question "$(eval_gettext 'Run \$TITLE?')" "\$TITLE"

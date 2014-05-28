@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-25 01-41)
-# Last revision : (2013-05-08 10-40)
-# Wine version used : 1.5.17
+# Last revision : (2013-11-23 01-11)
+# Wine version used : 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -10,6 +10,7 @@
 
 # Crashes with 1.5.0 (tab key)
 #   workaround: WINEDEBUG=warn+heap
+# Still crashes with 1.6.1, 1.7.6, 1.7.1-CSMT
 # Still crashes with 1.5.17, maybe slightly harder to trigger?
 
 # Lots of crashes with 1.3.35 - pattern in flashlight (intentional?
@@ -32,7 +33,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="shadowgrounds"
 PREFIX="ShadowGrounds_gog"
-WORKING_WINE_VERSION="1.5.17"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Shadowgrounds"
 SHORTCUT_NAME="Shadowgrounds"
@@ -43,7 +44,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Frozenbyte / Meridian4" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "398af39f2b133fde083897c6c6a1c2f6"
+POL_Call POL_GoG_setup "$GOGID" "4ccc3fa68b79eb23a4471258d2578668"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -63,9 +64,9 @@ POL_Wine_reboot
 
 POL_Shortcut "Shadowgrounds Launcher.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Shadowgrounds/Manual.pdf"
-# C:/$PROGRAMFILES/GOG.com/Shadowgrounds/Readme.txt
-# C:/$PROGRAMFILES/GOG.com/Shadowgrounds/weapon_chart.pdf
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Shadowgrounds/Manual.pdf"
+# C:\GOG Games\Shadowgrounds\Readme.txt
+# C:\GOG Games\Shadowgrounds\weapon_chart.pdf
 
 POL_SetupWindow_Close
 

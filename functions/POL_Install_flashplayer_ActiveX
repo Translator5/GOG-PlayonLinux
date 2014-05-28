@@ -1,0 +1,20 @@
+#!/bin/bash
+# Date : (2011-07-13 21-00)
+# Last revision : (2013-12-02 21-09)
+# Author : GNU_Raziel
+# Only For : http://www.playonlinux.com
+
+# CHANGELOG
+# [VV] (2013-12-02 21-09)
+#   Update script (link broken)
+
+# [SuperPlumus] (2012-05-18 06-31)
+#   Update script (broken)
+
+# Downloading Flashplayer for ActiveX (Internet Explorer Only)
+cd "$POL_USER_ROOT/ressources"
+POL_Download_Resource "http://fpdownload.macromedia.com/get/flashplayer/pdc/11.9.900.152/install_flash_player_ax.exe" "8a56647fab4555a90ce51a3b9891c8d8"
+
+POL_Wine_WaitBefore "Flash Player"
+POL_Wine "install_flash_player_ax_32bit.exe"
+POL_Wine_WaitExit "Flash Player"

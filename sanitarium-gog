@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-12-28 18-20)
-# Last revision : (2013-04-20 10-47)
-# Wine version used : 1.5.20
+# Last revision : (2013-12-15 10-22)
+# Wine version used : 1.5.20, 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -32,7 +32,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="sanitarium"
 PREFIX="Sanitarium_gog"
-WORKING_WINE_VERSION="1.5.20"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Sanitarium"
 SHORTCUT_NAME="Sanitarium"
@@ -45,7 +45,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "DreamForge Intertainment / XS Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "c60d04ddd0614988c7be7c86fa5fe7d8"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "db098bb49f9e8b7f3eefe04667cae316"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -63,8 +63,8 @@ POL_Wine_reboot
 SHORTCUT_WINDOW="$SHORTCUT_NAME $(eval_gettext '(windowed)')"
 POL_Shortcut "sntrm.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut "sntrm.exe" "$SHORTCUT_WINDOW" "$SHORTCUT_NAME.png" "-w" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Sanitarium/manual.pdf"
-POL_Shortcut_Document "$SHORTCUT_WINDOW" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Sanitarium/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Sanitarium/manual.pdf"
+POL_Shortcut_Document "$SHORTCUT_WINDOW" "$GOGROOT/Sanitarium/manual.pdf"
 
 POL_SetupWindow_Close
 

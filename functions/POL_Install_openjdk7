@@ -1,0 +1,46 @@
+# Unofficial OpenJDK installers
+# https://github.com/alexkasko/openjdk-unofficial-builds
+JDKZIPNAME="openjdk-1.7.0-u45-unofficial-icedtea-2.4.3-windows-i586-installer.zip"
+POL_Download_Resource "https://bitbucket.org/alexkasko/openjdk-unofficial-builds/downloads/$JDKZIPNAME" "e6010b22b3ed26019652b80b0d253a1a" "openjdk"
+
+cd "$POL_USER_ROOT/tmp"
+unzip "$POL_USER_ROOT/ressources/openjdk/$JDKZIPNAME"
+cd "${JDKZIPNAME%.zip}" || die "Could not find unzipped OpenJDK"
+
+# Prevents blurry fonts with FSAA present
+cat <<_EOFREG_ > "$POL_USER_ROOT/tmp/java2d_nod3d.reg"
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment]
+"_JAVA_OPTIONS"="-Dsun.java2d.d3d=false" 
+_EOFREG_
+POL_Wine regedit.exe "$POL_USER_ROOT/tmp/java2d_nod3d.reg"
+rm "$POL_USER_ROOT/tmp/java2d_nod3d.reg"
+
+cat <<_EOFAI_ > auto-install.xml
+<AutomatedInstallation langpack="eng">
+    <com.izforge.izpack.panels.TargetPanel>
+        <installpath>C:\openjdk7</installpath>
+    </com.izforge.izpack.panels.TargetPanel>
+    <com.izforge.izpack.panels.PacksPanel>
+        <pack name="OpenJDK Runtime Environment installation files" index="0" selected="true" />
+        <pack name="OpenJDK Development Kit installation files" index="1" selected="true" />
+        <pack name="OpenJDK uninstaller files" index="2" selected="true" />
+      ﻿ <pack name="Set environment variables (user settings)" index="3" selected="false" />
+      ﻿ <pack name="Set environment variables (global settings)" index="4" selected="false" />
+      ﻿ <pack name="Add registry keys (global settings)" index="5" selected="false" />
+    </com.izforge.izpack.panels.PacksPanel>
+    <com.izforge.izpack.panels.InstallPanel />
+    <com.izforge.izpack.panels.FinishPanel />
+</AutomatedInstallation>
+_EOFAI_
+
+#POL_Wine install.exe
+POL_Wine jre/bin/java.exe -jar install.jar auto-install.xml
+POL_Wine_WaitExit "$TITLE"
+
+WINEPATH=`POL_Wine cmd /c echo "%PATH%" |tr -d '\015\012'`
+(echo '[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment]'
+echo '"JAVA_HOME"="C:\\openjdk7"'
+echo '"PATH"="'$(echo "$WINEPATH;C:\\openjdk7\\bin;C:\\openjdk\\jre\\bin"|sed -e 's/\\/\\\\/g')'"') > "$POL_USER_ROOT/tmp/java_path.reg"
+POL_Wine regedit.exe "$POL_USER_ROOT/tmp/java_path.reg"
+rm "$POL_USER_ROOT/tmp/java_path.reg"
+

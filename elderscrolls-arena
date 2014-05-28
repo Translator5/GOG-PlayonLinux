@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-04-15 15-35)
-# Last revision : (2013-07-02 23-14)
+# Last revision : (2013-10-30 22-11)
 # Wine version used : 1.4-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
@@ -77,6 +77,7 @@ EXIT
 _EOFBAT_
 
 cat <<'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
+dosbox_memsize=64
 render_aspect=true
 render_frameskip=1
 cpu_cycles='max 95% limit 33000'

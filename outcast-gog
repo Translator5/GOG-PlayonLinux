@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2011-11-27 19-47)
-# Last revision : (2013-07-10 13-37)
-# Wine version used : 1.5.18
+# Last revision : (2013-12-08 00-38)
+# Wine version used : 1.6.1
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="outcast"
 PREFIX="Outcast_gog"
-WORKING_WINE_VERSION="1.5.18"
+WORKING_WINE_VERSION="1.6.1"
 
 TITLE="GOG.com - Outcast"
 SHORTCUT_NAME="Outcast"
@@ -26,7 +26,7 @@ POL_RequiredVersion "4.1.2" || POL_Debug_Fatal "$APPLICATION_TITLE 4.1.2 is requ
 POL_Debug_Init
 POL_SetupWindow_presentation "$TITLE" "Appeal S.A. / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "a8bf2336a580527f0eb99f8b90009c33"
+POL_Call POL_GoG_setup "$GOGID" "c588dab89cccaddfbcde2ebd69d5fad9"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -46,8 +46,9 @@ POL_Wine_X11Drv "GrabFullScreen" "Y"
 POL_Wine_reboot 
 
 
-POL_Shortcut "start.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Outcast/manual.pdf"
+POL_Shortcut "GOG Games/Outcast/LOADER.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Outcast/manual.pdf"
+# C:\GOG Games\Outcast\readme.txt
 
 POL_SetupWindow_Close
 
@@ -58,11 +59,9 @@ source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG=""
 
-POL_LoadVar_PROGRAMFILES
-
 TITLE="$TITLE"
 
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Outcast/" || exit 1
+cd "$GOGROOT/Outcast/" || exit 1
 
 CURRENT_LANG="$(eval_gettext 'English')"
 [ -f pol_configuration ] && source pol_configuration

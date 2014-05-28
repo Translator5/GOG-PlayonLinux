@@ -1,6 +1,6 @@
 #!/bin/bash
 # Date : (2012-11-27 00-14)
-# Last revision : (2013-07-10 13-38)
+# Last revision : (2013-11-03 20-33)
 # Wine version used : 1.4.1
 # Distribution used to test : Slackware 14.0, Debian Sid (Unstable)
 # Author : ... (Based on Gemini Rue script by Pierre Etchemaite)
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Wadjet Eye Games" "http://www.gog.com/gamecard/$GOGID" "....." "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "6d7bf055bd79bb272e558302b09b0109"
+POL_Call POL_GoG_setup "$GOGID" "efa958a7518cda9af68f8d452c09f3e5"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -45,7 +45,7 @@ POL_Wine_reboot
 
 POL_Shortcut "Resonance.exe" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;AdventureGame;"
 POL_Shortcut_QuietDebug "$SHORTCUT_NAME"
-POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Resonance/README.txt"
+POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Resonance/README.txt"
 
 POL_SetupWindow_Close
 
@@ -57,7 +57,7 @@ export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
 export WINEDEBUG="-all"
 
 POL_LoadVar_PROGRAMFILES
-cd "\$WINEPREFIX/drive_c/\$PROGRAMFILES/GOG.com/Resonance/" || exit 1
+cd "$GOGROOT/Resonance/" || exit 1
 TITLE="$TITLE"
 POL_Wine winsetup.exe
 exit 0
