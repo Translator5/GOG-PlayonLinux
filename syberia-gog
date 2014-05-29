@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-07 22-36)
-# Last revision : (2013-12-13 01-26)
-# Wine version used : 1.5.15, 1.6
+# Last revision : (2014-05-29 15-08)
+# Wine version used : 1.5.15, 1.6, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -15,7 +15,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="syberia"
 PREFIX="Syberia_gog"
-WORKING_WINE_VERSION="1.6"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Syberia"
 SHORTCUT_NAME="Syberia"
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microids / Anuman Interactive" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "56fffc13486cb1dec0afe59e5e3a1c8f"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "0ec452842adf2fb4f95c5f06e4304d42"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
