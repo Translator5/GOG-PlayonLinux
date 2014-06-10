@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-12-31 21-20)
-# Last revision : (2013-12-25 05-55)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-06-10 20-41)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="spycraft_the_great_game"
 PREFIX="Spycraft_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Spycraft: The Great Game"
 SHORTCUT_NAME="Spycraft: The Great Game"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Activision" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "fc5e91a66e39f9bca31e3f6594f93667"
+POL_Call POL_GoG_setup "$GOGID" "a24649fe50f528914fe7a00aee93e0d8"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
