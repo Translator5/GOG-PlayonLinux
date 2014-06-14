@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-02-25 23-27)
-# Last revision : (2013-12-08 21-47)
-# Wine version used : 1.4.1
+# Last revision : (2014-06-14 20-29)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -15,7 +15,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="riven_the_sequel_to_myst"
 PREFIX="Riven_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Riven: The sequel to Myst"
 SHORTCUT_NAME="Riven: The sequel to Myst"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Cyan Worlds / Cyan Inc" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "0798cd969e13ab0c8bf7919d0d7f8baa"
+POL_Call POL_GoG_setup "$GOGID" "27b5e91662ac661b0a825bdd5a68c9c8"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
