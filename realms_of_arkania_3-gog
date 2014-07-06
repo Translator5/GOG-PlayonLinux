@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-17 13-41)
-# Last revision : (2013-12-27 23-59)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-07-06 15-05)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="realms_of_arkania_3"
 PREFIX="RealmsOfArkania3_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Realms of Arkania 3"
 SHORTCUT_NAME="Realms of Arkania 3: Shadows Over Riva"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Attic Entertainment / Fantasy Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "450277e2519da7baf8c3333de9af072c"
+POL_Call POL_GoG_setup "$GOGID" "8377b88228e5017d31cc1ce1d7d0c053"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -37,8 +37,6 @@ POL_Call POL_GoG_install
 # "VGA"?
 POL_SetupWindow_VMS "1"
 
-# I am tempted to add render_aspect=true here, as some gfx (faces...) obviously
-# have a wrong aspect; But fonts get less readable when enabled
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 cpu_core=auto
@@ -56,8 +54,19 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=44100
+render_aspect=true
+render_scaler=normal2x
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+# 3D viewing: Far (any reason not to?)
+if type -t POL_unbase64 > /dev/null; then
+	cp "$WINEPREFIX/drive_c/GOG Games/Realms of Arkania 3/DATA/RIVA.CFG" "$WINEPREFIX/drive_c/GOG Games/Realms of Arkania 3/DATA/RIVA.CFG.orig"
+	POL_unbase64 <<-_EOF_ > "$WINEPREFIX/drive_c/GOG Games/Realms of Arkania 3/DATA/RIVA.CFG"
+	FQABAWQAAAFQQAEBAgIAAQEBAAB/AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEA
+	EgATABQAFQA=
+	_EOF_
+fi
+
 
 # Don't know why the cd is necessary, but it sucks
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
