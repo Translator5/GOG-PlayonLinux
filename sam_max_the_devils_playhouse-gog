@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-10-21 18-24)
-# Last revision : (2013-11-17 19-34)
-# Wine version used : 1.4.1, 1.5.15
+# Last revision : (2014-06-28 16-17)
+# Wine version used : 1.4.1, 1.5.15, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="sam_max_the_devils_playhouse"
 PREFIX="SamAndMaxS3_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Sam and Max: The Devils Playhouse"
 SHORTCUT_NAME1="Sam and Max S3E1: The Penal Zone"
@@ -30,7 +30,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "cb4ecc2a12d1bd426c909318b2228f0f"
+POL_Call POL_GoG_setup "$GOGID" "eaed94182264460188c73ccf85eff2bc"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

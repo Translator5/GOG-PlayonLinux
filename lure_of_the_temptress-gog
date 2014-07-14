@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-03-11 19-24)
-# Last revision : (2013-05-20 13-17)
-# Wine version used : 1.4-scummvm_support
+# Last revision : (2014-05-29 21-59)
+# Wine version used : 1.4-scummvm_support, 1.6.2-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="lure_of_the_temptress"
 PREFIX="LureOfTheTemptress_gog"
-WORKING_WINE_VERSION="1.4-scummvm_support"
+WORKING_WINE_VERSION="1.6.2-scummvm_support"
 
 TITLE="GOG.com - Lure of the Temptress"
 SHORTCUT_NAME="Lure of the Temptress"
@@ -25,7 +25,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Revolution Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "bc2df19e3ddeacf4528a5ee0f2b32d8d"
+POL_Call POL_GoG_setup "$GOGID" "a702cfd73ab6c6667b81937f45ec8c5b"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

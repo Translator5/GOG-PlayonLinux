@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-16 23-39)
-# Last revision : (2014-02-03 21-58)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-06-18 22-37)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="dragonsphere"
 PREFIX="Dragonsphere_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Dragonsphere"
 SHORTCUT_NAME="Dragonsphere"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Microprose / Atari" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "8c0630b0634f9bfcec66ad9770ce139e"
+POL_Call POL_GoG_setup "$GOGID" "de60b8167934faab186f93107c94aa18"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -40,9 +40,9 @@ dosbox_memsize=30
 render_aspect=true
 cpu_core=dynamic
 cpu_cycles=8000
+render_frameskip=1
+render_scaler=normal2x
 _EOFCFG_
-# That one is debatable, no scaler gives excellent result with aspect correction enabled
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/GOG Games/Dragonsphere/GAME.INST" -t iso

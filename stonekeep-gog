@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-09 13-03)
 # Last revision : (2013-05-23 00-05)
-# Wine version used : 1.4-dos_support_0.6
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="stonekeep"
 PREFIX="Stonekeep_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Stonekeep"
 SHORTCUT_NAME="Stonekeep"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "1119676b8dcfad69eef2738f80c6bcdd"
+POL_Call POL_GoG_setup "$GOGID" "a97ef922eee204686874a4d2bc46b4bc"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

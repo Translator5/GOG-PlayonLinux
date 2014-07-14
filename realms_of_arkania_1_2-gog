@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-10-27 22-51)
-# Last revision : (2013-12-23 23-59)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-07-06 17-58)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="realms_of_arkania_1_2"
 PREFIX="RealmsOfArkania1_2_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Realms of Arkania 1 and 2"
 SHORTCUT_NAME1="Realms of Arkania 1: Blade of Destiny"
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Attic Entertainment / Fantasy Productions" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "debf7fe8bb885298230c59836f35469f"
+POL_Call POL_GoG_setup "$GOGID" "69496fa7573633b447e88afe135a74ca"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -43,7 +43,6 @@ ROA2="ROA2"
 mv "Realms of Arkania 1" "$ROA1"
 mv "Realms of Arkania 2" "$ROA2"
 
-# render_aspect=true makes fonts look worse and does not improve the rest :p
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 dosbox_memsize=16
@@ -64,8 +63,9 @@ sblaster_oplmode=auto
 sblaster_oplrate=44100
 gus_gus=false
 ipx_ipx=false
+render_scaler=normal2x
+render_aspect=true
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cd "$GOGROOT/Realms of Arkania Pack/$ROA1" || POL_Debug_Fatal "Game not installed in standard path?"
 

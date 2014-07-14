@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-20 21-33)
-# Last revision : (2013-07-10 13-38)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-06-30 00-09)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="redneck_rampage_collection"
 PREFIX="RedneckRampage_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Redneck Rampage Collection"
 SHORTCUT_NAME1="Redneck Rampage"
@@ -28,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Xatrix Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "12b0f7ed3c01850bcdea2b93d9ea57b5"
+POL_Call POL_GoG_setup "$GOGID" "f0bd3394c8ff93a52c69e3e05af04b55"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

@@ -1,19 +1,21 @@
 #!/bin/bash
 # Date : (2013-01-30 19-01)
-# Last revision : (2013-11-06 22-08)
-# Wine version used : 1.4.1
+# Last revision : (2014-06-04 00-00)
+# Wine version used : 1.4.1, 1.6.2, 1.7.5
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# 1.7.5: fixes square "left hand smoke"
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="tales_of_monkey_island"
 PREFIX="TalesOfMonkeyIsland_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.7.5"
 
 TITLE="GOG.com - Tales of Monkey Island"
 SHORTCUT_NAME1="ToMI S1E1: Launch of the Screaming Narwhal"
@@ -30,7 +32,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Telltale Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "751028af43a23fa8707a20c243acfabb"
+POL_Call POL_GoG_setup "$GOGID" "063aae082dbdb87399f33e891ab2b688"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

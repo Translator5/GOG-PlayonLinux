@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-05-22 22-47)
-# Last revision : (2013-11-19 21-45)
-# Wine version used : 1.4-scummvm_support
+# Last revision : (2014-06-15 00-13)
+# Wine version used : 1.4-scummvm_support, 1.6.2-scummvm_support
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="simon_the_sorcerer_2"
 PREFIX="SimonTheSorcerer2_gog"
-WORKING_WINE_VERSION="1.4-scummvm_support"
+WORKING_WINE_VERSION="1.6.2-scummvm_support"
 
 TITLE="GOG.com - Simon the Sorcerer 2"
 SHORTCUT_NAME="Simon the Sorcerer 2"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Adventure Soft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "f7a5f3a620d951d0d4f9c9bdd0e388a9"
+POL_Call POL_GoG_setup "$GOGID" "bb5948a86a9325d07ad7052026b09546"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
