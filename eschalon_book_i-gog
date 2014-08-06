@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-06-22 19-11)
-# Last revision : (2013-06-22 20-04)
-# Wine version used : 1.4.1
+# Last revision : (2014-08-05 00-15)
+# Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="eschalon_book_i"
 PREFIX="EschalonBook1_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.6.2"
 
 TITLE="GOG.com - Eschalon: Book I"
 SHORTCUT_NAME="Eschalon: Book I"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Basilisk Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7a75c00577c7535366c32fd7c67880d8"
+POL_Call POL_GoG_setup "$GOGID" "4262f5080ddccd6b508989d6d44505ab"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
