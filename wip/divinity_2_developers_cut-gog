@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-01-06 16-20)
-# Last revision : (2013-03-25 23-45)
-# Wine version used : 1.5.21
+# Last revision : (2014-08-23 17-52)
+# Wine version used : 1.7.25
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="divinity_2_developers_cut"
 PREFIX="Divinity2_gog"
-WORKING_WINE_VERSION="1.5.21"
+WORKING_WINE_VERSION="1.7.25"
 
 TITLE="GOG.com - Divinity 2 Developer's Cut"
 SHORTCUT_NAME="Divinity 2"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Larian Studios" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "350cfe5309c140b8215dc9535b892f74" "74e9288ae4b5f82eefeefdbb820227ac" "e8e7f87e05006ece3ff8a293d8945fe5" "6c5e50b5d27119a3bb36c113a5233c89" "88ccf789ec9d60ca65bd6147f56ec49f"
+POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 5 "cfd274cac455b7e144c8fd4bee4f2127" "6029e6977ef019fadf1bcf1082d09a92" "bdf7a76142c05dd833d366db5dfc332d" "e100ceec4ff1ae56f7ab61080fc1fd35" "9752465446f857fed6df75e4d7f5cfe0"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -37,7 +37,7 @@ POL_Call POL_Install_quartz
 POL_Call POL_Install_wmp9
 POL_Call POL_Install_wmpcodecs
 
-POL_Call POL_GoG_install
+POL_Call POL_GoG_install "/nogui"
 
 
 # GoG work!
