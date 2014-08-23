@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-04-25 19-32)
 # Last revision : (2013-05-19 12-54)
-# Wine version used : 1.4-dos_support_0.6
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="earthworm_jim_1_2"
 PREFIX="EarthwormJim_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Earthworm Jim 1 and 2"
 SHORTCUT_NAME1="Earthworm Jim"
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Shiny Entertainment / Interplay" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "08ad7bb35a24cd1649e5a830b1c5c2b1"
+POL_Call POL_GoG_setup "$GOGID" "c8bac890508cdb4300746aa4e73fec87"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
