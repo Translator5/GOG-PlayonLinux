@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2013-03-17 21-44)
-# Last revision : (2013-12-01 20-47)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-08-25 23-12)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="carmageddon_max_pack"
 PREFIX="Carmageddon_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Carmageddon Max Pack"
 SHORTCUT_NAME1="Carmageddon"
@@ -27,7 +27,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Stainless Games" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4335ffd9d9d9bcdcfa995540e8731028"
+POL_Call POL_GoG_setup "$GOGID" "8591b46a7b275f60051856bc5ca2818f"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -38,7 +38,7 @@ POL_Call POL_GoG_install
 cat <<_EOFCFG_ >> "$WINEPREFIX/playonlinux_dos.cfg"
 manual_mount=true
 render_aspect=false
-render_frameskip=1
+render_frameskip=0
 dosbox_memsize=63
 cpu_core=dynamic
 cpu_cputype=auto
@@ -56,8 +56,8 @@ sblaster_oplmode=auto
 sblaster_oplemu=default
 #sblaster_oplrate=44100
 gus_gus=false
+render_scaler=normal2x
 _EOFCFG_
-#[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 cat <<_EOFBAT_ > "$GOGROOT/Carmageddon/CARMA/CARMA.BAT"
 @ECHO OFF
