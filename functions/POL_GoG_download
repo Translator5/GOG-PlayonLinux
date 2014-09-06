@@ -11,21 +11,21 @@ shift
 local BASENAME="setup_$GAME"
 local INDEX=0
 if [ "$1" = "--alternate" ]; then
-	BASENAME="$2"
-	INDEX="$3"
-	shift 3
+    BASENAME="$2"
+    INDEX="$3"
+    shift 3
 fi
 
 # URL = ${BASEURL}/${GAME}/${INDEXPREFIX}${INDEX}
 local BASEURL="https://secure.gog.com/downlink"
 local INDEXPREFIX="en1installer"
 if [ "$1" = "--patch" ]; then
-        INDEXPREFIX="en1patch"
-	shift
+    INDEXPREFIX="en1patch"
+    shift
 elif [ "$1" = "--bonus" ]; then
-	BASEURL="https://secure.gog.com/downlink/file"
-        INDEXPREFIX=""
-	shift
+    BASEURL="https://secure.gog.com/downlink/file"
+    INDEXPREFIX=""
+    shift
 fi
 
 local PIECES="$#"
@@ -33,9 +33,9 @@ local PIECES="$#"
 local GOG_REPO="$(POL_Config_Read GOG_REPO)"
 
 if [ -z "$GOG_REPO" ]; then
-	POL_SetupWindow_textbox "$(eval_gettext 'In what directory do you want to download GOG files?')" "$TITLE" "$POL_USER_ROOT/tmp/"
-	GOG_REPO="$APP_ANSWER"
-	POL_Config_Write GOG_REPO "$GOG_REPO"
+    POL_SetupWindow_textbox "$(eval_gettext 'In what directory do you want to download GOG files?')" "$TITLE" "$POL_USER_ROOT/tmp/"
+    GOG_REPO="$APP_ANSWER"
+    POL_Config_Write GOG_REPO "$GOG_REPO"
 fi
 
 
@@ -43,31 +43,31 @@ fi
 local COOKIES="$POL_USER_ROOT/tmp/gog_cookies"
 local COOKIES_2="$POL_USER_ROOT/tmp/gog_cookies2"
 while true; do
-	POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $BASENAME')" "$TITLE" "http://www.gog.com/"
+    POL_SetupWindow_login "$(eval_gettext 'Please enter your gog.com login to download $BASENAME')" "$TITLE" "http://www.gog.com/"
 
-	POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
+    POL_SetupWindow_wait "$(eval_gettext 'Please wait...')" "$TITLE"
 
-	rm "$COOKIES" 2> /dev/null
-	rm "$COOKIES_2" 2> /dev/null
-	gutm="$($POL_WGET http://www.gog.com/ -O- --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" | sed -n 's/^.*id="gutm" value="\([^"]*\)".*$/\1/p')"
-	gutm="$(POL_Website_urlencode "$gutm")"
+    rm "$COOKIES" 2> /dev/null
+    rm "$COOKIES_2" 2> /dev/null
+    gutm="$($POL_WGET http://www.gog.com/ -O- --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" | sed -n 's/^.*id="gutm" value="\([^"]*\)".*$/\1/p')"
+    gutm="$(POL_Website_urlencode "$gutm")"
 
-	buk="$($POL_WGET "http://www.gog.com/user/ajax" -O- --post-data="a=get&c=gamecard&p1=false&p2=false&auth=&gutm=$gutm" --save-cookies=$COOKIES_2 --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" |sed -n 's/^.*"buk":"\([^"]*\)".*/\1/p')"
-	buk="$(POL_Website_urlencode "$buk")"
+    buk="$($POL_WGET "http://www.gog.com/user/ajax" -O- --post-data="a=get&c=gamecard&p1=false&p2=false&auth=&gutm=$gutm" --save-cookies=$COOKIES_2 --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0" |sed -n 's/^.*"buk":"\([^"]*\)".*/\1/p')"
+    buk="$(POL_Website_urlencode "$buk")"
 
-	$POL_WGET https://secure.gog.com/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$(POL_Website_urlencode "$POL_LOGIN")&log_password=$(POL_Website_urlencode "$POL_PASSWORD")&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
+    $POL_WGET https://secure.gog.com/login --save-cookies=$COOKIES --load-cookies=$COOKIES_2 --post-data="log_email=$(POL_Website_urlencode "$POL_LOGIN")&log_password=$(POL_Website_urlencode "$POL_PASSWORD")&redirectOk=/&unlockSettings=0&btn_login=Log me in&buk=$buk" --no-check-certificate -O- --header="DNT: 1" --user-agent="Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"
 
-	unset POL_LOGIN POL_PASSWORD
+    unset POL_LOGIN POL_PASSWORD
 
-	local AUTH_SESSION="$(awk '$6 == "guc_al" { print $7 }' $COOKIES)"
-	[ "$AUTH_SESSION" != "0" ] && break
-	unset AUTH_SESSION
+    local AUTH_SESSION="$(awk '$6 == "guc_al" { print $7 }' $COOKIES)"
+    [ "$AUTH_SESSION" != "0" ] && break
+    unset AUTH_SESSION
 
-	POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, try again?')" "$TITLE"
-	if [ "$APP_ANSWER" = "FALSE" ]; then
-		POL_SetupWindow_Close
-		exit
-	fi
+    POL_SetupWindow_question "$(eval_gettext 'Gog.com login failed, try again?')" "$TITLE"
+    if [ "$APP_ANSWER" = "FALSE" ]; then
+        POL_SetupWindow_Close
+        exit
+    fi
 done
 
 # Download
@@ -77,52 +77,52 @@ POL_Debug_Message "Will download into $PWD"
 
 download_piece ()
 {
-	# 1: URL
-	# 2: filename
-	# 3: MD5 hash
-	# 4: Title
+    # 1: URL
+    # 2: filename
+    # 3: MD5 hash
+    # 4: Title
 
-	# Failed piece from previous download, maybe reference MD5 was corrected?
-	local FAILEDPIECE="$2.failed"
-	if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
-		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ "$(POL_MD5_file $FAILEDPIECE)" = "$3" ]; then
-			mv "$FAILEDPIECE" "$2"
-		fi
-	fi
+    # Failed piece from previous download, maybe reference MD5 was corrected?
+    local FAILEDPIECE="$2.failed"
+    if [ -n "$3" -a ! -e "$2" -a -e "$FAILEDPIECE" ]; then
+        POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
+        if [ "$(POL_MD5_file $FAILEDPIECE)" = "$3" ]; then
+            mv "$FAILEDPIECE" "$2"
+        fi
+    fi
 
-	[ -e "$2" ] && return
+    [ -e "$2" ] && return
 
-	local TMPPIECE="$2.part"
-	while true; do
-		POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" --continue -O "$TMPPIECE"
+    local TMPPIECE="$2.part"
+    while true; do
+        POL_System_wget "$1" "$4" --no-check-certificate --load-cookies="$COOKIES" --continue -O "$TMPPIECE"
 
-		POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
-		if [ ! -e "$TMPPIECE" ]; then
-			GOGDMSG="$(eval_gettext 'Download failed')"
-		elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
-			GOGDMSG="$(eval_gettext 'Download seems to be corrupted')\n$(eval_gettext 'The file could also have been updated. If the problem persists, consider reporting the issue so that the script can be adjusted.')"
-			mv "$TMPPIECE" "$FAILEDPIECE"
-		else
-			# Success
-			mv "$TMPPIECE" "$2"
-			[ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
-			break
-		fi
+        POL_SetupWindow_wait "$(eval_gettext 'Checking piece integrity...')" "$4"
+        if [ ! -e "$TMPPIECE" ]; then
+            GOGDMSG="$(eval_gettext 'Download failed')"
+        elif [ -n "$3" ] && [ "$(POL_MD5_file $TMPPIECE)" != "$3" ]; then
+            GOGDMSG="$(eval_gettext 'Download seems to be corrupted')\n$(eval_gettext 'The file could also have been updated. If the problem persists, consider reporting the issue so that the script can be adjusted.')"
+            mv "$TMPPIECE" "$FAILEDPIECE"
+        else
+            # Success
+            mv "$TMPPIECE" "$2"
+            [ -e "$FAILEDPIECE" ] && rm "$FAILEDPIECE"
+            break
+        fi
 
-		POL_SetupWindow_question "$GOGDMSG\n$(eval_gettext 'Retry?')" "$TITLE"
-		[ "$APP_ANSWER" = "TRUE" ] || POL_Debug_Fatal "$GOGDMSG"
-	done
+        POL_SetupWindow_question "$GOGDMSG\n$(eval_gettext 'Retry?')" "$TITLE"
+        [ "$APP_ANSWER" = "TRUE" ] || POL_Debug_Fatal "$GOGDMSG"
+    done
 }
 
 download_piece "$BASEURL/$GAME/${INDEXPREFIX}$INDEX" "$BASENAME.exe" "$1" "$BASENAME (1/$PIECES)"
 
 if [ $PIECES -gt 1 ]; then
-	local n=2
-	while [ $n -le $PIECES ]; do
-		download_piece "$BASEURL/$GAME/${INDEXPREFIX}$((INDEX+n-1))" "$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
-		let n=$((n+1))
-	done
+    local n=2
+    while [ $n -le $PIECES ]; do
+        download_piece "$BASEURL/$GAME/${INDEXPREFIX}$((INDEX+n-1))" "$BASENAME-$((n-1)).bin" "${!n}" "$BASENAME ($n/$PIECES)"
+        let n=$((n+1))
+    done
 fi
 
 # Close session

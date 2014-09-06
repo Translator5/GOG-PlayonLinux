@@ -1,0 +1,96 @@
+#!/bin/bash
+# Date : (2011-12-14 02-03)
+# Last revision : (2014-08-07 04-42)
+# Wine version used : 1.7.0
+# Distribution used to test : Debian Sid (Unstable)
+# Author : Pierre Etchemaite pe-pol@concept-micro.com
+# Script licence : GPL v.2
+# Program licence : Retail
+# Depend :
+
+# Wine 1.6.2 and below: some graphic glitches near mouse pointer
+
+[ -z "$PLAYONLINUX" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+GOGID="empire_earth_gold_edition"
+PREFIX="EmpireEarth_gog"
+WORKING_WINE_VERSION="1.7.0"
+
+TITLE="GOG.com - Empire Earth: Gold Edition"
+SHORTCUT_NAME1="Empire Earth"
+SHORTCUT_NAME2="Empire Earth: The Art of Conquest"
+
+POL_SetupWindow_Init
+POL_Debug_Init
+
+POL_SetupWindow_presentation "$TITLE" "Stainless Steel Studios / Rebellion" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
+
+POL_Call POL_GoG_setup "$GOGID" "57ef54728c735825e3ae276119b288d4"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_Call POL_GoG_install
+
+
+POL_Call POL_install_d3dx9
+POL_Call POL_install_directmusic
+POL_Call POL_install_vcrun6
+
+#cat <<_EOFINI_ > "$POL_USER_ROOT/tmp/disable_directmusic.reg"
+#REGEDIT4
+#
+#[HKEY_CURRENT_USER\Software\SSSI\Empire Earth]
+#"Music Enabled"=dword:00000000
+#_EOFINI_
+#POL_Wine regedit "$POL_USER_ROOT/tmp/disable_directmusic.reg"
+#rm "$POL_USER_ROOT/tmp/disable_directmusic.reg"
+
+# GoG work!?
+Set_OS win2k
+
+POL_SetupWindow_VMS "4"
+
+POL_Wine_X11Drv "DXGrab" "Y"
+POL_Wine_X11Drv "GrabFullScreen" "Y"
+
+# Doesn't hurt ;)
+POL_Wine_reboot
+
+# http://bugs.winehq.org/show_bug.cgi?id=13351
+POL_Shortcut_XInputLinearProfile() {
+  local SHORTCUT="$1"
+  [ "$POL_OS" = "Mac" ] && return # sorry
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" 'DEVICEIDS="$(xinput list|sed -ne '"'"'s/.*id=\([0-9]\+\).*slave.*pointer.*/\1/p'"'"')"'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" 'declare -A DEVICEPROFILES'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" 'for deviceid in $DEVICEIDS; do'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" '  profile="$(xinput list-props $deviceid|sed -ne '"'"'s/.*Device Accel Profile.*\([0-9]\+\)$/\1/p'"'"')"'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" '  if [ -n "$profile" ]; then'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" '    DEVICEPROFILES[$deviceid]=$profile'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" '    xinput set-prop $deviceid "Device Accel Profile" 6 # linear'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" '  fi'
+  POL_Shortcut_InsertBeforeWine "$SHORTCUT" 'done'
+  echo 'for deviceid in $DEVICEIDS; do' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT"
+  echo '  [ -n "${DEVICEPROFILES[$deviceid]}" ] && xinput set-prop $deviceid "Device Accel Profile" ${DEVICEPROFILES[$deviceid]}' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT"
+  echo 'done' >> "$POL_USER_ROOT/shortcuts/$SHORTCUT"
+}
+
+POL_Shortcut "Empire Earth.exe" "$SHORTCUT_NAME1" "$SHORTCUT_NAME1.png" "" "Game;StrategyGame;"
+POL_Shortcut_XInputLinearProfile "$SHORTCUT_NAME1"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME1"
+
+POL_Shortcut_Document "$SHORTCUT_NAME1" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/Manual.pdf"
+# C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/technology_tree.pdf
+# C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth/scenario_editor_manual.pdf
+
+POL_Shortcut "EE-AOC.exe" "$SHORTCUT_NAME2" "$SHORTCUT_NAME2.png" "" "Game;StrategyGame;"
+POL_Shortcut_XInputLinearProfile "$SHORTCUT_NAME2"
+POL_Shortcut_QuietDebug "$SHORTCUT_NAME2"
+
+POL_Shortcut_Document "$SHORTCUT_NAME2" "$WINEPREFIX/drive_c/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth - The Art of Conquest/manual_aoc.pdf"
+# C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth - The Art of Conquest/readme.txt
+# C:/$PROGRAMFILES/GOG.com/Empire Earth Gold Edition/Empire Earth - The Art of Conquest/technology_tree_aoc.pdf
+
+POL_SetupWindow_Close
+exit 0

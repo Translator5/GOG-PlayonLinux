@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-07-30 17-03)
-# Last revision : (2013-05-12 23-04)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-08-23 17-02)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -13,7 +13,7 @@ source "$PLAYONLINUX/lib/sources"
 
 GOGID="duke_nukem_3d_atomic_edition"
 PREFIX="DukeNukem3DAE_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Duke Nukem 3D Atomic Edition"
 SHORTCUT_NAME="Duke Nukem 3D Atomic Edition"
@@ -26,7 +26,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "3D Realms Entertainment / Apogee Software" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "7a91fc6bd86ab14cb33aa6017786b062"
+POL_Call POL_GoG_setup "$GOGID" "5410a97d6b87e4e79ff6c56dd833e1fd"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
@@ -52,8 +52,8 @@ sblaster_hdma=5
 sblaster_mixer=true
 sblaster_oplmode=auto
 sblaster_oplrate=22050
+render_scaler=normal2x
 _EOFCFG_
-[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
 
 POL_Shortcut "DUKE3D.EXE" "$SHORTCUT_NAME" "$SHORTCUT_NAME.png" "" "Game;ActionGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/Duke Nukem 3D/manual.pdf"

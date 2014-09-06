@@ -1,19 +1,21 @@
 #!/bin/bash
 # Date : (2013-06-08 21-06)
-# Last revision : (2013-07-19 20-58)
-# Wine version used : 1.4.1
+# Last revision : (2014-08-24 17-43)
+# Wine version used : 1.4.1, 1.7.13
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
 # Depend :
 
+# 1.6..1.7.12: music forgets to stop with screen change, and overlap next musics
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="defenders_quest"
 PREFIX="DefendersQuest_gog"
-WORKING_WINE_VERSION="1.4.1"
+WORKING_WINE_VERSION="1.7.13"
 
 TITLE="GOG.com - Defender's Quest"
 SHORTCUT_NAME="Defender's Quest"
@@ -26,7 +28,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "Level Up Labs" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "21555a253f9fdc0e7de46ac86223e55d"
+POL_Call POL_GoG_setup "$GOGID" "d8c668d84a5e045a271627439ba91fc2"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"

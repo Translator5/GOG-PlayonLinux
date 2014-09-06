@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2012-10-23 19-42)
-# Last revision : (2013-07-10 13-35)
-# Wine version used : 1.5.8
+# Last revision : (2014-07-20 21-39)
+# Wine version used : 1.5.8, 1.7.11
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
@@ -9,13 +9,14 @@
 # Depend :
 
 # Before 1.5.8: unimplemented function msvcp90.dll.??0?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@H@Z 
+# 1.5.14-1.7.10: weird resize in windowed mode
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="might_and_magic_7_for_blood_and_honor"
 PREFIX="MightAndMagic7_gog"
-WORKING_WINE_VERSION="1.5.8"
+WORKING_WINE_VERSION="1.7.11"
 
 TITLE="GOG.com - Might and Magic 7"
 SHORTCUT_NAME="Might and Magic 7 - For Blood and Honor"
@@ -28,7 +29,7 @@ POL_Debug_Init
 
 POL_SetupWindow_presentation "$TITLE" "New World Computing / Ubisoft" "http://www.gog.com/gamecard/$GOGID" "Pierre Etchemaite" "$PREFIX"
 
-POL_Call POL_GoG_setup "$GOGID" "4501cf746518a87f3a6268c18964d908"
+POL_Call POL_GoG_setup "$GOGID" "a5372e66e7ee6f5e8c93adadaae373eb"
 
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
