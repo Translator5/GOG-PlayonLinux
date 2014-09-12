@@ -1,19 +1,18 @@
 #!/bin/bash
 # Date : (2012-04-26 23-18)
-# Last revision : (2014-02-08 17-53)
-# Wine version used : 1.4-dos_support_0.6
+# Last revision : (2014-09-12 21-11)
+# Wine version used : 1.4-dos_support_0.6, 1.6.2-dos_support_0.6
 # Distribution used to test : Debian Sid (Unstable)
 # Author : Pierre Etchemaite pe-pol@concept-micro.com
 # Script licence : GPL v.2
 # Program licence : Retail
-# Depend : Timidity daemon on port midi 128:0 (recommended)
 
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
 GOGID="gabriel_knight_sins_of_the_fathers"
 PREFIX="GabrielKnight1_gog"
-WORKING_WINE_VERSION="1.4-dos_support_0.6"
+WORKING_WINE_VERSION="1.6.2-dos_support_0.6"
 
 TITLE="GOG.com - Gabriel Knight 1: Sins of the Fathers"
 SHORTCUT_NAME="Gabriel Knight 1: Sins of the Fathers"
@@ -41,20 +40,11 @@ cpu_core=normal
 cpu_cycles=10000
 mixer_prebuffer=40
 _EOFCFG_
-if [ "$POL_OS" = "Linux" ]; then
-	# use pmidi -l or aconnect -o list to check your (emulated) midi device
-	# 128:0 is just default software emulation port (usually Timidity)
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	render_scaler=hq2x
-	midi_mididevice=alsa
-	midi_midiconfig=128:0
-	_EOFCFG_
-fi
-if [ "$POL_OS" = "Mac" ]; then
-	cat <<-'_EOFCFG_' >> "$WINEPREFIX/playonlinux_dos.cfg"
-	midi_mididevice=coreaudio
-	_EOFCFG_
-fi
+[ "$POL_OS" = "Linux" ] && echo "render_scaler=hq2x" >> "$WINEPREFIX/playonlinux_dos.cfg"
+
+# SB Pro music by default
+cp "$GOGROOT/Gabriel Knight - Sins of the Fathers/RESOURCE.CFG" "$GOGROOT/Gabriel Knight - Sins of the Fathers/RESOURCE.BAK"
+sed -e 's/soundDrv  = .*\.DRV/soundDrv  = SBPRO.DRV/' "$GOGROOT/Gabriel Knight - Sins of the Fathers/RESOURCE.BAK" > "$GOGROOT/Gabriel Knight - Sins of the Fathers/RESOURCE.CFG"
 
 cat <<_EOFAE_ > "$WINEPREFIX/drive_c/autoexec.bat"
 imgmount D "$WINEPREFIX/drive_c/GOG Games/Gabriel Knight - Sins of the Fathers/GK1.GOG" -t iso
