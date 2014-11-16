@@ -8,14 +8,14 @@
 # Script license : GPL v2
 # Programm license : Retail
 # Depend :
- 
+
 [ -z "$PLAYONLINUX" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
- 
+
 GOGID="stronghold_crusader"
 PREFIX="Stronghold_crusader_gog"
 WORKING_WINE_VERSION="1.6.2"
- 
+
 TITLE="GOG.com - Stronghold Crusader HD"
 SHORTCUT_NAME1="Stronghold Crusader HD"
 SHORTCUT_NAME2="Stronghold Crusader Extreme HD"
@@ -23,31 +23,31 @@ SHORTCUT_NAME2="Stronghold Crusader Extreme HD"
 POL_SetupWindow_Init
 POL_SetupWindow_SetID 2231
 POL_Debug_Init
- 
+
 POL_SetupWindow_presentation "$TITLE" "Firefly Studios" "http://www.gog.com/game/$GOGID" "Hoshpak" "$PREFIX"
- 
+
 POL_Call POL_GoG_setup "$GOGID" --alternate "setup_$GOGID" 1 "440291642e8e588cdb046c9f30878353"
- 
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
- 
+
 # fake sdbinst.exe
-POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe" 
+POL_Call POL_Install_nop "$WINEPREFIX/drive_c/windows/system32/sdbinst.exe"
 
 POL_Call POL_GoG_install
- 
+
 # Needed for multiplayer
 POL_Call POL_Install_directplay
- 
+
 Set_OS winxp
- 
+
 # Configure the shortcut
 GOGPATH="$GOGROOT/Stronghold Crusader Extreme HD"
 POL_Shortcut "Stronghold Crusader.exe" "$SHORTCUT_NAME1" "" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME1" "$GOGPATH/manual/manual.pdf"
 POL_Shortcut "Stronghold_Crusader_Extreme.exe" "$SHORTCUT_NAME2" "" "" "Game;StrategyGame;"
 POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGPATH/manual/manual.pdf"
- 
+
 POL_SetupWindow_Close
 
 for SHORTCUT in "$SHORTCUT_NAME1" "$SHORTCUT_NAME2"; do
