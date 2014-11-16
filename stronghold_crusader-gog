@@ -1,0 +1,48 @@
+#!/bin/bash
+# Date : (2014-08-19 18:32)
+# Last Revision : (2014-08-19 22:07)
+# Wine Version used : 1.6.2
+# Distribution used to test : Debian testing/jessie
+# Author: Hoshpak
+# Script license : GPL v2
+# Programm license : Retail
+# Depend :
+ 
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+ 
+GOGID="stronghold_crusader"
+PREFIX="Stronghold_crusader_gog"
+WORKING_WINE_VERSION="1.6.2"
+ 
+TITLE="GOG.com - Stronghold Crusader HD"
+ 
+POL_SetupWindow_Init
+POL_Debug_Init
+ 
+POL_SetupWindow_presentation "$TITLE" "Firefly Studios" "http://www.gog.com/game/$GOGID" "Hoshpak" "$PREFIX"
+ 
+POL_Call POL_GoG_setup "$GOGID"
+ 
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+ 
+POL_Call POL_GoG_install
+ 
+# Needed for multiplayer
+POL_Call POL_Install_directplay
+ 
+Set_OS winxp
+ 
+# Language selection for the manual shortcut
+POL_SetupWindow_menu "$(eval_gettext 'What is your preferred language?')" "$(eval_gettext 'Language')" "en: English~fr: French~de: German~it: Italian~es: Spanish~pl: Polish" "~"
+MAN_LANG=$(echo "${APP_ANSWER}" | cut -d ':' -f 1)
+ 
+# Configure the shortcut
+GOGPATH="$GOGROOT/Stronghold Crusader Extreme HD"
+POL_Shortcut "Stronghold Crusader.exe" "Stronghold Crusader HD" "" "" "Game;StrategyGame;"
+POL_Shortcut "Stronghold_Crusader_Extreme.exe" "Stronghold Crusader Extreme HD" "" "" "Game;StrategyGame;"
+POL_Shortcut_Document "Stronghold Crusader Extreme HD" "$GOGPATH/manual/manual_$MAN_LANG.pdf"
+ 
+POL_SetupWindow_Close
+exit 0
