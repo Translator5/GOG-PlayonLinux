@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-05-01 00-01)
 # Last revision : (2014-02-25 21-26)
 # Wine version used : 1.4.1, 1.6.2
@@ -60,7 +60,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Runaway - A Road Adventure/manu
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

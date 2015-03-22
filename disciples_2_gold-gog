@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-07-20 01-46)
 # Last revision : (2013-11-26 23-02)
 # Wine version used : 1.4.1
@@ -56,7 +56,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME2" "$GOGROOT/Disciples 2 Gold/Disciples 2 -
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
@@ -70,7 +70,7 @@ exit 0
 _EOF_
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

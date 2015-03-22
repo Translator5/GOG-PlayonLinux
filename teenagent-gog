@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-05-20 00-38)
 # Last revision : (2014-05-29 17-22)
 # Wine version used : 1.4-scummvm_support, 1.6.2-scummvm_support

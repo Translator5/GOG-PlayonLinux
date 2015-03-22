@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # PlayOnLinux Function
 # Date : ?
 # Last revision : (2013-01-22 21-52)

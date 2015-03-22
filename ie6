@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Changelog
 # [Quentin PARIS] (2012-04-24) Fixed bug 815
 #   petch: fixed after ie6setup.exe disappearance

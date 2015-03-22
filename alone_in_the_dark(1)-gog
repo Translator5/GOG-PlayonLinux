@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-06-05 20-05)
 # Last revision : (2013-07-10 13-21)
 # Wine version used : 1.4-dos_support_0.6
@@ -67,7 +67,7 @@ POL_SetupWindow_Close
 
 # Configurators are only useful to set language
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME1"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"
@@ -82,7 +82,7 @@ exit 0
 _EOF_
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME2"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

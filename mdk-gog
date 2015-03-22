@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-12-16 21-06)
 # Last revision : (2014-04-12 18-18)
 # Wine version used : 1.4.1, 1.6.2
@@ -82,7 +82,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$WINEPREFIX/drive_c/GOG Games/MDK/MANUAL
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

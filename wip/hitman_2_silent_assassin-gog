@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-12-17 22-36)
 # Last revision : (2013-11-24 09-50)
 # Wine version used : 1.4.1
@@ -52,7 +52,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Hitman 2 Silent Assassin/manual
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

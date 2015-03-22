@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-11-08 21-42)
 # Last revision : (2013-04-18 07-21)
 # Wine version used : 1.4.1
@@ -48,7 +48,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Legacy of Kain Defiance/manual.
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

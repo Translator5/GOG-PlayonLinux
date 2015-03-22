@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2014-08-19 18:32)
 # Last Revision : (2014-11-16 22:01)
 # Wine Version used : 1.6.2
@@ -52,7 +52,7 @@ POL_SetupWindow_Close
 
 for SHORTCUT in "$SHORTCUT_NAME1" "$SHORTCUT_NAME2"; do
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

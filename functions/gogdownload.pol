@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 source "$PLAYONLINUX/lib/sources"
 [ "$PLAYONLINUX" = "" ] && exit
 

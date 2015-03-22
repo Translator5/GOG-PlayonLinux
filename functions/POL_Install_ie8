@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # PlayOnLinux Function
 # RealName: Internet Explorer 8
 # Date : (2012-11-19 14-52)

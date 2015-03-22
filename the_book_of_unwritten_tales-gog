@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-11-25 17:56)
 # Last revision : (2014-03-02 20-57)
 # Wine version used : 1.4.1, 1.5.5, 1.6.2

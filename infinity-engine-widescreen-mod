@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-05-11 13-22)
 # Last revision : (2012-10-29 02-22)
 # Wine version used : N/A
@@ -65,7 +65,7 @@ check_install () {
 
     CONFIGURATOR_EXTENSION="$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME.widescreen"
     cat <<-_EOF_ > "$CONFIGURATOR_EXTENSION"
-	#!/bin/bash
+	#!/usr/bin/env playonlinux-bash
 	cd "$DIR" || exit 1
 
 	if [ -e setup-widescreen.exe ]; then

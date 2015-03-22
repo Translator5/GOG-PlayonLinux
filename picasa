@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-11-12 19-39)
 # Last revision : (2013-07-10 13-37)
 # Wine version used : 1.4.1
@@ -54,7 +54,7 @@ POL_Shortcut "Picasa3.exe" "$SHORTCUT_NAME" "" "" "Graphics" # $SHORTCUT_NAME.pn
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

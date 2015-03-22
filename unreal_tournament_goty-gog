@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2014-05-07 09-32)
 # Wine version used : 1.4.1, 1.6.2
 # Distribution used to test : Debian Wheezy (Stable) - LXDE

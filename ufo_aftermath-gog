@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-05-16 20-31)
 # Last revision : (2013-11-03 11-03)
 # Wine version used : 1.4.1, 1.5.4
@@ -49,7 +49,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/UFO Aftermath/manual.pdf"
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

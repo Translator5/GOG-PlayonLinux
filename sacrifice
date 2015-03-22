@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2013-05-22 13-30)
 # Last revision : (2013-05-22 13-30)
 # Wine version used : 1.4.1
@@ -37,7 +37,8 @@ POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
 POL_SetupWindow_InstallMethod "LOCAL,CD"
 
 if [ "$INSTALL_METHOD" == "LOCAL" ]; then
-	POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run')" "$TITLE"POL_Wine_WaitBefore "$TITLE"
+	POL_SetupWindow_browse "$(eval_gettext 'Please select the setup file to run')" "$TITLE"
+        POL_Wine_WaitBefore "$TITLE"
 	POL_Wine start /unix "$APP_ANSWER"
 elif [ "$INSTALL_METHOD" == "CD" ]; then
 	POL_SetupWindow_message "$(eval_gettext 'Please insert the game media into your disk drive')" "$TITLE"

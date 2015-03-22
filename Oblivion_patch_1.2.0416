@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2010-09-06 14:00)
 # Last revision : (2013-08-11 21:32)
 # Distribution used to test : Debian Testing x64 - Linux Mint Debian Edition x64

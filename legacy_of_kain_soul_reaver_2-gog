@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-10-17 11-33)
 # Last revision : (2013-12-10 20-29)
 # Wine version used : 1.4.1
@@ -49,7 +49,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Legacy of Kain Soul Reaver 2/ma
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

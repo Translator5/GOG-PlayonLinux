@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 
 # CHANGELOG
 # [SuperPlumus] (2013-08-09 03-35)

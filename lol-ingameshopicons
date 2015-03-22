@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2013-02-24 19-44)
 # Last revision : (2013-09-23 22-12)
 # Wine version used : 1.5.24-LeagueOfLegendsShop
@@ -58,7 +58,7 @@ POL_SetupWindow_wait "$(eval_gettext 'Patching will take several minutes, please
 
 SCRIPTNAME="$POL_USER_ROOT/tmp/texture_patch"
 cat <<_EOS_ > "$SCRIPTNAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 python3.3 lol_linux.py texture_patch || \
   read -p 'Press enter to continue'
 exit 0

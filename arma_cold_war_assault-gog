@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-01-09 22-00)
 # Last revision : (2013-10-30 19-57)
 # Wine version used : 1.4.1
@@ -50,7 +50,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Arma Cold War Assault/manual.pd
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

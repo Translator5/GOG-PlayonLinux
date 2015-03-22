@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Date : (2012-06-13 19-32)
 # Last revision : (2014-02-09 14:20)
 # Wine version used : 1.5.0
@@ -77,7 +77,7 @@ POL_Shortcut_Document "$SHORTCUT_NAME" "$GOGROOT/Arx Fatalis/manual.pdf"
 POL_SetupWindow_Close
 
 cat <<_EOF_ > "$POL_USER_ROOT/configurations/configurators/$SHORTCUT_NAME"
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 [ -z "\$PLAYONLINUX" ] && exit 0
 source "\$PLAYONLINUX/lib/sources"
 export WINEPREFIX="\$POL_USER_ROOT/wineprefix/$PREFIX"

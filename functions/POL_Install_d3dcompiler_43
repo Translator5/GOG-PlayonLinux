@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 # Last revision : (2012-07-23 19:37)
 # Creator: petch
 #  based on POL_Install_d3dx9 by Berillions/GNU_Raziel

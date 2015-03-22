@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env playonlinux-bash
 
 # 1 : Game to download
 # 2.. : Md5sum(s) of piece(s)
